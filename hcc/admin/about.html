@@ -1,0 +1,280 @@
+<!DOCTYPE html>  
+<html lang="en">     
+ 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />     
+<meta name="viewport" content="width=device-width, minimum-scale=1.0" /> 
+<meta name="apple-mobile-web-app-title" content="Garden Visitors" />
+<meta name="description" content="Garden Viewer" />
+<link rel="apple-touch-icon" sizes="180x180" href="../core/assets/plant-icon-192.png" />
+<link rel="icon"    type="image/png"         href="../core/assets/plant-icon-96.png" sizes="96x96" />
+<link rel="icon"    type="image/svg+xml"     href="../core/assets/plant-icon-96.svg" />
+<link rel="shortcut icon"                    href="../core/assets/plant-club.ico" />
+<link rel="manifest"                         href="../core/assets/plant_club.webmanifest" />
+<link rel="stylesheet" type="text/css"       href="../core/css/core.css" />
+<title>Garden Viewer</title>
+</head>
+
+<style>
+   #tablekey { margin-left:15px; display:inline-table; justify-content:start; padding-top: 4px; padding-bottom: 4px; padding-left: 4px; padding-right: 4px; }
+   #trkey { padding:0; background:var(--color-base); border:none; border-collapse:collapse; }
+   #tdkey { padding:0; padding-right: 25px; vertical-align: top; }
+   #seperator { display: block; width: 100%; border-top: 1px solid #ccc; margin-top: 1em; margin-bottom: 1em; }
+   p { width:fit-content; max-width:375px; min-width:375px; }
+</style>
+ 
+<body>
+<script type="text/javascript"   src='../core/js/common_func.js'> </script>
+<script type="text/javascript"   src='../core/js/roots.js'> </script>
+<script type="text/javascript"   src='../core/js/store.js'> </script>
+<script>
+let winurlstr = window.location.href;
+let winurlsearchstr = window.location.search;
+let winurlexsearchstr = winurlstr.replace(winurlsearchstr,'');
+let winurlparams  = new URLSearchParams(winurlsearchstr.substring(1));
+let p_component = winurlparams.get('component') || '';
+let p_field     = winurlparams.get('field') || '';
+let p_study_title = winurlparams.get('studyTitle') || '';
+
+winurlparams.delete('field');
+winurlparams.delete('component');
+winurlparams.delete('studyTitle');
+  
+appState  =  buildStateFromParams(winurlparams);
+
+function buildMenu(configManager, default_sub_icons) {
+      let configuration = '';
+      let menu_string = '';
+      let links = '';
+      let comp = '';
+      let studyTitle = '';
+
+      for( let i=0; i<configManager.configurations.length; i++ ) {
+           // if there's only one component or if no component was chosen, default to first component.
+           if( configManager.configurations.length === 1 || !p_component ) { 
+               configuration = configManager.configurations[0]; 
+               p_component   = configManager.configurations[0].component;
+           } else {
+               if( p_component === COMPONENT_STUDIES ) {
+                   if( configManager.configurations[i].component === p_component && configManager.configurations[i].studyTitle === p_study_title) {
+                       configuration = configManager.configurations[i];
+                   }
+               } else if (configManager.configurations[i].component === p_component ) {
+                   configuration = configManager.configurations[i];
+               }
+           }
+      }
+ 
+      menu_string = '<div class="navbar">';
+
+      for( let i=0; i<configManager.configurations.length; i++ ) {
+           if( configManager.configurations[i].component && configManager.configurations[i].component === COMPONENT_STUDIES ) {
+               comp       = configManager.configurations[i].component;
+               studyTitle = configManager.configurations[i].studyTitle;               
+               links += furl('./about.html?params='+getParams(appState)+'&component='+comp+'&studyTitle='+studyTitle, studyTitle);
+           } else if( configManager.configurations[i].component ) {
+               comp = configManager.configurations[i].component;
+               links += furl('./about.html?params='+getParams(appState)+'&component='+comp, comp);
+           }
+      }
+ 
+      menu_string += buildDD('Component', links);
+
+      links = '';
+      if( configuration.project )          { links += furl('./about.html?params='+getParams(appState)+'&component='+p_component+'&field=project',            "project"); }
+      if( configuration.plantProject )     { links += furl('./about.html?params='+getParams(appState)+'&component='+p_component+'&field=plant_project',      "plant_project"); }
+      if( configuration.insectProject )    { links += furl('./about.html?params='+getParams(appState)+'&component='+p_component+'&field=insect_project',     "insect_project"); }
+      if( configuration.title )            { links += furl('./about.html?params='+getParams(appState)+'&component='+p_component+'&field=title',              "title"); }
+      if( configuration.plantField )       { links += furl('./about.html?params='+getParams(appState)+'&component='+p_component+'&field=plant_field',        "plant_field"); }
+      if( configuration.plantFieldValue )  { links += furl('./about.html?params='+getParams(appState)+'&component='+p_component+'&field=plant_field_value',  "plant_field_value"); }
+      if( configuration.plantIds )         { links += furl('./about.html?params='+getParams(appState)+'&component='+p_component+'&field=plant_ids',          "plant_ids"); }
+      if( configuration.defaultPlace )     { links += furl('./about.html?params='+getParams(appState)+'&component='+p_component+'&field=default_place',      "default_place"); }
+      if( configuration.hideOnAny )        { links += furl('./about.html?params='+getParams(appState)+'&component='+p_component+'&field=hide_on_any',        "hide_on_any"); }
+      if( configuration.fieldId )          { links += furl('./about.html?params='+getParams(appState)+'&component='+p_component+'&field=field_id',           "field_id"); }
+      if( configuration.fieldName )        { links += furl('./about.html?params='+getParams(appState)+'&component='+p_component+'&field=field_name',         "field_name"); }
+
+      if( configuration.taxa ) {
+          if( configuration.taxa[0] ) {
+              links += furl('./about.html?params='+getParams(appState)+'&component='+p_component+'&field=taxa', "taxa");
+          }
+      }
+ 
+      if( configuration.sub_icons ) {
+          if( configuration.sub_icons[0] ) {
+              links += furl('./about.html?params='+getParams(appState)+'&component='+p_component+'&field=sub_icons', "sub_icons");
+          }
+      } else if( default_sub_icons ) {
+              if( default_sub_icons[0] ) {
+                  links += furl('./about.html?params='+getParams(appState)+'&component='+p_component+'&field=def_sub_icons', "default_sub_icons");
+              }
+      }
+ 
+      menu_string += buildDD('Parameters', links);
+
+      let urlState = clearForDashParams(appState);
+      menu_string += buildHome(furl('./dashboard.html'+buildParameterList(urlState),'&#127807;'));
+
+      menu_string += '</div>';
+
+      faddelem('p',document.body,{innerHTML:(menu_string)});  
+
+      return( configuration );
+}
+
+// Define the replacer function for pretty print
+const replacer = (key, value) => {
+  // If the value is null, return undefined to exclude the property
+  if (value === null) {
+    return undefined;
+  }
+  return value;
+};
+ 
+function buildPage(configManager) {
+
+    let default_sub_icons = configManager.defaultSubIcons || '';
+
+    console.log('def sub ' + default_sub_icons);
+
+    let configuration = buildMenu(configManager, default_sub_icons);
+
+    let def_place_no_prj = '';
+    if( !configuration.plantProject ) {
+        def_place_no_prj = '  Default place is also used (as in this case) when plant_ids are configured but no plant_project is set.';
+    }
+ 
+    faddelem('p',document.body,{innerHTML:('This app is driven by a configuration file stored in '+getParams(appState)+'.json.  '+
+                                           'This configuration file tells the app things like which projects to pull data '+
+                                           'from and which observation fields to filter that data with.<span id="seperator"></span>')});
+                                           
+    if( p_field === 'plant_project' ) {
+        faddelem('p',document.body,{innerHTML:('<b>plant_project: '+furl(root_projects+configuration.plantProject, configuration.plantProject)+'</b>')});
+        faddelem('p',document.body,{innerHTML:('The unique iNat project id for the project that contains the plant observations. <span id="seperator"></span>')});
+    } else if( p_field === 'project' ) {
+        faddelem('p',document.body,{innerHTML:('<b>project: '+furl(root_projects+configuration.project, configuration.project)+'</b>')});
+        faddelem('p',document.body,{innerHTML:('The unique iNat project id for the project that supplies data to this component. ' +
+                                               '<span id="seperator"></span>')});
+    } else if( p_field === 'insect_project' ) {
+        faddelem('p',document.body,{innerHTML:('<b>insect_project: '+furl(root_projects+configuration.insectProject, configuration.insectProject)+'</b>')});
+        faddelem('p',document.body,{innerHTML:('The unique iNat project id for the project that contains the insect and ' +
+                                               'other wildlife activity observations. The wildlife activity observations in ' +
+                                               'this project are sometimes further filtered by setting the default_place parameter.<span id="seperator"></span>')});
+    } else if( p_field === 'seed_project' ) {
+        faddelem('p',document.body,{innerHTML:('<b>seed_project: '+furl(root_projects+configuration.seedProject, configuration.seedProject)+'</b>')});
+        faddelem('p',document.body,{innerHTML:('The unique iNat project id for the project that contains the observations of plants from which seeds '+
+                                               'are being shared. <span id="seperator"></span>')});
+    } else if( p_field === 'title' ) {
+        faddelem('p',document.body,{innerHTML:('<b>title:</b>')}); 
+        faddelem('p',document.body,{innerHTML:('The title to be displayed above the plant list in the app.<span id="seperator"></span>')});
+    } else if( p_field === 'plant_field' ) {
+        faddelem('p',document.body,{innerHTML:('<b>plant_field:</b>')});
+        faddelem('p',document.body,{innerHTML:('Used to filter observations stored in the iNat plant_project in the event that the iNat plant_project contains more than just the observations to be displayed in the plant list.<span id="seperator"></span>')});
+    } else if( p_field === 'plant_field_value' ) {
+        faddelem('p',document.body,{innerHTML:('<b>plant_field_value</b>')});
+        faddelem('p',document.body,{innerHTML:('Allows for yes/no values to add and remove plants from plant list." parameter.<span id="seperator"></span>')});
+    } else if( p_field === 'plant_ids' ) {
+        faddelem('p',document.body,{innerHTML:('<b>plant_ids</b>')});
+        faddelem('p',document.body,{innerHTML:('A comma delimited list of observation ids corresponding to plant observations to be displayed on the plant list.<span id="seperator"></span>')});
+    } else if( p_field === 'default_place' ) {
+        faddelem('p',document.body,{innerHTML:('<b>default_place: '+furl(root_places+configuration.defaultPlace, configuration.defaultPlace)+'</b>')});
+        faddelem('p',document.body,{innerHTML:('The unique iNat place id for the place that contains the insect and ' +
+                                               'other wildlife activity observations. The wildlife activity observations in ' +
+                                               'this project are sometimes further filtered by setting the default_place parameter.'+def_place_no_prj+'<span id="seperator"></span>')});
+    } else if( p_field === 'hide_on_any' ) {
+        faddelem('p',document.body,{innerHTML:('<b>hide_on_any: </b>')});
+        faddelem('p',document.body,{innerHTML:('Displays a link on the plant list page that shows the wildlife '+
+                                               'activity counts for the entire list of plants. <span id="seperator"></span>')});
+    } else if( p_field === 'field_id' ) {
+        faddelem('p',document.body,{innerHTML:('<b>field_id: '+furl(root_obs_fields+configuration.fieldId, configuration.fieldId)+'</b>')});
+        faddelem('p',document.body,{innerHTML:('The unique iNat field id for the observation field used to associate an ' +
+                                               'observation of wildlife to a given plant. <span id="seperator"></span>')});
+    } else if( p_field === 'field_name' ) {
+        faddelem('p',document.body,{innerHTML:('<b>field_name: '+furl(root_obs_fields+configuration.fieldId, configuration.fieldName)+'</b>')});
+        faddelem('p',document.body,{innerHTML:('The unique iNat field name for the observation field used to associate an ' +
+                                               'observation of wildlife to a given plant. <span id="seperator"></span>')});
+    } else if( p_field === 'taxa' ) {
+        faddelem('p',document.body,{innerHTML:('<b>taxa: </b>')});
+        faddelem('p',document.body,{innerHTML:('<table id="tablekey">' +
+                                               '<tr id="trkey"><td id="tdkey">taxon_id </td><td id="tdkey">' +
+                                               'The unique iNat ID of the taxon to be displayed in the "Plant" drop-down above the Plant List.' +
+                                               '  <br>(e.g. '+furl(root_taxa+configuration.taxa[0].taxonId,configuration.taxa[0].taxonId)+')</td></tr>' +
+                                               '<tr id="trkey"><td id="tdkey">taxon_name</td><td id="tdkey">' +
+                                               'The name of the taxon that will appear in the "Plant" drop-down.' +
+                                               '</td></tr></table><span id="seperator"></span>')});
+    } else if( p_field === 'sub_icons' ) {
+        faddelem('p',document.body,{innerHTML:('<b>sub_icons: </b>')});
+        faddelem('p',document.body,{innerHTML:('<table id="tablekey">' +
+                                               '<tr id="trkey"><td id="tdkey">nm</td><td id="tdkey">' +
+                                               'The name of the taxon that will appear in the "Show" drop-down above the Wildlife Activity Counts.' +
+                                               '</td></tr>' +
+                                               '<tr id="trkey"><td id="tdkey">taxon_id </td><td id="tdkey">' +
+                                               'The unique iNat ID of the taxon to be displayed in the "Show" drop-down above the Wildlife Activity Counts.' +
+                                               '  <br>(e.g. '+furl(root_taxa+configuration.subIcons[0].taxonId,configuration.subIcons[0].taxonId)+')</td></tr>' +
+                                               '<tr id="trkey"><td id="tdkey">icon</td><td id="tdkey">' +
+                                               'The utf-8 of the icon that will appear next to the corresponding name in the "Show" drop-down.' +
+                                               '  <br>(e.g. '+configuration.subIcons[0].icon+')</td></tr>' +
+                                               '</td></tr></table><span id="seperator"></span>')});
+    } else if( p_field === 'def_sub_icons' ) {
+        faddelem('p',document.body,{innerHTML:('<b>default_sub_icons: </b>')});
+        faddelem('p',document.body,{innerHTML:('<table id="tablekey">' +
+                                               '<tr id="trkey"><td id="tdkey">nm</td><td id="tdkey">' +
+                                               'The name of the taxon that will appear in the "Show" drop-down above the Wildlife Activity Counts.' +
+                                               '</td></tr>' +
+                                               '<tr id="trkey"><td id="tdkey">taxon_id </td><td id="tdkey">' +
+                                               'The unique iNat ID of the taxon to be displayed in the "Show" drop-down above the Wildlife Activity Counts.' +
+                                               '  <br>(e.g. '+furl(root_taxa+default_sub_icons[0].taxonId,default_sub_icons[0].taxonId)+')</td></tr>' +
+                                               '<tr id="trkey"><td id="tdkey">icon</td><td id="tdkey">' +
+                                               'The utf-8 of the icon that will appear next to the corresponding name in the "Show" drop-down.' +
+                                               '  <br>(e.g. '+default_sub_icons[0].icon+')</td></tr>' +
+                                               '</td></tr></table><span id="seperator"></span>')});
+    }
+ 
+    if( default_sub_icons ) {
+        const prettyJson     = JSON.stringify(configuration.originalConfig, replacer, 2);
+        const prettyJsonSubs = JSON.stringify(default_sub_icons, replacer, 2); 
+        faddelem('p',document.body,{innerHTML:('Entire<b> '+configuration.component+'</b> component in '+getParams(appState)+'.json:</b>' +
+                                           '<pre id="json-display"></pre>' + '"default_sub_icons": [' + 
+                                           '<pre id="json-default"></pre>')});
+        document.getElementById('json-display').textContent = prettyJson;
+        document.getElementById('json-default').textContent = prettyJsonSubs;
+    } else {
+        const prettyJson     = JSON.stringify(configuration.originalConfig, replacer, 2);
+        faddelem('p',document.body,{innerHTML:('Entire<b> '+configuration.component+'</b> component in '+getParams(appState)+'.json:</b>' +
+                                           '<pre id="json-display"></pre>')});
+        document.getElementById('json-display').textContent = prettyJson;
+    }
+}
+
+</script>
+ 
+<script type="text/javascript"   src="../core/js/ConfigManager.js"></script>
+
+<script>
+async function gatherResources() {
+  let json_path = json_root + getParams(appState);
+ 
+  try {
+      // get the configurations
+      const configManager   = await asyncGetConfiguration( json_path );
+     
+      // Pass the data to the buildPage function
+      buildPage( configManager ); 
+
+    } catch (error) {
+      console.error("An error occurred:", error);
+      faddelem('p',document.body,{innerHTML:('<span id="error">&#9888;<br>' + error.message + '</span>')}); 
+      throw error;
+    }
+}
+
+let message = validateConfig(appState);
+ 
+if( message ) {
+    faddelem('p',document.body,{innerHTML:('<span id="error">&#9888;<br>' + message + '</span>')}); 
+} else {
+    gatherResources(); 
+}
+  
+</script>
+</body>
+</html>
