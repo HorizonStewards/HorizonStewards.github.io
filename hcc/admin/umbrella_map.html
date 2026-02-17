@@ -1,5 +1,5 @@
 <!DOCTYPE html>  
-<html lang="en">     
+<html lang="en">       
  
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />     
@@ -15,6 +15,10 @@
 <title>Umbrella Map</title>
 </head>
 
+<style>
+  p { width:100%; }
+</style>
+
 <body>
 <script type="text/javascript"   src='../core/js/common_func.js'> </script>
 <script>  
@@ -22,8 +26,8 @@ let winurlstr = window.location.href;
 let winurlsearchstr    = window.location.search;
 let winurlexsearchstr  = winurlstr.replace(winurlsearchstr,'');
 let winurlparams       = new URLSearchParams(winurlsearchstr.substring(1));
- 
-      faddelem('p',document.body,{innerHTML:'<iframe src="https://www.google.com/maps/d/embed?mid=12ambBFWuysj82ZfV4bJXzO7z1ttSxoc&ehbc=2E312F" width="375" height="480"></iframe>'});
+
+ faddelem('p',document.body,{innerHTML:'<iframe src="https://www.google.com/maps/d/embed?mid=12ambBFWuysj82ZfV4bJXzO7z1ttSxoc&ehbc=2E312F&noprof=1" width="95%" height="600"></iframe>'});
  
 </script>
  
