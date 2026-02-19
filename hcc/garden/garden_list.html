@@ -1,5 +1,5 @@
-<!DOCTYPE html>      
-<html lang="en"> 
+<!DOCTYPE html>        
+<html lang="en">      
    
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />      
@@ -66,8 +66,26 @@ function getPlaceName( plantConfig, place_id ) {
 function buildMenu( config, results ) {
       let menu_string = '';
       let links = '';
+      let dd_name = '';
  
       menu_string = '<div class="navbar">';
+
+      if( config.ddObsFields && config.ddObsFields.length > 0 ) {
+          let urlState = appState;
+          urlState     = setFieldName(urlState, '');
+          urlState     = setFieldValue(urlState, ''); 
+          urlState     = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
+          links       += furl('./garden_list.html'+buildParameterList(urlState),capitalizeWords(CONST_ALL));
+          for( let i=0; i<config.ddObsFields.length; i++ ) {
+               dd_name  = config.ddObsFields[i].ddName;
+               urlState = setFieldName(  urlState, config.ddObsFields[i].fieldName );
+               urlState = setFieldValue( urlState, config.ddObsFields[i].fieldValue );
+               links += furl('./garden_list.html'+buildParameterList(urlState),config.ddObsFields[i].fieldValue);
+          }
+      }
+
+      if( links ) { menu_string += buildDD(dd_name, links); }
+      links = '';
  
       if( config.places && config.places.length > 0 ) {
           let urlState = appState;
@@ -158,7 +176,7 @@ function buildPage(xobj, config) {
           if( getPlaceMenuName(appState) ) {
               title_3 = '<span id="toprightbold">'+getPlaceMenuName(appState)+'</span>'; 
           } else {
-              title_3 = '<span id="toprightbold">'+config.title+'</span>'; 
+              title_3 = '<span id="toprightbold">'+config.studyTitle||config.title+'</span>'; 
           }
       }
 
@@ -258,6 +276,13 @@ function setupAPIParams( plantConfig ) {
    if( plantConfig.plantIds )          { api_params += '&id='       + plantConfig.plantIds;  }
    if( plantConfig.plantListUserId )   { api_params += '&user_id='  + plantConfig.plantListUserId; }
    if( plantConfig.tagName )           { api_params += '&tag='      + plantConfig.tagName; }
+
+   if( getFieldName(appState) ) {
+       api_params += '&field:' + getFieldName(appState);
+       if( getFieldValue(appState) ) {
+           api_params += '=' + getFieldValue(appState);
+       }
+   }
 
    // if a place_id was chosen from the place drop-down, use that place_id...
    if( getPlaceMenuId(appState) ) {
