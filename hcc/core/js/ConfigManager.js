@@ -114,7 +114,7 @@ class ConfigurationItem {
         if( this.studyTitle === null ) {
             return( '' );
         } else {
-            return this.studyTitle();
+            return this.studyTitle;
         }
     }
 
