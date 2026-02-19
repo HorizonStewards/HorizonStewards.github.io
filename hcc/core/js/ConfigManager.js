@@ -36,6 +36,17 @@ class SubIcon {
 }
 
 /**
+ * Represents a dd_obs_field entry.
+ */
+class DDObsField {
+    constructor(data) {
+        this.ddName     = data.dd_name;
+        this.fieldName  = data.field_name;
+        this.fieldValue = data.field_value;
+    }
+}
+
+/**
  * Represents an item within the main 'configurations' array.
  */
 class ConfigurationItem {
@@ -67,7 +78,9 @@ class ConfigurationItem {
         this.studyTitle = configData.study_title ?? null;
         this.studyDesc  = configData.study_desc ?? null;
         this.defaultTaxonId = configData.default_taxon_id ?? null;
-        this.utf8       = configData.utf8 ?? null;
+        this.utf8         = configData.utf8 ?? null;
+        this.obsAPIParams = configData.obs_api_params ?? null;
+        this.merge        = configData.merge ?? null;
 
         this.obsFields = configData.obs_fields ?? configData.field_id ?? null;
         
@@ -75,7 +88,8 @@ class ConfigurationItem {
         this.places = configData.places?.map(t => new Place(t)) ?? [];
         this.taxa   = configData.taxa?.map(t => new Taxon(t)) ?? [];
         this.subIcons = configData.sub_icons?.map(s => new SubIcon(s)) ?? [];
-
+        this.ddObsFields = configData.dd_obs_fields?.map(d => new DDObsField(d)) ?? [];
+        
         // store the orginial .json with original field names that haven't been mapped to this object.
         this.originalConfig = configData ?? null;  // used in about.html to pretty print the original .json
 
