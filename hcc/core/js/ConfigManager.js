@@ -110,6 +110,14 @@ class ConfigurationItem {
         return `${this.title} (${this.component})`;
     }
 
+    getSubTitle() {
+        if( this.studyTitle === null ) {
+            return( '' );
+        } else {
+            return this.studyTitle();
+        }
+    }
+
     // find the taxon name given the taxon_id in the list of sub_icons in the configuration
     getSubIconNameByTaxonId( plantsConfig, taxon_id ) {
         let sub_icon_name = '';
