@@ -736,8 +736,8 @@ function clearForObserverCountsParams(state) {
   urlState = setTaxonId(urlState, ''); 
   urlState = setTaxonName(urlState, '');
   urlState = setLSTaxonId( urlState, '');
-  urlState = setPlantId(urlState, '');
-  urlState = setPlantName(urlState, '');
+  //urlState = setPlantId(urlState, '');  // they may have chosen a plant on "choose plant"
+  //urlState = setPlantName(urlState, '');
   urlState = setMenuId(urlState, '');
   urlState = setMenuName(urlState, '');
   urlState = setTaxonDD(urlState, '');
