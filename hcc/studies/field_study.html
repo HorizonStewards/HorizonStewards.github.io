@@ -21,13 +21,67 @@
 
 <style>
 
-   #dltest { max-height:52px; overflow-y:auto; /* overflow: scroll; */ width:fit-content; display: block; justify-content:start; border-width:2px 2px; border-style:solid; border-color:var(--color-border); border-radius: 5px; padding-top: 3px; padding-bottom: 3px; padding-left: 8px; padding-right: 4px; margin-bottom: 10px; white-space:nowrap; }
+   /*#dltest { max-height:52px; overflow-y:auto; width:fit-content; display: block; justify-content:start; border-width:2px 2px; border-style:solid; border-color:var(--color-border); border-radius: 5px; padding-top: 3px; padding-bottom: 3px; padding-left: 8px; padding-right: 4px; margin-bottom: 10px; white-space:nowrap; }*/
    #topright { display:flex; justify-content:flex-end; align-items: flex-end; white-space:nowrap; padding-right:0px; }
-   #stats { margin-bottom: 10px; width:fit-content; display: block; justify-content:start; border-width:2px 2px; border-style:solid; border-color:var(--color-border); border-radius: 5px; padding-top: 3px; padding-bottom: 3px; padding-left: 8px; padding-right: 8px; }
+   /*#stats { margin-bottom: 5px; width:fit-content; display: block; justify-content:start; border-width:2px 2px; border-style:solid; border-color:var(--color-border); border-radius: 5px; padding-top: 3px; padding-bottom: 3px; padding-left: 8px; padding-right: 8px; box-sizing: border-box; }*/
+/* 1. THE CONTAINER: Forces equal height and pushes items to opposite sides */
+ 
+.top-bar {
+  display: flex;
+  justify-content: space-between; /* Pushes Stats Left and dltest Right */
+  align-items: stretch;           /* Forces both boxes to the same height */
+  width: 90%;
+  gap: 10px;                      /* Optional: space between them if they meet */
+  margin-bottom: 10px;
+}
 
+/* 2. STATS (Left Box) */
+#stats {
+  display: inline-flex;
+  flex-direction: column;
+  vertical-align: top;
+  box-sizing: border-box;
+  
+  /* Dimensions & Scroll */
+  max-height: 58px;
+  overflow-y: auto;
+  white-space: nowrap;
+  width: fit-content;
 
-   #mismatch { padding-right:25px; padding-bottom:12px; }
-   #divhead { max-width: 900px; }
+  /* iPhone Gap Fix: Tighten line-height so padding is the only gap */
+  line-height: 1; 
+
+  /* Visuals: Mirroring dltest */
+  border: 2px solid var(--color-border);
+  border-radius: 5px;
+  padding-top: 3px;
+  padding-bottom: 3px; /* Exact 3px gap you requested */
+  padding-left: 8px;
+  padding-right: 4px;
+}
+
+/* 3. DLTEST (Right Box) */
+#dltest {
+  display: block;
+  box-sizing: border-box; /* Crucial for height matching */
+  
+  /* Dimensions & Scroll */
+  max-height: 64px;
+  overflow-y: auto;
+  width: fit-content;
+  white-space: nowrap;
+
+  /* Visuals */
+  border: 2px solid var(--color-border);
+  border-radius: 5px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 8px;
+  padding-right: 4px;
+} 
+ 
+   #mismatch { padding-right:25px; padding-bottom:0px; }
+   #divhead { max-width: 90%; }
    #key { color:var(--color-text); text-decoration:underline; padding:0; padding-right: 25px;}
    #tablekey { display:inline-table; }
    #trkey { padding:0; background:var(--color-base); border:none; border-collapse:collapse; }
@@ -48,7 +102,7 @@
    }
  
    .navbar {
-      max-width: 900px;
+      max-width: 90%;
       overflow: hidden;
       background-color: var(--color-brand);
       border-radius: 5px 5px 5px 5px;
@@ -63,7 +117,6 @@ let winurlstr = window.location.href;
 let winurlsearchstr = window.location.search;
 let winurlexsearchstr = winurlstr.replace(winurlsearchstr,'');
 let winurlparams = new URLSearchParams(winurlsearchstr.substring(1));
-let p_ofield_iconic = winurlparams.get('ofield_iconic') || '';
 let p_field = '';
 let p_field_value = '';
 let field_array = [];
@@ -195,7 +248,7 @@ function fresults( xobj, config ) {
                  for( let j=0; j<rec.ofvs.length; j++ ){
                       if( field_array_copy[r] === rec.ofvs[j].field_id.toString() ){
                           let box_row   = box_array.find( boxRow => boxRow.field_id === rec.ofvs[j].field_id.toString() );
-                          box_row.field_name = rec.ofvs[j].name.toString();
+                          box_row.field_name = truncate(rec.ofvs[j].name.toString(), 25);
                       }
                  }
               }
@@ -245,7 +298,12 @@ function fresults( xobj, config ) {
     
       dlString += '</table></span></div>';
 
-      faddelem('p',document.body,{innerHTML:dlString});
+      faddelem('p',document.body,{innerHTML:'<div class="top-bar"><div id="stats"><table id="tablekey">' +
+                                            '<tr id="trkey"><td id="tdkey">total:</td><td id="tdright">'     + fcomnum(total_results) + '</td></tr>' + 
+                                            '<tr id="trkey"><td id="tdkey">per page:</td><td id="tdright">'  + fcomnum(per_page)      + '</td></tr>' + 
+                                            '<tr id="trkey"><td id="tdkey">page:</td><td id="tdright">'      + fcomnum(page_curr) + ' of ' + fcomnum(page_max) + '</td></tr></table></div>' + 
+                                            dlString + '</div>'});
+      //faddelem('p',document.body,{innerHTML:dlString+'</div>'});
 
       // hide the mismatch warning... only display it if there is a mismatch in the table.
       document.getElementById("mismatch").style.display = "none"; 
@@ -336,7 +394,7 @@ function fresults( xobj, config ) {
                           if( rec.ofvs[j].taxon ){ 
                               let name  = rec.ofvs[j].taxon.name || '';
                               let cname = rec.ofvs[j].taxon.preferred_common_name || '';
-                              if( p_ofield_iconic === '' || p_ofield_iconic === rec.ofvs[j].taxon.iconic_taxon_id.toString() ){
+                              if( !config.ofield_iconic || config.ofield_iconic === rec.ofvs[j].taxon.iconic_taxon_id.toString() ){
                                   field1 = name;
                                   displayCommonName = cname.toLowerCase();
                                   displayTaxonName = name;
@@ -416,15 +474,6 @@ function fresults( xobj, config ) {
 
          tempBrow.push(values);
       };
-       
-      faddelem('p',document.body,{innerHTML:'<span id="stats"><table id="tablekey">' +
-                                            '<tr id="trkey"><td id="tdkey">total:</td><td id="tdright">'     + fcomnum(total_results) + '</td></tr>' + 
-                                            '<tr id="trkey"><td id="tdkey">per page:</td><td id="tdright">'  + fcomnum(per_page)      + '</td></tr>' + 
-                                            '<tr id="trkey"><td id="tdkey">page:</td><td id="tdright">'      + fcomnum(page_curr) + ' of ' + fcomnum(page_max) + '</td></tr></table></span>'});
-    
-      /*faddelem('p',document.body,{innerHTML:'total observations: '+fcomnum(total_results)+' <br/>'
-             +'per page: '+fcomnum(per_page)+'<br />'
-             +'page: '+fcomnum(page_curr)+' of '+fcomnum(page_max)+flower+'<br /></div>'});  */
 
       let table = faddelem('table',document.body,{id:'main'});
       let thead = faddelem('thead',table);
