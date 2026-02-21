@@ -3,7 +3,33 @@ const CONST_OBSERVATIONS = 'observations:';
 const CONST_OF           = ' of ';
 
 function fcomnum(n) { return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',') }; 
-function furl(url,txt=url) { return '<a href="'+url+'">'+txt+'</a>'; };
+
+// SECURE: Uses textContent to prevent script injection in link text
+function furl(url, txt = url) {
+    const a = document.createElement('a');
+    const safeUrl = (url.trim().toLowerCase().startsWith('javascript:')) ? '#' : url;
+    a.href = safeUrl;
+    a.textContent = txt; 
+    return a;
+}
+
+function faddelem(etype, eparent = null, eattributes = {}) {
+    const eobj = document.createElement(etype);
+    for (let [key, value] of Object.entries(eattributes)) {
+        if (key === 'innerHTML') {
+            //console.warn("innerHTML used; ensure content is sanitized.");
+            eobj.innerHTML = value;
+        } else if (key === 'textContent') {
+            eobj.textContent = value;
+        } else {
+            eobj[key] = value;
+        }
+    }
+    if (eparent) eparent.appendChild(eobj);
+    return eobj;
+}
+
+/*function furl(url,txt=url) { return '<a href="'+url+'">'+txt+'</a>'; };
 function faddelem(etype,eparent=null,eattributes={}) { 
    let eobj = document.createElement(etype);
    for (let [key,value] of Object.entries(eattributes)) {
@@ -14,7 +40,7 @@ function faddelem(etype,eparent=null,eattributes={}) {
     };
    if (eparent) { eparent.appendChild(eobj); };
    return eobj;
-}
+}*/
 
 function faddelems(etype,eparent=null,eattributes=[]) { for (let e of eattributes) { faddelem(etype,eparent,e); }; };
 function fpageurl(urlbase,urlparams,per_page,page) {
@@ -60,10 +86,6 @@ function truncate(str, maxLength) {
   } else {
      return (str.substring(0, maxLength) + '...');
   }
-}
-
-function stripHtml(html) {
-  return html.replace(/<[^>]*>/g, '');
 }
 
 function isMultipleOfFour(num) {
