@@ -21,6 +21,7 @@ class Taxon {
     constructor(data) {
         this.taxonId = data.taxon_id;
         this.taxonName = data.taxon_name;
+        this.icon = data.icon;
     }
 }
 
@@ -80,6 +81,7 @@ class ConfigurationItem {
         this.defaultTaxonId = configData.default_taxon_id ?? null;
         this.utf8         = configData.utf8 ?? null;
         this.obsAPIParams = configData.obs_api_params ?? null;
+        this.ofieldIconic = configData.ofield_iconic ?? null;
         this.merge        = configData.merge ?? null;
 
         this.obsFields = configData.obs_fields ?? configData.field_id ?? null;
@@ -106,16 +108,16 @@ class ConfigurationItem {
         }
     }
 
-    getFullTitle() {
-        return `${this.title} (${this.component})`;
-    }
-
     getSubTitle() {
         if( this.studyTitle === null ) {
             return( '' );
         } else {
             return this.studyTitle;
         }
+    }
+
+    getFullTitle() {
+        return `${this.title} (${this.component})`;
     }
 
     // find the taxon name given the taxon_id in the list of sub_icons in the configuration
@@ -261,4 +263,3 @@ async function asyncGetConfiguration( params, component, studyTitle=null ) {
       throw error; 
    }
 }
-
