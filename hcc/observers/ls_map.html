@@ -133,6 +133,7 @@ function latidx(lat) { return (1-Math.log(Math.tan(lat*Math.PI/180)+1/Math.cos(l
 //function to identify the right tiles to pull, given a bounding box defined by a SW point and NE point in GPS coordinates
 //this is only somewhat tested, but it seems to help pull in the right tiles (most of the time?).
 function fmapextent(bbox={swlat:-90,swlng:0,nelat:89.999999,nelng:-0.00001}) {
+      console.log('bb ' + JSON.stringify(bbox));
    var w = bbox.swlng;
    var e = bbox.nelng;
    var n = bbox.nelat;
@@ -449,7 +450,6 @@ function fcreatelayer(lseq,ltype,lurl,marker=null) {
 function fcreatebaselayer(lseq,lurl,ldescr=null,lattr=null,visible=true,stylefilter=null,bgcolor=null,disabled=true) {
    var layer = fcreatelayer(lseq,'basemap',lurl);
    var isDisabled = (disabled === true) ? ' disabled' : ''; 
-   console.log('isdis ' + isDisabled);
    if (stylefilter!==null) { layer.style.filter = stylefilter; };
    if (bgcolor!==null) { layer.style.bgcolor = bgcolor; };
    var entry = faddelem('div',keybody,'keyentry');
