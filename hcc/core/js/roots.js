@@ -7,10 +7,10 @@ let root_taxa         = 'https://www.inaturalist.org/taxa/';
 let root_places       = 'https://www.inaturalist.org/places/';
 
 // json root dir
-let json_root = '../core/json/';
+const json_root = '../core/json/';
 
 // JavaScript root dir 
-let js_root = '../core/js/';
+const js_root = '../core/js/';
 
 // outlinks used in cncnpc_seeds_fields.html
 // usda outlink 
