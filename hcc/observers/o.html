@@ -114,7 +114,7 @@ function buildPage(xobj, observerConfig) {
 
            // Column: Name 
            let urlState = appState;
-           //console.log('rec ' + JSON.stringify(rec));
+           console.log('rec ' + JSON.stringify(rec.taxon.ancestor_ids));
            //const anc_arr = rec.taxon.min_species_ancestry.split(",");           
            //console.log('anc ' + rec.taxon.min_species_ancestry );
            if( rec.taxon.ancestor_ids.includes('47157') ) { urlState = setLSTaxonId(appState, '47157'); }  // lepidoptera*/
