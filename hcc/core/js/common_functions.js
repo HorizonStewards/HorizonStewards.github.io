@@ -10,10 +10,10 @@ const root_places       = 'https://www.inaturalist.org/places/';
 const github_root = 'https://stockslager.github.io/iNat/';
 
 // json root dir
-const json_root = 'https://stockslager.github.io/iNat/nn/core/json/';
+const json_root = '../core/json/';
 
 // JavaScript root dir 
-const js_root = 'https://stockslager.github.io/iNat/nn/core/js/';
+const js_root = '../nn/core/js/';
 
 // outlinks used in cncnpc_seeds_fields.html
 // usda outlink 
