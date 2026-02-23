@@ -15,7 +15,7 @@
             ]
     },
     { 
-        "component": "observers",             "title": "Horizon Community Church",     "ls_map_extent": "yes",
+        "component": "observers",             "title": "Horizon Community Church",     "ls_mapextent": "yes",
         "project": "157918",                  "insect_project": "157918", 
         "field_id": "7623",                   "field_name": "plant that the organism was found on"
     },
