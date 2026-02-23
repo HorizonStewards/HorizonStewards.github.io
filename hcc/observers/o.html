@@ -114,10 +114,10 @@ function buildPage(xobj, observerConfig) {
 
            // Column: Name 
            let urlState = appState;
-           console.log('rec ' + JSON.stringify(rec.taxon.ancestor_ids));
+           /*console.log('rec ' + JSON.stringify(rec.taxon.ancestor_ids));
            const anc_arr = rec.taxon.ancestor_ids.split(",");           
-           console.log('anc ' + anc_arr );
-           if( rec.taxon.ancestor_ids.includes('47157') ) { urlState = setLSTaxonId(appState, '47157'); }  // lepidoptera*/
+           console.log('anc ' + anc_arr );*/
+           if( rec.taxon.ancestor_ids.includes(47157) ) { urlState = setLSTaxonId(appState, '47157'); }  // lepidoptera*/
            urlState = setTaxonId(appState, rec.taxon.id);
            let url      = './observer_grid.html' + buildParameterList(urlState);
            buildSpeciesName( brow, rec, url );
