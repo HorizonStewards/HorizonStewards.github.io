@@ -1,10 +1,10 @@
 { 
+  "plant_field": "garden list",         "plant_field_value": "yes", 
   "configurations":    
   [
     { 
         "component": "plants",                "title": "Church Gardens Umbrella",   
         "project": "274978",                  "insect_project": "274978",
-        "plant_field": "garden list",         "plant_field_value": "yes", 
         "field_id": "7623",                   "field_name": "plant that the organism was found on",
         "places":
             [
@@ -21,7 +21,6 @@
     },
     { 
         "component": "observers",             "title": "Church Gardens Umbrella",     "ls_map_extent": "yes",
-        "plant_field": "garden list",         "plant_field_value": "yes", 
         "project": "274978",                  "insect_project": "274978", 
         "field_id": "7623",                   "field_name": "plant that the organism was found on"
     },
