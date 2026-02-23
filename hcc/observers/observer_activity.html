@@ -114,8 +114,8 @@ function buildPage(xobj, observerConfig) {
 
            // Column: Name 
            let urlState = appState;
-           console.log('anc ' + rec.taxon.ancestry);
-           if( rec.taxon.ancestry.includes('47157') ) { urlState = setLSTaxonId(appState, '47157'); }  // lepidoptera
+           console.log('anc ' + rec.taxon.min_species_ancestry);
+           if( rec.taxon.min_species_ancestry.includes('47157') ) { urlState = setLSTaxonId(appState, '47157'); }  // lepidoptera
            urlState = setTaxonId(appState, rec.taxon.id);
            let url      = './observer_grid.html' + buildParameterList(urlState);
            buildSpeciesName( brow, rec, url );
