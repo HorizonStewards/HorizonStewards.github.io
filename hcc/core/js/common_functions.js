@@ -22,16 +22,17 @@ const root_usda = 'https://plants.usda.gov/plant-profile/';
 const root_missouri = 'https://www.missouribotanicalgarden.org/PlantFinder/PlantFinderDetails.aspx?kempercode=';
 
 // global constants...
-const CONST_TOTAL_SPECIES  = 'total species: ';  // common api results header
-const CONST_TOTAL_OBS      = 'total observations: ';
-const CONST_PAGE           = 'page: ';           // common api results header 
-const CONST_PER_PAGE       = 'per page: ';       // common api results header
-const CONST_ON             = 'On ';
-const CONST_ALL_PLANTS     = 'All Plants';
-const CONST_SPECIES        = 'species:';
-const CONST_OBSERVATIONS   = 'observations:';
-const CONST_OF             = ' of ';
-const CONST_ABOUT          = 'About';
+const CONST_TOTAL_SPECIES   = 'total species: ';  // common api results header
+const CONST_TOTAL_OBS       = 'total observations: ';
+const CONST_PAGE            = 'page: ';           // common api results header 
+const CONST_PER_PAGE        = 'per page: ';       // common api results header
+const CONST_ON              = 'On ';
+const CONST_ALL_PLANTS      = 'All Plants';
+const CONST_SPECIES         = 'species:';
+const CONST_OBSERVATIONS    = 'observations:';
+const CONST_ENTIRE_UMBRELLA = 'Entire Umbrella';
+const CONST_OF              = ' of ';
+const CONST_ABOUT           = 'About';
 
 // show menu
 const CONST_ALL            = 'all';              // common show drop down label
@@ -45,7 +46,6 @@ const CONST_LEAF_UTF8      = '&#127807;';        // leaf icon for yard list
 const CONST_SEEDLING_UTF8  = '&#x1F331;';        // seedling icon
 const CONST_BOOT_UTF8      = '<span style="font-size: 18px;">&#x1F97E;</span>';        // back icon for thru hiker
 const CONST_NPC_UTF8       = '&#128101;';
-//const CONST_NPC_UTF8       = '&#128100;';        // npc icon for observers
 const CONST_ART_UTF8       = '&#127912;';        // pallete icon for journaling / artwork
 const CONST_ANIMALS_UTF8   = '&#128038;';        // bird
 const CONST_STUDIES_UTF8   = '&#127891;';
@@ -92,6 +92,9 @@ function capitalizeWords(str) {
   }).join(' ');
 }
 
+//****************************************
+// navbar title, url, drop-down helpers **
+//****************************************
 function buildNavHome( navbar, baseUrl, homeState ) {
     let homeUrl = baseUrl + buildParameterList(homeState);
     let homeDiv = faddelem('div', navbar, { id: 'home' });
@@ -104,6 +107,121 @@ function buildNavAbout( navbar, baseUrl, homeState ) {
     let homeDiv = faddelem('div', navbar, { id: 'home' });
     let hLink = faddelem('a', homeDiv, { href: homeUrl });
     faddelem('span', hLink, { textContent: CONST_ABOUT });
+}
+
+function buildNavDDPlace( navbar, dd_name, results, config, baseUrl, sub_taxon_arr ) {
+
+    // Build the Place Dropdown
+    if( config.places ) {
+        let urlState = appState;
+        urlState     = setPlaceMenuId(urlState, '');
+        urlState     = setPlaceMenuName(urlState, ''); 
+        urlState     = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
+
+        // Create the Dropdown container
+        let dropdown = faddelem('div', navbar, { className: 'dropdown' });
+       
+        // Dropdown Button
+        faddelem('button', dropdown, { className: 'dropbtn', textContent: capitalizeWords(dd_name) });
+
+        // Dropdown Content (the links)
+        let ddContent = faddelem('div', dropdown, { className: 'dropdown-content' }); 
+
+        // ALL Link
+        let allUrl = baseUrl + buildParameterList(urlState);
+        let allLink = faddelem('a', ddContent, { href: allUrl });
+        // Text for ALL 
+        faddelem('span', allLink, { textContent: CONST_ENTIRE_UMBRELLA }); 
+
+        // Place Links Loop
+        for( let j = 0; j < config.places.length; j++ ) {
+             urlState = setPlaceMenuId( urlState, config.places[j].placeId );
+             urlState = setPlaceMenuName( urlState, config.places[j].placeName );
+             let iconUrl = baseUrl + buildParameterList(urlState);
+                 
+             let tLink = faddelem('a', ddContent, { href: iconUrl });
+
+             // name to appear as an item in drop-down
+             faddelem('span', tLink, { textContent: config.places[j].placeName });
+        }
+    }
+}
+
+function buildNavDDTaxa( navbar, dd_name, results, config, baseUrl, sub_taxon_arr ) {
+
+    // Build the Taxa Dropdown
+    if( config.taxa ) {
+        let urlState = appState;
+        urlState     = setPlantMenuId(urlState, '');
+        urlState     = setPlantMenuName(urlState, '');
+        urlState     = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
+
+        // Create the Dropdown container
+        let dropdown = faddelem('div', navbar, { className: 'dropdown' });
+       
+        // Dropdown Button
+        faddelem('button', dropdown, { className: 'dropbtn', textContent: capitalizeWords(dd_name) });
+
+        // Dropdown Content (the links)
+        let ddContent = faddelem('div', dropdown, { className: 'dropdown-content' }); 
+
+        // ALL Link
+        let allUrl = baseUrl + buildParameterList(urlState);
+        let allLink = faddelem('a', ddContent, { href: allUrl });
+        // Text for ALL 
+        faddelem('span', allLink, { textContent: capitalizeWords(CONST_ALL) }); 
+
+        // Place Links Loop
+        for( let j = 0; j < config.taxa.length; j++ ) {
+             urlState = setPlantMenuId(   urlState, config.taxa[j].taxonId );
+             urlState = setPlantMenuName( urlState, config.taxa[j].taxonName );
+             let iconUrl = baseUrl + buildParameterList(urlState);
+                 
+             let tLink = faddelem('a', ddContent, { href: iconUrl });
+
+             // name to appear as an item in drop-down
+             faddelem('span', tLink, { textContent: config.taxa[j].taxonName });
+        }
+    }
+}
+
+function buildNavDDObsFields( navbar, dd_name, results, config, baseUrl, sub_taxon_arr ) {
+
+    // Build the Show Dropdown
+    if( config.ddObsFields ) {
+        let urlState = appState;
+        urlState     = setFieldName(urlState, '');
+        urlState     = setFieldValue(urlState, ''); 
+        urlState     = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
+
+        // Create the Dropdown container
+        let dropdown = faddelem('div', navbar, { className: 'dropdown' });
+       
+        // Dropdown Button
+        faddelem('button', dropdown, { className: 'dropbtn', textContent: capitalizeWords(dd_name) });
+
+        // Dropdown Content (the links)
+        let ddContent = faddelem('div', dropdown, { className: 'dropdown-content' }); 
+
+        // ALL Link
+        let allUrl = baseUrl + buildParameterList(urlState);
+        let allLink = faddelem('a', ddContent, { href: allUrl });
+        // Text for ALL 
+        faddelem('span', allLink, { textContent: capitalizeWords(CONST_ALL) }); 
+
+        // Obs Fields Links Loop
+        for( let j = 0; j < config.ddObsFields.length; j++ ) {
+             urlState = setFieldName(  urlState, config.ddObsFields[j].fieldName );
+             urlState = setFieldValue( urlState, config.ddObsFields[j].fieldValue );
+             let iconUrl = baseUrl + buildParameterList(urlState);
+                 
+             let tLink = faddelem('a', ddContent, { href: iconUrl });
+
+             // The name will always be the value of the field 
+             // (if the field name is "trail name" the value will be "some trail") 
+             faddelem('span', tLink, { textContent: config.ddObsFields[j].fieldValue });
+        }
+    }
 }
 
 function buildNavDDFilteredShow( navbar, dd_name, results, config, baseUrl ) {
@@ -285,6 +403,26 @@ function renderHeader(entity, total, per_page, page_curr, page_max, title_1, tit
     document.body.appendChild(pWrapper);
 }
 
+//********************
+// obs list helpers **
+//********************
+function sortWithNull(arr, ascending = true) {
+  for( let i=0; i<arr.length; i++ ) {
+       if( arr[i].taxon.preferred_common_name ){
+           arr[i].taxon.preferred_common_name = arr[i].taxon.preferred_common_name.toLowerCase();
+       }
+  }
+  arr.sort(function(a, b) {
+    if (!a.taxon.preferred_common_name && !b.taxon.preferred_common_name) return 0;
+    if (!a.taxon.preferred_common_name) return ascending ? 1 : -1;
+    if (!b.taxon.preferred_common_name) return ascending ? -1 : 1;
+    if (a.taxon.preferred_common_name < b.taxon.preferred_common_name) return ascending ? -1 : 1;
+    if (a.taxon.preferred_common_name > b.taxon.preferred_common_name) return ascending ? 1 : -1;
+    return 0;
+  });
+  return arr;
+}
+
 //**************************************
 // Species Counts Table Column Helpers *
 //**************************************
@@ -297,6 +435,12 @@ function buildSpeciesPhoto( brow, rec ) {
     } else {
         faddelem('div', tdPhoto, { className: 'clipart', html: '&#127807;' });
     }
+}
+
+// Garden List (Observations List) Table Column - Obs Photo
+function buildObsPhoto( brow, rec ) {
+    let tdPhoto = faddelem('td', brow);
+    faddelem('img', tdPhoto, { className: 'mini_photo2', src: ((rec.photos&&rec.photos.length>0)?rec.photos[0].url:'') });
 }
 
 // Species Counts Table Column - Name
