@@ -427,6 +427,41 @@ function getPerPageParam(state, param_nm)   {
   }
 }
 
+// validate params for dashboard
+function validateDashboardParams(state) {
+  let message = '';
+  
+  if( !getParams(state) ) {
+      let message = 'Params are required.  There is no value in the &amp;params parameter.  ' +
+                    'The value should match the name of a .json configuration file';
+      return message;
+  }
+}
+
+// validate params for garden_list
+function validateGardenListParams(state) {
+  let message = '';
+  
+  if( !getParams(state) ) {
+      let message = 'Params are required.  There is no value in the &amp;params parameter.  ' +
+                    'The value should match the name of a .json configuration file';
+      return message;
+  }
+
+  if( !getComponent(state) ) {
+      let message = 'Component is required.  There is no value in the &amp;component parameter.  ' +
+                    'The value should match the name of a .json configuration file';
+      return message;
+  }
+
+  // can be used from two components
+  if( getComponent(state) !== COMPONENT_OBSERVERS  && getComponent(state) !== COMPONENT_GARDEN ){
+      let message = 'Invalid Component.  ' +
+                    'The value for the component param should match the name of a component in the .json configuration file';
+      return message;
+  }
+}
+
 /*
  * component based validation
  *
@@ -736,7 +771,7 @@ function clearForObserverCountsParams(state) {
   urlState = setTaxonId(urlState, ''); 
   urlState = setTaxonName(urlState, '');
   urlState = setLSTaxonId( urlState, '');
-  //urlState = setPlantId(urlState, '');  // they may have chosen a plant on "choose plant"
+  //urlState = setPlantId(urlState, '');  // need to save these if returning after "choose plant" with plant in focus
   //urlState = setPlantName(urlState, '');
   urlState = setMenuId(urlState, '');
   urlState = setMenuName(urlState, '');
