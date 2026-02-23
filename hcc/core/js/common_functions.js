@@ -6,9 +6,6 @@ const root_projects     = 'https://www.inaturalist.org/projects/';
 const root_taxa         = 'https://www.inaturalist.org/taxa/';
 const root_places       = 'https://www.inaturalist.org/places/';
 
-// repo root directory
-const github_root = '../../';
-
 // json root dir
 const json_root = '../core/json/';
 
@@ -441,8 +438,13 @@ function buildSpeciesPhoto( brow, rec ) {
 
 // Garden List (Observations List) Table Column - Obs Photo
 function buildObsPhoto( brow, rec ) {
-    let tdPhoto = faddelem('td', brow);
-    faddelem('img', tdPhoto, { className: 'mini_photo2', src: ((rec.photos&&rec.photos.length>0)?rec.photos[0].url:'') });
+  let tdPhoto = faddelem('td', brow);
+    
+  // Create the anchor link inside the table cell
+  let a = faddelem('a', tdPhoto, { href: root_observations + rec.id });
+    
+  // Create the image INSIDE the anchor link (a) instead of the cell (tdPhoto)
+  faddelem('img', a, { className: 'mini_photo2', src: ((rec.photos && rec.photos.length > 0) ? rec.photos[0].url : '') });
 }
 
 // Species Counts Table Column - Name
