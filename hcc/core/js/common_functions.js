@@ -7,13 +7,13 @@ const root_taxa         = 'https://www.inaturalist.org/taxa/';
 const root_places       = 'https://www.inaturalist.org/places/';
 
 // repo root directory
-const github_root = 'https://stockslager.github.io/iNat/';
+const github_root = '../../';
 
 // json root dir
 const json_root = '../core/json/';
 
 // JavaScript root dir 
-const js_root = '../nn/core/js/';
+const js_root = '../core/js/';
 
 // outlinks used in cncnpc_seeds_fields.html
 // usda outlink 
