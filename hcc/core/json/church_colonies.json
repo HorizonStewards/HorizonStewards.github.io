@@ -22,8 +22,7 @@
     { 
         "component": "observers",             "title": "Church Gardens Umbrella",     "ls_map_extent": "yes",
         "project": "274978",                  "insect_project": "274978", 
-        "field_id": "7623",                   "field_name": "plant that the organism was found on",
-        "map_type": "ls"
+        "field_id": "7623",                   "field_name": "plant that the organism was found on"
     },
     {
         "component": "colonies",              "title": "Church Gardens Umbrella",
