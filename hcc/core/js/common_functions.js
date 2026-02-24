@@ -31,6 +31,7 @@ const CONST_ENTIRE_UMBRELLA = 'Entire Umbrella';
 const CONST_OF              = ' of ';
 const CONST_ABOUT           = 'About';
 const CONST_CHOOSE_PLANT    = 'Choose Plant';
+const CONST_SHOWING_COUNTS_FOR = 'showing counts for';
 const CONST_LS_MAP_EXTENT   = { nelat:39.13652110135628,nelng:-84.3476428020592,swlat:39.12904776433699,swlng:-84.35708417779162 }; 
 
 // show menu
@@ -94,7 +95,10 @@ function capitalizeWords(str) {
 //****************************************
 // navbar title, url, drop-down helpers **
 //****************************************
-function buildNavHome( navbar, baseUrl, homeState ) {
+function buildNavHome( navbar, baseUrl=null, homeState=null ) {
+    if( !baseUrl )   { baseUrl = '../admin/dashboard.html'; }
+    if( !homeState ) { homeState = clearForDashParams(appState); }
+    
     let homeUrl = baseUrl + buildParameterList(homeState);
     let homeDiv = faddelem('div', navbar, { id: 'home' });
     let hLink = faddelem('a', homeDiv, { href: homeUrl });
@@ -105,6 +109,13 @@ function buildNavTitle( navbar, title ) {
   let titleDiv = faddelem('div', navbar, { id: 'nav_title' });
 
   faddelem('div', titleDiv, { className: 'dd_title', textContent: title });
+}
+
+function buildNavLink( navbar, baseUrl, homeState, label ) {
+    let homeUrl = baseUrl + buildParameterList(homeState);
+    let homeDiv = faddelem('div', navbar, { id: 'navlink' });
+    let hLink = faddelem('a', homeDiv, { href: homeUrl });
+    faddelem('span', hLink, { textContent: label });
 }
 
 function buildNavAbout( navbar, baseUrl, homeState ) {
@@ -464,4 +475,33 @@ function buildSpeciesName( brow, rec, url ) {
     // Scientific Name 
     let br = faddelem('br', a);
     faddelem('span', a, { style: { fontStyle: 'italic' }, textContent: '(' + (rec.taxon.name || '') + ')' });
+}
+
+// Observers Table Column - Photo
+function buildObserverPhoto( brow, rec ) {
+    let tdPhoto = faddelem('td', brow);
+         
+    if( rec.user.icon ){
+        faddelem('img', tdPhoto, { className: 'exp_icon', src: rec.user.icon });
+    } else {
+        faddelem('div', tdPhoto, { className: 'npcicon', html: '' });
+    }
+}
+
+// Observers Table Column - Observer 
+function buildObserver( brow, rec ) {
+    let tdName = faddelem('td', brow);
+    let a = faddelem('a', tdName, { href: root_people + rec.user.login });
+    
+    // user login 
+    faddelem('span', a, { textContent: rec.user.login });    
+}
+
+// Observers Table Column - Observation Counts
+function buildObservationCounts( brow, rec, url ) {
+    let tdName = faddelem('td', brow);
+    let a = faddelem('a', tdName, { href: url });
+    
+    // Observation Count 
+    faddelem('span', a, { textContent: rec.observation_count });    
 }
