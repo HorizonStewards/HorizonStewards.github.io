@@ -1,9 +1,3 @@
-const CONST_CONFIGS_OBJ_PLANTS = 'plants';
-const CONST_CONFIGS_OBJ_COLONIES  = 'colonies'; 
-const CONST_CONFIGS_OBJ_HIKER  = 'hiker'; 
-const CONST_CONFIGS_OBJ_YARD   = 'yard'; 
-const CONST_CONFIGS_OBJ_ART    = 'art';  
-
 /**
  * Represents a single place entry.
  */
@@ -71,6 +65,7 @@ class ConfigurationItem {
         this.plantTagName    = configData.plant_tag_name ?? null;
         this.usePlantProjectImages = configData.use_plant_project_images ?? null;
         this.mapType         = configData.map_type ?? null;
+        this.defaultMapZoom  = configData.default_map_zoom ?? null;
         this.defaultPlace = configData.default_place ?? null;
         this.fieldId = configData.field_id ?? null;
         this.fieldName = configData.field_name ?? null;
@@ -103,10 +98,6 @@ class ConfigurationItem {
             console.warn('Component is missing for an entry. Defaulting.');
             this.component = 'default-component'; // Provide a safe default
         }
-        
-        if (this.component === CONST_CONFIGS_OBJ_HIKER && isNullOrEmpty(this.project)) {
-            console.warn('Hiker component is missing required "project" attribute. Setting default.');
-        }
     }
 
     getSubTitle() {
@@ -138,6 +129,15 @@ class ConfigurationItem {
     
         return sub_icon_name;
     }
+}
+
+// helpers for ConfigurationItem()
+function getMapZoom( config ) {
+  if( config.defaultMapZoom ) {
+      return( '&defaultzoom='+config.defaultMapZoom );
+  } else {
+      return '';
+  }
 }
 
 /**
