@@ -35,7 +35,7 @@ const CONST_MAP             = 'Map';
 const CONST_CHOOSE_PLANT    = 'Choose Plant';
 const CONST_SHOWING_COUNTS_FOR = 'showing counts for';
 const CONST_LS_MAP_EXTENT   = { nelat:39.13652110135628,nelng:-84.3476428020592,swlat:39.12904776433699,swlng:-84.35708417779162 }; 
-const CONST_MAP_CENTER      = '&centerlat=39.125110765542274&centerlng=-84.2456670686007';  // over cnc
+const CONST_MAP_CENTER      = '&nelat=39.13383415430728&nelng=-84.3524660594884&swlat=39.13366771255982&swlng=-84.35259480552112';  // over horizon
 
 // show menu
 const CONST_ALL            = 'all';              // common show drop down label
