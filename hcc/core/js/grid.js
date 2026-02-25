@@ -1,3 +1,5 @@
+function furlCell(params,txt=url) { return '<a href="'+root_grid_cell+params+'">'+txt+'</a>'; };
+ 
 function buildGrid(data, url=null) {
 
    var results = data.results;
@@ -13,14 +15,14 @@ function buildGrid(data, url=null) {
             left:((c-1)*cellpx+(c<=1?0:c-1)*spacerpx)+'px'
             }});
          if (recsfound===0&&data.total_results===0) { 
-            gcell.innerHTML = furl(famp(url || obsurl),'<span>no<br />data</span>');
+            gcell.innerHTML = furlCell(famp(url || obsurl), '<span>no<br />data</span>');
             break;
             }
          else if (recsfound===obsseq) {
             if( (fshorten(data.total_results-obsseq)) === 0 ){
                gcell.innerHTML = '<span>+0<br />more</span>';
             } else {
-               gcell.innerHTML = furl(famp(url || obsurl),'<span>+'+(fshorten(data.total_results-obsseq))+'<br />more</span>');
+               gcell.innerHTML = furlCell(famp(url || obsurl),'<span>+'+(fshorten(data.total_results-obsseq))+'<br />more</span>');
             }
             obsseq = 0;
             if (r===1&&c>1) { grid.style.width = (c*cellpx+(c-1)*spacerpx)+'px'; };
@@ -32,7 +34,7 @@ function buildGrid(data, url=null) {
             let taxon = obs.taxon?(obs.taxon.preferred_common_name?(obs.taxon.preferred_common_name):obs.taxon.name):'(Unknown Taxon)';
             let user = obs.user.login+((obs.user.name&&obs.user.name!='')?(' ('+obs.user.name+')'):'');
             let obsdt = obs.time_observed_at?fdate(obs.time_observed_at,true):(obs.observed_on||'(Unknown Date)');
-            let anchor = faddelem('a',gcell,{href:famp(obsurlbase+'/'+obs.id)});
+            let anchor = faddelem('a',gcell,{href:famp(root_grid_cell+'/'+obs.id)});
             let photo = (photourl===null) ? faddelem('span',anchor,{innerText:'❎'})
                : faddelem('img',anchor,{style:{width:cellpx+'px',height:cellpx+'px'},
                   title: taxon + ' observed by ' + user + ' on ' + obsdt,
