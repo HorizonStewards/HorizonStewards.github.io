@@ -18,7 +18,7 @@
 
 <body>
 <script type="text/javascript"   src='../core/js/common_functions.js'>  </script>
-<script type="text/javascript"   src='../core/js/store.js'>        </script>
+<script type="text/javascript"   src='../core/js/store.js'>         </script>
 <script type="text/javascript"   src="../core/js/grid.js">          </script>
 <script type="text/javascript"   src="../core/js/ConfigManager.js"> </script>
 <script type="text/javascript"   src="../core/js/api_fetch.js">     </script>
@@ -57,7 +57,7 @@ function buildMenu( config ) {
   if( !getMenuId(appState) && !getTaxonId(appState) ) {
     let links = [];
     
-    let mapLink  = faddelem('a', null, { href: '../admin/map.html' + setupAPIParams(config) + CONST_MAP_CENTER + getMapZoom(config), textContent: 'Map' });
+    let mapLink  = faddelem('a', null, { href: '../admin/map.html' + setupAPIParams(config) + getMapZoom(config), textContent: 'Map' });
     let timeLink = faddelem('a', null, { href: root_observations + 'torquemap' + setupAPIParams(config) + '&interval=monthly', textContent: 'Time Series' });
 
     links.push(mapLink);
@@ -66,7 +66,7 @@ function buildMenu( config ) {
     buildNavDD( navbar, 'Maps', links );
      
   } else {   
-      let url = '../admin/map.html' + setupAPIParams(config) + CONST_MAP_CENTER + getMapZoom(config);
+      let url = '../admin/map.html' + setupAPIParams(config) + getMapZoom(config);
       buildNavURL( navbar, url, CONST_MAP );
   }
 
