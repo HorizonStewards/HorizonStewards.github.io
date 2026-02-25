@@ -17,9 +17,7 @@
 </head>
 
 <body>
-<script type="text/javascript"   src='../core/js/global_const.js'> </script>
-<script type="text/javascript"   src='../core/js/common_func.js'>  </script>
-<script type="text/javascript"   src='../core/js/roots.js'>        </script>
+<script type="text/javascript"   src='../core/js/common_functions.js'>  </script>
 <script type="text/javascript"   src='../core/js/store.js'>        </script>
 <script>
 //get parameters from the url
@@ -31,7 +29,6 @@ let winurlparams   = new URLSearchParams(winurlsearchstr);
 appState       = buildStateFromParams(winurlparams);
 
 var api_base   = 'https://api.inaturalist.org/v1/observations'
-var obsurlbase = 'https://www.inaturalist.org/observations';
 
 // don't show organsims that have only been id'd to genus and above, otherwise the number's
 // won't match other counts
@@ -46,58 +43,69 @@ var recsmax      = columns * rows - 1;
 
 winurlparams.append('per_page',recsmax);
 
-function getMapParams(config) {
-   let map_params = '';
+function buildNavDD( navbar, dd_name, links ) {
 
-   map_params += '?project_id='+config.project;
+  // Create the Dropdown container
+  let dropdown = faddelem('div', navbar, { className: 'dropdown' });
+       
+  // Dropdown Button
+  faddelem('button', dropdown, { className: 'dropbtn', textContent: capitalizeWords(dd_name) });
 
-   map_params += getTaxonIdParam(appState, '&taxon_id='); 
+  // Dropdown Content (the links)
+  let ddContent = faddelem('div', dropdown, { className: 'dropdown-content' }); 
 
-   if( config.defaultPlaceId ) { map_params += '&place_id='+config.defaultPlaceId; } 
-   
-   map_params += '&user_id='+config.userId; 
-   map_params += '&field:'+config.fieldName+'='+(config.fieldValue||'');  // should change to generic filter?
-
-   return map_params;
+  // Place Links in Drop Down
+  for( let j = 0; j < links.length; j++ ) {
+       let item = faddelem('div', ddContent, { className: 'dd-item' });
+       item.appendChild(links[j]); 
+  }
 }
+
+</script>
+
+<script type="text/javascript"   src="../core/js/grid.js">          </script>
+<script type="text/javascript"   src="../core/js/ConfigManager.js"> </script>
+<script type="text/javascript"   src="../core/js/api_fetch.js">     </script>
+
+<script>
 
 function buildMenu( config ) {
 
-   let links = '';
-   let menu_string = '';
-   let menu_params = '';
+  // Create the main navbar container
+  let navbar = document.createElement('div');    
+  navbar.className = 'navbar v2-menu';
 
-   let id = getMenuId(appState);
+  // if all observations was selected... show the time series
+  // if a taxon is in focus, just show the regular map
+  if( !getMenuId(appState) && !getTaxonId(appState) ) {
+    let links = [];
+    
+    let mapLink  = faddelem('a', null, { href: '../admin/map.html' + setupAPIParams(config) + CONST_MAP_CENTER + getMapZoom(config), textContent: 'Map' });
+    let timeLink = faddelem('a', null, { href: root_observations + 'torquemap' + setupAPIParams(config) + '&interval=monthly', textContent: 'Time Series' });
 
-   if( id ) { menu_params += '&taxon_id=' + id + '&menu_id=' + id; }
+    links.push(mapLink);
+    links.push(timeLink);
 
-   menu_string = '<div class="navbar">';
+    buildNavDD( navbar, 'Maps', links );
+     
+  } else {   
+      let url = '../admin/map.html' + setupAPIParams(config) + CONST_MAP_CENTER + getMapZoom(config);
+      buildNavURL( navbar, url, CONST_MAP );
+  }
 
-   // if all observations was selected... show the time series
-   // if a taxon is in focus, just show the regular map
-   if( !getMenuId(appState) && !getTaxonId(appState) ) {
-       links  +=  furl('../admin/map.html'+getMapParams(config),"Map");
-       links  +=  furl(root_observations+'torquemap'+getMapParams(config)+'&interval=monthly', "Time Series");
-       menu_string += ( buildDD( 'Maps', links) );
-   } else {
-       menu_string += buildMenuURL( furl('../admin/map.html'+getMapParams(config),"Map") );
-   }
-   
-   let url_state = clearForSpeciesCountsParams( appState );
-   
-   menu_string += buildHome( furl('./species_counts.html'+buildParameterList(url_state),CONST_LEAF_UTF8) );
-   menu_string += '</div>';
-   
-   return menu_string;
+  // Build the Home Link
+  let homeState = clearForSpeciesCountsParams(appState);
+  let homeUrl = './species_counts.html';
+  buildNavHome( navbar, homeUrl, homeState );
+  
+  faddelem('p', document.body).appendChild(navbar);
+
 }
     
 function buildPage( data, config ) {  
-   faddelem('p',document.body,{innerHTML:buildMenu( config )}); 
-   
-   // append the params needed by the grid to build the url for outlinks to iNat.
-   let inat_url = obsurlbase + getMapParams(config);
-                                    
-   buildGrid(data, inat_url);    
+   buildMenu( config ); 
+                                       
+   buildGrid(data, setupAPIParams(config) );    
 };
 
 function setupAPIParams( config ) {
@@ -117,13 +125,6 @@ function setupAPIParams( config ) {
     return api_params;
 }
 
-</script>
-
-<script type="text/javascript"   src="../core/js/grid.js">          </script>
-<script type="text/javascript"   src="../core/js/ConfigManager.js"> </script>
-<script type="text/javascript"   src="../core/js/api_fetch.js">     </script>
-
-<script>
 async function gatherResources() {
   let json_path = json_root + getParams(appState);
  
