@@ -19,5 +19,5 @@
   "background_color": "#ffffff",
   "start_url": "/hcc/admin/dashboard.html?params=horizon",
   "scope": "/hcc/", 
-  "display": "standalone"
+  "display": "minimal-ui"
 }
