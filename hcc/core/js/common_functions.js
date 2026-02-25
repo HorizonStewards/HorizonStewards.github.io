@@ -5,6 +5,7 @@ const root_obs_fields   = 'https://www.inaturalist.org/observation_fields/';
 const root_projects     = 'https://www.inaturalist.org/projects/';
 const root_taxa         = 'https://www.inaturalist.org/taxa/';
 const root_places       = 'https://www.inaturalist.org/places/';
+const root_grid_cell    = 'https://www.inaturalist.org/observations';
 
 // json root dir
 const json_root = '../core/json/';
@@ -30,9 +31,11 @@ const CONST_OBSERVATIONS    = 'observations:';
 const CONST_ENTIRE_UMBRELLA = 'Entire Umbrella';
 const CONST_OF              = ' of ';
 const CONST_ABOUT           = 'About';
+const CONST_MAP             = 'Map';
 const CONST_CHOOSE_PLANT    = 'Choose Plant';
 const CONST_SHOWING_COUNTS_FOR = 'showing counts for';
 const CONST_LS_MAP_EXTENT   = { nelat:39.13652110135628,nelng:-84.3476428020592,swlat:39.12904776433699,swlng:-84.35708417779162 }; 
+const CONST_MAP_CENTER      = '&centerlat=39.125110765542274&centerlng=-84.2456670686007';  // over cnc
 
 // show menu
 const CONST_ALL            = 'all';              // common show drop down label
@@ -54,9 +57,9 @@ const CONST_STUDIES_UTF8   = '&#127891;';
 const CONST_OBSERVATIONS_PER_PAGE           = '100';
 const CONST_SPECIES_COUNTS_PER_PAGE         = '100';
 const CONST_OBSERVATIONS_OBSERVERS_PER_PAGE = '100';
+
 function fcomnum(n) { return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',') }; 
 
-// SECURE: Uses textContent to prevent script injection in link text
 function furl(url, txt = url) {
     const a = document.createElement('a');
     const safeUrl = (url.trim().toLowerCase().startsWith('javascript:')) ? '#' : url;
@@ -86,6 +89,32 @@ function faddelems(etype,eparent=null,eattributes=[]) { for (let e of eattribute
 
 function replaceDoubleQuotes(str) { return str.replace(/"/g, '%22'); }
 
+function famp(str) { return str.replace(/&/g,'&amp;'); };
+function fshorten(num) { return num<10000 ? num : num<1000000 ? (num/1000).toFixed(1)+'K' : (num/1000000).toFixed(1)+'M'; };
+function fdate(str,dateonly=false) {
+   str = str.replace(/t/i,' '); //replaces T (case insensitive) with a space
+   if (dateonly) { str = str.split(' ')[0]; }
+   else {
+      str = str.replace(/([+-]\d{2}\:?\d{2})/,' ($1)'); //puts parenthesis around time zone offset
+      str = str.replace(/z/i,' (+00:00)'); //replaces Z (case insensitve) with UTC
+      str = str.replace('+00:00','±00:00');
+   };
+   return str;
+}
+function fpageurl(urlbase,urlparams,per_page,page) {
+   let params = new URLSearchParams(urlparams);
+   let url_per_page = params.get('per_page');
+   let url_page = params.get('page');
+   (url_per_page===null) ? params.append('per_page',per_page) : params.set('per_page',per_page);
+   (url_page===null) ? params.append('page',page) : params.set('page',page);
+   return urlbase+'?'+params;
+}
+
+function fpageurlplusorderbyid(urlbase,urlparams,per_page,page) {
+   let params = new URLSearchParams(urlparams);
+   params.get('order_by') ? params.set('order_by','id') : params.append('order_by','id');
+   return fpageurl(urlbase,params,per_page,page);
+}
 function capitalizeWords(str) {
   return str.toLowerCase().split(' ').map(function(word) {
     return word.charAt(0).toUpperCase() + word.slice(1);
@@ -111,13 +140,19 @@ function buildNavTitle( navbar, title ) {
   faddelem('div', titleDiv, { className: 'dd_title', textContent: title });
 }
 
-function buildNavLink( navbar, baseUrl, homeState, label ) {
-    let homeUrl = baseUrl + buildParameterList(homeState);
+function buildNavURL( navbar, url, label ) {
     let homeDiv = faddelem('div', navbar, { id: 'navlink' });
-    let hLink = faddelem('a', homeDiv, { href: homeUrl });
+    let hLink = faddelem('a', homeDiv, { href: url });
     faddelem('span', hLink, { textContent: label });
 }
 
+// probably should be removed.  just use buildNavURL.
+function buildNavLink( navbar, baseUrl, homeState, label ) {
+    let homeUrl = baseUrl + buildParameterList(homeState);
+    buildNavURL( navbar, homeUrl, label );
+}
+
+// wrapper for about... needs to be removed.
 function buildNavAbout( navbar, baseUrl, homeState ) {
     let homeUrl = baseUrl + buildParameterList(homeState);
     let homeDiv = faddelem('div', navbar, { id: 'home' });
