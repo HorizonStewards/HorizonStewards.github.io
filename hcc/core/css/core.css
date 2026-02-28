@@ -104,6 +104,7 @@
 }
 
 .navbar a {
+  display: inline-block; /* Add this */
   float: left;
   font-size: 15px;
   color: white;
@@ -138,6 +139,7 @@
 }
 
 .dropbtn {
+  display: inline-block; /* Add this */
   cursor: pointer;
   font-size: 15px;  
   border: none;
@@ -199,4 +201,13 @@
 
 .show {
   display: block;
+}
+
+/* Target only iOS Safari to fix the 2px jump and shading */
+/* Only ios safari needs this hack workaroudn */
+@supports (-webkit-touch-callout: none) {
+   .navbar a, .dropbtn, .dd_title {
+      -webkit-tap-highlight-color: transparent !important;
+      line-height: 1.2 !important;
+   }
 }
