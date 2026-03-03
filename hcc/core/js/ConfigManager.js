@@ -1,4 +1,4 @@
-/**
+/** 
  * Represents a single place entry.
  */
 class Place {
@@ -38,6 +38,17 @@ class DDObsField {
         this.ddName     = data.dd_name;
         this.fieldName  = data.field_name;
         this.fieldValue = data.field_value;
+    }
+}
+
+/**
+ * Represents a filters entry.
+ */
+class DDFilters {
+    constructor(data) {
+        this.ddName    = data.dd_name;
+        this.ddLabel   = data.dd_label;
+        this.apiParams = data.api_params;
     }
 }
 
@@ -87,6 +98,7 @@ class ConfigurationItem {
         this.taxa   = configData.taxa?.map(t => new Taxon(t)) ?? [];
         this.subIcons = configData.sub_icons?.map(s => new SubIcon(s)) ?? [];
         this.ddObsFields = configData.dd_obs_fields?.map(d => new DDObsField(d)) ?? [];
+        this.ddFilters   = configData.dd_filters?.map(d => new DDFilters(d)) ?? [];
         
         // store the orginial .json with original field names that haven't been mapped to this object.
         this.originalConfig = configData ?? null;  // used in about.html to pretty print the original .json
@@ -131,6 +143,18 @@ class ConfigurationItem {
     }
 }
 
+// find the api params for the filter from the label
+function getFilterAPIParams(config) {
+    if( config.ddFilters ) {
+        for( let i = 0; i<config.ddFilters.length; i++ ) {
+             if( config.ddFilters[i].ddLabel === getActivityFilter(appState) ) {
+                 return( config.ddFilters[i].apiParams );
+             }
+        }
+    }
+    return( '' );
+}
+ 
 // helpers for ConfigurationItem()
 function getMapZoom( config ) {
   // the geocoodinates to center the map should only be used when a default zoom is set.
