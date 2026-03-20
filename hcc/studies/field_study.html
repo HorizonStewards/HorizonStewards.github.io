@@ -472,13 +472,13 @@ function fresults( xobj, config ) {
          urlState = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
          //values.push({innerHTML:user_icon});
          if( getComponent(appState) === COMPONENT_VISITS ) {
-             values.push({innerHTML: '<details style="max-width: 300px; white-space: normal;">' + 
-                  '<summary style="cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">' + 
-                     (rec.description ? rec.description.substring(0, 40) + '...' : 'No description') + 
-                  '</summary>' + 
-                  '<div style="max-height: 150px; overflow-y: auto; border: 1px solid #ccc; padding: 5px; margin-top: 5px; background: #f9f9f9;">' + 
-                     (rec.description || '') + 
-                  '</div></details>' });
+             values.push({ innerHTML: '<details style="max-width: 300px; white-space: normal;">' + 
+                                          '<summary style="cursor: pointer; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;">' + 
+                                             (rec.description ? rec.description : '') + 
+                                          '</summary>' + 
+                                          '<div style="max-height: 150px; overflow-y: auto; border: 1px solid #ccc; padding: 5px; margin-top: 5px; background: #f9f9f9;">' + 
+                                             (rec.description || '') + 
+                                          '</div></details>'});         
          }
          values.push({innerHTML:'<span>' + user_icon + '</span><span>' + furl('./field_study.html'+buildParameterList(urlState),rec.user.login) + '</span></div>'});
 
