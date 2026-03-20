@@ -471,6 +471,9 @@ function fresults( xobj, config ) {
          urlState = setUser(urlState, rec.user.login);
          urlState = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
          //values.push({innerHTML:user_icon});
+         if( getComponent(appState) === COMPONENT_VISITS ) {
+             values.push({innerText:rec.description});
+         }
          values.push({innerHTML:'<span>' + user_icon + '</span><span>' + furl('./field_study.html'+buildParameterList(urlState),rec.user.login) + '</span></div>'});
 
          tempBrow.push(values);
@@ -481,6 +484,9 @@ function fresults( xobj, config ) {
       let hrow = faddelem('tr',thead);
 
       //labels.push({innerText:'User Photo'});
+      if( getComponent(appState) === COMPONENT_VISITS ) {
+          labels.push({innerText:'Field Notes'});
+      }
       labels.push({innerHTML:'<div class="user"><span>Observer</span></div>'});
       
       faddelems('th',hrow,labels);
