@@ -17,6 +17,12 @@
         "study_title": "Site Visit",          "study_desc": "Visited with the intent of photographing and documenting approximate occurences of early ephemerals.",         
         "field_id": "9829",                   "obs_fields": "9829",
         "field_name": "approximate quantity", "default_taxon_id": "47126"
+    },
+    {
+        "component": "studies",               "project": "248418",        "utf8": "&#129714;",
+        "study_title": "Ephemerals",          "study_desc": "A running log of any ephemerals that were observed being visited by wildlife.",         
+        "field_id": "7623",                   "obs_fields": "7623",
+        "field_name": "plant that the organism was found on"
     }
   ],
   "default_sub_icons": 
