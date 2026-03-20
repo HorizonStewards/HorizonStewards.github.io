@@ -5,16 +5,13 @@
   [
     { 
         "component": "plants",                "title": "Ancient Oaks",
+        "study_title": "Ephemerals",          "study_desc": "List of ephemerals that have been observed to have been supporting wildlife at this property.", 
         "project": "248418",                  "insect_project": "248418", 
         "field_id": "7623",                   "field_name": "plant that the organism was found on"
     },
     { 
-        "component": "observers",             "title": "Ancient Oaks",     
-        "project": "218418",                  "insect_project": "248418", 
-        "field_id": "7623",                   "field_name": "plant that the organism was found on"
-    },
-    { 
         "component": "hiker",                 "project": "248418",  
+        "study_title": "Observers",           "study_desc": "All species observed by all observers during site visits or casual visits to this property.", 
         "title": "Ancient Oaks", 
                      "sub_icons": [
                        { "nm": "plants",      "taxon_id": "47126", "icon": "&#127807;" }, 
