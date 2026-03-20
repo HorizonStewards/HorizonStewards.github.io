@@ -72,10 +72,12 @@ function buildPage(xobj, hikerConfig) {
 
       let titleText = CONST_SPECIES_ALL+capitalizeWords(name);
       let urlState  = appState; 
-      urlState  = setTaxonId(urlState, getMenuId(appState));
-      if( !getMenuId(appState) ) {
+      if( getMenuId(appState) ) {
+          urlState = setTaxonId(urlState, getMenuId(appState)); // set taxon id to menu id if a filter was chosen for say, birds.
+      } else if( hikerConfig.defaultTaxonId ) {
           titleText = CONST_SPECIES_ALL_OBS;          
-      } 
+          urlState = setTaxonId(urlState, hikerConfig.defaultTaxonId);
+      }
 
       titleUrl = './obs_grid.html' + buildParameterList(urlState);
 
@@ -114,6 +116,7 @@ function buildPage(xobj, hikerConfig) {
 
            // Column: Name 
            let urlState = setTaxonId(appState, rec.taxon.id);
+           if( rec.taxon.ancestor_ids.some(id => id == 47157) ) { urlState = setLSTaxonId(urlState, '47157'); }  // lepidoptera*/
            let url      = './obs_grid.html' + buildParameterList(urlState);
            buildSpeciesName( brow, rec, url );
        
@@ -147,14 +150,18 @@ function setupAPIParams( hikerConfig ) {
    if( hikerConfig.fieldValue ) { field_val_param = hikerConfig.fieldValue; }
  
    // filter by field (usually trail name)... should change to generic filter
-   api_params += '&field:'+hikerConfig.fieldName+'='+field_val_param;
+   if( hikerConfig.fieldName ) { api_params += '&field:'+hikerConfig.fieldName+'='+field_val_param; }
 
    // default these to what's in the config even though the state sometimes
    // holds the same attributes for other components.
    if( hikerConfig.userId         ) { api_params += '&user_id='  + hikerConfig.userId; }
    if( hikerConfig.defaultPlaceId ) { api_params += '&place_id=' + hikerConfig.defaultPlaceId; }  
 
-   api_params += getMenuIdParam(appState, '&taxon_id='); 
+   if( getMenuId(appState) ) {
+       api_params += getMenuIdParam(appState, '&taxon_id='); 
+   } else {
+       if( hikerConfig.defaultTaxonId ) { api_params += '&taxon_id=' + hikerConfig.defaultTaxonId; }
+   }
 
    api_params += getPageParam(appState, '&page=');
    api_params += '&per_page='+CONST_SPECIES_COUNTS_PER_PAGE;
