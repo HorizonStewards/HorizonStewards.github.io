@@ -126,6 +126,14 @@ function buildPage( configManager ) {
                        buildRow( 'hiker', icon, name, desc, tbody, url );
                    }
 
+                   if( config.component === 'yard') {
+                       let url  = '../species/observer_counts.html';
+                       let icon = config.utf8 || CONST_NPC_UTF8;
+                       let name = config.studyTitle || CONST_OBSERVERS;
+                       let desc = config.studyDesc || CONST_OBSERVERS_DESC;
+                       buildRow( 'observers', icon, name, desc, tbody, url );
+                   }
+
                    if( config.component === 'observers' ) {
                        let url  = '../observers/observer_counts.html';
                        let icon = config.utf8 || CONST_NPC_UTF8;
