@@ -10,8 +10,7 @@
     { 
         "component": "observers",             "title": "Ancient Oaks",     
         "project": "218418",                  "insect_project": "248418", 
-        "field_id": "7623",                   "field_name": "plant that the organism was found on",
-        "map_type": "ls"
+        "field_id": "7623",                   "field_name": "plant that the organism was found on"
     },
     {
         "component": "visits",                "project": "248418",        "utf8": "&#128038;",
