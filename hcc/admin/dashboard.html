@@ -163,7 +163,7 @@ function buildPage( configManager ) {
        
            let config = configManager.configurations[i];
 
-           if( config.component === COMPONENT_STUDIES ) {
+           if( config.component === COMPONENT_STUDIES || config.component === COMPONENT_VISITS ) {
                if( headers === 'no' ) {
                    headers = 'yes';
                    studies_table = faddelem('stable',document.body,{id:'main'});                    
