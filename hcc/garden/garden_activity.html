@@ -118,6 +118,7 @@ function buildPage(xobj, config) {
 
            // Column: Name 
            let urlState = setTaxonId(appState, rec.taxon.id);
+           if( rec.taxon.ancestor_ids.some(id => id == 47157) ) { urlState = setLSTaxonId(urlState, '47157'); }  // lepidoptera*/
            let url      = './garden_grid.html' + buildParameterList(urlState);
            buildSpeciesName( brow, rec, url );
        
@@ -165,8 +166,15 @@ function setupAPIParams(config) {
    if( getActivityFilter(appState) ) {
        api_params += getFilterAPIParams(config);
    }
+
+   // if a taxon was chosen from the "Show" drop-down filter with that taxon_id.
+   // otherwise, filter with the default from the config file if there is one.
+   if( getMenuId(appState) ) {
+       api_params += getMenuIdParam(appState, '&taxon_id='); 
+   } else {
+       if( config.defaultTaxonId ) { api_params += '&taxon_id=' + config.defaultTaxonId; }
+   }
  
-   api_params += getMenuIdParam(appState, '&taxon_id='); 
    api_params += getPageParam(appState, '&page=');
    api_params += '&without_taxon_id='+CONST_WITHOUT_TAXON_PLANTAE; // only interested in visitors to plants here
    api_params += '&per_page='+CONST_SPECIES_COUNTS_PER_PAGE;
