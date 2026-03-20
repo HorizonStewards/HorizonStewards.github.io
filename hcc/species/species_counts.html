@@ -196,6 +196,8 @@ async function gatherResources() {
 let message = '';
 if( getComponent(appState) === COMPONENT_HIKER ) {
     validateHiker(appState);
+} else if( getComponent(appState) === COMPONENT_YARD ) {
+    validateYard(appState);
 } else {
     validateAnimals(appState);
 }
