@@ -115,8 +115,8 @@ function setupAPIParams( config ) {
     // holds the same attributes for other components.
     if( config.defaultPlaceId  ) { api_params += '&place_id=' + config.defaultPlaceId; }  
 
-    if( hikerConfig.userId ) { 
-        api_params += '&user_id='  + hikerConfig.userId; 
+    if( config.userId ) { 
+        api_params += '&user_id='  + config.userId; 
     } else if( getUser(appState) ){
         api_params += '&user_id=' + getUser(appState);
     }
