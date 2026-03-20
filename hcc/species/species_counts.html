@@ -154,8 +154,13 @@ function setupAPIParams( hikerConfig ) {
 
    // default these to what's in the config even though the state sometimes
    // holds the same attributes for other components.
-   if( hikerConfig.userId         ) { api_params += '&user_id='  + hikerConfig.userId; }
    if( hikerConfig.defaultPlaceId ) { api_params += '&place_id=' + hikerConfig.defaultPlaceId; }  
+
+   if( hikerConfig.userId ) { 
+       api_params += '&user_id='  + hikerConfig.userId; 
+   } else if( getUser(appState) ){
+       api_params += '&user_id=' + getUser(appState);
+   }
 
    if( getMenuId(appState) ) {
        api_params += getMenuIdParam(appState, '&taxon_id='); 
