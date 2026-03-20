@@ -472,7 +472,7 @@ function fresults( xobj, config ) {
          urlState = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
          //values.push({innerHTML:user_icon});
          if( getComponent(appState) === COMPONENT_VISITS ) {
-             values.push({innerText:rec.description});
+             values.push({innerHTML: '<span style="display:inline-block; max-width:150px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">'+ rec.description + '</span>'});
          }
          values.push({innerHTML:'<span>' + user_icon + '</span><span>' + furl('./field_study.html'+buildParameterList(urlState),rec.user.login) + '</span></div>'});
 
