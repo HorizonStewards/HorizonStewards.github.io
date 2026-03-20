@@ -10,7 +10,7 @@
         "field_id": "7623",                   "field_name": "plant that the organism was found on"
     },
     { 
-        "component": "hiker",                 "project": "248418",  
+        "component": "yard",                  "project": "248418",  
         "study_title": "Observers",           "study_desc": "All species observed by all observers during site visits or casual visits to this property.", 
         "title": "Ancient Oaks",              "utf8": "&#128101;",                     
           "sub_icons": [
