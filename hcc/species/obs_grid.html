@@ -113,8 +113,13 @@ function setupAPIParams( config ) {
 
     // default these to what's in the config even though the state sometimes
     // holds the same attributes for other components.
-    if( config.userId          ) { api_params += '&user_id='  + config.userId; }
     if( config.defaultPlaceId  ) { api_params += '&place_id=' + config.defaultPlaceId; }  
+
+    if( hikerConfig.userId ) { 
+        api_params += '&user_id='  + hikerConfig.userId; 
+    } else if( getUser(appState) ){
+        api_params += '&user_id=' + getUser(appState);
+    }
 
     if( config.fieldName ) {
         api_params += '&field:'+config.fieldName+'='+(config.fieldValue||'');  // should change to generic filter?
