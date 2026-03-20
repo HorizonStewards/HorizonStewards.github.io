@@ -70,6 +70,8 @@ function buildPage(xobj, observerConfig) {
       let urlState = appState;
       if( getMenuId(appState) ) {
           urlState = setTaxonId(urlState, getMenuId(appState)); // set taxon id to menu id if a filter was chosen for say, birds.
+      } else if( observerConfig.defaultTaxonId ) {
+          urlState = setTaxonId(urlState, observerConfig.defaultTaxonId);
       }
 
       let title_1 = '', title_2 = '';
@@ -149,8 +151,13 @@ function setupAPIParams(observerConfig) {
    if( getUser(appState) )              { api_params += '&user_id='  + getUser(appState); }
    if( observerConfig.defaultPlace    ) { api_params += '&place_id=' + observerConfig.defaultPlace; }  
    if( observerConfig.faunaAPIParams  ) { api_params += observerConfig.faunaAPIParams; }
+
+   if( getMenuId(appState) ) {
+       api_params += getMenuIdParam(appState, '&taxon_id='); 
+   } else {
+       if( observerConfig.defaultTaxonId ) { api_params += '&taxon_id=' + observerConfig.defaultTaxonId; }
+   }
  
-   api_params += getMenuIdParam(appState, '&taxon_id='); 
    api_params += getPageParam(appState, '&page=');
    api_params += '&without_taxon_id='+CONST_WITHOUT_TAXON_PLANTAE; // only interested in visitors to plants here
    api_params += '&per_page='+CONST_SPECIES_COUNTS_PER_PAGE;
