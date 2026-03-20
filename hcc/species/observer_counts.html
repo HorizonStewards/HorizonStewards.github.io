@@ -141,7 +141,7 @@ function setupAPIParams( config ) {
 
    // default these to what's in the config even though the state sometimes
    // holds the same attributes for other components.
-   api_params += ('?project_id='+config.insectProject || config.project);
+   api_params += ('?project_id='config.project);
    if( config.userId          ) { api_params += '&user_id='  + config.userId; }
    if( config.defaultPlace    ) { api_params += '&place_id=' + config.defaultPlace; } 
    if( config.faunaAPIParams  ) { api_params += config.faunaAPIParams; }
