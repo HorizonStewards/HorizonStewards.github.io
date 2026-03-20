@@ -214,7 +214,7 @@ function buildPage( configManager ) {
       ];
  
       faddelem('p',document.body,{innerHTML:('<div id="vpadding"></div>')}); 
-      let headers = 'no';
+      let visits_headers = 'no';
       let visits_table = '';
       let visits_thead = '';
       let visits_hrow = '';
@@ -225,8 +225,8 @@ function buildPage( configManager ) {
            let config = configManager.configurations[i];
 
            if( config.component === COMPONENT_VISITS ) {
-               if( headers === 'no' ) {
-                   headers = 'yes';
+               if( visits_headers === 'no' ) {
+                   visits_headers = 'yes';
                    visits_table = faddelem('table',document.body,{id:'main'});                    
                    visits_thead = faddelem('thead',visits_table);
                    visits_hrow  = faddelem('tr',visits_thead);
