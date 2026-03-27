@@ -33,7 +33,6 @@
   width: 100%;
   gap: 10px;                      /* Optional: space between them if they meet */
   margin-bottom: 10px;
-  box-sizing: border-box;
 }
 
 /* 2. STATS (Left Box) */
@@ -93,11 +92,6 @@
    #h2 { font-weight:bold; font-size:20px; }
    #cap { align:left; text-decoration:underline; font: 16px Sans-Serif; padding:0; padding-right: 25px; }
    p { width:100%; }
-   #main, .top-bar, .navbar, #divhead {
-      box-sizing: border-box;
-      padding-left: 40px !important;
-      padding-right: 40px !important;
-   } 
    .npcicon { width:34px; height:34px; text-align:center; vertical-align:middle; z-index: 9999;  border: 1px solid cornflowerblue; padding: 5px; border-radius: 50px; }
    .smallicon { height:34px; width:34px; border-radius:50%; top:10px; left:20px;}
    .user {
@@ -108,8 +102,7 @@
    }
  
    .navbar {
-      width: 100%;
-      box-sizing: border-box;
+      max-width: 100%;
       overflow: hidden;
       background-color: var(--color-brand);
       border-radius: 5px 5px 5px 5px;
