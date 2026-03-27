@@ -22,7 +22,7 @@
     },
     {
         "component": "studies",               "project": "248418",        "utf8": "&#128038;",
-        "study_title": "Associations",        "study_desc": "List of observations of animals that were observed on plants.  Allows filtering by plant or animal.  Requires the \"plant that the organism was found on \" observation fields to be populated.",         
+        "study_title": "Associations",        "study_desc": "Running log of fauna observed on plants.  Allows filtering by flora or fauna.  Requires the \"plant that the organism was found on \" observation fields to be populated.",         
         "field_id": "7623",                   "obs_fields": "7623",
         "field_name": "plant that the organism was found on",
         "taxa":
