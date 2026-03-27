@@ -42,7 +42,7 @@
     },
     {
         "component": "visits",                "project": "248418",        "utf8": "&#128056;",
-        "study_title": "preliminaries",       "study_desc": "Visited with the intent of photographing and documenting approximate occurences of early ephemerals.",         
+        "study_title": "Preliminaries",       "study_desc": "Visited with the intent of photographing and documenting approximate occurences of early ephemerals.",         
         "field_id": "9829",                   "obs_fields": "9829",
         "field_name": "approximate quantity", "default_taxon_id": "47126"
     }
