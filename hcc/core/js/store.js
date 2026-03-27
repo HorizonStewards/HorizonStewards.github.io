@@ -100,7 +100,7 @@ function createNewStateInstance(initialValues = {}) {
     [ATTRIBUTE_GARDENLISTVALUE]: '',
     [ATTRIBUTE_TAXONDD]:   '',
     [ATTRIBUTE_OBSID]:     '',
-    [ATTRIBUTE_OBSDATE];   '',
+    [ATTRIBUTE_OBSDATE]:   '',
     [ATTRIBUTE_ACTIVITYFILTER]:  '',
     [ATTRIBUTE_FIELDNAME]: '',
     [ATTRIBUTE_FIELDVALUE]: '',
