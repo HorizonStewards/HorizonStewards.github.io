@@ -20,19 +20,22 @@
 </head>
 
 <style>
-  /* 1. THE GUTTER FIX: Reset the external file's rigid rules */
+  /* 1. THE GUTTERS: Redefining #main to use margins instead of fit-content */
   #main { 
-    width: auto !important;        /* Overrides fit-content */
-    min-width: 0 !important;       /* Kills the 375px floor causing the scroll */
-    margin: 0 40px !important;     /* Forces the 40px gutters */
-    display: block !important;
+    display: block;
+    width: auto; 
+    min-width: 0;       /* This kills the 375px scroll bug */
+    margin: 0 40px;    /* Your 40px Left and Right Gutters */
+    box-sizing: border-box;
   }
 
-  /* 2. THE ALIGNMENT: Make sure every row fills the new space perfectly */
-  .top-bar, .navbar, #divhead {
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
+  /* 2. ALIGNMENT: Force rows to 100% so they hit the 40px margin line */
+  #divhead, .navbar, .top-bar {
+    width: 100%;
+    max-width: 100%;   /* Overrides the old 700px limit */
+    margin-left: 0;
+    margin-right: 0;
+    box-sizing: border-box;
   }
 
   .top-bar {
@@ -43,7 +46,7 @@
     margin-bottom: 10px;
   }
 
-  /* 3. THE BOXES: Restoring your original clean styling */
+  /* 3. THE BOXES: Restoring your clean style */
   #stats, #dltest {
     display: block;
     box-sizing: border-box;
@@ -54,11 +57,18 @@
     border: 2px solid var(--color-border);
     border-radius: 5px;
     padding: 3px 8px;
-    line-height: 1.2;
     background: var(--color-base);
+    line-height: 1.2;
   }
 
-  /* 4. NAVBAR: Original visual style */
+  /* 4. THE SHIELD: Specific fix for content inside those boxes */
+  #stats table, #stats td, #dltest table, #dltest td {
+    border: none;
+    background: transparent;
+    padding: 0 4px;
+  }
+
+  /* 5. NAVBAR: Original visual style */
   .navbar {
     overflow: hidden;
     background-color: var(--color-brand);
@@ -71,7 +81,6 @@
 
   /* Original Helpers */
   #h2 { font-weight:bold; font-size:20px; }
-  p { width:100%; }
   .npcicon { width:34px; height:34px; border: 1px solid cornflowerblue; padding: 5px; border-radius: 50px; }
   .user { display: flex; flex-direction: column; align-items: center; justify-content: center; }
 </style>
