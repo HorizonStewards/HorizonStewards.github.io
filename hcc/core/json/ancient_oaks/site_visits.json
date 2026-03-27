@@ -21,7 +21,7 @@
                        { "nm": "mushrooms",   "taxon_id": "47170", "icon": "&#127812;" } ]
     },
     {
-        "component": "studies",               "project": "248418",        "utf8": "&#128038;",
+        "component": "studies",               "project": "248418",        "utf8": "&#127807;",
         "study_title": "Associations",        "study_desc": "Running log of fauna observed on plants.  Allows filtering by flora or fauna.  Requires the \"plant that the organism was found on \" observation fields to be populated.",         
         "field_id": "7623",                   "obs_fields": "7623",
         "field_name": "plant that the organism was found on",
@@ -41,7 +41,7 @@
             ]
     },
     {
-        "component": "visits",                "project": "248418",        "utf8": "&#128056;",
+        "component": "visits",                "project": "248418",        "utf8": "&#129488;",
         "study_title": "Preliminaries",       "study_desc": "Visited with the intent of photographing and documenting approximate occurences of early ephemerals.",         
         "field_id": "9829",                   "obs_fields": "9829",
         "field_name": "approximate quantity", "default_taxon_id": "47126"
