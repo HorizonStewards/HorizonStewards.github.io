@@ -20,29 +20,35 @@
 </head>
 
 <style>
-  /* 1. THE GUTTERS: 40px frame on screen edges */
+  /* 1. THE GUTTERS: Frame the entire site */
   body {
     padding: 0 40px;
     margin: 0;
     box-sizing: border-box;
   }
 
-  /* 2. THE ALIGNMENT: Stretch rows to match the new 40px frame */
-  #main, .navbar, .top-bar, #divhead {
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 0 10px 0 !important;
+  /* 2. THE ALIGNMENT: Use specific selectors to override the 'skinny' widths */
+  #main, 
+  #main #divhead, 
+  #main .navbar, 
+  #main .top-bar {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
     box-sizing: border-box;
   }
 
+  /* 3. THE TOP BAR: Original Side-by-Side Logic */
   .top-bar {
     display: flex;
     justify-content: space-between;
     align-items: stretch;
     gap: 10px;
+    margin-bottom: 10px;
   }
 
-  /* 3. THE BOXES: Clean reset for internal table styles */
+  /* 4. THE BOXES: Resetting the 'table look' without affecting fonts */
   #stats, #dltest {
     display: block;
     box-sizing: border-box;
@@ -53,10 +59,10 @@
     border: 2px solid var(--color-border);
     border-radius: 5px;
     padding: 3px 8px;
-    background: var(--color-base); /* Keeps box color separate from table */
+    background: var(--color-base);
   }
 
-  /* 4. THE SHIELD: Kills the main table's borders/backgrounds inside these boxes */
+  /* 5. THE SHIELD: Specific reset for tables nested inside the boxes */
   #stats table, #stats td, #stats tr,
   #dltest table, #dltest td, #dltest tr {
     border: none;
@@ -65,7 +71,7 @@
     box-shadow: none;
   }
 
-  /* 5. NAVBAR: Original visual style */
+  /* 6. NAVBAR: Original visual style */
   .navbar {
     background-color: var(--color-brand);
     border-radius: 5px;
