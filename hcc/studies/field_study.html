@@ -182,6 +182,13 @@ function buildMenu( results, config ) {
       let taxon_name = capitalizeWords(getMenuName(appState) || CONST_SHOW);  
       if( links ) { menu_string += buildDD( taxon_name, links); }
 
+      if( getComponent(appState) === COMPONENT_VISITS ) {
+          let urlState  = clearForDashParams(appState);
+          urlState = setComponent( urlState, COMPONENT_VISITS );
+          let baseUrl = './field_study.html';
+          buildNavLink( navbar, baseUrl, appState, 'Reset' );
+      }
+
       if( p_hide_dash === 'no' ) {
           let urlState  = clearForDashParams(appState);
           menu_string += buildHome(furl('../admin/dashboard.html'+buildParameterList(urlState),CONST_LEAF_UTF8));
