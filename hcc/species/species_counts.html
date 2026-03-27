@@ -55,7 +55,7 @@ function buildMenu( results, config ) {
     faddelem('p', document.body).appendChild(navbar);
 }
 
-function buildPage(xobj, hikerConfig) {
+function buildPage(xobj, config) {
    let results = xobj.results;
  
    if (results) {
@@ -66,20 +66,19 @@ function buildPage(xobj, hikerConfig) {
       let page_prev = ((page_curr>1)?page_curr-1:null);
       let page_next = ((page_curr<page_max)?page_curr+1:null);
 
-      let name = hikerConfig.getSubIconNameByTaxonId(hikerConfig, getMenuId(appState)) || CONST_SHOW;
+      let name = config.getSubIconNameByTaxonId(config, getMenuId(appState)) || CONST_SHOW;
 
-      buildMenu( results, hikerConfig );
+      buildMenu( results, config );
 
       let titleText = CONST_SPECIES_ALL+capitalizeWords(name);
       let urlState  = appState; 
       if( getMenuId(appState) ) {
-          if( getComponent(appState) === COMPONENT_YARD && !getMenuId(appState) ) {
-              titleText = CONST_SPECIES_ALL + ' By ' + getUser(appState);
-          }
           urlState = setTaxonId(urlState, getMenuId(appState)); // set taxon id to menu id if a filter was chosen for say, birds.
-      } else if( hikerConfig.defaultTaxonId ) {
+      } else if( config.defaultTaxonId ) {
           titleText = CONST_SPECIES_ALL_OBS;          
-          urlState = setTaxonId(urlState, hikerConfig.defaultTaxonId);
+          urlState = setTaxonId(urlState, config.defaultTaxonId);
+      } else if( getComponent(appState) === COMPONENT_YARD && getUser(appState) ) {
+          titleText = CONST_SPECIES_ALL + ' By ' + getUser(appState);
       }
 
       titleUrl = './obs_grid.html' + buildParameterList(urlState);
@@ -143,24 +142,24 @@ function buildPage(xobj, hikerConfig) {
 <script type="text/javascript"   src="../core/js/api_fetch.js"></script>
 
 <script>
-function setupAPIParams( hikerConfig ) {
+function setupAPIParams( config ) {
    let api_params = '';
 
-   api_params += ('?project_id='+hikerConfig.project);
+   api_params += ('?project_id='+config.project);
    //api_params += '&hrank=species';
 
    let field_val_param = ''
-   if( hikerConfig.fieldValue ) { field_val_param = hikerConfig.fieldValue; }
+   if( config.fieldValue ) { field_val_param = config.fieldValue; }
  
    // filter by field (usually trail name)... should change to generic filter
-   if( hikerConfig.fieldName ) { api_params += '&field:'+hikerConfig.fieldName+'='+field_val_param; }
+   if( config.fieldName ) { api_params += '&field:'+config.fieldName+'='+field_val_param; }
 
    // default these to what's in the config even though the state sometimes
    // holds the same attributes for other components.
-   if( hikerConfig.defaultPlaceId ) { api_params += '&place_id=' + hikerConfig.defaultPlaceId; }  
+   if( config.defaultPlaceId ) { api_params += '&place_id=' + config.defaultPlaceId; }  
 
-   if( hikerConfig.userId ) { 
-       api_params += '&user_id='  + hikerConfig.userId; 
+   if( config.userId ) { 
+       api_params += '&user_id='  + config.userId; 
    } else if( getUser(appState) ){
        api_params += '&user_id=' + getUser(appState);
    }
@@ -168,7 +167,7 @@ function setupAPIParams( hikerConfig ) {
    if( getMenuId(appState) ) {
        api_params += getMenuIdParam(appState, '&taxon_id='); 
    } else {
-       if( hikerConfig.defaultTaxonId ) { api_params += '&taxon_id=' + hikerConfig.defaultTaxonId; }
+       if( config.defaultTaxonId ) { api_params += '&taxon_id=' + config.defaultTaxonId; }
    }
 
    api_params += getPageParam(appState, '&page=');
@@ -184,15 +183,15 @@ async function gatherResources() {
   try {
    
       // Await the result of getObservations() and store the actual data
-      const hikerConfig  = await asyncGetConfiguration( json_path, getComponent(appState) );
-      console.log('full config title: ' + hikerConfig.getFullTitle());
-      const api_params    = setupAPIParams( hikerConfig );
+      const config  = await asyncGetConfiguration( json_path, getComponent(appState) );
+      console.log('full config title: ' + config.getFullTitle());
+      const api_params    = setupAPIParams( config );
       const api_url       = api_base+api_params;
       console.log('api url: ' + api_url);
       const obs_data      = await apiFetch( api_url ); 
      
       // Pass the data to the buildPage function
-      buildPage(obs_data, hikerConfig); 
+      buildPage(obs_data, config); 
 
     } catch (error) {
       console.error("An error occurred:", error);
