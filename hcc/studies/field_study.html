@@ -20,20 +20,20 @@
 </head>
 
 <style>
-  /* 1. THE GUTTERS: Frame the entire site */
+  /* 1. THE GUTTERS: 40px frame on screen edges */
   body {
     padding: 0 40px;
     margin: 0;
     box-sizing: border-box;
   }
 
-  /* 2. THE ALIGNMENT: Use specific selectors to override the 'skinny' widths */
+  /* 2. THE ALIGNMENT: Using ID Selectors to beat the external "skinny" widths */
   #main, 
   #main #divhead, 
   #main .navbar, 
   #main .top-bar {
     width: 100%;
-    max-width: 100%;
+    max-width: 100%; /* Kills the external 700px and 90% limits */
     margin-left: 0;
     margin-right: 0;
     box-sizing: border-box;
