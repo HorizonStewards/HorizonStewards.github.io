@@ -28,7 +28,7 @@
     box-sizing: border-box;
   }
 
-  /* 2. ALIGNMENT */
+  /* 2. THE ALIGNMENT */
   #main, .navbar, .top-bar, #divhead {
     width: 100%;
     max-width: 100%;
@@ -46,13 +46,13 @@
     margin-bottom: 10px;
   }
 
-  /* 4. THE BOXES: Fixed width-calculation to stop horizontal scroll */
+  /* 4. THE BOXES: Fixed horizontal scroll and standard styling */
   #stats, #dltest {
     display: block;
     box-sizing: border-box;
     max-height: 64px;
     overflow-y: auto;
-    overflow-x: hidden; /* KILL HORIZONTAL SCROLL */
+    overflow-x: hidden; /* Fixes left box horizontal scroll */
     width: fit-content;
     white-space: nowrap;
     border: 2px solid var(--color-border);
@@ -64,22 +64,20 @@
     font: 14px Sans-Serif;
   }
 
-  /* 5. THE SHIELD & UNDERLINE FIX */
+  /* 5. THE SHIELD: Reset internal table tags */
   #stats table, #stats td, #stats tr,
   #dltest table, #dltest td, #dltest tr {
     border: none;
     background: transparent;
-    padding: 0 2px; /* Reduced padding to stop scroll trigger */
+    padding: 0 4px;
     box-shadow: none;
     color: inherit;
     font: inherit;
   }
 
-  /* Specifically force the underline back onto the labels/headers in the boxes */
-  #stats td:first-child, #dltest td:first-child, 
-  #stats th, #dltest th {
+  /* FIX: Only underlines the VERY FIRST row of the RIGHT box (#dltest) */
+  #dltest tr:first-child td {
     text-decoration: underline;
-    padding-right: 10px;
   }
 
   /* 6. LINK COLORS */
