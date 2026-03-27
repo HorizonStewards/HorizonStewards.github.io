@@ -28,7 +28,7 @@
     box-sizing: border-box;
   }
 
-  /* 2. ALIGNMENT: Forces rows to match the 40px frame */
+  /* 2. ALIGNMENT */
   #main, .navbar, .top-bar, #divhead {
     width: 100%;
     max-width: 100%;
@@ -37,7 +37,7 @@
     box-sizing: border-box;
   }
 
-  /* 3. THE TOP BAR: Side-by-side positioning */
+  /* 3. THE TOP BAR */
   .top-bar {
     display: flex;
     justify-content: space-between;
@@ -46,12 +46,13 @@
     margin-bottom: 10px;
   }
 
-  /* 4. THE BOXES: Standardized look and font reset */
+  /* 4. THE BOXES: Fixed width-calculation to stop horizontal scroll */
   #stats, #dltest {
     display: block;
     box-sizing: border-box;
     max-height: 64px;
     overflow-y: auto;
+    overflow-x: hidden; /* KILL HORIZONTAL SCROLL */
     width: fit-content;
     white-space: nowrap;
     border: 2px solid var(--color-border);
@@ -59,30 +60,35 @@
     padding: 3px 8px;
     background: var(--color-base);
     line-height: 1.2;
-    /* Force children to use these colors/fonts */
     color: var(--color-text);
     font: 14px Sans-Serif;
   }
 
-  /* 5. THE SHIELD: Reset internal table tags and force font inheritance */
+  /* 5. THE SHIELD & UNDERLINE FIX */
   #stats table, #stats td, #stats tr,
   #dltest table, #dltest td, #dltest tr {
     border: none;
     background: transparent;
-    padding: 0 4px;
+    padding: 0 2px; /* Reduced padding to stop scroll trigger */
     box-shadow: none;
-    /* Inherit font and color from the #stats/#dltest parent */
     color: inherit;
     font: inherit;
   }
 
-  /* 6. LINK COLORS: Ensures links inside the boxes look correct */
+  /* Specifically force the underline back onto the labels/headers in the boxes */
+  #stats td:first-child, #dltest td:first-child, 
+  #stats th, #dltest th {
+    text-decoration: underline;
+    padding-right: 10px;
+  }
+
+  /* 6. LINK COLORS */
   #stats a, #dltest a {
     color: var(--color-text-link);
     text-decoration: underline;
   }
 
-  /* 7. NAVBAR: Original visual style */
+  /* 7. NAVBAR */
   .navbar {
     background-color: var(--color-brand);
     border-radius: 5px;
