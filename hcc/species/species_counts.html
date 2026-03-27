@@ -73,6 +73,9 @@ function buildPage(xobj, hikerConfig) {
       let titleText = CONST_SPECIES_ALL+capitalizeWords(name);
       let urlState  = appState; 
       if( getMenuId(appState) ) {
+          if( getComponent(appState) === COMPONENT_YARD && !getMenuId(appState) ) {
+              titleText = CONST_SPECIES_ALL + ' By ' + getUser(appState);
+          }
           urlState = setTaxonId(urlState, getMenuId(appState)); // set taxon id to menu id if a filter was chosen for say, birds.
       } else if( hikerConfig.defaultTaxonId ) {
           titleText = CONST_SPECIES_ALL_OBS;          
