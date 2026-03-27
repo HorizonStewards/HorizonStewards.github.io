@@ -185,7 +185,7 @@ function buildMenu( results, config ) {
       if( getComponent(appState) === COMPONENT_VISITS ) {
           let urlState  = clearForDashParams(appState);
           urlState = setComponent( urlState, COMPONENT_VISITS );
-          buildMenuURL( furl('./field_study.html'+buildParameterList(urlState), 'Reset' ) );
+          menu_string += buildMenuURL( furl('./field_study.html'+buildParameterList(urlState), 'Reset' ) );
       }
 
       if( p_hide_dash === 'no' ) {
