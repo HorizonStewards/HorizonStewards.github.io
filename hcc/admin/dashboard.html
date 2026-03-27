@@ -201,29 +201,6 @@ function buildPage( configManager ) {
                faddelem('a', td2, { href: url, textContent: name });
                faddelem('td', brow, { textContent: desc });
            }
-      }
-
-      faddelem('p', document.body,{innerHTML:'</div>'});
-
-      visits_labels = [];
-
-      visits_labels = [
-            {innerText:CONST_ICON},
-            {innerText:CONST_VISITS},
-            {innerText:CONST_DESCRIPTION}, 
-      ];
- 
-      faddelem('p',document.body,{innerHTML:('<div id="vpadding"></div>')}); 
-      let visits_headers = 'no';
-      let visits_table = '';
-      let visits_thead = '';
-      let visits_hrow = '';
-      let visits_tbody = '';
- 
-      for( let i=0; i<configManager.configurations.length; i++ ) {
-       
-           let config = configManager.configurations[i];
-
            if( config.component === COMPONENT_VISITS ) {
                if( visits_headers === 'no' ) {
                    visits_headers = 'yes';
@@ -252,6 +229,7 @@ function buildPage( configManager ) {
                faddelem('a', td2, { href: url, textContent: name, style: 'white-space: nowrap;' });  
                faddelem('td', brow, { textContent: desc });
            }
+      
       }
 
       faddelem('p', document.body,{innerHTML:'</div>'});
