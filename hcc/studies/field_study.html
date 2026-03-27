@@ -29,7 +29,6 @@
   }
 
   /* 2. THE ALIGNMENT: Forces every row to be the same width (100% of the body) */
-  /* This fixes the "too skinny" Navbar and Divhead */
   #main, .navbar, .top-bar, #divhead {
     width: 100%;
     max-width: 100%;
@@ -62,7 +61,17 @@
     line-height: 1.2;
   }
 
-  /* 5. NAVBAR: Restored original height and background */
+  /* 5. THE SHIELD: Specific fix for content inside those boxes */
+  /* This kills the borders and backgrounds inherited from your main data table */
+  #stats table, #stats td, #stats tr,
+  #dltest table, #dltest td, #dltest tr {
+    border: none;
+    background: transparent;
+    padding: 2px 4px;
+    box-shadow: none;
+  }
+
+  /* 6. NAVBAR: Restored original height and background */
   .navbar {
     background-color: var(--color-brand);
     border-radius: 5px;
