@@ -540,6 +540,7 @@ function setupAPIParams( config ) {
    }
  
    if( getFieldValue(appState) ) { api_params += '='          + getFieldValue(appState); }
+   if( getObsDate(appState)    ) { api_params += '&on='       + getObsDate(appState); }
 
    if( getUser(appState) ) {
        api_params += '&user_id=' + getUser(appState);
