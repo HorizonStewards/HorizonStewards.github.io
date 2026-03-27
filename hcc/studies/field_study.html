@@ -20,7 +20,7 @@
 </head>
 
 <style>
-  /* 1. THE GUTTERS: Sets the 40px frame on the screen edges */
+  /* 1. THE GUTTER FRAME */
   body {
     padding-left: 40px;
     padding-right: 40px;
@@ -28,7 +28,7 @@
     box-sizing: border-box;
   }
 
-  /* 2. THE ALIGNMENT: Forces every row to be the same width (100% of the body) */
+  /* 2. ALIGNMENT: Forces rows to match the 40px frame */
   #main, .navbar, .top-bar, #divhead {
     width: 100%;
     max-width: 100%;
@@ -37,7 +37,7 @@
     box-sizing: border-box;
   }
 
-  /* 3. THE TOP BAR: Keeps Stats Left and Dltest Right */
+  /* 3. THE TOP BAR: Side-by-side positioning */
   .top-bar {
     display: flex;
     justify-content: space-between;
@@ -46,7 +46,7 @@
     margin-bottom: 10px;
   }
 
-  /* 4. THE BOXES: Your original clean styling */
+  /* 4. THE BOXES: Standardized look and font reset */
   #stats, #dltest {
     display: block;
     box-sizing: border-box;
@@ -59,19 +59,30 @@
     padding: 3px 8px;
     background: var(--color-base);
     line-height: 1.2;
+    /* Force children to use these colors/fonts */
+    color: var(--color-text);
+    font: 14px Sans-Serif;
   }
 
-  /* 5. THE SHIELD: Specific fix for content inside those boxes */
-  /* This kills the borders and backgrounds inherited from your main data table */
+  /* 5. THE SHIELD: Reset internal table tags and force font inheritance */
   #stats table, #stats td, #stats tr,
   #dltest table, #dltest td, #dltest tr {
     border: none;
     background: transparent;
-    padding: 2px 4px;
+    padding: 0 4px;
     box-shadow: none;
+    /* Inherit font and color from the #stats/#dltest parent */
+    color: inherit;
+    font: inherit;
   }
 
-  /* 6. NAVBAR: Restored original height and background */
+  /* 6. LINK COLORS: Ensures links inside the boxes look correct */
+  #stats a, #dltest a {
+    color: var(--color-text-link);
+    text-decoration: underline;
+  }
+
+  /* 7. NAVBAR: Original visual style */
   .navbar {
     background-color: var(--color-brand);
     border-radius: 5px;
