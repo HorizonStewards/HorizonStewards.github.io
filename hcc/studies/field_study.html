@@ -186,7 +186,7 @@ function buildMenu( results, config ) {
       let taxon_name = capitalizeWords(getMenuName(appState) || CONST_SHOW);  
       if( links ) { menu_string += buildDD( taxon_name, links); }
 
-      if( p_hide_dash === 'yes' ) {
+      if( p_hide_dash === 'no' ) {
           let urlState  = clearForDashParams(appState);
           menu_string += buildHome(furl('../admin/dashboard.html'+buildParameterList(urlState),CONST_LEAF_UTF8));
       }
