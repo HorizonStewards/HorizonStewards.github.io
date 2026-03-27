@@ -88,7 +88,14 @@
    #tdkey { padding:0; padding-right: 25px; }
    #tdright { padding:0; padding-right: 5px; float:right; }
    #tdright2 { padding:0; padding-right: 5px; padding-top: 2px; text-align:left; } 
-   #main { display:block; width:auto;  margin-left: 40px; margin-right: 40px; box-sizing: border-box; }
+   /*#main { display:block; width:auto;  margin-left: 40px; margin-right: 40px; box-sizing: border-box; }*/
+ #main {
+  width: calc(100% - 80px); /* Total width minus 40px on each side */
+  max-width: 1200px;        /* Prevents it from getting too wide on desktop */
+  margin: 0 auto;           /* Centers the whole block */
+  display: block;
+  box-sizing: border-box;
+}
    #h2 { font-weight:bold; font-size:20px; }
    #cap { align:left; text-decoration:underline; font: 16px Sans-Serif; padding:0; padding-right: 25px; }
    p { width:100%; }
