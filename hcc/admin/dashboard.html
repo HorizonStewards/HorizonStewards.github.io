@@ -201,15 +201,16 @@ function buildPage( configManager ) {
                faddelem('a', td2, { href: url, textContent: name });
                faddelem('td', brow, { textContent: desc });
            }
+       
            if( config.component === COMPONENT_VISITS ) {
-               if( visits_headers === 'no' ) {
-                   visits_headers = 'yes';
-                   visits_table = faddelem('table',document.body,{id:'main'});                    
-                   visits_thead = faddelem('thead',visits_table);
-                   visits_hrow  = faddelem('tr',visits_thead);
+               if( headers === 'no' ) {
+                   headers = 'yes';
+                   studies_table = faddelem('table',document.body,{id:'main'});                    
+                   studies_thead = faddelem('thead',studies_table);
+                   studies_hrow  = faddelem('tr',studies_thead);
       
-                   faddelems('th',visits_hrow,visits_labels);
-                   visits_tbody = faddelem('tbody',visits_table);
+                   faddelems('th',visits_hrow,studies_labels);
+                   studies_tbody = faddelem('tbody',studies_table);
                }
 
                let urlState = appState;
