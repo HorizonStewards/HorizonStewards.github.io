@@ -28,24 +28,27 @@
     box-sizing: border-box;
   }
 
-  /* 2. THE ALIGNMENT: Standardized to match Navbar exactly */
+  /* 2. THE ALIGNMENT: Forces every row to share the same boundary */
   #main, .navbar, .top-bar, #divhead {
     width: 100%;
     max-width: 100%;
-    margin: 0 0 10px 0;
+    margin-left: 0;
+    margin-right: 0;
     box-sizing: border-box;
   }
 
-  /* 3. THE TOP BAR: Container for boxes */
+  /* 3. THE TOP BAR: Snaps children to the far edges */
   .top-bar {
     display: flex;
     justify-content: space-between;
     align-items: stretch;
     gap: 10px;
-    padding: 0; /* Ensures no internal padding holds the box back */
+    margin-bottom: 10px;
+    /* FIX 1: Ensures no hidden padding holds the box away from the edge */
+    padding: 0; 
   }
 
-  /* 4. THE BOXES: Standardized look */
+  /* 4. THE BOXES: Left (#stats) and Right (#dltest) */
   #stats, #dltest {
     display: block;
     box-sizing: border-box;
@@ -63,36 +66,35 @@
     font: 14px Sans-Serif;
   }
 
-  /* SNAP-TO-RIGHT FIX: Forces the right box to the absolute edge of #main */
+  /* FIX 2: Forces the right box to grab all empty space and snap right */
   #dltest {
     margin-left: auto;
   }
 
   /* 5. THE SHIELD: Reset internal table tags */
-  #stats table, #stats td, #dltest table, #dltest td {
+  #stats table, #stats td, #stats tr,
+  #dltest table, #dltest td, #dltest tr {
     border: none;
     background: transparent;
+    padding: 0 12px 0 0;
     box-shadow: none;
     color: inherit;
     font: inherit;
     text-decoration: none;
     margin: 0; 
-    border-collapse: collapse;
+    /* FIX 3: Ensures table doesn't have its own invisible margins */
+    border-collapse: collapse; 
   }
 
-  /* Padding adjustments to keep boxes tight */
-  #stats td { padding: 0 12px 0 0; }
-  #dltest td { padding: 0; }
+  #dltest td { padding-right: 0; }
 
-  /* Underline for right box header only */
-  #dltest tr:first-child td {
-    text-decoration: underline;
-  }
-
-  /* Link color restoration */
   #stats a, #dltest a {
     color: var(--color-text-link);
     text-decoration: none; 
+  }
+
+  #dltest tr:first-child td {
+    text-decoration: underline;
   }
 
   /* 6. NAVBAR */
@@ -106,7 +108,7 @@
     overflow: hidden;
   }
 
-  /* Helpers */
+  /* Original Helpers */
   #h2 { font-weight:bold; font-size:20px; }
   p { width:100%; }
   .npcicon { width:34px; height:34px; border: 1px solid cornflowerblue; padding: 5px; border-radius: 50px; }
