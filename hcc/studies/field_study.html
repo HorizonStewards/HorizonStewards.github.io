@@ -20,7 +20,7 @@
 </head>
 
 <style>
-  /* 1. THE GUTTER FRAME */
+  /* 1. THE GUTTER FRAME: This is the 'master' boundary */
   body {
     padding-left: 40px;
     padding-right: 40px;
@@ -28,25 +28,25 @@
     box-sizing: border-box;
   }
 
-  /* 2. THE ALIGNMENT */
+  /* 2. THE ALIGNMENT: Ensures the container is exactly as wide as the navbar */
   #main, .navbar, .top-bar, #divhead {
     width: 100%;
     max-width: 100%;
-    margin-left: 0;
-    margin-right: 0;
+    margin: 0 0 10px 0;
     box-sizing: border-box;
   }
 
-  /* 3. THE TOP BAR */
+  /* 3. THE TOP BAR: This is where the alignment 'snap' happens */
   .top-bar {
     display: flex;
     justify-content: space-between;
     align-items: stretch;
     gap: 10px;
-    margin-bottom: 10px;
+    /* Safety: ensure no hidden padding is pushing the right box out */
+    padding: 0; 
   }
 
-  /* 4. THE BOXES: Fixed horizontal scroll and standard styling */
+  /* 4. THE BOXES: fit-content ensures the border hugs the text */
   #stats, #dltest {
     display: block;
     box-sizing: border-box;
@@ -64,28 +64,27 @@
     font: 14px Sans-Serif;
   }
 
-  /* 5. THE SHIELD: Reset internal table tags and remove ALL default underlines */
-  #stats table, #stats td, #stats tr,
-  #dltest table, #dltest td, #dltest tr {
+  /* 5. THE SHIELD: Reset internal table tags */
+  #stats table, #stats td, #dltest table, #dltest td {
     border: none;
     background: transparent;
-    padding: 0 12px 0 0; /* Extra 12px padding to the right for breathing room */
     box-shadow: none;
     color: inherit;
     font: inherit;
-    text-decoration: none; /* KILLS ALL UNDERLINES IN ALL ROWS */
+    text-decoration: none;
   }
 
-  /* KILL UNDERLINES FOR ALL LINKS IN THE BOXES */
+  /* Padding Fixes */
+  #stats td { padding: 0 12px 0 0; }
+  #dltest td { padding: 0; }
+
+  /* Underline for right box header row only */
+  #dltest tr:first-child td { text-decoration: underline; }
+
+  /* No underlines for links in boxes */
   #stats a, #dltest a {
     color: var(--color-text-link);
     text-decoration: none; 
-  }
-
-  /* RE-ADD UNDERLINE: Only for the very first row of the right box (#dltest) */
-  /* This ensures text-only headers are underlined, but URLs remain clean */
-  #dltest tr:first-child td {
-    text-decoration: underline;
   }
 
   /* 6. NAVBAR */
