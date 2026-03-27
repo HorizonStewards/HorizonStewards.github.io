@@ -20,7 +20,7 @@
 </head>
 
 <style>
-  /* 1. THE GUTTER FRAME: This is the 'master' boundary */
+  /* 1. THE GUTTER FRAME */
   body {
     padding-left: 40px;
     padding-right: 40px;
@@ -28,32 +28,32 @@
     box-sizing: border-box;
   }
 
-  /* 2. THE ALIGNMENT: Ensures the container is exactly as wide as the navbar */
+  /* 2. THE ALIGNMENT: Ensures rows fill the body frame */
   #main, .navbar, .top-bar, #divhead {
     width: 100%;
     max-width: 100%;
-    margin: 0 0 10px 0;
+    margin-left: 0;
+    margin-right: 0;
     box-sizing: border-box;
   }
 
-  /* 3. THE TOP BAR: This is where the alignment 'snap' happens */
+  /* 3. THE TOP BAR */
   .top-bar {
     display: flex;
     justify-content: space-between;
     align-items: stretch;
     gap: 10px;
-    /* Safety: ensure no hidden padding is pushing the right box out */
-    padding: 0; 
+    margin-bottom: 10px;
   }
 
-  /* 4. THE BOXES: fit-content ensures the border hugs the text */
+  /* 4. THE BOXES: Standardized look */
   #stats, #dltest {
     display: block;
     box-sizing: border-box;
     max-height: 64px;
     overflow-y: auto;
     overflow-x: hidden; 
-    width: fit-content;
+    width: fit-content; /* Keeps them tight to content */
     white-space: nowrap;
     border: 2px solid var(--color-border);
     border-radius: 5px;
@@ -64,7 +64,7 @@
     font: 14px Sans-Serif;
   }
 
-  /* 5. THE SHIELD: Reset internal table tags */
+  /* 5. THE SHIELD: Specific Reset for Tables */
   #stats table, #stats td, #dltest table, #dltest td {
     border: none;
     background: transparent;
@@ -74,14 +74,16 @@
     text-decoration: none;
   }
 
-  /* Padding Fixes */
+  /* LEFT BOX PADDING: Keeps content from touching the right edge */
   #stats td { padding: 0 12px 0 0; }
+
+  /* RIGHT BOX PADDING: Kills the extra space so the border hugs the text */
   #dltest td { padding: 0; }
 
-  /* Underline for right box header row only */
+  /* UNDERLINE: Only for the very first row of the right box */
   #dltest tr:first-child td { text-decoration: underline; }
 
-  /* No underlines for links in boxes */
+  /* KILL UNDERLINES for all links in both boxes */
   #stats a, #dltest a {
     color: var(--color-text-link);
     text-decoration: none; 
