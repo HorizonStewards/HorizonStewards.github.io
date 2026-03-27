@@ -30,7 +30,7 @@
   display: flex;
   justify-content: space-between; /* Pushes Stats Left and dltest Right */
   align-items: stretch;           /* Forces both boxes to the same height */
-  width: 90%;
+  width: 100%;
   gap: 10px;                      /* Optional: space between them if they meet */
   margin-bottom: 10px;
 }
@@ -81,14 +81,14 @@
 } 
  
    #mismatch { padding-right:25px; padding-bottom:0px; }
-   #divhead { max-width: 90%; }
+   #divhead { max-width: 100%; }
    #key { color:var(--color-text); text-decoration:underline; padding:0; padding-right: 25px;}
    #tablekey { display:inline-table; }
    #trkey { padding:0; background:var(--color-base); border:none; border-collapse:collapse; }
    #tdkey { padding:0; padding-right: 25px; }
    #tdright { padding:0; padding-right: 5px; float:right; }
    #tdright2 { padding:0; padding-right: 5px; padding-top: 2px; text-align:left; } 
-   #main { width:100%; }
+   #main { width:100%;  padding-left: 40px; padding-right: 40px; }
    #h2 { font-weight:bold; font-size:20px; }
    #cap { align:left; text-decoration:underline; font: 16px Sans-Serif; padding:0; padding-right: 25px; }
    p { width:100%; }
@@ -102,7 +102,7 @@
    }
  
    .navbar {
-      max-width: 90%;
+      max-width: 100%;
       overflow: hidden;
       background-color: var(--color-brand);
       border-radius: 5px 5px 5px 5px;
