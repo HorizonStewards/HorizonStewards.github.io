@@ -117,6 +117,7 @@ let winurlstr = window.location.href;
 let winurlsearchstr = window.location.search;
 let winurlexsearchstr = winurlstr.replace(winurlsearchstr,'');
 let winurlparams = new URLSearchParams(winurlsearchstr.substring(1));
+let p_hide_dash    = winurlparams.get('hide_dash') || 'no';
 let p_field = '';
 let p_field_value = '';
 let field_array = [];
@@ -185,8 +186,10 @@ function buildMenu( results, config ) {
       let taxon_name = capitalizeWords(getMenuName(appState) || CONST_SHOW);  
       if( links ) { menu_string += buildDD( taxon_name, links); }
 
-      let urlState  = clearForDashParams(appState);
-      menu_string += buildHome(furl('../admin/dashboard.html'+buildParameterList(urlState),CONST_LEAF_UTF8));
+      if( p_hide_dash === 'yes' ) {
+          let urlState  = clearForDashParams(appState);
+          menu_string += buildHome(furl('../admin/dashboard.html'+buildParameterList(urlState),CONST_LEAF_UTF8));
+      }
  
       menu_string += '</div>';
 
