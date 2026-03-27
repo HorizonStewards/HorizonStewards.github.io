@@ -173,7 +173,7 @@ function buildPage( configManager ) {
        
            let config = configManager.configurations[i];
 
-           if( config.component === COMPONENT_STUDIES ) {
+           if( config.component === COMPONENT_STUDIES || config.component === COMPONENT_VISITS ) {
                if( headers === 'no' ) {
                    headers = 'yes';
                    studies_table = faddelem('table',document.body,{id:'main'});                    
@@ -202,14 +202,14 @@ function buildPage( configManager ) {
                faddelem('td', brow, { textContent: desc });
            }
        
-           if( config.component === COMPONENT_VISITS ) {
+           /*if( config.component === COMPONENT_VISITS ) {
                if( headers === 'no' ) {
                    headers = 'yes';
                    studies_table = faddelem('table',document.body,{id:'main'});                    
                    studies_thead = faddelem('thead',studies_table);
                    studies_hrow  = faddelem('tr',studies_thead);
       
-                   faddelems('th',visits_hrow,studies_labels);
+                   faddelems('th',studies_hrow,studies_labels);
                    studies_tbody = faddelem('tbody',studies_table);
                }
 
@@ -222,14 +222,14 @@ function buildPage( configManager ) {
                let icon = config.utf8 || CONST_STUDIES_UTF8;
                let name = config.studyTitle;
                let desc = config.studyDesc;
-               let brow = faddelem('tr', visits_tbody);
+               let brow = faddelem('tr', studies_tbody);
 
                let td1 = faddelem('td', brow);
                faddelem('a', td1, { href: url, innerHTML: icon }); 
                let td2 = faddelem('td', brow);
                faddelem('a', td2, { href: url, textContent: name, style: 'white-space: nowrap;' });  
                faddelem('td', brow, { textContent: desc });
-           }
+           }*/
       
       }
 
