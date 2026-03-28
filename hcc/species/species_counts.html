@@ -50,6 +50,7 @@ function buildMenu( results, config ) {
     let homeState = clearForDashParams(appState);
     let homeUrl   = '';
     if( getComponent(appState) === COMPONENT_YARD ) {
+        homeState = setComponent(homeState, COMPONENT_YARD);
         homeUrl = './observer_counts.html';
     } else {
         homeUrl = '../admin/dashboard.html';
