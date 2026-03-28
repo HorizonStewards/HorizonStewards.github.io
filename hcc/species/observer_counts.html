@@ -40,7 +40,11 @@ function buildMenu() {
   navbar.className = 'navbar v2-menu';
 
   // Build the Home Link
-  if( p_hide_dash === 'no' ) { buildNavHome( navbar ); }
+  if( p_hide_dash === 'no' ) { 
+      buildNavHome( navbar ); 
+  } else {
+      buildNavTitle( navbar, getTitle(appState) );
+  }
   
   faddelem('p', document.body).appendChild(navbar);
 
