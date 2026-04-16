@@ -3,21 +3,13 @@
   "configurations":     
   [
     { 
-        "component": "yard",                  "project": "248418",  
-        "study_title": "Observers",           "study_desc": "All species observed by all observers during site visits or casual visits to this property.", 
-        "title": "Ancient Oaks",              "utf8": "&#128101;",   
+        "component": "yard",                  "project": "157918",  
+        "study_title": "Observers",           "study_desc": "Swallows and Martins by observer.", 
+        "title": "Horizon Community Church",  "utf8": "&#128101;",   
         "default_taxon_id": "11853",
           "sub_icons": [
-                       { "nm": "birds",       "taxon_id": "3",     "icon": "&#128038;" }, 
-                       { "nm": "butterflies", "taxon_id": "47157", "icon": "&#129419;" }, 
-                       { "nm": "beetles",     "taxon_id": "47208", "icon": "&#129714;" }, 
-                       { "nm": "bees",        "taxon_id": "47222", "icon": "&#128029;" }, 
-                       { "nm": "spiders",     "taxon_id": "47118", "icon": "&#128375;" }, 
-                       { "nm": "amphibians",  "taxon_id": "20978", "icon": "&#128056;" }, 
-                       { "nm": "reptiles",    "taxon_id": "26036", "icon": "&#128013;" }, 
-                       { "nm": "mammals",     "taxon_id": "40151", "icon": "&#128059;" }, 
-                       { "nm": "snails",      "taxon_id": "47115", "icon": "&#128012;" }, 
-                       { "nm": "mushrooms",   "taxon_id": "47170", "icon": "&#127812;" } ]
+                       { "nm": "barn swallow",                    "taxon_id": "11901",     "icon": "&#128038;" }, 
+                       { "nm": "purple martin",                   "taxon_id": "11867",     "icon": "&#128038;" } ]
     }
   ],
   "default_sub_icons": 
