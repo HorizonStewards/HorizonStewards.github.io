@@ -178,17 +178,31 @@ function setupAPIParams( plantConfig ) {
    api_params += '?project_id='+plantConfig.project;
    api_params += '&iconic_taxa=plantae';
 
-   if( plantConfig.plantField )        { api_params += '&field:'    + plantConfig.plantField;  } 
-   if( plantConfig.plantFieldValue )   { api_params += '='          + plantConfig.plantFieldValue; }
    if( plantConfig.plantIds )          { api_params += '&id='       + plantConfig.plantIds;  }
    if( plantConfig.plantListUserId )   { api_params += '&user_id='  + plantConfig.plantListUserId; }
    if( plantConfig.tagName )           { api_params += '&tag='      + plantConfig.tagName; }
 
    if( getFieldName(appState) ) {
-       api_params += '&field:' + getFieldName(appState);
-       if( getFieldValue(appState) ) {
-           api_params += '=' + getFieldValue(appState);
-       }
+       // if the field in the drop-down matches the plantField only set the value
+       if( getFieldName(appState).toString() === plantConfig.plantField.toString() ) {
+           if( plantConfig.plantField )            { api_params += '&field:'    + plantConfig.plantField;  } 
+           if( getFieldValue(appState) ) {
+               api_params += '=' + getFieldValue(appState);
+           } else {
+               if( plantConfig.plantFieldValue )   { api_params += '='          + plantConfig.plantFieldValue; }
+           }
+       } else {
+           if( plantConfig.plantField )        { api_params += '&field:'    + plantConfig.plantField;  } 
+           if( plantConfig.plantFieldValue )   { api_params += '='          + plantConfig.plantFieldValue; }
+          
+           api_params += '&field:' + getFieldName(appState);
+           if( getFieldValue(appState) ) {
+               api_params += '=' + getFieldValue(appState);
+           }
+       }          
+   } else {
+       if( plantConfig.plantField )        { api_params += '&field:'    + plantConfig.plantField;  } 
+       if( plantConfig.plantFieldValue )   { api_params += '='          + plantConfig.plantFieldValue; }
    }
 
    // if a place_id was chosen from the place drop-down, use that place_id...
