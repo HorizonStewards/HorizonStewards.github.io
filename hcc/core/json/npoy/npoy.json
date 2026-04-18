@@ -4,8 +4,8 @@
   "configurations":     
   [
     { 
-        "component": "plants",                "title": "Anderson Native Plant of the Year", 
-        "study_title": "Noteworthy Natives",  "study_desc": "Current and former native plants of the year as selected by the Anderson Township Native Plant Initiative.", 
+        "component": "plants",                "title": "Anderson Native Plant Initiative", 
+        "study_title": "Plants of the Year",  "study_desc": "Current and former native plants of the year as selected by the Anderson Township Native Plant Initiative.", 
         "project": "255754",                  "insect_project": "255754", 
         "field_id": "7623",                   "field_name": "plant that the organism was found on",
         "dd_obs_fields":
