@@ -1,6 +1,7 @@
 { 
   "plant_project": "255754",
   "plant_field": "startYear", 
+  "map_type": "hide",
   "configurations":     
   [
     { 
