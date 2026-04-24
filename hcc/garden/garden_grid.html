@@ -102,9 +102,12 @@ function setupAPIParams( config ) {
         api_params += getFilterAPIParams(config);
     }
 
-    // if a place_id was chosen from the place drop-down, use that place_id...
+    // if a place_id was chosen from the place drop-down, use that place_id.
+    // otherwise, check for a default.
     if( getPlaceMenuId(appState) ) {
         api_params += '&place_id=' + getPlaceMenuId(appState);
+    } else if( config.defaultPlace ) {
+        api_params += '&place_id=' + config.defaultPlace;
     }
   
     api_params += '&field:'+config.fieldName+'=' + getPlantId(appState);
