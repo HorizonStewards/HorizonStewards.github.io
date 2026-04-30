@@ -36,6 +36,31 @@ function buildNavHomeCustom( navbar, baseUrl=null, homeState=null ) {
     if( !baseUrl )   { baseUrl = '../admin/dashboard.html'; }
     if( !homeState ) { homeState = clearForDashParams(appState); }
     
+    let homeDiv = faddelem('div', navbar, { id: 'home' });
+    
+    // Create the link
+    let hLink = faddelem('a', homeDiv, { 
+        href: 'javascript:void(0)', // Prevent navigation
+        onclick: function(e) {
+            e.preventDefault();
+            window.close();
+            
+            // Fallback: If window.close() is blocked by the browser 
+            // (common if the tab wasn't opened via script), 
+            // you might want to alert the user or redirect them.
+            setTimeout(() => {
+                alert("Please close this tab manually.");
+            }, 200);
+        }
+    });
+    
+    faddelem('span', hLink, { innerHTML: CONST_LEAF_UTF8 });
+}
+
+ /*function buildNavHomeCustom( navbar, baseUrl=null, homeState=null ) {
+    if( !baseUrl )   { baseUrl = '../admin/dashboard.html'; }
+    if( !homeState ) { homeState = clearForDashParams(appState); }
+    
     let homeUrl = baseUrl + buildParameterList(homeState);
     let homeDiv = faddelem('div', navbar, { id: 'home' });
     
@@ -53,7 +78,7 @@ function buildNavHomeCustom( navbar, baseUrl=null, homeState=null ) {
     });
     
     faddelem('span', hLink, { innerHTML: CONST_LEAF_UTF8 });
-}
+}*/
 
 function addLink( p, project_title, project_id ) {
    // 1. Create a simple header instead of a toggle link
