@@ -39,6 +39,12 @@
         "study_title": "Nest Monitoring",     "study_desc": "Nest Box Monitoring (sample field study)",         
         "field_id": "12490",                  "obs_fields": "13436,1,12490,12493",
         "field_name": "birds nesting"
+    },
+    {
+        "component": "studies",               "project": "157918",
+        "study_title": "Propagated By",       "study_desc": "Name of the organization that propagated the initial plant that we re-established the colony from.  Year it was planted and year it first bloomed.",         
+        "field_id": "16769",                  "obs_fields": "16769,8217,21753",
+        "field_name": "Propagated By"
     }
   ],
   "default_sub_icons": 
