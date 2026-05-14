@@ -5,12 +5,12 @@
   [
     { 
         "component": "plants",                "title": "Horizon Community Church",
-        "project": "157918",                  "insect_project": "157918", 
+        "project": "157918",                  "insect_project": "255754",
         "field_id": "7623",                   "field_name": "plant that the organism was found on"
     },
     { 
         "component": "observers",             "title": "Horizon Community Church",     
-        "project": "157918",                  "insect_project": "157918", 
+        "project": "157918",                  "insect_project": "255754",
         "field_id": "7623",                   "field_name": "plant that the organism was found on",
         "map_type": "ls"
     }
