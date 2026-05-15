@@ -6,8 +6,8 @@
                      "project": "289197",  
                      "utf8": "&#127793;",
                      "study_title": "Parent Colonies",       
-                     "study_desc": "Shows the geographic range that plant species were collected from.  Shows the parent colony observation from each location where collection occurred and a map of the collection area.",
-                     "title": "Plants with Provenance", 
+                     "study_desc": "Shows the geographic range that each plant species were collected from. ",
+                     "title": "Ancestry", 
                      "default_map_zoom": "6",
                      "field_id": "17383", "field_name": "wild ancestral colony"
     },
