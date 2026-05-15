@@ -10,6 +10,12 @@
                      "title": "Plants with Provenance", 
                      "default_map_zoom": "6",
                      "field_id": "17383", "field_name": "wild ancestral colony"
+    },
+    {
+        "component": "studies",               "project": "289197",       "utf8": "&#127793;",
+        "study_title": "Provenance Data",     "study_desc": "List of cultivated plants and their parent colonies.",         
+        "field_id": "17383",                  "obs_fields": "17383",
+        "field_name": "Wild Ancestral Colony"
     }
   ]
 }
