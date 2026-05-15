@@ -1,0 +1,13 @@
+{ 
+  "plant_ids": "243701514,280885863",           
+  "configurations":   
+  [
+    { 
+        "component": "hiker", 
+                     "project": "289197",  
+                     "title": "Plants with Provenance", 
+                     "default_map_zoom": "6",
+                     "field_id": "17383", "field_name": "wild ancestral colony"
+    }
+  ]
+}
