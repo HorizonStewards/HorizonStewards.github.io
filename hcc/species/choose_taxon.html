@@ -154,7 +154,7 @@ function fresults(xobj) {
 function buildForm() {
   faddelem('p',document.body,{innerHTML:('<div>' +
                                            '<form action=./choose_taxon.html>' +
-                                              '<label for="fname">Taxon Search</label>' +
+                                              //'<label for="fname">Taxon Search</label>' +
                                               '<input type="text" id="pname" name="q" placeholder="Enter a full or partial taxon name..">' +   
                                               '<input type="submit" value="Search">' +
                                            '</form>' +
@@ -166,10 +166,12 @@ let apiurl     = apibase+((winurlparams!='')?('?'+winurlparams):'');
 let apirefname = 'Choose Taxon';
 
 if( !p_q ) {
+  faddelem('h2',document.body,{innerText:'Taxon Search'});
   buildForm();
 } else {
+   faddelem('h2',document.body,{innerText:'Taxon Search'});
    buildForm();
-   faddelem('p',document.body,{innerText:'List of taxons found.  Select one to view plants of that taxon.'});
+   //faddelem('p',document.body,{innerText:'List of taxons found.  Select one to view plants of that taxon.'});
    fetch(apiurl)
       .then((response) => {
          if (!response.ok) { throw new Error(response.status+' ('+response.statusText+') returned from '+response.url); };
