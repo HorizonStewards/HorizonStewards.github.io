@@ -24,6 +24,8 @@ let winurlsearchstr   = window.location.search;
 let winurlexsearchstr = winurlstr.replace(winurlsearchstr,'');
 let winurlparams      = new URLSearchParams(winurlsearchstr.substring(1));
 
+let p_action   = winurlparams.get('action') || '';
+
 appState       = buildStateFromParams(winurlparams);
 
 // page & api specific constants
@@ -49,11 +51,15 @@ function buildMenu( results, config ) {
     // Build the Home Link
     let homeState = clearForDashParams(appState);
     let homeUrl   = '';
-    if( getComponent(appState) === COMPONENT_YARD ) {
-        homeState = setComponent(homeState, COMPONENT_YARD);
-        homeUrl = './observer_counts.html';
+    if( p_action === 'choose' ) {
+        homeUrl = './choose_taxon.html';
     } else {
-        homeUrl = '../admin/dashboard.html';
+        if( getComponent(appState) === COMPONENT_YARD ) {
+            homeState = setComponent(homeState, COMPONENT_YARD);
+            homeUrl = './observer_counts.html';
+        } else {
+            homeUrl = '../admin/dashboard.html';
+        }
     }
     buildNavHome( navbar, homeUrl, homeState );
 
