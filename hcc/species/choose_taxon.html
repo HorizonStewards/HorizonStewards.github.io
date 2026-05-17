@@ -71,6 +71,19 @@ winurlparams.delete('idextra_user_id');
 let p_photo_curl_filename_prefix = winurlparams.get('photo_curl_filename_prefix')?.split(',') || ['photo_id'];
 winurlparams.delete('photo_curl_filename_prefix');
 
+// Species Counts Table Column - Name
+function buildSpeciesName( brow, rec, url ) {
+    let tdName = faddelem('td', brow);
+    let a = faddelem('a', tdName, { href: url });
+    
+    // Common Name 
+    faddelem('span', a, { style: { fontSize: 'larger' }, textContent: (rec.preferred_common_name || '').toLowerCase() });
+    
+    // Scientific Name 
+    let br = faddelem('br', a);
+    faddelem('span', a, { style: { fontStyle: 'italic' }, textContent: '(' + (rec.name || '') + ')' });
+}
+  
 function fresults(xobj) {
 
    let results = xobj.results;
