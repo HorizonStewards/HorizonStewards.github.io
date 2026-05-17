@@ -60,10 +60,11 @@ let winurlstr = window.location.href;
 let winurlsearchstr = window.location.search;
 let winurlexsearchstr = winurlstr.replace(winurlsearchstr,'');
 let winurlparams = new URLSearchParams(winurlsearchstr.substring(1));
-let p_options  = winurlparams.get('options') || [];
-let p_taxon_id = winurlparams.get('taxon_id') || '';
-let p_params   = winurlparams.get('params') || '';
-let p_q        = winurlparams.get('q') || '';
+let p_options   = winurlparams.get('options') || [];
+let p_taxon_id  = winurlparams.get('taxon_id') || '';
+let p_params    = winurlparams.get('params') || '';
+let p_q         = winurlparams.get('q') || '';
+let p_hide_dash = winurlparams.get('hide_dash') || '';
 
 winurlparams.delete('options');
 let p_idextra_ = winurlparams.get('idextra_user_id')?.split(',') || [];;
@@ -178,10 +179,8 @@ let apiurl     = apibase+((winurlparams!='')?('?'+winurlparams):'');
 let apirefname = 'Choose Taxon';
 
 if( !p_q ) {
-   faddelem('h2',document.body,{innerText:'Enter a full or partial taxon name.'});
-   buildForm();
+  buildForm();
 } else {
-   faddelem('h2',document.body,{innerText:apirefname});
    buildForm();
    faddelem('p',document.body,{innerText:'List of taxons found.  Select one to view plants of that taxon.'});
    fetch(apiurl)
