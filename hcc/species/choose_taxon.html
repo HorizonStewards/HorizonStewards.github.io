@@ -134,7 +134,7 @@ function fresults(xobj) {
       for (let i=0; i<length; i++) {
          let brow = faddelem('tr',tbody);
          let rec  = results[i];
-         let url  = './species_counts.html?params=yard&component=hiker&menuid='+rec.id;
+         let url  = './species_counts.html?params=yard&component=hiker&action=choose&menuid='+rec.id;
 
          // Column: Index
          faddelem('td', brow, { textContent: i + 1 });
