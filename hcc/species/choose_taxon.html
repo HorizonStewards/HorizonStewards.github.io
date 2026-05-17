@@ -108,9 +108,12 @@ function fresults(xobj) {
          let brow = faddelem('tr',tbody);
          let rec = results[i];
 
+         let url      = './species_counts.html?params=yard&component=hiker&menuid='+rec.id;
+             buildSpeciesName( brow, rec, url );
+
          let values = [
             {innerText:i+1},
-            {innerHTML:furl('./species_counts.html?params=yard&component=hiker&menuid='+rec.id,(rec.preferred_common_name||rec.name))},
+            {innerHTML:buildSpeciesName( brow, rec, url )},
             {innerText:rec.rank},
          ];         
 
