@@ -93,25 +93,12 @@ function buildMenu(  ) {
 
     let baseUrl = window.location.origin + window.location.pathname;
 
-    if( p_hide_dash === 'yes' ) {
-        let title = 'Horizon Taxon Search';        
-        buildNavTitle( navbar, title );
-        faddelem('p', document.body).appendChild(navbar);
-        return;
-    }
-
-    // Build the Home Link
-    let homeState = clearForDashParams(appState);
-    let homeUrl = '../admin/dashboard.html';
-    buildNavHome( navbar, homeUrl, homeState );
-
-    // Append the DOM nodes to the body
+    let title = 'Horizon Taxon Search';        
+    buildNavTitle( navbar, title );
     faddelem('p', document.body).appendChild(navbar);
 }
   
 function fresults(xobj) {
-
-   buildMenu();
 
    let results = xobj.results;
    if (results) {
@@ -177,6 +164,8 @@ function buildForm() {
 let apibase    = 'https://api.inaturalist.org/v1/taxa/autocomplete';
 let apiurl     = apibase+((winurlparams!='')?('?'+winurlparams):'');
 let apirefname = 'Choose Taxon';
+
+buildMenu();
 
 if( !p_q ) {
   buildForm();
