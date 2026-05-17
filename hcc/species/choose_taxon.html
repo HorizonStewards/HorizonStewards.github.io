@@ -75,7 +75,7 @@ function fresults(xobj) {
 
          let values = [
             {innerText:i+1},
-            {innerHTML:furl(github_root+'bugs_on_plants.html?params='+p_params+'&taxon_id='+rec.id+'&taxon_name='+(rec.preferred_common_name||rec.name),(rec.preferred_common_name||rec.name))},
+            {innerHTML:furl('./species_counts.html?params=yard&component=hiker&menuid='+rec.taxon.id,(rec.preferred_common_name||rec.name))},
             {innerText:rec.rank},
          ];         
 
