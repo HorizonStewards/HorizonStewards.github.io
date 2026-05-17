@@ -83,8 +83,34 @@ function buildSpeciesName( brow, rec, url ) {
     let br = faddelem('br', a);
     faddelem('span', a, { style: { fontStyle: 'italic' }, textContent: '(' + (rec.name || '') + ')' });
 }
+
+function buildMenu(  ) {
+
+    // Create the main navbar container
+    let navbar = document.createElement('div');
+    navbar.className = 'navbar v2-menu';
+
+    let baseUrl = window.location.origin + window.location.pathname;
+
+    if( p_hide_dash === 'yes' ) {
+        let title = 'Horizon Taxon Search';        
+        buildNavTitle( navbar, title );
+        faddelem('p', document.body).appendChild(navbar);
+        return;
+    }
+
+    // Build the Home Link
+    let homeState = clearForDashParams(appState);
+    let homeUrl = '../admin/dashboard.html';
+    buildNavHome( navbar, homeUrl, homeState );
+
+    // Append the DOM nodes to the body
+    faddelem('p', document.body).appendChild(navbar);
+}
   
 function fresults(xobj) {
+
+   buildMenu();
 
    let results = xobj.results;
    if (results) {
