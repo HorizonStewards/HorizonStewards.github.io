@@ -110,7 +110,7 @@ function fresults(xobj) {
 
          let values = [
             {innerText:i+1},
-            {innerHTML:furl('./species_counts.html?params=yard&component=hiker&menuid='+rec.taxon_id,(rec.preferred_common_name||rec.name))},
+            {innerHTML:furl('./species_counts.html?params=yard&component=hiker&menuid='+rec.id,(rec.preferred_common_name||rec.name))},
             {innerText:rec.rank},
          ];         
 
