@@ -81,6 +81,26 @@ function buildSpeciesName( brow, rec, url ) {
     faddelem('span', a, { style: { fontStyle: 'italic' }, textContent: '(' + (rec.name || '') + ')' });
 }
 
+function buildIconList( config ) {
+
+    let urlState = appState;
+    urlState = setQ(urlState, 'birds');
+  
+    let url  = './t.html'+buildParameterList(appState);
+    let utf8 = '&#129419;';
+
+    let link = document.createElement('a');
+
+    // Set the destination URL
+    link.href = url;
+    link.textContent = utf8;
+    link.style.cursor = 'pointer';
+    link.style.textDecoration = 'none';
+
+    document.body.appendChild(link);
+
+}
+  
 function buildMenu( config ) {
 
     // Create the main navbar container
@@ -119,6 +139,8 @@ function buildMenu( config ) {
 
     // Append the DOM nodes to the body
     faddelem('p', document.body).appendChild(navbar);
+
+    buildIconList(config);
 }
   
 function fresults(xobj) {
