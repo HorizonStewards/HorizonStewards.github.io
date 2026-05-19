@@ -269,6 +269,7 @@ async function gatherResources() {
       config  = await asyncGetConfiguration( json_path, getComponent(appState) );
 
       buildMenu(config); 
+      buildForm();
       console.log('config ' + JSON.stringify(config));
       console.log('full config title: ' + config.getFullTitle());
      
@@ -294,11 +295,7 @@ let apibase = 'https://api.inaturalist.org/v1/taxa/autocomplete';
 let apiurl = apibase+setupAPIParams(); 
 let apirefname = 'Choose Taxon'; 
 
-if( !p_q ) { 
-     buildForm(); 
-} else { 
-     buildForm(); 
-        
+if( p_q ) {         
      fetch(apiurl) 
           .then((response) => { 
              if (!response.ok) { 
