@@ -205,43 +205,41 @@ async function gatherResources() {
     }
 }
 
-(async () => {
-    let message = validateConfig(appState); 
+let message = validateConfig(appState); 
 
-    if( message ) { 
-        faddelem('p',document.body,{innerHTML:('<span id="error">⚠<br>' + message + '</span>')}); 
-        throw new Error(message); 
-    } else { 
-        // This will now correctly pause and halt the script if it throws
-        await gatherResources(); 
-    }
+if( message ) { 
+    faddelem('p',document.body,{innerHTML:('<span id="error">⚠<br>' + message + '</span>')}); 
+    throw new Error(message); 
+} else { 
+    // This will now correctly pause and halt the script if it throws
+    await gatherResources(); 
+}
 
-    // This code below will NO LONGER run if gatherResources() fails
-    let apibase = 'https://api.inaturalist.org/v1/taxa/autocomplete'; 
-    let apiurl = apibase+((winurlparams!='')?('?'+winurlparams):''); 
-    let apirefname = 'Choose Taxon'; 
+// This code below will NO LONGER run if gatherResources() fails
+let apibase = 'https://api.inaturalist.org/v1/taxa/autocomplete'; 
+let apiurl = apibase+((winurlparams!='')?('?'+winurlparams):''); 
+let apirefname = 'Choose Taxon'; 
 
-    if( !p_q ) { 
-        buildMenu(config); 
-        buildForm(); 
-    } else { 
-        buildMenu(config); 
-        buildForm(); 
+if( !p_q ) { 
+     buildMenu(config); 
+     buildForm(); 
+} else { 
+     buildMenu(config); 
+     buildForm(); 
         
-        fetch(apiurl) 
-            .then((response) => { 
-                if (!response.ok) { 
-                    throw new Error(response.status+' ('+response.statusText+') returned from '+response.url); 
-                }; 
-                return response.json(); 
-            }) 
-            .then((data) => { fresults(data); }) 
-            .catch((err) => { 
+     fetch(apiurl) 
+          .then((response) => { 
+             if (!response.ok) { 
+                 throw new Error(response.status+' ('+response.statusText+') returned from '+response.url); 
+             }; 
+             return response.json(); 
+          }) 
+           .then((data) => { fresults(data); }) 
+           .catch((err) => { 
                 console.error(err.message); 
                 faddelem('p',document.body,{innerText:'There was a problem retrieving data. Error '+err.message+'.'}); 
-            });
-    }
-})(); // The () at the end executes it immediately
+          });
+}
 
 </script>
 </body>
