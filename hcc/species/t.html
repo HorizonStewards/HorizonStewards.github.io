@@ -211,7 +211,7 @@ if( message ) {
     faddelem('p',document.body,{innerHTML:('<span id="error">&#9888;<br>' + message + '</span>')}); 
     throw new Error(message); 
 } else {
-    gatherResources(); 
+    try { gatherResources(); } catch (error) { throw error; }
 }
   
 let apibase    = 'https://api.inaturalist.org/v1/taxa/autocomplete';
