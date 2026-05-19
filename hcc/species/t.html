@@ -83,16 +83,14 @@ function buildSpeciesName( brow, rec, url ) {
 
 function buildIconList( config ) {
 
-      console.log('one '+JSON.stringify(config));
       if( config.taxa && config.taxa.length > 0 ) {
-        console.log('two');
           for( let i=0; i<config.taxa.length; i++ ) {
-            console.log('three');
 
                let urlState = appState;
                urlState = setMenuId( urlState, config.taxa[i].taxonId );
                urlState = setMenuName( urlState, config.taxa[i].taxonName );
                urlState = setRank( urlState, 'order' );
+               urlState = setQ( urlState, '' );
   
                let url  = './t.html'+buildParameterList(urlState);
                let utf8 = config.taxa[i].icon;
