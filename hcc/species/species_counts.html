@@ -54,8 +54,8 @@ function buildMenu( results, config ) {
     if( getComponent(appState) === COMPONENT_YARD ) {
         homeState = setComponent(homeState, COMPONENT_YARD);
         homeUrl = './observer_counts.html';
-    } else if( getComponent(appState) === 'search' ) {
-        homeState = setComponent(homeState, 'search');
+    } else if( getComponent(appState) === COMPONENT_SEARCH ) {
+        homeState = setComponent(homeState, COMPONENT_SEARCH );
         homeUrl = './choose_taxon.html';
     } else {
         homeUrl = '../admin/dashboard.html';
