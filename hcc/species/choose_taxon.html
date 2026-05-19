@@ -40,13 +40,6 @@ input[type=submit]:hover {
   background-color: #171717;
 }
 
-/*div {
-  min-width: 355px;
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 10px;
-}*/
-
 </style>
 </head>
 
@@ -65,6 +58,9 @@ let p_taxon_id  = winurlparams.get('taxon_id') || '';
 let p_params    = winurlparams.get('params') || '';
 let p_q         = winurlparams.get('q') || '';
 let p_hide_dash = winurlparams.get('hide_dash') || '';
+
+let config   = '';
+appState       = buildStateFromParams(winurlparams);
 
 winurlparams.delete('options');
 let p_idextra_ = winurlparams.get('idextra_user_id')?.split(',') || [];;
@@ -85,7 +81,7 @@ function buildSpeciesName( brow, rec, url ) {
     faddelem('span', a, { style: { fontStyle: 'italic' }, textContent: '(' + (rec.name || '') + ')' });
 }
 
-function buildMenu(  ) {
+function buildMenu( config ) {
 
     // Create the main navbar container
     let navbar = document.createElement('div');
@@ -93,8 +89,35 @@ function buildMenu(  ) {
 
     let baseUrl = window.location.origin + window.location.pathname;
 
-    let title = 'Horizon Taxon Search';        
-    buildNavTitle( navbar, title );
+    buildNavTitle( navbar, 'Taxon Search' );
+
+  /*
+    // if place filters were set in the configuration
+    if( config.places && config.places.length > 0 ) {
+        buildNavDDPlace( navbar, CONST_PLACE, results, config, baseUrl );
+    }
+
+    // if taxon filters were set in the configuration
+    if( config.taxa && config.taxa.length > 0 ) {
+        let dd_name   = getPlantMenuName(appState) || CONST_CUSTOM_PLANT;  
+        buildNavDDTaxa( navbar, dd_name, results, config, baseUrl );
+    }
+   
+    // if observation field filters were set in the configuration
+    if( config.ddObsFields && config.ddObsFields.length > 0 ) {
+        let dd_name   = config.ddObsFields[0].ddName;  // just take the first one. 
+        let menu_name = getFieldValue(appState)||dd_name;
+
+        buildNavDDObsFields( navbar, menu_name, results, config, baseUrl );
+    }
+    */
+
+    // Build the Home Link
+    let homeState = clearForDashParams(appState);
+    let homeUrl = '../admin/dashboard.html';
+    buildNavHome( navbar, homeUrl, homeState );
+
+    // Append the DOM nodes to the body
     faddelem('p', document.body).appendChild(navbar);
 }
   
@@ -134,7 +157,7 @@ function fresults(xobj) {
       for (let i=0; i<length; i++) {
          let brow = faddelem('tr',tbody);
          let rec  = results[i];
-         let url  = './species_counts.html?params=yard&component=hiker&action=choose&menuid='+rec.id+'&q='+p_q;
+         let url  = './species_counts.html'+buildParameterList(appState)+'&action=choose&menuid='+rec.id+'&q='+p_q;
 
          // Column: Index
          faddelem('td', brow, { textContent: i + 1 });
@@ -152,37 +175,88 @@ function fresults(xobj) {
 };
 
 function buildForm() {
-  faddelem('p',document.body,{innerHTML:('<div>' +
-                                           '<form action=./choose_taxon.html>' +
-                                              //'<label for="fname">Taxon Search</label>' +
-                                              '<input type="text" id="pname" name="q" placeholder="Enter a full or partial taxon name..">' +   
-                                              '<input type="submit" value="Search">' +
-                                           '</form>' +
-                                         '</div>')});
+  // Keep the action clean without parameters
+  let formHTML = '<div><form action="./choose_taxon.html" method="GET">';
+
+  // Safely parse parameters and turn them into hidden input fields 
+  let paramsString = buildParameterList(appState); // e.g., "?garden=front&user=1"
+  if( paramsString.startsWith('?')) {
+      paramsString = paramsString.substring(1);
+  }
+
+  if (paramsString) {
+      let urlParams = new URLSearchParams(paramsString);
+      for( let [key, value] of urlParams.entries()) {
+           formHTML += `<input type="hidden" name="${key}" value="${value}">`;
+      }
+  }
+
+  // Add visible search input and submit button
+  formHTML += '<input type="text" id="pname" name="q" placeholder="Enter a full or partial taxon name..">';
+  formHTML += '<input type="submit" value="Search">'; 
+  formHTML += '</form></div>';
+
+  // Render it to the page
+  faddelem('p', document.body, { innerHTML: formHTML });  
 }
   
-let apibase    = 'https://api.inaturalist.org/v1/taxa/autocomplete';
-let apiurl     = apibase+((winurlparams!='')?('?'+winurlparams):'');
-let apirefname = 'Choose Taxon';
+</script>
 
-if( !p_q ) {
-  faddelem('h2',document.body,{innerText:'Taxon Search'});
-  buildForm();
-} else {
-   faddelem('h2',document.body,{innerText:'Taxon Search'});
-   buildForm();
-   //faddelem('p',document.body,{innerText:'List of taxons found.  Select one to view plants of that taxon.'});
-   fetch(apiurl)
-      .then((response) => {
-         if (!response.ok) { throw new Error(response.status+' ('+response.statusText+') returned from '+response.url); };
-         return response.json();
-      })
-      .then((data) => { fresults(data); })
-      .catch((err) => {
-         console.error(err.message);
-         faddelem('p',document.body,{innerText:'There was a problem retrieving data. Error '+err.message+'.'});
-      })
-};
+<script type="text/javascript"   src="../core/js/ConfigManager.js"></script>
+
+<script>
+async function gatherResources() {
+  let json_path = json_root + getParams(appState);
+ 
+  try {
+
+      // Await the result of getObservations() and store the actual data
+      config  = await asyncGetConfiguration( json_path, getComponent(appState) );
+
+      console.log('full config title: ' + config.getFullTitle());
+     
+    } catch (error) {
+      console.error("An error occurred:", error);
+      faddelem('p',document.body,{innerHTML:('<span id="error">&#9888;<br>' + error.message + '</span>')}); 
+      throw error;
+    }
+}
+
+let message = validateConfig(appState); 
+
+if( message ) { 
+    faddelem('p',document.body,{innerHTML:('<span id="error">⚠<br>' + message + '</span>')}); 
+    throw new Error(message); 
+} else { 
+    // This will now correctly pause and halt the script if it throws
+    gatherResources(); 
+}
+
+// This code below will NO LONGER run if gatherResources() fails
+let apibase = 'https://api.inaturalist.org/v1/taxa/autocomplete'; 
+let apiurl = apibase+((winurlparams!='')?('?'+winurlparams):''); 
+let apirefname = 'Choose Taxon'; 
+
+if( !p_q ) { 
+     buildMenu(config); 
+     buildForm(); 
+} else { 
+     buildMenu(config); 
+     buildForm(); 
+        
+     fetch(apiurl) 
+          .then((response) => { 
+             if (!response.ok) { 
+                 throw new Error(response.status+' ('+response.statusText+') returned from '+response.url); 
+             }; 
+             return response.json(); 
+          }) 
+           .then((data) => { fresults(data); }) 
+           .catch((err) => { 
+                console.error(err.message); 
+                faddelem('p',document.body,{innerText:'There was a problem retrieving data. Error '+err.message+'.'}); 
+          });
+}
 
 </script>
 </body>
