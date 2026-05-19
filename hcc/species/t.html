@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+<meta name="viewport" content="width=device-width, minimum-scale=1.0" />
+<meta name="apple-mobile-web-app-title" content="HCC Taxon Search" />
+<meta name="description" content="HCC Taxon Search" />
+<link rel="apple-touch-icon" sizes="180x180" href="../core/assets/plant-icon-192.png" />
+<link rel="icon"    type="image/png"         href="../core/assets/plant-icon-96.png" sizes="96x96" />
+<link rel="icon"    type="image/svg+xml"     href="../core/assets/plant-icon-96.svg" />
+<link rel="shortcut icon"                    href="../core/assets/plant-club.ico" />
+<link rel="manifest"                         href="../core/assets/plant_club.webmanifest" />
+<link rel="stylesheet" type="text/css"       href="../core/css/core.css" />
+<title>HCC Taxon Search</title>
+
+<style>
+input[type=text], select {
+  width: 95%;
+  padding: 6px 10px;
+  margin: 4px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: fit-content;
+  background-color: #333;
+  color: white;
+  padding: 7px 10px;
+  margin: 4px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #171717;
+}
+
+</style>
+</head>
+
+<body>
+   
+<script type="text/javascript"   src='../core/js/common_functions.js'> </script>
+<script type="text/javascript"   src='../core/js/store.js'> </script>
+   
+<script>
+let winurlstr = window.location.href;
+let winurlsearchstr = window.location.search;
+let winurlexsearchstr = winurlstr.replace(winurlsearchstr,'');
+let winurlparams = new URLSearchParams(winurlsearchstr.substring(1));
+let p_options   = winurlparams.get('options') || [];
+let p_taxon_id  = winurlparams.get('taxon_id') || '';
+let p_params    = winurlparams.get('params') || '';
+let p_q         = winurlparams.get('q') || '';
+let p_hide_dash = winurlparams.get('hide_dash') || '';
+
+winurlparams.delete('options');
+let p_idextra_ = winurlparams.get('idextra_user_id')?.split(',') || [];;
+winurlparams.delete('idextra_user_id');
+let p_photo_curl_filename_prefix = winurlparams.get('photo_curl_filename_prefix')?.split(',') || ['photo_id'];
+winurlparams.delete('photo_curl_filename_prefix');
+
+// Species Counts Table Column - Name
+function buildSpeciesName( brow, rec, url ) {
+    let tdName = faddelem('td', brow);
+    let a = faddelem('a', tdName, { href: url });
+    
+    // Common Name 
+    faddelem('span', a, { style: { fontSize: 'larger' }, textContent: (rec.preferred_common_name || '').toLowerCase() });
+    
+    // Scientific Name 
+    let br = faddelem('br', a);
+    faddelem('span', a, { style: { fontStyle: 'italic' }, textContent: '(' + (rec.name || '') + ')' });
+}
+
+function buildMenu(  ) {
+
+    // Create the main navbar container
+    let navbar = document.createElement('div');
+    navbar.className = 'navbar v2-menu';
+
+    let baseUrl = window.location.origin + window.location.pathname;
+
+    buildNavTitle( navbar, 'Taxon Search' );
+    faddelem('p', document.body).appendChild(navbar);
+
+  /*
+    // if place filters were set in the configuration
+    if( config.places && config.places.length > 0 ) {
+        buildNavDDPlace( navbar, CONST_PLACE, results, config, baseUrl );
+    }
+
+    // if taxon filters were set in the configuration
+    if( config.taxa && config.taxa.length > 0 ) {
+        let dd_name   = getPlantMenuName(appState) || CONST_CUSTOM_PLANT;  
+        buildNavDDTaxa( navbar, dd_name, results, config, baseUrl );
+    }
+   
+    // if observation field filters were set in the configuration
+    if( config.ddObsFields && config.ddObsFields.length > 0 ) {
+        let dd_name   = config.ddObsFields[0].ddName;  // just take the first one. 
+        let menu_name = getFieldValue(appState)||dd_name;
+
+        buildNavDDObsFields( navbar, menu_name, results, config, baseUrl );
+    }
+    */
+
+    // Build the Home Link
+    let homeState = clearForDashParams(appState);
+    let homeUrl = '../admin/dashboard.html';
+    buildNavHome( navbar, homeUrl, homeState );
+
+    // Append the DOM nodes to the body
+    faddelem('p', document.body).appendChild(navbar);
+}
+  
+function fresults(xobj) {
+
+   buildMenu();
+
+   let results = xobj.results;
+   if (results) {
+      let total_results = xobj.total_results;
+      let per_page = xobj.per_page;
+      let page_curr = xobj.page;
+      let page_max = Math.ceil(total_results/per_page);
+      let page_prev = ((page_curr>1)?page_curr-1:null);
+      let page_next = ((page_curr<page_max)?page_curr+1:null);
+      let toggle_args = '';
+      let args = '';
+
+      let table = faddelem('table',document.body,{id:'main'});
+      let thead = faddelem('thead',table);
+      let hrow = faddelem('tr',thead);
+      let labels = [
+            {innerText:('#')},
+            {innerText:'Taxon Name'},   
+            {innerText:'Rank'},   
+      ];
+
+      faddelems('th',hrow,labels);
+
+      let tbody = faddelem('tbody',table);
+
+      let length = 0;
+      if( results.length > 10 ) {
+          length = 10;
+      } else {
+          length = results.length;
+      }
+      
+      for (let i=0; i<length; i++) {
+         let brow = faddelem('tr',tbody);
+         let rec  = results[i];
+         let url  = './species_counts.html?params=yard&component=hiker&action=choose&menuid='+rec.id+'&q='+p_q;
+
+         // Column: Index
+         faddelem('td', brow, { textContent: i + 1 });
+
+         // Column: Taxon Name 
+         buildSpeciesName( brow, rec, url );
+
+         // Column: Rank
+         faddelem('td', brow, { textContent: rec.rank });
+
+      };
+
+   }
+   else { faddelem('p',document.body,{innerText:'No results returned.'}); };
+};
+
+function buildForm() {
+  faddelem('p',document.body,{innerHTML:('<div>' +
+                                           '<form action=./choose_taxon.html>' +
+                                              //'<label for="fname">Taxon Search</label>' +
+                                              '<input type="text" id="pname" name="q" placeholder="Enter a full or partial taxon name..">' +   
+                                              '<input type="submit" value="Search">' +
+                                           '</form>' +
+                                         '</div>')});
+}
+  
+let apibase    = 'https://api.inaturalist.org/v1/taxa/autocomplete';
+let apiurl     = apibase+((winurlparams!='')?('?'+winurlparams):'');
+let apirefname = 'Choose Taxon';
+
+if( !p_q ) {
+  faddelem('h2',document.body,{innerText:'Taxon Search'});
+  buildForm();
+} else {
+   faddelem('h2',document.body,{innerText:'Taxon Search'});
+   buildForm();
+   //faddelem('p',document.body,{innerText:'List of taxons found.  Select one to view plants of that taxon.'});
+   fetch(apiurl)
+      .then((response) => {
+         if (!response.ok) { throw new Error(response.status+' ('+response.statusText+') returned from '+response.url); };
+         return response.json();
+      })
+      .then((data) => { fresults(data); })
+      .catch((err) => {
+         console.error(err.message);
+         faddelem('p',document.body,{innerText:'There was a problem retrieving data. Error '+err.message+'.'});
+      })
+};
+
+</script>
+</body>
+
+</html>
