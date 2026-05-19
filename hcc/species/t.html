@@ -205,39 +205,43 @@ async function gatherResources() {
     }
 }
 
-let message = validateConfig(appState);
- 
-if( message ) {
-    faddelem('p',document.body,{innerHTML:('<span id="error">&#9888;<br>' + message + '</span>')}); 
-    throw new Error(message); 
-} else {
-    await gatherResources(); 
-}
-  
-let apibase    = 'https://api.inaturalist.org/v1/taxa/autocomplete';
-let apiurl     = apibase+((winurlparams!='')?('?'+winurlparams):'');
-let apirefname = 'Choose Taxon';
+(async () => {
+    let message = validateConfig(appState); 
 
-if( !p_q ) {
-    buildMenu(config);
-    //faddelem('h2',document.body,{innerText:'Taxon Search'});
-    buildForm();
-} else {
-    buildMenu(config);
-    //faddelem('h2',document.body,{innerText:'Taxon Search'});
-    buildForm();
-    //faddelem('p',document.body,{innerText:'List of taxons found.  Select one to view plants of that taxon.'});
-    fetch(apiurl)
-       .then((response) => {
-          if (!response.ok) { throw new Error(response.status+' ('+response.statusText+') returned from '+response.url); };
-          return response.json();
-       })
-       .then((data) => { fresults(data); })
-       .catch((err) => {
-          console.error(err.message);
-          faddelem('p',document.body,{innerText:'There was a problem retrieving data. Error '+err.message+'.'});
-       })
-};
+    if( message ) { 
+        faddelem('p',document.body,{innerHTML:('<span id="error">⚠<br>' + message + '</span>')}); 
+        throw new Error(message); 
+    } else { 
+        // This will now correctly pause and halt the script if it throws
+        await gatherResources(); 
+    }
+
+    // This code below will NO LONGER run if gatherResources() fails
+    let apibase = 'https://api.inaturalist.org/v1/taxa/autocomplete'; 
+    let apiurl = apibase+((winurlparams!='')?('?'+winurlparams):''); 
+    let apirefname = 'Choose Taxon'; 
+
+    if( !p_q ) { 
+        buildMenu(config); 
+        buildForm(); 
+    } else { 
+        buildMenu(config); 
+        buildForm(); 
+        
+        fetch(apiurl) 
+            .then((response) => { 
+                if (!response.ok) { 
+                    throw new Error(response.status+' ('+response.statusText+') returned from '+response.url); 
+                }; 
+                return response.json(); 
+            }) 
+            .then((data) => { fresults(data); }) 
+            .catch((err) => { 
+                console.error(err.message); 
+                faddelem('p',document.body,{innerText:'There was a problem retrieving data. Error '+err.message+'.'}); 
+            });
+    }
+})(); // The () at the end executes it immediately
 
 </script>
 </body>
