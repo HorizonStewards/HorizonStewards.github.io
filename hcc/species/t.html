@@ -83,8 +83,11 @@ function buildSpeciesName( brow, rec, url ) {
 
 function buildIconList( config ) {
 
+      console.log('one');
       if( config.taxa && config.taxa.length > 0 ) {
+        console.log('two');
           for( let i=0; i<config.taxa.length; i++ ) {
+            console.log('three');
 
                let urlState = appState;
                urlState = setTaxonId( urlState, config.taxa[i].taxonId );
@@ -100,7 +103,7 @@ function buildIconList( config ) {
                link.innerHTML = utf8;
                link.style.cursor = 'pointer';
                link.style.textDecoration = 'none';
-               link.style.fontSize = '24px';
+               link.style.fontSize = '18px';
   
                document.body.appendChild(link);                 
           }
