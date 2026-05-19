@@ -52,7 +52,7 @@ function buildMenu( results, config ) {
     let homeState = clearForDashParams(appState);
     let homeUrl   = '';
     if( p_action === 'choose' ) {
-        homeUrl = './choose_taxon.html?params='+getParams(appState)+'&component='+getComponent(appState);
+        homeUrl = './choose_taxon.html'+buildParameterList(appState);
     } else {
         if( getComponent(appState) === COMPONENT_YARD ) {
             homeState = setComponent(homeState, COMPONENT_YARD);
