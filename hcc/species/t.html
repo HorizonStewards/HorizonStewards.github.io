@@ -175,16 +175,30 @@ function fresults(xobj) {
 };
 
 function buildForm() {
-  faddelem('p', document.body, {
-    innerHTML: `
-        <div>
-            <form action="./t.html${buildParameterList(appState)}">
-                <input type="text" id="pname" name="q" placeholder="Enter a full or partial taxon name..">
-                <input type="submit" value="Search">
-            </form>
-        </div>
-    `
-  });  
+  // 1. Keep the action clean without parameters
+  let formHTML = '<div><form action="./t.html" method="GET">';
+
+  // 2. Safely parse your parameters and turn them into hidden input fields 
+  let paramsString = buildParameterList(appState); // e.g., "?garden=front&user=1"
+  if( paramsString.startsWith('?')) {
+      paramsString = paramsString.substring(1);
+  }
+
+  if (paramsString) {
+      let urlParams = new URLSearchParams(paramsString);
+      for( let [key, value] of urlParams.entries()) {
+           formHTML += `<input type="hidden" name="${key}" value="${value}">`;
+      }
+  }
+
+  // 3. Add your visible search input and submit button
+  formHTML += '<input type="text" id="pname" name="q" placeholder="Enter a full or partial taxon name..">';
+  formHTML += '<input type="submit" value="Search">'; 
+  formHTML += '</form></div>';
+
+  // 4. Render it to the page
+  faddelem('p', document.body, { innerHTML: formHTML });  
+  
   /*
   let url = './t.html'+buildParameterList(appState);
   
