@@ -187,11 +187,11 @@ let apirefname = 'Choose Taxon';
 
 if( !p_q ) {
     buildMenu();
-    faddelem('h2',document.body,{innerText:'Taxon Search'});
+    //faddelem('h2',document.body,{innerText:'Taxon Search'});
     buildForm();
 } else {
     buildMenu();
-    faddelem('h2',document.body,{innerText:'Taxon Search'});
+    //faddelem('h2',document.body,{innerText:'Taxon Search'});
     buildForm();
     //faddelem('p',document.body,{innerText:'List of taxons found.  Select one to view plants of that taxon.'});
     fetch(apiurl)
