@@ -44,10 +44,12 @@ const CONST_GARDEN_DESC    = 'Interactions between plants and animals by plant.'
 const CONST_COLONY_DESC    = 'Lists the colonies of plants where collection has occurred.  Shows the child colonies established from each parent colony.';
 const CONST_HIKER_DESC   = 'Species encountered during this trek.';
 const CONST_OBSERVERS_DESC   = 'Interactions between plants and animals by observer.';
+const CONST_SEARCH_DESC  = 'Search / filter all observations at Horizon by taxon.';
 const CONST_PLANT_VALUE  = 'Plants';
 const CONST_COLONIES     = 'Colonies';
 const CONST_BIODIVERSITY = 'Biodiversity';
 const CONST_THRU_HIKES   = 'Thru Hikes';
+const CONST_SEARCH       = 'Taxon Search';
 const CONST_ART          = 'Art & Journaling';
 const CONST_OBSERVERS    = 'Observers';
 
@@ -118,6 +120,14 @@ function buildPage( configManager ) {
  
               for( let i=0; i<configManager.configurations.length; i++ ) {
                    let config = configManager.configurations[i];
+
+                   if( config.component === 'search') {
+                       let url  = '../species/choose_taxon.html';
+                       let icon = config.utf8 || CONST_LEAF_UTF8;
+                       let name = config.studyTitle || CONST_SEARCH;
+                       let desc = config.studyDesc || CONST_SEARCH_DESC;
+                       buildRow( 'hiker', icon, name, desc, tbody, url );
+                   }
 
                    if( config.component === 'hiker') {
                        let url  = '../species/species_counts.html';
