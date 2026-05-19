@@ -212,7 +212,7 @@ if( message ) {
     throw new Error(message); 
 } else { 
     // This will now correctly pause and halt the script if it throws
-    await gatherResources(); 
+    gatherResources(); 
 }
 
 // This code below will NO LONGER run if gatherResources() fails
