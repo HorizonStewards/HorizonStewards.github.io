@@ -458,7 +458,7 @@ function getRankParam(state, param_nm)   {
   }
 }
 
-function getQ(state, param_nm)   { 
+function getQParam(state, param_nm)   { 
   let q = getQ(state);
   if( q ) { 
       return (param_nm + q);
