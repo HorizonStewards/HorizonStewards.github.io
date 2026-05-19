@@ -90,7 +90,8 @@ function buildIconList( config ) {
             console.log('three');
 
                let urlState = appState;
-               urlState = setTaxonId( urlState, config.taxa[i].taxonId );
+               urlState = setMenuId( urlState, config.taxa[i].taxonId );
+               urlState = setMenuName( urlState, config.taxa[i].taxonName );
                urlState = setRank( urlState, 'order' );
   
                let url  = './t.html'+buildParameterList(urlState);
@@ -191,7 +192,7 @@ function fresults(xobj) {
       for (let i=0; i<length; i++) {
          let brow = faddelem('tr',tbody);
          let rec  = results[i];
-         let url  = './species_counts.html'+buildParameterList(appState)+'&menuid='+rec.id;
+         let url  = './species_counts.html'+buildParameterList(appState);
 
          // Column: Index
          faddelem('td', brow, { textContent: i + 1 });
@@ -242,15 +243,10 @@ function buildForm() {
 function setupAPIParams( plantConfig ) {
    let api_params = '';
 
-   // if they click search, there will be a query (q).
-   // if they click an icon, the taxon_id will be populated.
-   if( getQ(appState) ) {
-       api_params += '?q='+getQ(appState);
-   } else {
-       api_params += '?taxon_id='+getTaxonId(appState);
-   }
- 
-   api_params += '&rank='+getRank(appState);
+   api_params += '?q='+getQ(appState);
+   
+   if( getMenuId(appState) ) { api_params += '&taxon_id='+getMenuId(appState); }
+   if( getRank(appState) )   { api_params += '&rank='+getRank(appState); }
 
    return api_params;
 }
