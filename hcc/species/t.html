@@ -175,6 +175,17 @@ function fresults(xobj) {
 };
 
 function buildForm() {
+  faddelem('p', document.body, {
+    innerHTML: `
+        <div>
+            <form action="./t.html${buildParameterList(appState)}">
+                <input type="text" id="pname" name="q" placeholder="Enter a full or partial taxon name..">
+                <input type="submit" value="Search">
+            </form>
+        </div>
+    `
+  });  
+  /*
   let url = './t.html'+buildParameterList(appState);
   
   faddelem('p',document.body,{innerHTML:('<div>' +
@@ -183,7 +194,7 @@ function buildForm() {
                                               '<input type="text" id="pname" name="q" placeholder="Enter a full or partial taxon name..">' +   
                                               '<input type="submit" value="Search">' +
                                            '</form>' +
-                                         '</div>')});
+                                         '</div>')});*/
 }
 </script>
 
