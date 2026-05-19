@@ -54,15 +54,17 @@ function buildMenu( results, config ) {
         let homeState = clearForDashParams(appState);
         homeState = setComponent(homeState, COMPONENT_YARD);
         homeUrl = './observer_counts.html';
+        buildNavHome( navbar, homeUrl, homeState );
     } else if( getComponent(appState) === COMPONENT_SEARCH ) {
         let homeState = clearForSearchParams(appState);
         homeState = setComponent(homeState, COMPONENT_SEARCH );
         homeUrl = './choose_taxon.html';
+        buildNavHome( navbar, homeUrl, homeState );
     } else {
         let homeState = clearForDashParams(appState);
         homeUrl = '../admin/dashboard.html';
+        buildNavHome( navbar, homeUrl, homeState );
     }
-    buildNavHome( navbar, homeUrl, homeState );
 
     // Append the DOM nodes to the body
     faddelem('p', document.body).appendChild(navbar);
