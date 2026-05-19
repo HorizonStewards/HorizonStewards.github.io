@@ -51,15 +51,13 @@ function buildMenu( results, config ) {
     // Build the Home Link
     let homeState = clearForDashParams(appState);
     let homeUrl   = '';
-    if( p_action === 'choose' ) {
+    if( getComponent(appState) === COMPONENT_YARD ) {
+        homeState = setComponent(homeState, COMPONENT_YARD);
+        homeUrl = './observer_counts.html';
+    } else if( getComponent(appState) === 'search' ) {
         homeUrl = './choose_taxon.html';
     } else {
-        if( getComponent(appState) === COMPONENT_YARD ) {
-            homeState = setComponent(homeState, COMPONENT_YARD);
-            homeUrl = './observer_counts.html';
-        } else {
-            homeUrl = '../admin/dashboard.html';
-        }
+        homeUrl = '../admin/dashboard.html';
     }
     buildNavHome( navbar, homeUrl, homeState );
 
