@@ -201,6 +201,7 @@ function fresults(xobj) {
 function buildForm() {
   let urlState = appState;
   urlState = setQ(urlState, '');
+  urlState = setRank(urlState, '');
   
   // Keep the action clean without parameters
   let formHTML = '<div><form action="./t.html" method="GET">';
