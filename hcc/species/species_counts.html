@@ -49,15 +49,17 @@ function buildMenu( results, config ) {
     buildNavDDShow( navbar, menu_name, results, config, baseUrl );
 
     // Build the Home Link
-    let homeState = clearForDashParams(appState);
     let homeUrl   = '';
     if( getComponent(appState) === COMPONENT_YARD ) {
+        let homeState = clearForDashParams(appState);
         homeState = setComponent(homeState, COMPONENT_YARD);
         homeUrl = './observer_counts.html';
     } else if( getComponent(appState) === COMPONENT_SEARCH ) {
+        let homeState = clearForSearchParams(appState);
         homeState = setComponent(homeState, COMPONENT_SEARCH );
         homeUrl = './choose_taxon.html';
     } else {
+        let homeState = clearForDashParams(appState);
         homeUrl = '../admin/dashboard.html';
     }
     buildNavHome( navbar, homeUrl, homeState );
