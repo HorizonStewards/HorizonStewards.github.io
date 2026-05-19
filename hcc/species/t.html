@@ -293,7 +293,7 @@ let apibase = 'https://api.inaturalist.org/v1/taxa/autocomplete';
 let apiurl = apibase+setupAPIParams(); 
 let apirefname = 'Choose Taxon'; 
 
-if( p_q ) {         
+if( getMenuName(appState) || getQ(appState) ) {         
      fetch(apiurl) 
           .then((response) => { 
              if (!response.ok) { 
