@@ -907,8 +907,6 @@ function clearForSearchParams(state) {
   urlState = setPlaceMenuId(urlState, '');
   urlState = setPlaceMenuName(urlState, '');
   urlState = setGardenListValue(urlState, '');
-  urlState = setMenuId(urlState, '');
-  urlState = setMenuName(urlState, '');
   urlState = setTaxonDD(urlState, '');
   urlState = setObsId(urlState, '');
   urlState = setObsDate(urlState, '');
