@@ -55,6 +55,7 @@ function buildMenu( results, config ) {
         homeState = setComponent(homeState, COMPONENT_YARD);
         homeUrl = './observer_counts.html';
     } else if( getComponent(appState) === 'search' ) {
+        homeState = setComponent(homeState, 'search');
         homeUrl = './choose_taxon.html';
     } else {
         homeUrl = '../admin/dashboard.html';
