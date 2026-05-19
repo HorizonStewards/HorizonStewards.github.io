@@ -190,7 +190,11 @@ function fresults(xobj) {
       for (let i=0; i<length; i++) {
          let brow = faddelem('tr',tbody);
          let rec  = results[i];
-         let url  = './species_counts.html'+buildParameterList(appState);
+
+         let urlState = appState;
+         urlState = setMenuId( urlState, rec.id );
+         urlState = setMenuName( urlState, rec.preferred_common_name || rec.name );
+         let url  = './species_counts.html'+buildParameterList(urlState);
 
          // Column: Index
          faddelem('td', brow, { textContent: i + 1 });
