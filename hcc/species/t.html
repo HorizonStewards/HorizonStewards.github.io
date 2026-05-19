@@ -83,7 +83,7 @@ function buildSpeciesName( brow, rec, url ) {
 
 function buildIconList( config ) {
 
-      console.log('one '+config);
+      console.log('one '+JSON.stringify(config));
       if( config.taxa && config.taxa.length > 0 ) {
         console.log('two');
           for( let i=0; i<config.taxa.length; i++ ) {
