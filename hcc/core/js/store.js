@@ -36,6 +36,7 @@ const ATTRIBUTE_OBSDATE         = 'obsdate';
 const ATTRIBUTE_ACTIVITYFILTER  = 'activityfilter';
 const ATTRIBUTE_FIELDNAME       = 'fieldname';
 const ATTRIBUTE_FIELDVALUE      = 'fieldvalue';
+const ATTRIBUTE_Q               = 'q';
 const ATTRIBUTE_PAGE            = 'page';
 const ATTRIBUTE_PER_PAGE        = 'per_page';
 
