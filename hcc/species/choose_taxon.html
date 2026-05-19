@@ -175,11 +175,14 @@ function fresults(xobj) {
 };
 
 function buildForm() {
+  let urlState = appState;
+  urlState = setQ(urlState, '');
+  
   // Keep the action clean without parameters
   let formHTML = '<div><form action="./choose_taxon.html" method="GET">';
 
   // Safely parse parameters and turn them into hidden input fields 
-  let paramsString = buildParameterList(appState); // e.g., "?garden=front&user=1"
+  let paramsString = buildParameterList(urlState); // e.g., "?garden=front&user=1"
   if( paramsString.startsWith('?')) {
       paramsString = paramsString.substring(1);
   }
