@@ -37,6 +37,7 @@ const ATTRIBUTE_ACTIVITYFILTER  = 'activityfilter';
 const ATTRIBUTE_FIELDNAME       = 'fieldname';
 const ATTRIBUTE_FIELDVALUE      = 'fieldvalue';
 const ATTRIBUTE_Q               = 'q';
+const ATTRIBUTE_RANK            = 'rank';
 const ATTRIBUTE_PAGE            = 'page';
 const ATTRIBUTE_PER_PAGE        = 'per_page';
 
@@ -68,6 +69,7 @@ let appState = {
   [ATTRIBUTE_FIELDNAME]: '',
   [ATTRIBUTE_FIELDVALUE]: '',
   [ATTRIBUTE_Q]: '',
+  [ATTRIBUTE_RANK]: '',
   [ATTRIBUTE_PAGE]:      '',
   [ATTRIBUTE_PER_PAGE]:  ''
 
@@ -108,6 +110,7 @@ function createNewStateInstance(initialValues = {}) {
     [ATTRIBUTE_FIELDNAME]: '',
     [ATTRIBUTE_FIELDVALUE]: '',
     [ATTRIBUTE_Q]: '',
+    [ATTRIBUTE_RANK]: '',
     [ATTRIBUTE_PAGE]:      '',
     [ATTRIBUTE_PER_PAGE]:  ''
   };
@@ -221,6 +224,7 @@ function getActivityFilter(state)  { return (getAttribute(state, ATTRIBUTE_ACTIV
 function getFieldName(state)       { return (getAttribute(state, ATTRIBUTE_FIELDNAME)); }
 function getFieldValue(state)      { return (getAttribute(state, ATTRIBUTE_FIELDVALUE)); }
 function getQ(state)               { return (getAttribute(state, ATTRIBUTE_Q)); }
+function getRank(state)            { return (getAttribute(state, ATTRIBUTE_RANK)); }
 function getPage(state)            { return (getAttribute(state, ATTRIBUTE_PAGE)); }
 function getPerPage(state)         { return (getAttribute(state, ATTRIBUTE_PER_PAGE)); }
 
@@ -255,6 +259,7 @@ function setActivityFilter(state, value)  { return (setAttribute(state, ATTRIBUT
 function setFieldName(state, value)       { return (setAttribute(state, ATTRIBUTE_FIELDNAME, value)); }
 function setFieldValue(state, value)      { return (setAttribute(state, ATTRIBUTE_FIELDVALUE, value)); }
 function setQ(state, value)               { return (setAttribute(state, ATTRIBUTE_Q, value)); }
+function setRank(state, value)            { return (setAttribute(state, ATTRIBUTE_RANK, value)); }
 function setPage(state, value)            { return (setAttribute(state, ATTRIBUTE_PAGE, value)); }
 function setPerPage(state, value)         { return (setAttribute(state, ATTRIBUTE_PER_PAGE, value)); }
 
@@ -439,6 +444,15 @@ function getFieldVaueParam(state, param_nm)   {
   let field_value = getFieldValue(state);
   if( field_value ) { 
       return (param_nm + field_value);
+  } else {
+      return '';
+  }
+}
+
+function getRankParam(state, param_nm)   { 
+  let rank = getRank(state);
+  if( rank ) { 
+      return (param_nm + rank);
   } else {
       return '';
   }
@@ -862,6 +876,7 @@ function clearForDashParams(state) {
   urlState = setFieldName(urlState, '');
   urlState = setFieldValue(urlState, '');
   urlState = setQ(urlState, '');
+  urlState = setRank(urlState, '');
   urlState = setStudyTitle(urlState, '');
   urlState = setActivityFilter(urlState, '');
 
