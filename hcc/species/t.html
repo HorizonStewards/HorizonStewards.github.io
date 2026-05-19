@@ -175,8 +175,10 @@ function fresults(xobj) {
 };
 
 function buildForm() {
+  let url = './t.html'+buildParameterList(appState);
+  
   faddelem('p',document.body,{innerHTML:('<div>' +
-                                           '<form action="./t.html'+buildParameterList(appState)+'" >' +
+                                           '<form action="'+url+'" >' +
                                               //'<label for="fname">Taxon Search</label>' +
                                               '<input type="text" id="pname" name="q" placeholder="Enter a full or partial taxon name..">' +   
                                               '<input type="submit" value="Search">' +
