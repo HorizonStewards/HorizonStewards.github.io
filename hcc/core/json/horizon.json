@@ -16,7 +16,15 @@
     },
     { 
         "component": "search",                "utf8": "&#x2299;",
-        "project": "157918"
+        "project": "157918",
+        "taxa":
+            [
+              { "taxon_name": "birds",       "taxon_id": "3",     "icon": "&#128038;" }, 
+              { "taxon_name": "amphibians",  "taxon_id": "20978", "icon": "&#128056;" }, 
+              { "taxon_name": "butterflies", "taxon_id": "47157", "icon": "&#129419;" }, 
+              { "taxon_name": "beetles",     "taxon_id": "47208", "icon": "&#129714;" },
+              { "taxon_name": "bees",        "taxon_id": "47222", "icon": "&#128029;" }
+            ]
     },
     {
         "component": "studies",               "project": "157918",        "utf8": "&#128038;",
