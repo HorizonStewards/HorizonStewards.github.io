@@ -869,6 +869,47 @@ function clearForDashParams(state) {
 }
 
 /*
+ * Used to clean up the state when returning to taxon search. 
+ * @param {object} state The current application state object.
+ * @returns {object} a copy with new values stored on a new state.
+ */
+function clearForSearchParams(state) {
+  let urlState = state;  
+
+  urlState = setPlace(urlState, '');
+  urlState = setProject(urlState, '');
+  urlState = setStudyTitle(urlState, '');
+  urlState = setUser(urlState, '');
+  urlState = setGarden(urlState, '');
+  urlState = setComponent(urlState, '');
+  urlState = setPlantId(urlState, '');
+  urlState = setPlantName(urlState, '');
+  urlState = setTaxonId(urlState, ''); 
+  urlState = setTaxonName(urlState, '');
+  urlState = setLSTaxonId( urlState, '');
+  urlState = setPlantMenuId(urlState, '');
+  urlState = setPlantMenuName(urlState, '');
+  urlState = setPlaceMenuId(urlState, '');
+  urlState = setPlaceMenuName(urlState, '');
+  urlState = setGardenListValue(urlState, '');
+  urlState = setMenuId(urlState, '');
+  urlState = setMenuName(urlState, '');
+  urlState = setTaxonDD(urlState, '');
+  urlState = setObsId(urlState, '');
+  urlState = setObsDate(urlState, '');
+  urlState = setPage(urlState, '');
+  urlState = setPerPage(urlState, '');
+  urlState = setActivityFilter(urlState, '');
+  urlState = setFieldName(urlState, '');
+  urlState = setFieldValue(urlState, '');
+  urlState = setStudyTitle(urlState, '');
+  urlState = setActivityFilter(urlState, '');
+
+  return urlState;
+}
+
+
+/*
  * Used from the pages in the app that display the images grid (GardenGrid.html, ThruHikerGrid.html, etc.)
  * Used to reset params before rendering the back link in the grid menu.
  * @param {object} state The current application state object.
