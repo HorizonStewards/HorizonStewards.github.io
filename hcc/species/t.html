@@ -205,7 +205,7 @@ let message = validateGardenListParams(appState);
  
 if( message ) {
     faddelem('p',document.body,{innerHTML:('<span id="error">&#9888;<br>' + message + '</span>')}); 
-    throw;
+    throw new Error(message); 
 } else {
     gatherResources(); 
 }
