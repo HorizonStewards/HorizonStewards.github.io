@@ -85,6 +85,7 @@ function buildIconList( config ) {
 
     let urlState = appState;
     urlState = setQ(urlState, 'birds');
+    urlState = setRank(urlState, 'order');
   
     let url  = './t.html'+buildParameterList(urlState);
     let utf8 = '&#129419;';
@@ -225,6 +226,15 @@ function buildForm() {
   // Render it to the page
   faddelem('p', document.body, { innerHTML: formHTML });  
 }
+
+function setupAPIParams( plantConfig ) {
+   let api_params = '';
+ 
+   api_params += '?q='+getQ(appState);
+   api_params += '&rank='+getRank(appState);
+
+   return api_params;
+}
   
 </script>
 
@@ -260,7 +270,7 @@ if( message ) {
 
 // This code below will NO LONGER run if gatherResources() fails
 let apibase = 'https://api.inaturalist.org/v1/taxa/autocomplete'; 
-let apiurl = apibase+((winurlparams!='')?('?'+winurlparams):''); 
+let apiurl = apibase+setupAPIParams(); 
 let apirefname = 'Choose Taxon'; 
 
 if( !p_q ) { 
