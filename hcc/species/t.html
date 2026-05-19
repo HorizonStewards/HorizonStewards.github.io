@@ -268,6 +268,7 @@ async function gatherResources() {
       // Await the result of getObservations() and store the actual data
       config  = await asyncGetConfiguration( json_path, getComponent(appState) );
 
+      buildMenu(config); 
       console.log('config ' + JSON.stringify(config));
       console.log('full config title: ' + config.getFullTitle());
      
@@ -294,10 +295,8 @@ let apiurl = apibase+setupAPIParams();
 let apirefname = 'Choose Taxon'; 
 
 if( !p_q ) { 
-     buildMenu(config); 
      buildForm(); 
 } else { 
-     buildMenu(config); 
      buildForm(); 
         
      fetch(apiurl) 
