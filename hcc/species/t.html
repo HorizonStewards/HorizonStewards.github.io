@@ -86,7 +86,7 @@ function buildIconList( config ) {
     let urlState = appState;
     urlState = setQ(urlState, 'birds');
   
-    let url  = './t.html'+buildParameterList(appState);
+    let url  = './t.html'+buildParameterList(urlState);
     let utf8 = '&#129419;';
 
     let link = document.createElement('a');
