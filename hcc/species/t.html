@@ -243,8 +243,12 @@ function buildForm() {
 function setupAPIParams( plantConfig ) {
    let api_params = '';
 
-   api_params += '?q='+getQ(appState);
-   
+   if( getMenuName(appState) ) {
+       api_params += '?q='+getMenuName(appState);
+   } else {
+       api_params += '?q='+getQ(appState);
+   }
+  
    if( getMenuId(appState) ) { api_params += '&taxon_id='+getMenuId(appState); }
    if( getRank(appState) )   { api_params += '&rank='+getRank(appState); }
 
