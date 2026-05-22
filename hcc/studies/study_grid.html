@@ -120,7 +120,7 @@ function setupAPIParams( config ) {
 
     // if a filter has been chosen, get the filter api params
     if( getActivityFilter(appState) ) {
-        api_params += getFilterAPIParams(config);
+        api_params += getActivityFilter(appState);
     } 
 
     if( config.obsAPIParams ) { api_params += config.obsAPIParams; }
