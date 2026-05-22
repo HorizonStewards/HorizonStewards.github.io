@@ -66,7 +66,9 @@
         "field_name": "plant that the organism was found on",
         "dd_filters":
             [
-               { "dd_name": "Filters",  "dd_label": "Plant Interaction",    "api_params": "&field:plant+interaction=" }
+               { "dd_name": "Filters",  "dd_label": "All Interactions",           "api_params": "&field:plant+interaction=" },
+               { "dd_name": "Filters",  "dd_label": "Mating",                     "api_params": "&field:plant+interaction=mating" },
+               { "dd_name": "Filters",  "dd_label": "Nectaring / Pollinating",    "api_params": "&field:plant+interaction=nectaring+/+pollinating" }
             ]
     }
   ],
