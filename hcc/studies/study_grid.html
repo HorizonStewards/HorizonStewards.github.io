@@ -84,33 +84,48 @@ function setupAPIParams( config ) {
     
     let api_params = '';
 
-    api_params += '?project_id='+config.insectProject;
+    api_params += '?project_id='+config.project;
 
-    // if a taxon was chosen from the "Show" drop-down filter with that taxon_id.
-    // otherwise, filter with the default from the config file if there is one.
-    if( getTaxonId(appState) ) {
-        api_params += getTaxonIdParam(appState, '&taxon_id='); 
-    } else {
-        if( config.defaultTaxonId ) { api_params += '&taxon_id=' + config.defaultTaxonId; }
+    // url params will include field name when they filter based on a 
+    // obs field value by clicking it in the table.
+    if( getFieldName(appState) )  { 
+        api_params += '&field:' + getFieldName(appState); 
+    } else if( config.fieldName ) { 
+        api_params += '&field:'    + config.fieldName;  
     }
+ 
+    if( getFieldValue(appState) ) { api_params += '='          + getFieldValue(appState); }
+    if( getObsDate(appState)    ) { api_params += '&on='       + getObsDate(appState); } 
 
-    if( config.userId )         { api_params += '&user_id='  + config.userId; }  
-    if( config.faunaAPIParams ) { api_params += config.faunaAPIParams; }
+    if( getUser(appState) ) {
+        api_params += '&user_id=' + getUser(appState);
+    } else if( config.userId ) { 
+        api_params += '&user_id='  + config.userId; 
+    }
+ 
+    api_params += getPlaceMenuIdParam(appState, '&place_id=');
+
+    // if a taxon_id was chosen from a row in the table, use that taxon_id.  if not, 
+    // use the menu_id if one was passed in.
+    console.log('sub ' + config.defaultTaxonId);
+    if( getTaxonId(appState) ) {
+        api_params += '&taxon_id='+getTaxonId(appState);
+    } else if( getMenuId(appState) ) { 
+        api_params += '&taxon_id=' + getMenuId(appState); 
+    } else {
+        if( config.defaultTaxonId ) {
+            api_params += '&taxon_id=' + config.defaultTaxonId;
+        }
+    }
 
     // if a filter has been chosen, get the filter api params
     if( getActivityFilter(appState) ) {
         api_params += getFilterAPIParams(config);
-    }
+    } 
 
-    // if a place_id was chosen from the place drop-down, use that place_id.
-    // otherwise, check for a default.
-    if( getPlaceMenuId(appState) ) {
-        api_params += '&place_id=' + getPlaceMenuId(appState);
-    } else if( config.defaultPlace ) {
-        api_params += '&place_id=' + config.defaultPlace;
-    }
-  
-    api_params += '&field:'+config.fieldName+'=' + getPlantId(appState);
+    if( config.obsAPIParams ) { api_params += config.obsAPIParams; }
+    api_params += getPageParam(appState, '&page=');
+    api_params += '&per_page='+CONST_OBSERVATIONS_PER_PAGE;
 
     return api_params;
 }
