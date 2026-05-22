@@ -61,7 +61,7 @@
     },
     {
         "component": "studies",               "project": "157918",       
-        "study_title": "Matrix",              "study_desc": "Name of the organization that propagated the initial plant that we re-established the colony from.  Year it was planted and year it first bloomed.",         
+        "study_title": "Matrix",              "study_desc": "Flora / Fauna interactions matrix.",         
         "field_id": "7623",                   "obs_fields": "7623,21273",
         "field_name": "plant that the organism was found on",
         "dd_filters":
