@@ -59,6 +59,19 @@ function buildMenu( config ) {
     let navbar = document.createElement('div');
     navbar.className = 'navbar v2-menu';
 
+    // these are hard coded for now but could be moved to the json or added to an umbrella
+    if( getParams(appState) === 'ctk' || getParams(appState) === 'ctk2' ) {   
+        let links = [];
+    
+        let ctkLink     = faddelem('a', null, { href: './dashboard.html?params=ctk',  textContent: 'Christ the King Lutheran' });
+        let horizonLink = faddelem('a', null, { href: './dashboard.html?params=ctk2', textContent: 'Horizon Community Church' });
+
+        links.push(ctkLink);
+        links.push(horizonLink);
+
+        buildNavDD( navbar, 'Church', links );
+   }
+
     let baseUrl = '../admin/about.html';
 
     // Build the About Link
