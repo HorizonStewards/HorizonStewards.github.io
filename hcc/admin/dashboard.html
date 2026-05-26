@@ -86,12 +86,20 @@ function buildMenu( config ) {
     let church_icon = '';
     if( getParams(appState) === 'ctk' ) {
         church_icon = '<img src="../core/assets/ctk.png" style="width: 24px; height: 24px; margin-right: 5px; vertical-align: middle;">';
+        let homeUrl = baseUrl + buildParameterList(homeState);
+        let homeDiv = faddelem('div', navbar, { id: 'home' });
+        let hLink = faddelem('a', homeDiv, { href: homeUrl });
+        faddelem('span', hLink, { textContent: church_icon + CONST_ABOUT });
     } else if( getParams(appState) === 'ctk2' ) { 
         church_icon = '<img src="../core/assets/plant-icon-96.png" style="width: 24px; height: 24px; margin-right: 5px; vertical-align: middle;">';
-    } 
-
-    // Build the About Link
-    buildNavAbout( navbar, baseUrl, appState );
+        let homeUrl = baseUrl + buildParameterList(homeState);
+        let homeDiv = faddelem('div', navbar, { id: 'home' });
+        let hLink = faddelem('a', homeDiv, { href: homeUrl });
+        faddelem('span', hLink, { textContent: church_icon + CONST_ABOUT });
+    } else {
+        // Build the About Link
+        buildNavAbout( navbar, baseUrl, appState );
+    }
 
     // Append the DOM nodes to the body
     faddelem('p', document.body).appendChild(navbar);
