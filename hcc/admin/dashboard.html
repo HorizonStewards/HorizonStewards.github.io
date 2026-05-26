@@ -32,7 +32,7 @@ let winurlexsearchstr  = winurlstr.replace(winurlsearchstr,'');
 let winurlparams       = new URLSearchParams(winurlsearchstr.substring(1));
  
 appState  =  buildStateFromParams(winurlparams);
-
+ 
 // page specific constants...
 const CONST_ICON           = 'Icon';
 const CONST_COMPONENT      = 'Component';
@@ -107,8 +107,17 @@ function buildPage( configManager ) {
 
       buildMenu( configManager );
 
+      let church_title = '';
+      if( getParams(appState) === 'ctk' ) {
+          church_title = '<img src="../core/assets/ctk.png" style="width: 24px; height: 24px; margin-right: 5px; vertical-align: middle;"> ' + configManager.configurations[0].title;
+      } else if( getParams(appState) === 'ctk2' ) { 
+          church_title = '<img src="../core/assets/plant-icon-96.png" style="width: 24px; height: 24px; margin-right: 5px; vertical-align: middle;"> ' + configManager.configurations[0].title;
+      } else {
+          curch_title = configManager.configurations[0].title;
+      }
+ 
       // Generate the header element
-      renderHeader(CONST_COMPONENTS, configManager.configurations.length, '20', '1', '1', '', '', configManager.configurations[0].title);
+      renderHeader(CONST_COMPONENTS, configManager.configurations.length, '20', '1', '1', '', '', church_title);
 
       let labels = [];
 
