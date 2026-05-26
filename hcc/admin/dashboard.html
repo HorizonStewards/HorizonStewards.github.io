@@ -62,9 +62,18 @@ function buildMenu( config ) {
     // these are hard coded for now but could be moved to the json or added to an umbrella
     if( getParams(appState) === 'ctk' || getParams(appState) === 'ctk2' ) {   
         let links = [];
-    
-        let ctkLink     = faddelem('a', null, { href: './dashboard.html?params=ctk',  textContent: 'Christ the King Lutheran' });
-        let horizonLink = faddelem('a', null, { href: './dashboard.html?params=ctk2', textContent: 'Horizon Community Church' });
+
+        let ctkLink     = faddelem('a', null, { href: './dashboard.html?params=ctk' });
+        let horizonLink = faddelem('a', null, { href: './dashboard.html?params=ctk2' });
+
+        let ctkIcon     = faddelem('img', null, { src: '../core/assets/ctk.png',           alt: 'Icon', style: 'margin-right: 5px; vertical-align: middle;' });
+        let horizonIcon = faddelem('img', null, { src: '../core/assets/plant-icon-96.png', alt: 'Icon', style: 'margin-right: 5px; vertical-align: middle;' });
+     
+        ctkLink.appendChild(ctkIcon);
+        ctkLink.appendChild(document.createTextNode('Christ the King Lutheran'));
+
+        horizonLink.appendChild(horizonIcon);
+        horizonLink.appendChild(document.createTextNode('Horizon Community Church'));
 
         links.push(ctkLink);
         links.push(horizonLink);
