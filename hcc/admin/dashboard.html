@@ -109,9 +109,9 @@ function buildPage( configManager ) {
 
       let church_title = '';
       if( getParams(appState) === 'ctk' ) {
-          church_title = '<img src="../core/assets/ctk.png" style="width: 24px; height: 24px; margin-right: 5px; vertical-align: middle;"> ' + configManager.configurations[0].title;
+          church_title = '<span style="white-space: nowrap;"><img src="../core/assets/ctk.png" style="width: 24px; height: 24px; margin-right: 5px; vertical-align: middle;"> ' + configManager.configurations[0].title + '</span>';
       } else if( getParams(appState) === 'ctk2' ) { 
-          church_title = '<img src="../core/assets/plant-icon-96.png" style="width: 24px; height: 24px; margin-right: 5px; vertical-align: middle;"> ' + configManager.configurations[0].title;
+          church_title = '<span style="white-space: nowrap;"><img src="../core/assets/plant-icon-96.png" style="width: 24px; height: 24px; margin-right: 5px; vertical-align: middle;"> ' + configManager.configurations[0].title + '</span>';
       } else {
           curch_title = configManager.configurations[0].title;
       }
