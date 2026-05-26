@@ -209,7 +209,9 @@ function setupAPIParams( plantConfig ) {
    if( getPlaceMenuId(appState) ) {
        api_params += '&place_id=' + getPlaceMenuId(appState);
    } else if( plantConfig.defaultPlace ) {
-       api_params += '&place_id=' + plantConfig.defaultPlace;
+       if( !plantConfig.plantIds ) {   // don't add place if there are plant_id's since we have the actual taxon id for each plant and don't need to further filter by place.
+           api_params += '&place_id=' + plantConfig.defaultPlace;
+       }
    }
 
    // if a taxon_id was chosen in the plant drop-down, use that taxon_id.  if not, 
