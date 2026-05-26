@@ -152,7 +152,7 @@ function setupAPIParams( config ) {
    if( getPlaceMenuId(appState) ) {
        api_params += '&place_id=' + getPlaceMenuId(appState);
    } else if( config.defaultPlace ) {
-       if( !plantConfig.plantIds ) {   // don't add place if there are plant_id's since we have the actual taxon id for each plant and don't need to further filter by place.
+       if( !config.plantIds ) {   // don't add place if there are plant_id's since we have the actual taxon id for each plant and don't need to further filter by place.
            api_params += '&place_id=' + config.defaultPlace;
        }
    }
