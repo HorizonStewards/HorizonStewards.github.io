@@ -89,13 +89,13 @@ function buildMenu( config ) {
         let homeUrl = baseUrl + buildParameterList(appState);
         let homeDiv = faddelem('div', navbar, { id: 'home' });
         let hLink = faddelem('a', homeDiv, { href: homeUrl });
-        faddelem('span', hLink, { innerHTML: church_icon + CONST_ABOUT });
+        faddelem('span', hLink, { innerHTML: church_icon });
     } else if( getParams(appState) === 'ctk2' ) { 
         church_icon = '<img src="../core/assets/plant-icon-96.png" style="width: 24px; height: 24px; margin-right: 5px; vertical-align: middle;">';
         let homeUrl = baseUrl + buildParameterList(appState);
         let homeDiv = faddelem('div', navbar, { id: 'home' });
         let hLink = faddelem('a', homeDiv, { href: homeUrl });
-        faddelem('span', hLink, { innerHTML: church_icon + CONST_ABOUT });
+        faddelem('span', hLink, { innerHTML: church_icon  });
     } else {
         // Build the About Link
         buildNavAbout( navbar, baseUrl, appState );
