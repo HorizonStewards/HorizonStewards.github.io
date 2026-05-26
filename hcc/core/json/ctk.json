@@ -4,12 +4,12 @@
   "configurations":     
   [
     { 
-        "component": "plants",                "title": "Christ the King Church",
+        "component": "plants",                "title": "Christ the King Lutheran",
         "project": "22501 ",                  "insect_project": "22501",             "default_place": "184831",
         "field_id": "4935",                   "field_name": "nectar / pollen delivering plant"
     },
     { 
-        "component": "observers",             "title": "Christ the King Church",     
+        "component": "observers",             "title": "Christ the King Lutheran",     
         "project": "22501",                   "insect_project": "22501",             "default_place": "184831",
         "field_id": "4935",                   "field_name": "nectar / pollen delivering plant",
         "map_type": "ls"
