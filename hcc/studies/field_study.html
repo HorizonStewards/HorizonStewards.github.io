@@ -594,6 +594,10 @@ function setupAPIParams( config ) {
        api_params += getFilterAPIParams(config);
    }
 
+   if( config.defaultPlace ) {
+       api_params += '&place_id=' + config.defaultPlace;
+   }
+
    if( config.obsAPIParams ) { api_params += config.obsAPIParams; }
    api_params += getPageParam(appState, '&page=');
    api_params += '&per_page='+CONST_OBSERVATIONS_PER_PAGE;
