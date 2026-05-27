@@ -2,11 +2,18 @@
   "configurations":     
   [
    {
+        "component": "visits",                "project": "22501",        "utf8": "&#129488;",
+        "study_title": "JS Place",            "study_desc": "Suburban restoration with developing spicebush / ohio buckeye understory.",         
+        "field_id": "9829",                   "obs_fields": "9829",
+        "field_name": "approximate quantity", "default_taxon_id": "47126",
+        "obs_api_params": "&nelat=39.19058308&nelng=-84.345347267&subview=map&swlat=39.189964063&swlng=-84.34712531626208"
+   },
+   {
         "component": "visits",                "project": "248418",        "utf8": "&#129488;",
-        "study_title": "Site Visits",         "study_desc": "Visited with the intent of photographing and documenting approximate occurences of early ephemerals.",         
+        "study_title": "Ancient Oaks",        "study_desc": "Large woodland area with fairly intact herbaceous and understory layers.",         
         "field_id": "9829",                   "obs_fields": "9829",
         "field_name": "approximate quantity", "default_taxon_id": "47126"
-    }
+   }
   ],
   "default_sub_icons": 
   [
