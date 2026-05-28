@@ -212,7 +212,7 @@ function buildMenu( results, config ) {
       }
 
       if( getComponent(appState) === "plantings" ) {
-          menu_string += buildMenuURL( furl('./study_grid.html'+buildParameterList(urlState), 'Grid' ) );
+          menu_string += buildMenuURL( furl('./study_grid.html'+buildParameterList(appState), 'Grid' ) );
       }
 
       if( p_hide_dash === 'no' ) {
