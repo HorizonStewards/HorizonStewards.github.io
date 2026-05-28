@@ -2,6 +2,10 @@
   "configurations":     
   [
    {
+        "component": "hiker",                 "title": "Woodland Garden Plantings",
+        "project": "289197"                  
+   },
+   {
         "component": "visits",                "project": "22501",        "utf8": "&#127807;",
         "study_title": "JS Place",            "study_desc": "Suburban restoration with developing spicebush / ohio buckeye understory.",         
         "field_id": "9829",                   "obs_fields": "9829",
