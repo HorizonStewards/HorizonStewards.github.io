@@ -175,6 +175,14 @@ function buildPage( configManager ) {
                        buildRow( 'hiker', icon, name, desc, tbody, url );
                    }
 
+                   if( config.component === 'plantings' ) {
+                       let url  = '../studies/field_study.html' + buildParameterList(urlState);
+                       let icon = config.utf8 || CONST_LEAF_UTF8;
+                       let name = config.studyTitle || CONST_COLONIES;
+                       let desc = config.studyDesc || CONST_COLONY_DESC;
+                       buildRow( 'hiker', icon, name, desc, tbody, url );
+                   }
+
                    if( config.component === 'yard') {
                        let url  = '../species/observer_counts.html';
                        let icon = config.utf8 || CONST_NPC_UTF8;
