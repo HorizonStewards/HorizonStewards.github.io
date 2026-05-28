@@ -176,6 +176,9 @@ function buildPage( configManager ) {
                    }
 
                    if( config.component === 'plantings' ) {
+                       let urlState = appState;
+                       urlState = setComponent( urlState, config.component );
+                       urlState = setStudyTitle(urlState, config.studyTitle);
                        let url  = '../studies/field_study.html' + buildParameterList(urlState);
                        let icon = config.utf8 || CONST_LEAF_UTF8;
                        let name = config.studyTitle || CONST_COLONIES;
