@@ -39,6 +39,7 @@ const CONST_COMPONENT      = 'Component';
 const CONST_DESCRIPTION    = 'Description';
 const CONST_COMPONENTS     = 'components: ';
 const CONST_FIELD_STUDIES  = 'Field Studies';
+const CONST_SITE_ASSESSMENTS = 'Site Assessments';
 const CONST_VISITS         = 'Site Visits';
 const CONST_GARDEN_DESC    = 'Interactions between plants and animals by plant.';
 const CONST_COLONY_DESC    = 'Lists the colonies of plants where collection has occurred.  Shows the child colonies established from each parent colony.';
@@ -203,11 +204,19 @@ function buildPage( configManager ) {
  
       studies_labels = [];
 
-      studies_labels = [
+      if( getParams(appState) === 'all_sites' ) {
+          studies_labels = [
+            {innerText:CONST_ICON},
+            {innerText:CONST_SITE_ASSESSMENTS},
+            {innerText:CONST_DESCRIPTION}, 
+          ];
+      } else {
+          studies_labels = [
             {innerText:CONST_ICON},
             {innerText:CONST_FIELD_STUDIES},
             {innerText:CONST_DESCRIPTION}, 
-      ];
+          ];
+      }
 
       faddelem('p',document.body,{innerHTML:('<div id="vpadding"></div>')}); 
       let headers = 'no';
