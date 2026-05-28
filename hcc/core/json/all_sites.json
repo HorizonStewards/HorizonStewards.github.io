@@ -9,6 +9,12 @@
         "study_desc": "Native restorative plantings from assessment sites listed below."     
    },
    {
+        "component": "plantings",             "project": "22501",        "utf8": "&#127793;",
+        "study_title": "Plantings",           "study_desc": "Suburban restoration with developing spicebush / ohio buckeye understory.",         
+        "field_id": "17383",                  "obs_fields": "17383",
+        "field_name": "wild ancestral colony"
+   },
+   {
         "component": "visits",                "project": "22501",        "utf8": "&#127807;",
         "study_title": "JS Place",            "study_desc": "Suburban restoration with developing spicebush / ohio buckeye understory.",         
         "field_id": "9829",                   "obs_fields": "9829",
