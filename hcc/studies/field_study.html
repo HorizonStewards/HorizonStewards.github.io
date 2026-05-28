@@ -211,6 +211,10 @@ function buildMenu( results, config ) {
           menu_string += buildMenuURL( furl('./field_study.html'+buildParameterList(urlState), 'Reset' ) );
       }
 
+      if( getComponent(appState) === "plantings" ) {
+          menu_string += buildMenuURL( furl('./study_grid.html'+buildParameterList(urlState), 'Grid' ) );
+      }
+
       if( p_hide_dash === 'no' ) {
           let urlState  = clearForDashParams(appState);
           menu_string += buildHome(furl('../admin/dashboard.html'+buildParameterList(urlState),CONST_LEAF_UTF8));
