@@ -67,9 +67,7 @@ function buildMenu(config) {
    }
    //menu_string += buildMenuURL( furl('../admin/layered_map.html'+buildParameterList(appState)+'&project_id='+config.insectProject,"Map") );
    
-   let url_state = clearForSpeciesCountsParams( appState );
-   
-   menu_string += buildHome( furl('./garden_activity.html'+buildParameterList(url_state),CONST_LEAF_UTF8) );
+   menu_string += buildHome( furl('./field_study.html'+buildParameterList(appState),CONST_LEAF_UTF8) );
    menu_string += '</div>';
    
    return menu_string;
