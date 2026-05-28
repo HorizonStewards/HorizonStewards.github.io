@@ -2,8 +2,11 @@
   "configurations":     
   [
    {
-        "component": "hiker",                 "title": "Woodland Garden Plantings",
-        "project": "289197"                  
+        "component": "hiker",                   "title": "Woodland Garden Plantings",
+        "project": "289197",                    "utf8": "&#127807;",
+        "study_title": "Plantings",             "default_taxon_id": "",
+        "plant_field": "wild ancestral colony",
+        "study_desc": "Native restorative plantings from assessment sites listed below."     
    },
    {
         "component": "visits",                "project": "22501",        "utf8": "&#127807;",
