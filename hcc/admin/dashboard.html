@@ -122,11 +122,9 @@ function buildRow( component, icon, name, desc, tbody, url ) {
 function buildPage( configManager ) {
 
       buildMenu( configManager );
-
-      let collection_area = furl('../admin/map.html?not_in_project=157918&place_id=9853&project_id=289197&subview=map&verifiable=any','collection area');
  
       // Generate the header element
-      renderHeader(CONST_COMPONENTS, configManager.configurations.length, '20', '1', '1', '', collection_area, configManager.configurations[0].title);
+      renderHeader(CONST_COMPONENTS, configManager.configurations.length, '20', '1', '1', '', '', configManager.configurations[0].title);
 
       let labels = [];
 
