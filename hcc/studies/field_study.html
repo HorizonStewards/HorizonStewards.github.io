@@ -457,7 +457,7 @@ function fresults( xobj, config ) {
                                   field1 = '<span style="font-size:larger">'+cname.toLowerCase()+'</span><span style="font-style:italic"><br>('+name+')</span>';
                               }
                               if( rec.ofvs[j].field_id.toString() === '17383' ) {  // wild ancestral colony 
-                                  values.push({innerHTML:furl(root_observations+rec.id, field1)});
+                                  values.push({innerHTML:furl(root_observations+field1, field1)});
                               } else {
                                   let urlState = appState;
                                   urlState = setPage(urlState, '1');
