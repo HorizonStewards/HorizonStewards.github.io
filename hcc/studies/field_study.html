@@ -211,7 +211,7 @@ function buildMenu( results, config ) {
           menu_string += buildMenuURL( furl('./field_study.html'+buildParameterList(urlState), 'Reset' ) );
       }
 
-      if( getComponent(appState) === "plantings" ) {
+      if( getComponent(appState) === 'plantings' || getComponent(appState) === 'visits' ) {
           menu_string += buildMenuURL( furl('./study_grid.html'+buildParameterList(appState), 'Grid' ) );
       }
 
