@@ -2,31 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Discord Activity Wrapper</title>
+    <title>Activity Loader</title>
+    <style>
+        html, body, iframe { margin: 0; padding: 0; width: 100%; height: 100%; border: none; overflow: hidden; }
+    </style>
 </head>
 <body>
-    <!-- This container will hold your dashboard content -->
-    <div id="app-root">Loading dashboard...</div>
-
-    <script>
-        async function loadDashboard() {
-            try {
-                // Fetch the dashboard HTML content locally
-                const response = await fetch('./dashboard.html?params=all_sites');
-                const htmlText = await response.text();
-                
-                // Inject the dashboard into the main page wrapper
-                document.getElementById('app-root').innerHTML = htmlText;
-                
-                console.log("Dashboard loaded successfully!");
-            } catch (error) {
-                console.error("Error loading dashboard:", error);
-                document.getElementById('app-root').innerHTML = "Failed to load dashboard.";
-            }
-        }
-
-        // Run the function immediately when index.html loads
-        loadDashboard();
-    </script>
+    <!-- Loads your dashboard using a relative path layout -->
+    <iframe src="./dashboard.html?params=all_sites"></iframe>
 </body>
 </html>
