@@ -74,7 +74,7 @@ function buildMenu(config) {
        let urlString = api_params.toString() + '&params=' + getParams(appState);
        let safeHtmlUrl = escapeHtmlUrl(urlString);
 
-       menu_string += buildMenuURL(furl(safeHtmlUrl, "Map"));      
+       menu_string += buildMenuURL(furl(safeHtmlUrl, "Collection Area Map"));      
    }
    //menu_string += buildMenuURL( furl('../admin/layered_map.html'+buildParameterList(appState)+'&project_id='+config.insectProject,"Map") );
 
