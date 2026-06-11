@@ -69,7 +69,6 @@ function buildMenu(config) {
        let api_params = new URL('./hcc/admin/map.html', window.location.origin);
 
        setupMapAPIParams(config, api_params);
-       if( getMapZoom(config) ) { api_params.searchParams.append('zoom', getMapZoom(config)); }
 
        // Escape the raw ampersands before passing it to furl or buildMenuURL
        let urlString = api_params.toString() + '&params=' + getParams(appState);
@@ -128,6 +127,13 @@ function setupMapAPIParams( config, api_params ) {
 
     if (config.obsAPIParams) {
         const extraParams = new URLSearchParams(config.obsAPIParams);
+        extraParams.forEach((value, key) => {
+            api_params.searchParams.append(key, value);
+        });
+    }
+
+    if( getMapZoom(config) ) { 
+        const extraParams = new URLSearchParams(getMapZoom(config));
         extraParams.forEach((value, key) => {
             api_params.searchParams.append(key, value);
         });
