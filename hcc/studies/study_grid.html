@@ -86,8 +86,8 @@ function setupMapAPIParams( config ) {
     
     let api_params = '';
 
-    api_params += '?project_id='+config.project;
-    api_params += '&not_in_project=157918';
+    api_params += '?not_in_project=157918';
+    api_params += '&project_id='+config.project;
 
     if( getObsDate(appState)    ) { api_params += '&on='       + getObsDate(appState); } 
 
