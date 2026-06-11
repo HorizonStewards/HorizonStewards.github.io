@@ -49,6 +49,10 @@ var recsmax      = columns * rows - 1;
 
 winurlparams.append('per_page',recsmax);
 
+function escapeHtmlUrl(urlString) {
+    return urlString.replace(/&/g, '&amp;');
+}
+
 function buildMenu(config) {
 
    let links = '';
@@ -67,9 +71,11 @@ function buildMenu(config) {
        setupMapAPIParams(config, api_params);
        api_params.searchParams.append('zoom', getMapZoom(config));
 
-       let finalUrlString = api_params.toString() + '&params=' + getParams(appState);
+       // Escape the raw ampersands before passing it to furl or buildMenuURL
+       let urlString = api_params.toString() + '&params=' + getParams(appState);
+       let safeHtmlUrl = escapeHtmlUrl(urlString);
 
-       menu_string += buildMenuURL(furl(finalUrlString, "Map"));      
+       menu_string += buildMenuURL(furl(safeHtmlUrl, "Map"));      
    }
    //menu_string += buildMenuURL( furl('../admin/layered_map.html'+buildParameterList(appState)+'&project_id='+config.insectProject,"Map") );
    
