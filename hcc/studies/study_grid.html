@@ -86,8 +86,8 @@ function setupMapAPIParams( config ) {
     
     let api_params = '';
 
-    api_params += '?not_in_project=157918';
-    api_params += '&project_id='+config.project;
+    api_params += '?project_id='+config.project;
+    api_params += '&not_in_project=157918';
 
     if( getObsDate(appState)    ) { api_params += '&on='       + getObsDate(appState); } 
 
@@ -121,7 +121,7 @@ function setupMapAPIParams( config ) {
     api_params += getPageParam(appState, '&page=');
     api_params += '&per_page='+CONST_OBSERVATIONS_PER_PAGE;
 
-    return api_params;
+    return encodeURIComponent(api_params);
 }
 
 function setupAPIParams( config ) {
