@@ -62,8 +62,14 @@ function buildMenu(config) {
    menu_string = '<div class="navbar">';
 
    if( config.mapType !== 'hide' ) {
-       let api_params = new URL('../admin/map.html', window.location.origin);       
-       menu_string += buildMenuURL( furl( setupMapAPIParams(config, api_params).toString  + getMapZoom(config) + '&params=' + getParams(appState), "Map") );
+       let api_params = new URL('../admin/map.html', window.location.origin);
+
+       setupMapAPIParams(config, api_params);
+       api_params.searchParams.append('zoom', getMapZoom(config));
+
+       let finalUrlString = api_params.toString() + '&params=' + getParams(appState);
+
+       menu_string += buildMenuURL(furl(finalUrlString, "Map"));      
    }
    //menu_string += buildMenuURL( furl('../admin/layered_map.html'+buildParameterList(appState)+'&project_id='+config.insectProject,"Map") );
    
