@@ -63,7 +63,7 @@ function buildMenu(config) {
 
    console.log('mt ' + config.mapType);
    if( config.mapType !== 'hide' ) {
-       menu_string += buildMenuURL( furl('../admin/map.html' + setupAPIParams(config)  + getMapZoom(config) + '&params=' + getParams(appState), "Map") );
+       menu_string += buildMenuURL( furl('../admin/map.html' + setupMapAPIParams(config)  + getMapZoom(config) + '&params=' + getParams(appState), "Map") );
    }
    //menu_string += buildMenuURL( furl('../admin/layered_map.html'+buildParameterList(appState)+'&project_id='+config.insectProject,"Map") );
    
@@ -81,6 +81,49 @@ function buildPage(data, config) {
                                     
    buildGrid(data, inat_url);    
 };
+
+function setupMapAPIParams( config ) {
+    
+    let api_params = '';
+
+    api_params += '?project_id='+config.project;
+    api_params += '&not_in_project=157918';
+
+    if( getObsDate(appState)    ) { api_params += '&on='       + getObsDate(appState); } 
+
+    if( getUser(appState) ) {
+        api_params += '&user_id=' + getUser(appState);
+    } else if( config.userId ) { 
+        api_params += '&user_id='  + config.userId; 
+    }
+ 
+    api_params += getPlaceMenuIdParam(appState, '&place_id=');
+
+    // if a taxon_id was chosen from a row in the table, use that taxon_id.  if not, 
+    // use the menu_id if one was passed in.
+    console.log('sub ' + config.defaultTaxonId);
+    if( getTaxonId(appState) ) {
+        api_params += '&taxon_id='+getTaxonId(appState);
+    } else if( getMenuId(appState) ) { 
+        api_params += '&taxon_id=' + getMenuId(appState); 
+    } else {
+        if( config.defaultTaxonId ) {
+            api_params += '&taxon_id=' + config.defaultTaxonId;
+        }
+    }
+
+    // if a filter has been chosen, get the filter api params
+    if( getActivityFilter(appState) ) {
+        api_params += '&field:plant+interaction='+getActivityFilter(appState);
+    } 
+
+    if( config.obsAPIParams ) { api_params += config.obsAPIParams; }
+    api_params += getPageParam(appState, '&page=');
+    api_params += '&per_page='+CONST_OBSERVATIONS_PER_PAGE;
+
+    return api_params;
+}
+</script>
 
 function setupAPIParams( config ) {
     
