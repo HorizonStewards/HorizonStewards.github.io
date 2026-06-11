@@ -107,7 +107,7 @@ function setupMapAPIParams( config, api_params ) {
         api_params.searchParams.append('user_id', config.userId);
     }
 
-    api_params.searchParams.append('place_id', getPlaceMenuId(appState));
+    if( getPlaceMenuId(appState) ) { api_params.searchParams.append('place_id', getPlaceMenuId(appState)); }
 
     // if a taxon_id was chosen from a row in the table, use that taxon_id.  if not, 
     // use the menu_id if one was passed in.
@@ -133,8 +133,8 @@ function setupMapAPIParams( config, api_params ) {
         });
     }
    
-    api_params.searchParams.set('page', getPage(appState));
-    api_params.searchParams.set('per_page', CONST_OBSERVATIONS_PER_PAGE);
+    if( getPage(appState) ) { api_params.searchParams.set('page', getPage(appState)); }
+    if( getPage(appState) ) { api_params.searchParams.set('per_page', CONST_OBSERVATIONS_PER_PAGE); }
 
     return api_params;
 }
