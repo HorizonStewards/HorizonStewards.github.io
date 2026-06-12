@@ -165,7 +165,7 @@ function setupAPIParams( config ) {
    // use the taxon_id(s) from the config when present.
    if( config.beds ) { 
        for( let i=0; i<config.beds.length; i++ ) {
-            if( config.beds[i].bed_name === getGarden(appState) ) {
+            if( config.beds[i].bed_name === (getGarden(appState)||'lake') ) {
                 api_params += '&taxon_id=' + config.beds[i].taxon_ids; 
             }
        }
