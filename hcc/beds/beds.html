@@ -207,7 +207,11 @@ header.appendChild(img);
    header.appendChild(img);   */
    //faddelem('p', document.body).appendChild(img);
 
-   if (results && p_mode !== 'imageonly') {
+   if( p_mode === 'imageonly' ) {
+       return;
+   }
+
+   if (results) {
       let total_results = xobj.total_results;
       let per_page = xobj.per_page;
       let page_curr = xobj.page;
