@@ -161,8 +161,25 @@ function buildPage(xobj, config) {
 
    buildMenu( config, results );
 
+// Look for your main structural container instead of the body root 
+const mainContainer = document.getElementById('main') || document.body; 
+const header = faddelem('p', mainContainer); 
+
+// Clear layout overrides; let the element use your new CSS rules natively
+header.removeAttribute('style'); 
+
+const img = document.createElement('img'); 
+img.src = './artwork/' + image_name; 
+
+// Only apply visual/scaling behavior, NOT layout-breaking width constraints
+img.style.height = 'auto'; 
+img.style.borderRadius = '5px'; 
+img.style.objectFit = 'contain'; // Still needed to override that old global 'cover' property
+
+header.appendChild(img);
+
    // Look for your main structural container instead of the body root
-   const mainContainer = document.getElementById('main') || document.body;
+ /*  const mainContainer = document.getElementById('main') || document.body;
    const header = faddelem('p', mainContainer);
 
    // Prevent this specific paragraph from blowing out past its siblings
@@ -177,7 +194,7 @@ function buildPage(xobj, config) {
    img.style.height    = 'auto';
    img.style.objectFit = 'contain';
 
-   header.appendChild(img);   
+   header.appendChild(img);   */
    //faddelem('p', document.body).appendChild(img);
 
    if (results) {
