@@ -79,9 +79,10 @@ function buildPage(xobj, config) {
    const img = document.createElement('img');
 
    img.src = './artwork/'+image_name;
-   img.style.width   = 'fit-content';
-   img.style.height  = 'auto';
-   img.style.display = 'block'; // Removes unwanted bottom whitespace
+   img.style.width = 'fit-content';
+   img.style.maxWidth = '100%'; 
+   img.style.height = 'auto';
+   img.style.objectFit = 'contain'; // Overrides the global 'cover' property so it doesn't crop
 
    faddelem('p', document.body).appendChild(img);
 
