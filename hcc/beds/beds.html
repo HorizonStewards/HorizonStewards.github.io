@@ -92,7 +92,8 @@ function buildPage(xobj, config) {
    img.style.height    = 'auto';
    img.style.objectFit = 'contain';
 
-   faddelem('p', document.body).appendChild(img);
+   header.appendChild(img);   
+   //faddelem('p', document.body).appendChild(img);
 
    if (results) {
       let total_results = xobj.total_results;
