@@ -3,10 +3,10 @@
   [
     { 
         "component": "beds",                  "title": "Horizon Cultivated Beds",   
-        "project": "157918",                  "insect_project": "157918",
+        "project": "157918",                  
         "beds":
             [
-               { "bed_name": "lake",     "image": "American Asters",
+               { "bed_name": "lake",     "image": "lake.jpeg",
                  "taxa":
                       [
                         { "taxon_id": "56112",    "taxon_name": "American Asters" },
@@ -15,7 +15,7 @@
                         { "taxon_id": "56955",    "taxon_name": "Sunflowers" }
                       ]
                },
-               { "bed_name": "pylon",     "image": "American Asters",
+               { "bed_name": "pylon",     "image": "pylon.jpeg",
                  "taxa":
                       [
                         { "taxon_id": "56112",    "taxon_name": "American Asters" },
