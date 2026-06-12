@@ -30,6 +30,8 @@ let p_hide_dash    = winurlparams.get('hide_dash') || 'no';
 appState       = buildStateFromParams(winurlparams);
 appState       = setComponent(appState, 'beds');
 
+let image_name = '';
+
 // page / api specific constants 
 const CONST_CUSTOM_PLANT   = 'Plant';
   
@@ -73,6 +75,12 @@ function buildPage(xobj, config) {
    let box_array = [];
 
    buildMenu( config, results );
+
+   const img = document.createElement('img');
+
+   img.src = './artwork/'+image_name;
+
+   faddelem('p', document.body).appendChild(img);
 
    if (results) {
       let total_results = xobj.total_results;
@@ -166,11 +174,9 @@ function setupAPIParams( config ) {
    // use the taxon_id(s) from the config when present.
    if( config.beds ) { 
        for( let i=0; i<config.beds.length; i++ ) {
-            console.log('garden ' + getGarden(appState) );
-            console.log('bed name ' + config.beds[i].bedName );
             if( config.beds[i].bedName === (getGarden(appState)||'lake') ) {
-                console.log('match');
                 api_params += '&taxon_id=' + config.beds[i].taxonIds; 
+                image_name = config.beds[i].image;
             }
        }
    }
