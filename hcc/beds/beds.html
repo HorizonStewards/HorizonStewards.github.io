@@ -267,11 +267,11 @@ header.appendChild(img);
              // Column: Name 
              let urlState = appState;
              urlState = setPage(urlState, '');
-             urlState = setTaxonId(urlState, '');
+             urlState = setTaxonId(urlState, rec.taxon.id);
              urlState = setTaxonName(urlState, '');
              urlState = setPlantId(urlState, rec.taxon.id);
              urlState = setPlantName(urlState, header_name||'?');
-             let url      = './garden_activity.html' + buildParameterList(urlState);
+             let url      = './beds_grid.html' + buildParameterList(urlState);
              buildSpeciesName( brow, rec, url );
          }
       };
