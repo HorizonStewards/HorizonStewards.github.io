@@ -166,7 +166,8 @@ function setupAPIParams( config ) {
    if( config.beds ) { 
        for( let i=0; i<config.beds.length; i++ ) {
             console.log('garden ' + getGarden(appState) );
-            if( config.beds[i].bed_name === (getGarden(appState)||'lake') ) {
+            console.log('bed name ' + config.beds[i].bedName
+            if( config.beds[i].bedName === (getGarden(appState)||'lake') ) {
                 console.log('match');
                 api_params += '&taxon_id=' + config.beds[i].taxon_ids; 
             }
