@@ -58,8 +58,8 @@ function buildMenu(config) {
    menu_string = '<div class="navbar">';
    
    let url_state = clearForSpeciesCountsParams( appState );
-   url_state = setPlantName(urlState, '');
-   url_state = setPlantId(urlState, '');
+   url_state = setPlantName(url_state, '');
+   url_state = setPlantId(url_state, '');
    
    menu_string += buildHome( furl('./beds.html'+buildParameterList(url_state),CONST_LEAF_UTF8) );
    menu_string += '</div>';
