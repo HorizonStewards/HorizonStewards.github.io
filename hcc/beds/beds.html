@@ -111,6 +111,7 @@ let winurlsearchstr = window.location.search;
 let winurlexsearchstr = winurlstr.replace(winurlsearchstr,'');
 let winurlparams  = new URLSearchParams(winurlsearchstr.substring(1));
 let p_hide_dash    = winurlparams.get('hide_dash') || 'no';
+let p_mode         = winurlparams.get('mode') || '';
 
 appState       = buildStateFromParams(winurlparams);
 appState       = setComponent(appState, 'beds');
@@ -197,7 +198,7 @@ header.appendChild(img);
    header.appendChild(img);   */
    //faddelem('p', document.body).appendChild(img);
 
-   if (results) {
+   if (results && p_mode !== 'imageonly') {
       let total_results = xobj.total_results;
       let per_page = xobj.per_page;
       let page_curr = xobj.page;
