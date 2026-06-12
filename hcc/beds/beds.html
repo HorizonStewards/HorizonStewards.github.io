@@ -28,7 +28,7 @@ let winurlparams  = new URLSearchParams(winurlsearchstr.substring(1));
 let p_hide_dash    = winurlparams.get('hide_dash') || 'no';
 
 appState       = buildStateFromParams(winurlparams);
-appState       = setComponent('beds');
+appState       = setComponent(appState, 'beds');
 
 // page / api specific constants 
 const CONST_CUSTOM_PLANT   = 'Plant';
