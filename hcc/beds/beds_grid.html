@@ -78,33 +78,15 @@ function setupAPIParams( config ) {
     
     let api_params = '';
 
-    api_params += '?project_id='+config.insectProject;
+    api_params += '?project_id='+config.project;
 
     // if a taxon was chosen from the "Show" drop-down filter with that taxon_id.
     // otherwise, filter with the default from the config file if there is one.
     if( getTaxonId(appState) ) {
         api_params += getTaxonIdParam(appState, '&taxon_id='); 
-    } else {
-        if( config.defaultTaxonId ) { api_params += '&taxon_id=' + config.defaultTaxonId; }
-    }
+    } 
 
     if( config.userId )         { api_params += '&user_id='  + config.userId; }  
-    if( config.faunaAPIParams ) { api_params += config.faunaAPIParams; }
-
-    // if a filter has been chosen, get the filter api params
-    if( getActivityFilter(appState) ) {
-        api_params += getFilterAPIParams(config);
-    }
-
-    // if a place_id was chosen from the place drop-down, use that place_id.
-    // otherwise, check for a default.
-    if( getPlaceMenuId(appState) ) {
-        api_params += '&place_id=' + getPlaceMenuId(appState);
-    } else if( config.defaultPlace ) {
-        api_params += '&place_id=' + config.defaultPlace;
-    }
-  
-    api_params += '&field:'+config.fieldName+'=' + getPlantId(appState);
 
     return api_params;
 }
