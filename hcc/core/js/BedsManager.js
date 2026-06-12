@@ -1,11 +1,11 @@
 /**
- * Represents a single taxon entry (e.g., American Asters).
+ * Represents a single beds entry.
  */
-class Taxon {
+class Beds {
     constructor(data) {
-        this.taxonId = data.taxon_id;
-        this.taxonName = data.taxon_name;
-        this.icon = data.icon;
+        this.bedName  = data.bed_name;
+        this.image    = data.image;
+        this.taxonIds = data.taxon_ids;
     }
 }
 
@@ -29,7 +29,7 @@ class ConfigurationItem {
         this.studyTitle = configData.study_title ?? null;
         this.studyDesc  = configData.study_desc ?? null;
 
-        this.taxa   = configData.taxa?.map(t => new Taxon(t)) ?? [];
+        this.beds   = configData.beds?.map(t => new Beds(t)) ?? [];
         
         // store the orginial .json with original field names that haven't been mapped to this object.
         this.originalConfig = configData ?? null;  // used in about.html to pretty print the original .json
