@@ -76,13 +76,21 @@ function buildPage(xobj, config) {
 
    buildMenu( config, results );
 
-   const img = document.createElement('img');
+   // Look for your main structural container instead of the body root
+   const mainContainer = document.getElementById('main') || document.body;
+   const header = faddelem('p', mainContainer);
 
+   // Prevent this specific paragraph from blowing out past its siblings
+   header.style.maxWidth = '100%';
+   header.style.width = '100%';
+
+   const img = document.createElement('img');
    img.src = './artwork/'+image_name;
-   img.style.width = 'fit-content';
-   img.style.maxWidth = '100%'; 
-   img.style.height = 'auto';
-   img.style.objectFit = 'contain'; // Overrides the global 'cover' property so it doesn't crop
+
+   // Force the image to respect the parent boundaries
+   img.style.maxWidth  = '100%';
+   img.style.height    = 'auto';
+   img.style.objectFit = 'contain';
 
    faddelem('p', document.body).appendChild(img);
 
