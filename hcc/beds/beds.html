@@ -259,10 +259,9 @@ function buildPage(xobj, config) {
              let url      = './beds_grid.html' + buildParameterList(urlState);
              buildSpeciesName( brow, rec, url );
 
-             // Split the string into an array and trim any accidental whitespace
-             let taxonIdArray = config.activityTaxonIds.split(',').map(id => id.trim());
-
              if( p_mode === 'activity' ) {
+                 // Split the string into an array and trim any accidental whitespace
+                 let taxonIdArray = config.activityTaxonIds.split(',').map(id => id.trim());
                  if( rec?.taxon?.id && taxonIdArray.includes(String(rec.taxon.id)) ) {
                      // Column: wildlife activity
                      urlState = appState;
