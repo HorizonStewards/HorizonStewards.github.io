@@ -282,10 +282,13 @@ header.appendChild(img);
              urlState = setTaxonName(urlState, '');
              urlState = setPlantId(urlState, rec.taxon.id);
              urlState = setPlantName(urlState, header_name||'?');
-             let url      = '../garden/garden_activity.html' + buildParameterList(urlState);
-             let tdPhoto = faddelem('td', brow); 
+             let activity_url      = '../garden/garden_activity.html' + buildParameterList(urlState);
+             let tdPhoto = faddelem('td', brow);
 
-             faddelem('div', tdPhoto, { className: 'npcicon', textContent: '&#129458;' });
+             // Create the anchor link pointing to the wildlife activity url
+             let aLink = faddelem('a', tdPhoto, { href: activity_url, style: 'text-decoration: none;' });
+
+             faddelem('div', aLink, { className: 'npcicon', textContent: '\u{1FAB2}' });         
          }
       };
 
