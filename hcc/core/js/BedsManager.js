@@ -23,7 +23,8 @@ class ConfigurationItem {
         // Ensure hideOnAny results in a boolean or default to true
         this.hideOnAny = (configData.hide_on_any === 'yes') ?? true; 
 
-        this.plantIds   = configData.plant_ids ?? null;
+        this.plantIds         = configData.plant_ids ?? null;
+        this.activityTaxonIds = configData.activity_taxon_ids ?? null;
         this.usePlantProjectImages = configData.use_plant_project_images ?? null;
 
         this.studyTitle = configData.study_title ?? null;
@@ -70,7 +71,8 @@ class ConfigManager {
         });
 
         // map the default_sub_icons if they're set
-        this.plantIds        = jsonData.plant_ids;
+        this.plantIds         = jsonData.plant_ids;
+        this.activityTaxonIds = jsonData.activity_taxon_ids;
         this.usePlantProjectImages = jsonData.use_plant_project_images;
     }
 
@@ -114,6 +116,9 @@ async function asyncGetConfiguration( params, component, studyTitle=null ) {
           if( finalConfigInstance ) {
               if( !finalConfigInstance.plantIds ) {
                   if( managerInstance.plantIds ) { finalConfigInstance.plantIds = managerInstance.plantIds; }
+              }
+              if( !finalConfigInstance.activityTaxonIds ) {
+                  if( managerInstance.activityTaxonIds ) { finalConfigInstance.activityTaxonIds = managerInstance.activityTaxonIds; }
               }
               if( !finalConfigInstance.usePlantProjectImages ) {
                   if( managerInstance.usePlantProjectImages ) { finalConfigInstance.usePlantProjectImages = managerInstance.usePlantProjectImages; }
@@ -169,6 +174,9 @@ async function asyncGetConfiguration( params, component, studyTitle=null ) {
 
         if( !finalConfigInstance.plantIds ) {
             if( managerInstance.plantIds ) { finalConfigInstance.plantIds = managerInstance.plantIds; }
+        }
+        if( !finalConfigInstance.activityTaxonIds ) {
+            if( managerInstance.activityTaxonIds ) { finalConfigInstance.activityTaxonIds = managerInstance.activityTaxonIds; }
         }
         if( !finalConfigInstance.usePlantProjectImages ) {
             if( managerInstance.usePlantProjectImages ) { finalConfigInstance.usePlantProjectImages = managerInstance.usePlantProjectImages; }
