@@ -171,41 +171,22 @@ function buildPage(xobj, config) {
 
    buildMenu( config, results );
 
-// Look for your main structural container instead of the body root 
-const mainContainer = document.getElementById('main') || document.body; 
-const header = faddelem('p', mainContainer); 
+   // Look for your main structural container instead of the body root 
+   const mainContainer = document.getElementById('main') || document.body; 
+   const header = faddelem('p', mainContainer); 
 
-// Clear layout overrides; let the element use your new CSS rules natively
-header.removeAttribute('style'); 
+   // Clear layout overrides; let the element use your new CSS rules natively
+   header.removeAttribute('style'); 
 
-const img = document.createElement('img'); 
-img.src = './artwork/' + image_name; 
+   const img = document.createElement('img'); 
+   img.src = './artwork/' + image_name; 
 
-// Only apply visual/scaling behavior, NOT layout-breaking width constraints
-img.style.height = 'auto'; 
-img.style.borderRadius = '5px'; 
-img.style.objectFit = 'contain'; // Still needed to override that old global 'cover' property
+   // Only apply visual/scaling behavior, NOT layout-breaking width constraints
+   img.style.height = 'auto'; 
+   img.style.borderRadius = '5px'; 
+   img.style.objectFit = 'contain'; // Still needed to override that old global 'cover' property
 
-header.appendChild(img);
-
-   // Look for your main structural container instead of the body root
- /*  const mainContainer = document.getElementById('main') || document.body;
-   const header = faddelem('p', mainContainer);
-
-   // Prevent this specific paragraph from blowing out past its siblings
-   header.style.maxWidth = '100%';
-   header.style.width = '100%';
-
-   const img = document.createElement('img');
-   img.src = './artwork/'+image_name;
-
-   // Force the image to respect the parent boundaries
-   img.style.maxWidth  = '100%';
-   img.style.height    = 'auto';
-   img.style.objectFit = 'contain';
-
-   header.appendChild(img);   */
-   //faddelem('p', document.body).appendChild(img);
+   header.appendChild(img);
 
    if( p_mode === 'imageonly' ) {
        return;
@@ -278,7 +259,10 @@ header.appendChild(img);
              let url      = './beds_grid.html' + buildParameterList(urlState);
              buildSpeciesName( brow, rec, url );
 
-             if( p_mode === 'activity' ) {
+             // Split the string into an array and trim any accidental whitespace
+             let taxonIdArray = config.activityTaxonIds.split(',').map(id => id.trim());
+
+             if( p_mode === 'activity' && rec?.taxon?.id && taxonIdArray.includes(String(rec.taxon.id)) ) {
                  // Column: wildlife activity
                  urlState = appState;
                  urlState = setPage(urlState, '');
