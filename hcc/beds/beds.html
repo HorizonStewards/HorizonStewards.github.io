@@ -223,8 +223,11 @@ header.appendChild(img);
             {innerText:'#'},
             {innerText:'Photo'},
             {innerText:'Name'}, 
-            {innerText:''},
       ];
+
+      if( p_mode === 'activity' ) {
+          labels.push({innerText:''});
+      }
 
       /*let title_1 = '', title_2 = '', title_3 = '';
 
@@ -275,20 +278,22 @@ header.appendChild(img);
              let url      = './beds_grid.html' + buildParameterList(urlState);
              buildSpeciesName( brow, rec, url );
 
-             // Column: wildlife activity
-             urlState = appState;
-             urlState = setPage(urlState, '');
-             urlState = setTaxonId(urlState, '');
-             urlState = setTaxonName(urlState, '');
-             urlState = setPlantId(urlState, rec.taxon.id);
-             urlState = setPlantName(urlState, header_name||'?');
-             let activity_url      = '../garden/garden_activity.html' + buildParameterList(urlState);
-             let tdPhoto = faddelem('td', brow);
+             if( p_mode === 'activity' ) {
+                 // Column: wildlife activity
+                 urlState = appState;
+                 urlState = setPage(urlState, '');
+                 urlState = setTaxonId(urlState, '');
+                 urlState = setTaxonName(urlState, '');
+                 urlState = setPlantId(urlState, rec.taxon.id);
+                 urlState = setPlantName(urlState, header_name||'?');
+                 let activity_url      = '../garden/garden_activity.html' + buildParameterList(urlState);
+                 let tdPhoto = faddelem('td', brow);
 
-             // Create the anchor link pointing to the wildlife activity url
-             let aLink = faddelem('a', tdPhoto, { href: activity_url, style: 'text-decoration: none;' });
+                 // Create the anchor link pointing to the wildlife activity url
+                 let aLink = faddelem('a', tdPhoto, { href: activity_url, style: 'text-decoration: none;' });
 
-             faddelem('div', aLink, { className: 'npcicon', textContent: '\u{1FAB2}' });         
+                 faddelem('div', aLink, { className: 'npcicon', textContent: '\u{1FAB2}' });      
+             }
          }
       };
 
