@@ -9,7 +9,7 @@
     },
     { 
         "component": "beds",                  "title": "Horizon Cultivated Beds",   
-        "project": "157918",                  
+        "project": "157918",                  "activity_taxon_ids": "76444,48627,125381",
         "beds":
             [
                { "bed_name": "lake",     "image": "lake.jpeg",    "taxon_ids": "56112,48678" },
