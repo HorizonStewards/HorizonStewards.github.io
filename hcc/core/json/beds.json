@@ -1,6 +1,12 @@
 { 
-  "configurations":    
+  "default_map_zoom": "17",
+  "configurations":     
   [
+    { 
+        "component": "plants",                "title": "Horizon Community Church",
+        "project": "157918",                  "insect_project": "157918", 
+        "field_id": "7623",                   "field_name": "plant that the organism was found on"
+    },
     { 
         "component": "beds",                  "title": "Horizon Cultivated Beds",   
         "project": "157918",                  
