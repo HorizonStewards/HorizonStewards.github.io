@@ -223,6 +223,7 @@ header.appendChild(img);
             {innerText:'#'},
             {innerText:'Photo'},
             {innerText:'Name'}, 
+            {innerText:''},
       ];
 
       /*let title_1 = '', title_2 = '', title_3 = '';
@@ -273,6 +274,18 @@ header.appendChild(img);
              urlState = setPlantName(urlState, header_name||'?');
              let url      = './beds_grid.html' + buildParameterList(urlState);
              buildSpeciesName( brow, rec, url );
+
+             // Column: wildlife activity
+             urlState = appState;
+             urlState = setPage(urlState, '');
+             urlState = setTaxonId(urlState, '');
+             urlState = setTaxonName(urlState, '');
+             urlState = setPlantId(urlState, rec.taxon.id);
+             urlState = setPlantName(urlState, header_name||'?');
+             let url      = '../garden/garden_activity.html' + buildParameterList(urlState);
+             let tdPhoto = faddelem('td', brow); 
+
+             faddelem('div', tdPhoto, { className: 'npcicon', textContent: '&#129458;' });
          }
       };
 
