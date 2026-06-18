@@ -16,7 +16,7 @@
             [
                { "bed_name": "plant evaluation",     "image": "eval2.jpg",    "taxon_ids": "51723,56955,67790,67524" }
             ]
-    }
+    },
    {
         "component": "visits",               "project": "280571",        "utf8": "&#127807;",
         "study_title": "Interactions Matrix",        "study_desc": "Flora / Fauna interactions matrix.",         
