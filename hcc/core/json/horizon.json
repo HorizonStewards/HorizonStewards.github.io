@@ -62,11 +62,11 @@
     {
         "component": "studies",               "project": "157918",       
         "study_title": "Matrix",              "study_desc": "Flora / Fauna interactions matrix.",         
-        "field_id": "7623",                   "obs_fields": "7623,21273",
+        "field_id": "7623",                   "obs_fields": "7623,21273,21998",
         "field_name": "plant that the organism was found on",
         "dd_filters":
             [
-               { "dd_name": "Filters",  "dd_label": "mating",                     "api_params": "&field:plant+interaction=mating" },
+               { "dd_name": "Filters",  "dd_label": "mating",                       "api_params": "&field:plant+interaction=mating" },
                { "dd_name": "Location",  "dd_label": "on leaf",                     "api_params": "&field:plant+interaction=mating" },
                { "dd_name": "Location",  "dd_label": "on flower",                   "api_params": "&field:plant+interaction=nectaring+/+pollinating" }
             ]
