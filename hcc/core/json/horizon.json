@@ -67,8 +67,11 @@
         "dd_filters":
             [
                { "dd_name": "Filters",  "dd_label": "mating",                       "api_params": "&field:plant+interaction=mating" },
-               { "dd_name": "Location",  "dd_label": "on leaf",                     "api_params": "&field:plant+interaction=mating" },
-               { "dd_name": "Location",  "dd_label": "on flower",                   "api_params": "&field:plant+interaction=nectaring+/+pollinating" }
+               { "dd_name": "Filters",  "dd_label": "on bark",                      "api_params": "&field:location+on+plant=on+bark" },
+               { "dd_name": "Filters",  "dd_label": "on flower",                    "api_params": "&field:location+on+plant=on+flower" },
+               { "dd_name": "Filters",  "dd_label": "on leaf",                      "api_params": "&field:location+on+plant=on+leaf" },
+               { "dd_name": "Filters",  "dd_label": "on flower",                    "api_params": "&field:location+on+plant=on+flower" },
+               { "dd_name": "Filters",  "dd_label": "on leaf",                      "api_params": "&field:location+on+plant=on+stem" }
             ]
     }
   ],
