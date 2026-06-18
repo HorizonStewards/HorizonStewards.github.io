@@ -199,6 +199,7 @@ function buildMenu( results, config ) {
                    activityDDName = capitalizeWords(getActivityFilter(appState) || dd_name);  
                    menu_string += buildDD( activityDDName, links);
                    links = '';
+                   links       += furl('./field_study.html'+buildParameterList(urlState),all_icon+CONST_ALL);
                }
                urlState = setActivityFilter(   urlState, config.ddFilters[i].ddLabel );
                let icon = config.ddFilters[i].icon ? ('<span style="padding-right:20px;">'+config.ddFilters[i].icon+'</span>') : '';
