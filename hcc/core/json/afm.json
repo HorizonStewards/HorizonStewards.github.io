@@ -7,6 +7,7 @@
         "component": "plants",                "title": "AFM",
         "project": "255754",                  "insect_project": "255754", 
         "field_id": "7623",                   "field_name": "plant that the organism was found on",
+        "user_id": "identifyam",
         "obs_api_params": "&nelat=39.09319066347188&nelng=-84.34097658959033&subview=map&swlat=39.092311432&swlng=-84.34214215755725"
     }
   ],
