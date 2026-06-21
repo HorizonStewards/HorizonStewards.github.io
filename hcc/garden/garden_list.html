@@ -224,7 +224,7 @@ function setupAPIParams( plantConfig ) {
        }
    }
 
-   if( config.obsAPIParams ) { api_params += config.obsAPIParams; }
+   if( plantConfig.obsAPIParams ) { api_params += plantConfig.obsAPIParams; }
    api_params += getPageParam(appState, '&page=');
 
    if( plantConfig.usePlantProjectImages && plantConfig.usePlantProjectImages === 'yes' ) {
