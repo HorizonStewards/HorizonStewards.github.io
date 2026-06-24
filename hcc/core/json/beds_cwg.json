@@ -9,10 +9,11 @@
     },
     { 
         "component": "beds",                  "title": "Casual Woodland Garden",   
-        "project": "133007",                  "activity_taxon_ids": "48038,119095,142654",
+        "project": "133007",                  "activity_taxon_ids": "48038,119095,142654,48627,85331,158076,635325",
         "beds":
             [
-               { "bed_name": "cwg",     "image": "cwg.jpg",    "taxon_ids": "48038,119095,142654,125381,47912" }
+               { "bed_name": "circle",     "image": "cwg.jpg",    "taxon_ids": "48038,119095,142654,125381,47912" },
+               { "bed_name": "meter box",  "image": "meter.jpg",  "taxon_ids": "48627,85331,158076,635325" }
             ]
     }
   ],
