@@ -5,7 +5,8 @@
    {
         "component": "visits",                             "project": "29497",        "utf8": "&#127807;",
         "study_title": "Gooseneck Loosestrife",            "study_desc": "Incidences of gooseneck loosestrife.",
-        "default_taxon_id": "132224"
+        "default_taxon_id": "132224",
+        "obs_api_params": "&id=29813356,33571024,55688745,55381743,54894951,83023981,85389130,89120091,154960637,133874550,169088218,173304754,176869556,189709117,217177287,211087244,225564928,225416681,275803866,241013996,291636773,291653022,364860029,346227263"
    }
   ],
   "default_sub_icons": 
