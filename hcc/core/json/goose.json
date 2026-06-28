@@ -4,7 +4,8 @@
   [
    {
         "component": "visits",                             "project": "22501",        "utf8": "&#127807;",
-        "study_title": "Gooseneck Loosestrife",            "study_desc": "Incidences of gooseneck loosestrife."       
+        "study_title": "Gooseneck Loosestrife",            "study_desc": "Incidences of gooseneck loosestrife.",
+        "default_taxon_id": "132224"
    }
   ],
   "default_sub_icons": 
