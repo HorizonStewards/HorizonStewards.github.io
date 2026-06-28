@@ -3,7 +3,7 @@
   "configurations":     
   [
    {
-        "component": "visits",                             "project": "22501",        "utf8": "&#127807;",
+        "component": "visits",                             "project": "29497",        "utf8": "&#127807;",
         "study_title": "Gooseneck Loosestrife",            "study_desc": "Incidences of gooseneck loosestrife.",
         "default_taxon_id": "132224"
    }
