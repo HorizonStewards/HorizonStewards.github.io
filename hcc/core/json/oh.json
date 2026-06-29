@@ -5,7 +5,7 @@
   [
     { 
         "component": "plants",                "title": "Sample Multiple Obs Fields",
-        "study_title": "3126",                "study_desc": "interaction->visited flower of",
+        "study_title": "plants w 3126",       "study_desc": "interaction->visited flower of",
         "project": "22501",                   "insect_project": "22501",
         "field_id": "3126",                   "field_name": "interaction->visited flower of",
         "default_taxon_id": "47157,47201,47822,47208,11989,71349,5562"
