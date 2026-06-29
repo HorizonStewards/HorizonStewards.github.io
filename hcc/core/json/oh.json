@@ -1,6 +1,6 @@
 { 
-  "plant_field": "garden list",         "plant_field_value": "yes", 
-  "default_map_zoom": "17",             "plant_list_user_id": "asteroidowl",
+  "plant_ids": "312177221,312177697,312176624,312175157,312179019,312178340",
+  "default_map_zoom": "17",             
   "configurations":     
   [
     { 
