@@ -1,6 +1,7 @@
 { 
   "plant_ids": "312177221,312177697,312176624,312175157,312179019,312178340",
-  "default_map_zoom": "17",             
+  "map_center": "&centerlat=40.169690348&centerlng=-82.66825084999999",   
+  "default_map_zoom": "7",             
   "configurations":     
   [
     { 
