@@ -1,6 +1,7 @@
 { 
   "plant_field": "garden list",         "plant_field_value": "yes", 
   "default_map_zoom": "9",
+  "map_extent": "nelat:39.531159629239504,nelng:-83.949940685,swlat:38.814067959,swlng:-84.983347707", 
   "configurations":     
   [
     { 
