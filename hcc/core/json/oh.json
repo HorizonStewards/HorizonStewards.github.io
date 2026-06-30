@@ -9,6 +9,20 @@
         "project": "22501",                   "insect_project": "22501",
         "field_id": "3126",                   "field_name": "interaction->visited flower of",
         "default_taxon_id": "47157,47201,47822,47208,11989,71349,5562"
+    },
+    { 
+        "component": "plants",                "title": "Sample Multiple Obs Fields",
+        "study_title": "plants w 498",        "study_desc": "nectar plant",
+        "project": "22501",                   "insect_project": "22501",
+        "field_id": "498",                    "field_name": "nectar plant",
+        "default_taxon_id": "47157,47201,47822,47208,11989,71349,5562"
+    },
+    { 
+        "component": "plants",                "title": "Sample Multiple Obs Fields",
+        "study_title": "plants w 4935",       "study_desc": "nectar / pollen delivering plant",
+        "project": "22501",                   "insect_project": "22501",
+        "field_id": "4935",                   "field_name": "nectar / pollen delivering plant",
+        "default_taxon_id": "47157,47201,47822,47208,11989,71349,5562"
     }
   ],
   "default_sub_icons": 
