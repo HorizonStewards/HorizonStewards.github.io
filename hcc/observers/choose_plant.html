@@ -185,7 +185,7 @@ async function gatherResources() {
   try {
    
       // Await the result of getObservations() and store the actual data
-      const config  = await asyncGetConfiguration( json_path, getComponent(appState) );
+      const config  = await asyncGetConfiguration( json_path, getComponent(appState), getStudyTitle(appState) );
 
       if( config.usePlantProjectImages && config.usePlantProjectImages === 'yes' ) {
           api_base = 'https://api.inaturalist.org/v1/observations';
