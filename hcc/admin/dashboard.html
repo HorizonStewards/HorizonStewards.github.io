@@ -148,6 +148,7 @@ function buildPage( configManager ) {
                    let config = configManager.configurations[i];
 
                    if( config.component === 'plants') {
+                       appState = setStudyTitle(appState, config.studyTitle);
                        let url  = '../garden/garden_list.html';
                        let icon = config.utf8 || CONST_LEAF_UTF8;
                        let name = config.studyTitle || CONST_PLANT_VALUE;
