@@ -24,6 +24,13 @@
         "project": "22501",                   "insect_project": "22501",
         "field_id": "4935",                   "field_name": "nectar / pollen delivering plant",
         "default_taxon_id": "47157,47201,47822,47208,11989,71349,5562"
+    },
+    { 
+        "component": "observers",                "title": "Sample Multiple Obs Fields",
+        "study_title": "observers 7623",      "study_desc": "plant that the organism was found on",
+        "project": "22501",                   "insect_project": "22501",
+        "field_id": "7623",                   "field_name": "plant that the organism was found on",
+        "default_taxon_id": "47157,47201,47822,47208,11989,71349,5562"
     }
   ],
   "default_sub_icons": 
