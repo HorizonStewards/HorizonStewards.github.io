@@ -627,7 +627,7 @@ async function gatherResources() {
       console.log('full config title: ' + config.getFullTitle());
       const map_params    = setupMapParams( config );
 
-       fmapextent(CONST_LS_MAP_EXTENT); 
+       fmapextent(config.mapExtent||CONST_LS_MAP_EXTENT); 
        fcreatebaselayer(0,bm_s_osm.url,bm_s_osm.description,bm_s_osm.attribution,true,'grayscale(100%) invert(100%) brightness(60%) sepia(100%) hue-rotate(180deg) saturate(150%)','',true);
        fcreateutflayer(1,utfgridapi.url+map_params+'&verifiable=any&term_id=1&term_value_id=7','Egg',utfgridapi.attr,true,{type:'square_tl',scaleType:'opacity',scaleFactor:1,colorRGB:[173,216,230]});
        fcreateutflayer(2,utfgridapi.url+map_params+'&verifiable=any&term_id=1&term_value_id=4','Pupa',utfgridapi.attr,true,{type:'square_tl',scaleType:'opacity',scaleFactor:1,colorRGB:[144,238,144]});
