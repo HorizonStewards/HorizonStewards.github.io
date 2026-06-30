@@ -194,6 +194,7 @@ function buildPage( configManager ) {
                    }
 
                    if( config.component === 'observers' ) {
+                       appState = setStudyTitle(appState, config.studyTitle);
                        let url  = '../observers/observer_counts.html';
                        let icon = config.utf8 || CONST_NPC_UTF8;
                        let name = config.studyTitle || CONST_OBSERVERS;
