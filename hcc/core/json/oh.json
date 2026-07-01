@@ -1,7 +1,8 @@
 { 
   "plant_ids": "312177221,312177697,312176624,312175157,312179019,312178340,376236524",
   "map_center": "&centerlat=40.169690348&centerlng=-82.66825084999999",   
-  "default_map_zoom": "7",             
+  "default_map_zoom": "9",
+  "map_extent": "nelat:39.531159629239504,nelng:-83.949940685,swlat:38.814067959,swlng:-84.983347707", 
   "configurations":     
   [
     { 
@@ -30,7 +31,8 @@
         "study_title": "observers 7623",      "study_desc": "plant that the organism was found on",
         "project": "22501",                   "insect_project": "22501",
         "field_id": "7623",                   "field_name": "plant that the organism was found on",
-        "default_taxon_id": "47157,47201,47822,47208,11989,71349,5562"
+        "default_taxon_id": "47157,47201,47822,47208,11989,71349,5562",
+        "map_type": "ls"
     }
   ],
   "default_sub_icons": 
