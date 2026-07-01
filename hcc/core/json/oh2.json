@@ -7,7 +7,7 @@
   [
     {
         "component": "studies",               "project": "22501",       
-        "study_title": "Found On",            "study_desc": "Selected fauna found visiting flora.  <br>Uses the \"Plant that the organism was found on\" observation field.",         
+        "study_title": "Found On",            "study_desc": "Selected fauna found visiting flora.  \nUses the \"Plant that the organism was found on\" observation field.",         
         "field_id": "7623",                   "obs_fields": "7623",
         "field_name": "plant that the organism was found on",
         "show_study_grid": "yes",             "user_id": "stockslager",
