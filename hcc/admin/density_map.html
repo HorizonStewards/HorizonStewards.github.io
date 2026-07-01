@@ -607,7 +607,11 @@ function setupMapParams(config) {
 
    // default these to what's in the config even though the state sometimes
    // holds the same attributes for other components.
-   if( getUser(appState) )              { api_params += '&user_id='  + getUser(appState); }
+   if( getUser(appState) ) { 
+       api_params += '&user_id='  + getUser(appState); 
+   } else if( config.userId ) { 
+       api_params += '&user_id=' + config.userId;
+   }
 
    api_params += getTaxonIdParam(appState, '&taxon_id=');
 
@@ -628,8 +632,6 @@ async function gatherResources() {
       const map_params    = setupMapParams( config );
 
       console.log('map_extent ' + config.mapExtent);
-      console.log('prj ' + config.project);
-      console.log('map p ' + map_params);
       let map_ex = null;
 
        if( config.mapExtent ) {
