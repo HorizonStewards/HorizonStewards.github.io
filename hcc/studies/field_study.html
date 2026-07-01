@@ -210,7 +210,15 @@ function buildMenu( results, config ) {
       }
       if( links ) { menu_string += buildDD( activityDDName, links); }
 
-      if( getComponent(appState) === COMPONENT_VISITS || getComponent(appState) === 'plantings' ) {
+      if( getComponent(appState) === 'plantings' ) {
+          let studyTitle = getStudyTitle(appState);
+          let urlState  = clearForDashParams(appState);
+          urlState = setStudyTitle( urlState, studyTitle );
+          urlState = setComponent( urlState, 'plantings' );
+          menu_string += buildMenuURL( furl('./field_study.html'+buildParameterList(urlState), 'Reset' ) );
+      }
+ 
+      if( getComponent(appState) === COMPONENT_VISITS ) {
           let studyTitle = getStudyTitle(appState);
           let urlState  = clearForDashParams(appState);
           urlState = setStudyTitle( urlState, studyTitle );
