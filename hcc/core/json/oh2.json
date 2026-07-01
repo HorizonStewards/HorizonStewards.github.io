@@ -22,10 +22,6 @@
               { "taxon_name": "Icteridae",       "taxon_id": "11989",     "icon": "&#128038;" }, 
               { "taxon_name": "Parulidae",       "taxon_id": "71349",     "icon": "&#128038;" }, 
               { "taxon_name": "Trochilidae",     "taxon_id": "5562",      "icon": "&#128038;" }
-            ],
-        "dd_filters":
-            [
-              { "dd_name": "Filters",    "dd_label": "larva only",     "api_params": "&term_id=1&term_value_id=6" }
             ]
     },
     {
@@ -46,10 +42,6 @@
               { "taxon_name": "Icteridae",       "taxon_id": "11989",     "icon": "&#128038;" }, 
               { "taxon_name": "Parulidae",       "taxon_id": "71349",     "icon": "&#128038;" }, 
               { "taxon_name": "Trochilidae",     "taxon_id": "5562",      "icon": "&#128038;" }
-            ],
-        "dd_filters":
-            [
-              { "dd_name": "Filters",    "dd_label": "larva only",     "api_params": "&term_id=1&term_value_id=6" }
             ]
     },
     {
@@ -70,10 +62,6 @@
               { "taxon_name": "Icteridae",       "taxon_id": "11989",     "icon": "&#128038;" }, 
               { "taxon_name": "Parulidae",       "taxon_id": "71349",     "icon": "&#128038;" }, 
               { "taxon_name": "Trochilidae",     "taxon_id": "5562",      "icon": "&#128038;" }
-            ],
-        "dd_filters":
-            [
-              { "dd_name": "Filters",    "dd_label": "larva only",     "api_params": "&term_id=1&term_value_id=6" }
             ]
     }
   ],
