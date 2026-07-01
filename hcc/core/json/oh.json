@@ -33,6 +33,23 @@
         "field_id": "7623",                   "field_name": "plant that the organism was found on",
         "default_taxon_id": "47157,47201,47822,47208,11989,71349,5562",
         "map_type": "ls"
+    },
+    {
+        "component": "studies",               "project": "22501",       
+        "study_title": "Matrix",              "study_desc": "Flora / Fauna interactions matrix.",         
+        "field_id": "7623",                   "obs_fields": "7623",
+        "field_name": "plant that the organism was found on",
+        "default_taxon_id": "47157,47201,47822,47208,11989,71349,5562",
+        "taxa":
+            [
+              { "taxon_name": "Lepidoptera",     "taxon_id": "47157",     "icon": "&#129419;" }, 
+              { "taxon_name": "Hymenoptera",     "taxon_id": "47201",     "icon": "&#128028;" }, 
+              { "taxon_name": "Diptera",         "taxon_id": "47822",     "icon": "&#129712;" }, 
+              { "taxon_name": "Coleoptera",      "taxon_id": "47208",     "icon": "&#129714;" }, 
+              { "taxon_name": "Icteridae",       "taxon_id": "11989",     "icon": "&#128038;" }, 
+              { "taxon_name": "Parulidae",       "taxon_id": "71349",     "icon": "&#128038;" }, 
+              { "taxon_name": "Trochilidae",     "taxon_id": "5562",      "icon": "&#128038;" }
+            ]
     }
   ],
   "default_sub_icons": 
