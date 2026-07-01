@@ -7,7 +7,7 @@
   [
     {
         "component": "studies",               "project": "22501",       
-        "study_title": "All Found On",        "study_desc": "Selected fauna found visiting flora.  Uses the \"Plant that the organism was found on\" observation field.",         
+        "study_title": "Found On",            "study_desc": "Selected fauna found visiting flora.  <br>Uses the \"Plant that the organism was found on\" observation field.",         
         "field_id": "7623",                   "obs_fields": "7623",
         "field_name": "plant that the organism was found on",
         "show_study_grid": "yes",             "user_id": "stockslager",
@@ -30,7 +30,7 @@
     },
     {
         "component": "studies",               "project": "22501",       
-        "study_title": "Larva Only",          "study_desc": "Selected larva found visiting flora.  Uses \"plant that the organism was found on\" and \"life stages annotations\".",         
+        "study_title": "Larva Only",          "study_desc": "Selected larva found visiting flora.  <br>Uses \"plant that the organism was found on\" and \"life stages annotations\".",         
         "field_id": "7623",                   "obs_fields": "7623",
         "field_name": "plant that the organism was found on",
         "show_study_grid": "yes",             "user_id": "stockslager",
@@ -54,7 +54,7 @@
     },
     {
         "component": "studies",               "project": "22501",       
-        "study_title": "On Flower",           "study_desc": "Selected fauna found interacting with a flower. Uses \"plant that the organism was found on\" and \"location on plant\" observation fields.",         
+        "study_title": "On Flower",           "study_desc": "Selected fauna found interacting with a flower. <br>Uses \"plant that the organism was found on\" and \"location on plant\" observation fields.",         
         "field_id": "7623",                   "obs_fields": "7623",
         "field_name": "plant that the organism was found on",
         "show_study_grid": "yes",             "user_id": "stockslager",
