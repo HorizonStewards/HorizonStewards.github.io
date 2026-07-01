@@ -84,14 +84,15 @@ class ConfigurationItem {
         this.fieldName = configData.field_name ?? null;
         this.fieldValue = configData.field_value ?? null;
 
-        this.studyTitle = configData.study_title ?? null;
-        this.studyDesc  = configData.study_desc ?? null;
+        this.studyTitle     = configData.study_title ?? null;
+        this.studyDesc      = configData.study_desc ?? null;
         this.defaultTaxonId = configData.default_taxon_id ?? null;
-        this.utf8         = configData.utf8 ?? null;
-        this.obsAPIParams = configData.obs_api_params ?? null;
+        this.utf8           = configData.utf8 ?? null;
+        this.obsAPIParams   = configData.obs_api_params ?? null;
         this.faunaAPIParams = configData.fauna_api_params ?? null;
-        this.ofieldIconic = configData.ofield_iconic ?? null;
-        this.merge        = configData.merge ?? null;
+        this.ofieldIconic   = configData.ofield_iconic ?? null;
+        this.merge          = configData.merge ?? null;
+        this.showStudyGrid  = configData.show_study_grid ?? null; 
 
         this.obsFields = configData.obs_fields ?? configData.field_id ?? null;
         
