@@ -61,6 +61,11 @@ function buildMenu(config) {
 
    if( id ) { menu_params += '&taxon_id=' + id + '&menu_id=' + id; }
 
+   // if a filter has been chosen, get the filter api params
+   if( getActivityFilter(appState) ) {
+       menu_params += getFilterAPIParams(config);
+   }
+
    menu_string = '<div class="navbar">';
 
    if( config.mapType !== 'hide' ) {
@@ -156,10 +161,9 @@ function setupMapAPIParams( config, api_params ) {
         }
     }
 
-    // if a filter has been chosen, get the filter api params
-    if( getActivityFilter(appState) ) {
+    /*if( getActivityFilter(appState) ) {
         api_params.searchParams.append('field:plant+interaction', getActivityFilter(appState));
-    } 
+    } */
 
     if (config.obsAPIParams) {
         const extraParams = new URLSearchParams(config.obsAPIParams);
@@ -221,8 +225,11 @@ function setupAPIParams( config ) {
 
     // if a filter has been chosen, get the filter api params
     if( getActivityFilter(appState) ) {
+        api_params += getFilterAPIParams(config);
+    }
+    /*if( getActivityFilter(appState) ) {
         api_params += '&field:plant+interaction='+getActivityFilter(appState);
-    } 
+    } */
 
     if( config.obsAPIParams ) { api_params += config.obsAPIParams; }
     api_params += getPageParam(appState, '&page=');
