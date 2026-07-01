@@ -166,6 +166,10 @@ function buildNavAbout( navbar, baseUrl, homeState ) {
     faddelem('span', hLink, { textContent: CONST_ABOUT });
 }
 
+function buildHome( url ) {
+   return ('<div id="home">'+url+'</div>');
+}
+
 function buildMenuURL( url ) {
   let dd = '<div id="menu_title">' + url +     
            '</div>';
