@@ -210,7 +210,7 @@ function buildMenu( results, config ) {
       }
       if( links ) { menu_string += buildDD( activityDDName, links); }
 
-      if( getComponent(appState) === COMPONENT_VISITS ) {
+      if( getComponent(appState) === COMPONENT_VISITS || getComponent(appState) === 'plantings' ) {
           let studyTitle = getStudyTitle(appState);
           let urlState  = clearForDashParams(appState);
           urlState = setStudyTitle( urlState, studyTitle );
