@@ -166,6 +166,13 @@ function buildNavAbout( navbar, baseUrl, homeState ) {
     faddelem('span', hLink, { textContent: CONST_ABOUT });
 }
 
+function buildMenuURL( url ) {
+  let dd = '<div id="menu_title">' + url +     
+           '</div>';
+
+  return( dd );
+}
+
 function buildNavDD( navbar, dd_name, links ) {
 
   // Create the Dropdown container
