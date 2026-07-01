@@ -122,11 +122,11 @@ function buildMenu2( config ) {
 
 function buildPage(data, config) {  
 
-   if( getComponent(appState) === 'plantings' || getComponent(appState) === 'visits' ) {
-       faddelem('p',document.body,{innerHTML:buildMenu(config)}); 
-   } else {
+   //if( getComponent(appState) === 'plantings' || getComponent(appState) === 'visits' ) {
+       //faddelem('p',document.body,{innerHTML:buildMenu(config)}); 
+   //} else {
        buildMenu2(config); 
-   }
+  // }
    
    // append the params needed by the grid to build the url for outlinks to iNat.
    let inat_url = setupAPIParams(config);
