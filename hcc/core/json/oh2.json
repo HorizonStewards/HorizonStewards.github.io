@@ -1,0 +1,90 @@
+{ 
+  "plant_ids": "312177221,312177697,312176624,312175157,312179019,312178340,376236524",
+  "map_center": "&centerlat=40.169690348&centerlng=-82.66825084999999",   
+  "default_map_zoom": "7",
+  "map_extent": "nelat:39.531159629239504,nelng:-83.949940685,swlat:38.814067959,swlng:-84.983347707", 
+  "configurations":     
+  [
+    {
+        "component": "studies",               "project": "22501",       
+        "study_title": "All Found On",        "study_desc": "Selected fauna found visiting flora.  Uses the \"Plant that the organism was found on\" observation field.",         
+        "field_id": "7623",                   "obs_fields": "7623",
+        "field_name": "plant that the organism was found on",
+        "show_study_grid": "yes",             "user_id": "stockslager",
+        "map_type": "ls",
+        "default_taxon_id": "47157,47201,47822,47208,11989,71349,5562",
+        "taxa":
+            [
+              { "taxon_name": "Lepidoptera",     "taxon_id": "47157",     "icon": "&#129419;" }, 
+              { "taxon_name": "Hymenoptera",     "taxon_id": "47201",     "icon": "&#128028;" }, 
+              { "taxon_name": "Diptera",         "taxon_id": "47822",     "icon": "&#129712;" }, 
+              { "taxon_name": "Coleoptera",      "taxon_id": "47208",     "icon": "&#129714;" }, 
+              { "taxon_name": "Icteridae",       "taxon_id": "11989",     "icon": "&#128038;" }, 
+              { "taxon_name": "Parulidae",       "taxon_id": "71349",     "icon": "&#128038;" }, 
+              { "taxon_name": "Trochilidae",     "taxon_id": "5562",      "icon": "&#128038;" }
+            ],
+        "dd_filters":
+            [
+              { "dd_name": "Filters",    "dd_label": "larva only",     "api_params": "&term_id=1&term_value_id=6" }
+            ]
+    },
+    {
+        "component": "studies",               "project": "22501",       
+        "study_title": "Larva Only",          "study_desc": "Selected larva found visiting flora.  Uses \"plant that the organism was found on\" and \"life stages annotations\".",         
+        "field_id": "7623",                   "obs_fields": "7623",
+        "field_name": "plant that the organism was found on",
+        "show_study_grid": "yes",             "user_id": "stockslager",
+        "map_type": "ls",
+        "default_taxon_id": "47157,47201,47822,47208,11989,71349,5562",
+        "obs_api_params": "&term_id=1&term_value_id=6",
+        "taxa":
+            [
+              { "taxon_name": "Lepidoptera",     "taxon_id": "47157",     "icon": "&#129419;" }, 
+              { "taxon_name": "Hymenoptera",     "taxon_id": "47201",     "icon": "&#128028;" }, 
+              { "taxon_name": "Diptera",         "taxon_id": "47822",     "icon": "&#129712;" }, 
+              { "taxon_name": "Coleoptera",      "taxon_id": "47208",     "icon": "&#129714;" }, 
+              { "taxon_name": "Icteridae",       "taxon_id": "11989",     "icon": "&#128038;" }, 
+              { "taxon_name": "Parulidae",       "taxon_id": "71349",     "icon": "&#128038;" }, 
+              { "taxon_name": "Trochilidae",     "taxon_id": "5562",      "icon": "&#128038;" }
+            ],
+        "dd_filters":
+            [
+              { "dd_name": "Filters",    "dd_label": "larva only",     "api_params": "&term_id=1&term_value_id=6" }
+            ]
+    },
+    {
+        "component": "studies",               "project": "22501",       
+        "study_title": "On Flower",           "study_desc": "Selected fauna found interacting with a flower. Uses \"plant that the organism was found on\" and \"location on plant\" observation fields.",         
+        "field_id": "7623",                   "obs_fields": "7623",
+        "field_name": "plant that the organism was found on",
+        "show_study_grid": "yes",             "user_id": "stockslager",
+        "map_type": "ls",
+        "default_taxon_id": "47157,47201,47822,47208,11989,71349,5562",
+        "obs_api_params": "&field:location+on+plant=flower",
+        "taxa":
+            [
+              { "taxon_name": "Lepidoptera",     "taxon_id": "47157",     "icon": "&#129419;" }, 
+              { "taxon_name": "Hymenoptera",     "taxon_id": "47201",     "icon": "&#128028;" }, 
+              { "taxon_name": "Diptera",         "taxon_id": "47822",     "icon": "&#129712;" }, 
+              { "taxon_name": "Coleoptera",      "taxon_id": "47208",     "icon": "&#129714;" }, 
+              { "taxon_name": "Icteridae",       "taxon_id": "11989",     "icon": "&#128038;" }, 
+              { "taxon_name": "Parulidae",       "taxon_id": "71349",     "icon": "&#128038;" }, 
+              { "taxon_name": "Trochilidae",     "taxon_id": "5562",      "icon": "&#128038;" }
+            ],
+        "dd_filters":
+            [
+              { "dd_name": "Filters",    "dd_label": "larva only",     "api_params": "&term_id=1&term_value_id=6" }
+            ]
+    }
+  ],
+  "default_sub_icons": 
+  [
+              { "nm": "Lepidoptera",     "taxon_id": "47157",     "icon": "&#129419;" }, 
+              { "nm": "Hymenoptera",     "taxon_id": "47201",     "icon": "&#128028;" }, 
+              { "nm": "Diptera",         "taxon_id": "47822",     "icon": "&#129712;" }, 
+              { "nm": "Coleoptera",      "taxon_id": "47208",     "icon": "&#129714;" }, 
+              { "nm": "Icteridae",       "taxon_id": "11989",     "icon": "&#128038;" }, 
+              { "nm": "Parulidae",       "taxon_id": "71349",     "icon": "&#128038;" }, 
+              { "nm": "Trochilidae",     "taxon_id": "5562",      "icon": "&#128038;" }
+  ]
+}
