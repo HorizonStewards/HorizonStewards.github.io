@@ -238,7 +238,7 @@ function buildMenu( results, config ) {
 
       if( p_hide_dash === 'no' ) {
           //let urlState  = clearForDashParams(appState);
-          menu_string += buildHome(furl('../admin/dashboard.html?params='+getParams(appState))); //+buildParameterList(urlState),CONST_LEAF_UTF8));
+          menu_string += buildHome(furl('../admin/dashboard.html?params='+getParams(appState),CONST_LEAF_UTF8)); //+buildParameterList(urlState),CONST_LEAF_UTF8));
       }
  
       menu_string += '</div>';
