@@ -603,6 +603,7 @@ function setupMapParams(config) {
    } else {
        api_params += '?project_id=' + (config.insectProject||config.project);
        api_params += '&field:'+config.fieldName+'='+getPlantId(appState);
+       if( getFieldValue(appState) ) { api_params += '=' + getFieldValue(appState); }
    }
 
    // default these to what's in the config even though the state sometimes
