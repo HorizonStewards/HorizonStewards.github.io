@@ -602,6 +602,7 @@ function setupMapParams(config) {
        api_params += '?project_id=' + (config.insectProject||config.project);
    } else if( getComponent(appState) === COMPONENT_STUDIES ) {
        api_params += '?project_id=' + (config.insectProject||config.project);
+       console.log('field val ' + getFieldValue(appState);
        api_params += '&field:'+config.fieldName+'='+getFieldValue(appState);
    } else {
        api_params += '?project_id=' + (config.insectProject||config.project);
