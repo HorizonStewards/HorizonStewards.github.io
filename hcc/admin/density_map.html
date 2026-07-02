@@ -600,9 +600,12 @@ function setupMapParams(config) {
    // component hiker will just be looking at all the butterflies without filtering by an obs field.
    if( getComponent(appState) === COMPONENT_HIKER ) {
        api_params += '?project_id=' + (config.insectProject||config.project);
+   } else if( getComponent(appState) === COMPONENT_STUDIES ) {
+       api_params += '?project_id=' + (config.insectProject||config.project);
+       api_params += '&field:'+config.fieldName+'='+getFieldValue(appState);
    } else {
        api_params += '?project_id=' + (config.insectProject||config.project);
-       api_params += '&field:'+config.fieldName+'='+getPlantId(appState)||getFieldValue(appState);
+       api_params += '&field:'+config.fieldName+'='+getPlantId(appState);
    }
 
    // default these to what's in the config even though the state sometimes
