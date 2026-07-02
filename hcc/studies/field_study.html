@@ -468,10 +468,11 @@ function fresults( xobj, config ) {
                           if( rec.ofvs[j].value ) {
                               field1 = rec.ofvs[j].value.toLowerCase();
                               displayName = rec.ofvs[j].value.toLowerCase();
+                              let name = ''; let cname = '';
                                 
                               if( rec.ofvs[j].taxon ){
-                                  let name  = rec.ofvs[j].taxon.name || '';
-                                  let cname = rec.ofvs[j].taxon.preferred_common_name || '';
+                                  name  = rec.ofvs[j].taxon.name || '';
+                                  cname = rec.ofvs[j].taxon.preferred_common_name || '';
                                   field1 = '<span style="font-size:larger">'+cname.toLowerCase()+'</span><span style="font-style:italic"><br>('+name+')</span>';
                               }
                               if( rec.ofvs[j].field_id.toString() === '17383' ) {  // wild ancestral colony 
@@ -479,6 +480,7 @@ function fresults( xobj, config ) {
                               } else {
                                   let urlState = appState;
                                   urlState = setPage(urlState, '1');
+                                  urlState = setPlantName(urlState, cname||name);
                                   urlState = setFieldName(urlState, rec.ofvs[j].name);
                                   urlState = setFieldValue(urlState, replaceDoubleQuotes(rec.ofvs[j].value.toString()));
                                   values.push({innerHTML:furl('./field_study.html'+buildParameterList(urlState), field1)});
