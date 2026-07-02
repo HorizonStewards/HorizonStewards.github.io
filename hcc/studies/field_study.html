@@ -393,6 +393,7 @@ function fresults( xobj, config ) {
              let urlState = appState;
              urlState = setTaxonId(urlState, tax_id);
              urlState = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
+             urlState = setTaxonName(urlState, pref_tax_name||tax_name);
              taxon = furl('./field_study.html'+buildParameterList(urlState),'<span style=\"font-size:larger\">'+pref_tax_name.toLowerCase()+'</span><span style=\"font-style:italic\"><br>('+tax_name+')</span>');         
          }
        
