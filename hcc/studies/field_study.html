@@ -237,9 +237,9 @@ function buildMenu( results, config ) {
       }
 
       if( p_hide_dash === 'no' ) {
-          let urlState  = clearForDashParams(appState);
           winurlparams.delete('without_user_id');
           winurlparams.delete('without_term_id');
+          let urlState  = clearForDashParams(appState);
           menu_string += buildHome(furl('../admin/dashboard.html'+buildParameterList(urlState),CONST_LEAF_UTF8));
           winurlparams.append('without_user_id', p_not_user_id);
           winurlparams.append('without_term_id', p_without_term_id);
