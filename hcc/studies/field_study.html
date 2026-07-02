@@ -173,7 +173,9 @@ function buildMenu( results, config ) {
           urlState     = setMenuId(urlState, '');
           urlState     = setMenuName(urlState, '');
           urlState     = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
+          urlState     = setUser(urlState, '');
           links       += furl('./field_study.html'+buildParameterList(urlState),'<span style="padding-right:20px;">'+CONST_PLUS_UTF8+'</span>'+CONST_ALL);
+          urlState     = setUser(urlState, getUser(appState));
           for( let i=0; i<config.taxa.length; i++ ) {
                urlState = setMenuId(   urlState, config.taxa[i].taxonId );
                urlState = setMenuName( urlState, config.taxa[i].taxonName );
