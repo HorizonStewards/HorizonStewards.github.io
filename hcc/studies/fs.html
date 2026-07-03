@@ -451,7 +451,7 @@ function fresults( xobj, config ) {
            } 
        
            labelCount++;
-           if( box_array[e].field_name !== '' ){
+           if( box_array[e].field_name !== '' ) {
             
                dlString += ('<tr id="trkey"><td id="tdkey">' + furl2(root_obs_fields+box_array[e].field_id,box_array[e].field_id) + '</td>');
                dlString += ('<td id="tdkey">' + truncate(box_array[e].field_name.toLowerCase(), 25) + '</td></tr>');
@@ -481,11 +481,9 @@ function fresults( xobj, config ) {
                        labels.push({innerText:'Merged Fields (see above)'});
                    } 
                }
-           } 
-      }
-
-      for( let e=0; e<box_array.length; e++ ){
-           if( box_array[e].field_name === '' ){
+           } else {
+               // not found on this page of data.  these can't be all moved to the end of the list because
+               // we need to match them in order with the column headers for the clear filters.
                dlString += ('<tr id="trkey"><td id="tdkey">' + furl2(root_obs_fields+box_array[e].field_id,box_array[e].field_id) + '</td>');
                dlString += ('<td id="tdkey">missing from this page</td></tr>');
                if( config.merge !== 'yes' ) {
@@ -493,6 +491,16 @@ function fresults( xobj, config ) {
                }
            }
       }
+
+      /*for( let e=0; e<box_array.length; e++ ){
+           if( box_array[e].field_name === '' ){
+               dlString += ('<tr id="trkey"><td id="tdkey">' + furl2(root_obs_fields+box_array[e].field_id,box_array[e].field_id) + '</td>');
+               dlString += ('<td id="tdkey">missing from this page</td></tr>');
+               if( config.merge !== 'yes' ) {
+                   labels.push({innerText:''});
+               }
+           }
+      }*/
     
       dlString += '</table></span></div>';
       let clearState = clearForDashParams(appState);
