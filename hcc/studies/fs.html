@@ -672,10 +672,9 @@ function fresults( xobj, config ) {
          let urlState = appState;
          urlState = setUser(urlState, rec.user.login);
          urlState = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
-         // Force the entire cell content into an unbreakable inline container string
-         const photoCellContent = furl(root_observations + rec.id, '<img class="mini_photo2" src="' + ((rec.photos && rec.photos.length > 0) ? rec.photos[0].url : '') + '" />');
 
-         values.push({ innerHTML: '<span style="display: inline-block; white-space: nowrap; vertical-align: middle;">' + photoCellContent + '</span>'});         
+         values.push({innerHTML:user_icon+furl('./field_study.html'+buildParameterList(urlState),rec.user.login)+'</span>'});
+         
          //values.push({innerHTML:user_icon+furl('./field_study.html'+buildParameterList(urlState),rec.user.login)+'</span>'});
          //values.push({innerHTML:'<span>' + user_icon + '</span><span>' + furl('./field_study.html'+buildParameterList(urlState),rec.user.login) + '</span></div>'});
 
