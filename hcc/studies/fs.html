@@ -32,10 +32,12 @@ th a:hover {
     opacity: 1 !important;
 }
 
-/* Keep this just to ensure the icon inherits the inverted white text color */
 .clear-btn { 
-    color: var(--color-text-invert) !important; 
-}
+    text-decoration: none !important; 
+    
+    /* Simulates a bold look while using whatever text color the parent link dictates */
+    text-shadow: 0 0 0.5px currentColor; 
+} 
  
   /* 1. THE GUTTER FRAME */
   body {
@@ -318,7 +320,7 @@ function fresults( xobj, config ) {
           let hasFilter = window.location.search.includes('lifestage=') && 
                          !window.location.search.includes('lifestage=&'); 
 
-          let iconHtml = '<span class="clear-btn" style="font-size:14px; padding-left:8px; display:inline-block; vertical-align:middle; line-height:1;">ⓧ</span>';
+          let iconHtml = '<span class="clear-btn" style="font-size:18px; padding-left:12px; display:inline-block; vertical-align:middle; line-height:1;">ⓧ</span>'
           let resetLink = hasFilter ? ' ' + furl(resetUrl, iconHtml) : ''; 
 
           labels.push({ innerHTML: 'Life Stage' + resetLink }); 
