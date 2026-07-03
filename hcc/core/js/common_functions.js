@@ -214,24 +214,24 @@ function buildNavDD( navbar, dd_name, links ) {
   }
 }
 
-function buildNavActivityFiltersDD( navbar, dd_name, config, url=null ) {
+function buildNavActivityFiltersDD( navbar, dd_name, config, url, homeState ) {
     if( config.ddFilters && config.ddFilters.length > 0 ) {
         let dd_name = config.ddFilters[0].ddName;
         let filters = [];
-        let urlState = appState;
+        let urlState = homeState;
         urlState = setActivityFilter(urlState, '');
-        filters.push(faddelem('a', null, { href: url||'./garden_activity.html' + buildParameterList(urlState), textContent: CONST_ALL }));
+        filters.push(faddelem('a', null, { href: url + buildParameterList(urlState), textContent: CONST_ALL }));
         for( let i = 0; i<config.ddFilters.length; i++ ) {
              if( dd_name !== config.ddFilters[i].ddName ) {
-                 buildNavDD( navbar, getActivityFilter(appState) || dd_name, filters );
+                 buildNavDD( navbar, getActivityFilter(homeState) || dd_name, filters );
                  dd_name = config.ddFilters[0].ddName;
              }
-             let urlState = appState;
+             let urlState = homeState;
              urlState     = setActivityFilter(urlState, config.ddFilters[i].ddLabel);
-             let filter  = faddelem('a', null, { href: url||'./garden_activity.html' + buildParameterList(urlState), textContent: config.ddFilters[i].ddLabel });
+             let filter  = faddelem('a', null, { href: url + buildParameterList(urlState), textContent: config.ddFilters[i].ddLabel });
              filters.push(filter);
         }
-        buildNavDD( navbar, getActivityFilter(appState) || dd_name, filters );
+        buildNavDD( navbar, getActivityFilter(homeState) || dd_name, filters );
     }
 }
 
