@@ -480,7 +480,8 @@ function fresults( xobj, config ) {
     
       dlString += '</table></span></div>';
       let clearState = clearForDashParams(appState);
-      clearState     = setComponent(clearState, getComponent(appState));
+      clearState     = setComponent(clearState, getComponent(appState));    // component required when clearing state on a reset.
+      clearState     = setStudyTitle(clearState, getStudyTitle(appState));  // study title required when clearing state on a reset.
 
       faddelem('p', document.body, {
           innerHTML: '<div class="top-bar">' +
