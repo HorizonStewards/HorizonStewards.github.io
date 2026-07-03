@@ -305,7 +305,7 @@ function fresults( xobj, config ) {
           let hasFilter = window.location.search.includes('lifestage=') && 
                          !window.location.search.includes('lifestage=&'); 
 
-          let resetLink = hasFilter ? ' ' + furl(resetUrl, '✕') : ''; 
+          let resetLink = hasFilter ? ' ' + furl(resetUrl, 'ⓧ') : ''; 
 
           labels.push({ innerHTML: 'Life Stage' + resetLink }); 
       }
