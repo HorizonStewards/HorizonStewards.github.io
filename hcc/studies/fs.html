@@ -415,35 +415,21 @@ function fresults( xobj, config ) {
          values.push({innerHTML:taxon});
 
          if( p_show_ls === 'yes' ) {
+             let stage = ''; // Default placeholder if missing or empty
              if( rec.annotations && rec.annotations.length > 0 ) {
-                 for( let i=0; i<rec.annotations.length; i++ ) {
-                      if( rec.annotations[i].controlled_attribute_id.toString() === '1' ) {          // life stage annotation found
-                          if( rec.annotations[i].controlled_value_id.toString() === '2' ) {          // adult
-                              values.push({innerText:'adult'});
-                          } else if( rec.annotations[i].controlled_value_id.toString() === '3' ) {   // teneral
-                              values.push({innerText:'teneral'});
-                          } else if( rec.annotations[i].controlled_value_id.toString() === '4' ) {   // pupa
-                              values.push({innerText:'pupa'});
-                          } else if( rec.annotations[i].controlled_value_id.toString() === '5' ) {   // nymph
-                              values.push({innerText:'nymph'});
-                          } else if( rec.annotations[i].controlled_value_id.toString() === '6' ) {   // larva
-                              values.push({innerText:'larva'});
-                          } else if( rec.annotations[i].controlled_value_id.toString() === '7' ) {   // egg
-                              values.push({innerText:'egg'});
-                          } else if( rec.annotations[i].controlled_value_id.toString() === '8' ) {   // juvenile
-                              values.push({innerText:'juvenile'});
-                          } else if( rec.annotations[i].controlled_value_id.toString() === '16' ) {  // submiago
-                              values.push({innerText:'submiago'});
-                          } else {
-                              values.push({innerText:'unknown'});
-                          }
+                 for( let i = 0; i < rec.annotations.length; i++ ) {
+                      if( rec.annotations[i].controlled_attribute_id?.toString() === '1' ) {
+                          const valueId = rec.annotations[i].controlled_value_id?.toString();
+                          // look up the life stage in the life stages map...
+                          stage = LIFE_STAGE_MAP[valueId] || 'unknown';
+                          break; 
                       }
                  }
-             } else {
-                 values.push({innerText:''});
              }
+             // Always pushes exactly one object to keep array lengths consistent
+             values.push({ innerText: stage }); 
          }
-         
+       
          values.push({innerHTML:furl(root_observations+rec.id,'<img class="mini_photo2" src="'+((rec.photos&&rec.photos.length>0)?rec.photos[0].url:'')+'" />')});
 
          let user_icon = rec.user.icon || '';
