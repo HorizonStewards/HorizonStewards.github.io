@@ -1,6 +1,6 @@
-<!DOCTYPE html>       
-<html lang="en">       
- 
+<!DOCTYPE html>     
+<html lang="en">         
+   
 <head> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
 <meta name="viewport" content="width=device-width, minimum-scale=1.0" />
@@ -20,6 +20,37 @@
 </head>
 
 <style>
+/* for the column header un-filter */
+.filterable-header a,
+.filterable-header a:active {
+    color: var(--color-text-link); 
+    background: transparent;
+    background-color: transparent;
+    text-decoration: none;
+    
+    /* Adds a subtle opacity so it blends nicely in the header, matching your old look */
+    opacity: 0.7;
+    transition: opacity 0.2s ease, filter 0.2s ease;
+}
+
+/* 2. Hover State: Turn off background blocks and amplify the blue color vibrancy */
+.filterable-header a:hover {
+    color: var(--color-text-link); 
+    background: transparent;
+    background-color: transparent;
+    text-decoration: none;
+    
+    /* Brings icon to full opacity and injects a 40% vibrancy boost to make the blue pop */
+    opacity: 1;
+    filter: brightness(1.4); 
+}
+
+/* 3. Icon Thickness Management */
+.clear-btn { 
+    /* Ensures the custom bold text shadow uses the exact blue dictated by the link above */
+    text-shadow: 0 0 0.5px currentColor; 
+}
+ 
   /* 1. THE GUTTER FRAME */
   body {
     padding-left: 50px;
@@ -104,8 +135,9 @@
   /* Original Helpers */
   #h2 { font-weight:bold; font-size:20px; }
   p { width:100%; }
-  .npcicon { width:34px; height:34px; border: 1px solid cornflowerblue; padding: 5px; border-radius: 50px; }
-  .user { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .npcicon { width:14px; height:14px; border: 1px solid cornflowerblue; padding: 5px; border-radius: 50px; }
+  .user_head { align-items: center; justify-content: center; }
+  .user { display: inline-flex; align-items: center; white-space: nowrap; gap: 8px; margin-left: 2px; } 
 </style>
 <body>
 <script>
@@ -116,6 +148,7 @@ let winurlparams = new URLSearchParams(winurlsearchstr.substring(1));
 let p_hide_dash       = winurlparams.get('hide_dash') || 'no';
 let p_without_term_id = winurlparams.get('without_term_id'); 
 let p_not_user_id     = winurlparams.get('without_user_id');
+let p_show_ls         = winurlparams.get('show_ls') || 'no';
 let p_field = '';
 let p_field_value = '';
 let field_array = [];
@@ -282,13 +315,45 @@ function fresults( xobj, config ) {
       let flower = '';
       let dlString = '<div id="divhead"><span id="topright">';
       let labelCount = 0;
+      let iconHtml = '<span class="clear-btn" style="font-size:18px; padding-left:6px; display:inline-block; vertical-align:middle; line-height:1;">ⓧ</span>';
 
       let merged = 'observation field';
     
       labels = [{innerText:'#'}];
 
       labels.push({innerText:'Photo'});
-      labels.push({innerText:'Name'});
+
+      // taxon name column...
+      let nameState = appState; 
+      nameState = setTaxonId(nameState, '');
+      nameState = setTaxonName(nameState, '');
+      nameState = setPage(nameState, '1'); 
+      let taxonUrl = './field_study.html' + buildParameterList(nameState); 
+
+      // Is a valid, active taxon filter currently in the URL string? 
+      let hasTaxonFilter = window.location.search.includes('taxonid=') && 
+                          !window.location.search.includes('taxonid=&'); 
+
+      let resetTaxonLink = hasTaxonFilter ? ' ' + furl(taxonUrl, iconHtml) : '';
+
+      labels.push({ innerHTML: '<span class="filterable-header">Name' + resetTaxonLink + '</span>' });
+
+      // life stages column...
+      if( p_show_ls === 'yes' ) { 
+          let urlState = appState; 
+          urlState = setLifeStage(urlState, ''); 
+          urlState = setPage(urlState, '1'); 
+          let resetUrl = './field_study.html' + buildParameterList(urlState); 
+
+          // Is a valid, active lifestage filter currently in the URL string? 
+          let hasFilter = window.location.search.includes('lifestage=') && 
+                         !window.location.search.includes('lifestage=&'); 
+
+          let resetLink = hasFilter ? ' ' + furl(resetUrl, iconHtml) : '';
+
+          labels.push({ innerHTML: '<span class="filterable-header">Life Stage' + resetLink + '</span>' });
+      }
+    
       labels.push({innerText:'Obs Photo'});
 
       if( config.merge === 'yes' ){
@@ -304,7 +369,7 @@ function fresults( xobj, config ) {
                  for( let j=0; j<rec.ofvs.length; j++ ){
                       if( field_array_copy[r] === rec.ofvs[j].field_id.toString() ){
                           let box_row   = box_array.find( boxRow => boxRow.field_id === rec.ofvs[j].field_id.toString() );
-                          box_row.field_name = truncate(rec.ofvs[j].name.toString(), 25);
+                          box_row.field_name = rec.ofvs[j].name.toString();
                       }
                  }
               }
@@ -331,9 +396,27 @@ function fresults( xobj, config ) {
            if( box_array[e].field_name !== '' ){
             
                dlString += ('<tr id="trkey"><td id="tdkey">' + furl(root_obs_fields+box_array[e].field_id,box_array[e].field_id) + '</td>');
-               dlString += ('<td id="tdkey">' + box_array[e].field_name.toLowerCase() + '</td></tr>');
+               dlString += ('<td id="tdkey">' + truncate(box_array[e].field_name.toLowerCase(), 25) + '</td></tr>');
                if( config.merge !== 'yes' ){
-                   labels.push({innerText:box_array[e].field_name});
+                   if( box_array[e].field_name === getFieldName(appState) ) {
+                       let urlState = appState;
+                       urlState = setPage(urlState, '1');
+                       urlState = setPlantName(urlState, '');
+                       urlState = setFieldName(urlState, '');
+                       urlState = setFieldValue(urlState, '');
+                                   
+                       let resetUrl = './field_study.html'+buildParameterList(urlState); 
+    
+                       // Is a valid, active lifestage filter currently in the URL string? 
+                       let hasFilter = window.location.search.includes('fieldvalue=') && 
+                                      !window.location.search.includes('fieldvalue=&'); 
+
+                       let resetLink = hasFilter ? ' ' + furl(resetUrl, iconHtml) : '';
+
+                       labels.push({ innerHTML: '<span class="filterable-header">'+ truncate(box_array[e].field_name,25) + resetLink + '</span>' });
+                   } else {
+                       labels.push({innerText:truncate(box_array[e].field_name,25)});
+                   }
                } else {
                    if( firstCol === 'yes' ){
                        firstCol = 'no';
@@ -407,14 +490,41 @@ function fresults( xobj, config ) {
 
          values.push({innerHTML:tax_photo});
          values.push({innerHTML:taxon});
-         values.push({innerHTML:furl(root_observations+rec.id,'<img class="mini_photo2" src="'+((rec.photos&&rec.photos.length>0)?rec.photos[0].url:'')+'" />')});
 
+         if( p_show_ls === 'yes' ) { 
+             let stage = ''; // Default placeholder if missing or empty 
+             let valueId = ''; 
+    
+             if( rec.annotations && rec.annotations.length > 0 ) { 
+                 for( let i = 0; i < rec.annotations.length; i++ ) { 
+                      if( rec.annotations[i].controlled_attribute_id?.toString() === '1' ) { 
+                          valueId = rec.annotations[i].controlled_value_id?.toString() || ''; 
+                          // look up the life stage in the life stages map... 
+                          stage = LIFE_STAGE_MAP[valueId] || 'unknown'; 
+                          break; 
+                      } 
+                 }  
+             } 
+    
+             if( stage === 'unknown' ) { 
+                 values.push({ innerHTML: stage }); 
+             } else { 
+                 let urlState = appState; 
+                 urlState = setPage(urlState, '1'); // set the page to 1 anytime they choose to filter. 
+        
+                 urlState = setLifeStage(urlState, valueId || 'null');     
+                 values.push({ innerHTML: furl('./field_study.html' + buildParameterList(urlState), stage || '[none]') }); 
+             } 
+         } 
+
+         values.push({ innerHTML: furl(root_observations + rec.id, '<img class="mini_photo2" src="' + ((rec.photos && rec.photos.length > 0) ? rec.photos[0].url : '') + '" />') });
+       
          let user_icon = rec.user.icon || '';
          
          if( user_icon === '' ){
-            user_icon += '<div class="user"><div class="npcicon"></div>';
+            user_icon += '<span class="user"><span class="npcicon"></span>';
          } else {
-            user_icon = '<div class="user"><img class="smallicon" src="'+user_icon+'" />';
+            user_icon = '<img class="smallicon" src="'+user_icon+'" />';
          }
 
          let emojiTitle = 'Merged Observation Fields:&#10;';
@@ -542,9 +652,9 @@ function fresults( xobj, config ) {
          let urlState = appState;
          urlState = setUser(urlState, rec.user.login);
          urlState = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
-         //values.push({innerHTML:user_icon});
-         values.push({innerHTML:'<span>' + user_icon + '</span><span>' + furl('./field_study.html'+buildParameterList(urlState),rec.user.login) + '</span></div>'});
 
+         values.push({innerHTML:'<span class="user">'+user_icon+furl('./field_study.html'+buildParameterList(urlState),rec.user.login)+'</span>'});
+         
          tempBrow.push(values);
       };
 
@@ -557,8 +667,21 @@ function fresults( xobj, config ) {
           labels.push({innerText:'Date'});
           labels.push({innerText:'Field Notes'});
       }
-      labels.push({innerHTML:'<div class="user"><span>Observer</span></div>'});
-      
+
+      // Observer column...
+      let obsState = appState; 
+      obsState = setUser(obsState, '');
+      obsState = setPage(obsState, '1'); 
+      let obsUrl = './field_study.html' + buildParameterList(obsState); 
+
+      // Is a valid, active observer filter currently in the URL string? 
+      let hasObsFilter = window.location.search.includes('user=') && 
+                        !window.location.search.includes('user=&'); 
+
+      let resetObsLink = hasObsFilter ? ' ' + furl(obsUrl, iconHtml) : '';
+
+      labels.push({ innerHTML: '<span class="filterable-header"><span class="user_head">Observer' + resetObsLink + '</span></span>' });
+
       faddelems('th',hrow,labels);
 
       let tbody = faddelem('tbody',table);
@@ -629,7 +752,24 @@ function setupAPIParams( config ) {
 
    if( config.defaultPlace ) { api_params += '&place_id='        + config.defaultPlace; }
 
-   // hidden parameters available directly from the url rather than the config file or state.
+   // filter for life stage annotation...
+   if( getLifeStage(appState) ) { 
+       if( getLifeStage(appState) === 'null' ) {
+           api_params += '&without_term_id=1';
+       } else {
+           api_params += '&term_id=1&term_value_id='  + getLifeStage(appState);
+       }
+   }
+
+   // filter for evidence annotation...
+   if( getEvidence(appState) ) { 
+       if( getEvidence(appState) === 'null' ) {
+           api_params += '&without_term_id=22';
+       } else {
+           api_params += '&term_id=1&term_value_id='  + getEvidence(appState);
+       }
+   }
+ 
    if( p_without_term_id )   { api_params += '&without_term_id=' + p_without_term_id; }
    if( p_not_user_id )       { api_params += '&not_user_id='     + p_not_user_id; }
 
