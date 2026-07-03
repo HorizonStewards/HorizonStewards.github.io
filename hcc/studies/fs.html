@@ -50,6 +50,18 @@
     /* Ensures the custom bold text shadow uses the exact blue dictated by the link above */
     text-shadow: 0 0 0.5px currentColor; 
 }
+
+.clear-all-filters a:hover {
+    color: royalblue;
+    /*color: var(--color-text-link); */
+    background: transparent;
+    background-color: transparent;
+    text-decoration: none;
+    
+    /* Brings icon to full opacity and injects a 40% vibrancy boost to make the blue pop */
+    opacity: 1;
+    filter: brightness(1.4); 
+}
  
   /* 1. THE GUTTER FRAME */
   body {
@@ -481,7 +493,7 @@ function fresults( xobj, config ) {
                      '<tr id="trkey"><td id="tdkey">page:</td><td id="tdright">' + fcomnum(page_curr) + ' of ' + fcomnum(page_max) + '</td></tr>' +
                    '</table>' +
                  '</div>' +
-                 '<span class="filterable-header">' + 
+                 '<span class="clear-all-filters">' + 
                     '<span style="white-space: nowrap; margin-bottom: 2px;">' + furl('./fs.html'+buildParameterList(clearState), 'clear all filters') + '</span>' + 
                  '</span>' +              
                '</div>' +
