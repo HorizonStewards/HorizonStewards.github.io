@@ -415,7 +415,7 @@ function fresults( xobj, config ) {
          values.push({innerHTML:taxon});
 
          if( p_show_ls === 'yes' ) {
-             if( rec.annotations && rec.annotations.length > 1 ) {
+             if( rec.annotations && rec.annotations.length > 0 ) {
                  for( let i=0; i<rec.annotations.length; i++ ) {
                       if( rec.annotations[i].controlled_attribute_id.toString() === '1' ) {          // life stage annotation found
                           if( rec.annotations[i].controlled_value_id.toString() === '2' ) {          // adult
@@ -439,6 +439,8 @@ function fresults( xobj, config ) {
                           }
                       }
                  }
+             } else {
+                 values.push({innerText:''});
              }
          }
          
