@@ -205,8 +205,9 @@ function buildMenu2( results, config ) {
       }
 
       if( p_hide_dash === 'no' ) {
-          let homeUrl = '../admin/dashboard.html?params='+getParams(appState);
-          buildNavHome( navbar, homeUrl, appState );
+          let homeState = clearForDashParams(appState);
+          let homeUrl = '../admin/dashboard.html';
+          buildNavHome( navbar, homeUrl, homeState );
       }
 
       // Append the DOM nodes to the body
