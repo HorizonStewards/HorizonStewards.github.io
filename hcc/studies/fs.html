@@ -436,7 +436,7 @@ function fresults( xobj, config ) {
                  urlState = setPage(urlState, '1'); // set the page to 1 anytime they choose to filter. 
         
                  urlState = setLifeStage(urlState, valueId || 'null');     
-                 values.push({ innerHTML: furl('./fs.html' + buildParameterList(urlState), stage || '<em>none</em>') }); 
+                 values.push({ innerHTML: furl('./fs.html' + buildParameterList(urlState), stage || '[none]') }); 
              } 
          } 
 
