@@ -203,7 +203,7 @@ function buildMenu2( results, config ) {
       }
 
       if( getComponent(appState) === 'plantings' || getComponent(appState) === 'visits' || config.showStudyGrid === 'yes' ) {
-          menu_string += buildMenuURL( furl('./study_grid.html'+buildParameterList(appState), 'Grid' ) );
+          buildNavURL( navbar, furl('./study_grid.html'+buildParameterList(appState), 'Grid') );
       }
 
       if( p_hide_dash === 'no' ) {
