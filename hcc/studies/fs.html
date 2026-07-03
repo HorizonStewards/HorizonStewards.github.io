@@ -213,7 +213,7 @@ function buildMenu2( results, config ) {
       }
 
       if( config.ddFilters && config.ddFilters.length > 0 ) {
-          buildNavActivityFiltersDD( navbar, 'Filters', config );
+          buildNavActivityFiltersDD( navbar, 'Filters', config, baseUrl );
       }
 
       if( getComponent(appState) === 'plantings' || getComponent(appState) === 'visits' || config.showStudyGrid === 'yes' ) {
