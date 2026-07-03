@@ -432,7 +432,7 @@ function fresults( xobj, config ) {
              } else {
                  let urlState = appState;
                  urlState   = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
-                 values.push({ innerHTML:furl('./fs.html'+buildParameterList(urlState, stage||'[none]')+'&life_stage='+valueId) }); 
+                 values.push({ innerHTML:furl('./fs.html'+buildParameterList(urlState)+'&life_stage='+valueId, stage||'[none]') }); 
              }
          }
        
