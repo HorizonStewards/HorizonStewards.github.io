@@ -170,6 +170,8 @@ function replaceDoubleQuotes(str) {
   return str.replace(/"/g, '%22');
 }
 
+function furl(url,txt=url) { return '<a href="'+url+'">'+txt+'</a>'; };
+
 function buildMenu2( results, config ) {
       // Create the main navbar container
       let navbar = document.createElement('div');
