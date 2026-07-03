@@ -415,19 +415,25 @@ function fresults( xobj, config ) {
          values.push({innerHTML:taxon});
 
          if( p_show_ls === 'yes' ) {
-             let stage = ''; // Default placeholder if missing or empty
+             let stage   = ''; // Default placeholder if missing or empty
+             let valueId = '';
              if( rec.annotations && rec.annotations.length > 0 ) {
                  for( let i = 0; i < rec.annotations.length; i++ ) {
                       if( rec.annotations[i].controlled_attribute_id?.toString() === '1' ) {
-                          const valueId = rec.annotations[i].controlled_value_id?.toString();
+                          valueId = rec.annotations[i].controlled_value_id?.toString();
                           // look up the life stage in the life stages map...
                           stage = LIFE_STAGE_MAP[valueId] || 'unknown';
                           break; 
                       }
                  }
              }
-             // Always pushes exactly one object to keep array lengths consistent
-             values.push({ innerText: stage }); 
+             if( stage === 'unknown' ) {
+                 values.push({ innerText:stage }); 
+             } else {
+                 let urlState = appState;
+                 urlState   = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
+                 values.push({ innerHTML:furl('./fs.html'+buildParameterList(urlState, stage||'[none]')+'&life_stage='+valueId) }); 
+             }
          }
        
          values.push({innerHTML:furl(root_observations+rec.id,'<img class="mini_photo2" src="'+((rec.photos&&rec.photos.length>0)?rec.photos[0].url:'')+'" />')});
