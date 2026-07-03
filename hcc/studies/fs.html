@@ -158,8 +158,22 @@
   #h2 { font-weight:bold; font-size:20px; }
   p { width:100%; }
   .npcicon { width:18px; height:18px; border: 1px solid cornflowerblue; padding: 5px; border-radius: 50px; }
-  .user_head { align-items: center; justify-content: center; }
-  .user { display: inline-flex; align-items: center; white-space: nowrap; gap: 8px; margin-left: 2px; }
+.user_head {
+  display: flex; /* Ensure display is set to flex */
+  align-items: center;
+  justify-content: center;
+}
+
+.user {
+  display: flex; /* Changed from inline-flex to full flex */
+  align-items: center;
+  justify-content: center; /* Centers the image and text together */
+  white-space: nowrap;
+  gap: 8px;
+  margin-left: 0; /* Removed the 2px offset to prevent shifting */
+}
+/*  .user_head { align-items: center; justify-content: center; }
+  .user { display: inline-flex; align-items: center; white-space: nowrap; gap: 8px; margin-left: 2px; } */
 </style>
 <body>
 <script>
