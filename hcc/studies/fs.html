@@ -420,22 +420,25 @@ function fresults( xobj, config ) {
                dlString += ('<tr id="trkey"><td id="tdkey">' + furl(root_obs_fields+box_array[e].field_id,box_array[e].field_id) + '</td>');
                dlString += ('<td id="tdkey">' + box_array[e].field_name.toLowerCase() + '</td></tr>');
                if( config.merge !== 'yes' ){
-                   let urlState = appState;
-                   urlState = setPage(urlState, '1');
-                   urlState = setPlantName(urlState, '');
-                   urlState = setFieldName(urlState, '');
-                   urlState = setFieldValue(urlState, '');
-                                  
-                   let resetUrl = './fs.html'+buildParameterList(urlState); 
+                   if( box_array[e].field_name === getFieldName(appState) ) {
+                       let urlState = appState;
+                       urlState = setPage(urlState, '1');
+                       urlState = setPlantName(urlState, '');
+                       urlState = setFieldName(urlState, '');
+                       urlState = setFieldValue(urlState, '');
+                                   
+                       let resetUrl = './fs.html'+buildParameterList(urlState); 
+    
+                       // Is a valid, active lifestage filter currently in the URL string? 
+                       let hasFilter = window.location.search.includes('fieldvalue=') && 
+                                      !window.location.search.includes('fieldvalue=&'); 
 
-                   // Is a valid, active lifestage filter currently in the URL string? 
-                   let hasFilter = window.location.search.includes('fieldvalue=') && 
-                                  !window.location.search.includes('fieldvalue=&'); 
+                       let resetLink = hasFilter ? ' ' + furl(resetUrl, iconHtml) : '';
 
-                   let resetLink = hasFilter ? ' ' + furl(resetUrl, iconHtml) : '';
-
-                   labels.push({ innerHTML: '<span class="filterable-header">'+ box_array[e].field_name + resetLink + '</span>' });
-                   //labels.push({innerText:box_array[e].field_name});
+                       labels.push({ innerHTML: '<span class="filterable-header">'+ box_array[e].field_name + resetLink + '</span>' });
+                   } else {
+                       labels.push({innerText:box_array[e].field_name});
+                   }
                } else {
                    if( firstCol === 'yes' ){
                        firstCol = 'no';
