@@ -173,12 +173,13 @@ function replaceDoubleQuotes(str) {
 }
 
 function buildMenu2( results, config ) {
-      let menu_string = '';
+      // Create the main navbar container
+      let navbar = document.createElement('div');
+      navbar.className = 'navbar v2-menu';
+   
       let links = '';
       let taxon_param = '';
       let menu_name = config.getSubIconNameByTaxonId(config, getMenuId(appState)) || CONST_SHOW;
-
-      menu_string = '<div class="navbar">';
 
       if( config.taxa && config.taxa.length > 0 ) {
           buildNavDDFilteredShow( navbar, menu_name, results, config, baseUrl );
@@ -349,7 +350,7 @@ function fresults( xobj, config ) {
       let page_prev = ((page_curr>1)?page_curr-1:null);
       let page_next = ((page_curr<page_max)?page_curr+1:null);
 
-      buildMenu(results, config);
+      buildMenu2(results, config);
 
       let labels = [];
       let mismatch = '';
