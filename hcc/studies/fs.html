@@ -20,6 +20,10 @@
 </head>
 
 <style>
+  /* for the column header un-filter */
+  .clear-btn { color: var(--color-text-invert) !important; text-decoration: none !important; margin-left: 6px; font-weight: bold; opacity: 0.7; }
+  .clear-btn:hover { opacity: 1; }
+ 
   /* 1. THE GUTTER FRAME */
   body {
     padding-left: 50px;
@@ -291,10 +295,24 @@ function fresults( xobj, config ) {
       labels.push({innerText:'Photo'});
       labels.push({innerText:'Name'});
 
-      if( p_show_ls === 'yes' ) {
-          labels.push({innerText:'Life Stage'});
-      }
-     
+      if( p_show_ls === 'yes' ) { 
+          let urlState = appState;
+          urlState = setLifeStage(urlState, ''); 
+          urlState = setPage(urlState, '1');     
+    
+          let resetUrl = './fs.html' + buildParameterList(urlState);
+    
+          // is a valid, active life_stage filter is currently in the URL string?
+          let hasFilter = window.location.search.includes('lifestage=') && 
+                         !window.location.search.includes('lifestage=null') && 
+                         !window.location.search.includes('lifestage=&');
+    
+          // Create the ✕ link string if filtered, otherwise leave it empty
+          let resetLink = hasFilter ? ` <a href="${furl(resetUrl)}" class="clear-btn">✕</a>` : '';
+    
+          labels.push({ innerHTML: 'Life Stage' + resetLink }); 
+      }     
+    
       labels.push({innerText:'Obs Photo'});
 
       if( config.merge === 'yes' ){
