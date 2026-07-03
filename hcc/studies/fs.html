@@ -422,7 +422,7 @@ function fresults( xobj, config ) {
                if( config.merge !== 'yes' ){
                    console.log('box ' + box_array[e].field_name);
                    console.log('fn    ' + getFieldName(appState));
-                   if( (truncate(box_array[e].field_name, 25)) === getFieldName(appState) ) {
+                   if( box_array[e].field_name === ( truncate(getFieldName(appState), 25) ) ) {
                        let urlState = appState;
                        urlState = setPage(urlState, '1');
                        urlState = setPlantName(urlState, '');
