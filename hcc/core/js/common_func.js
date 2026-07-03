@@ -2,6 +2,17 @@ const CONST_SPECIES      = 'species:';
 const CONST_OBSERVATIONS = 'observations:';
 const CONST_OF           = ' of ';
 
+const LIFE_STAGE_MAP = {
+  '2': 'adult',
+  '3': 'teneral',
+  '4': 'pupa',
+  '5': 'nymph',
+  '6': 'larva',
+  '7': 'egg',
+  '8': 'juvenile',
+  '16': 'submiago'
+};
+
 function fcomnum(n) { return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',') }; 
 
 function furl(url,txt=url) { return '<a href="'+url+'">'+txt+'</a>'; };
