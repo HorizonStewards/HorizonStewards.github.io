@@ -662,19 +662,22 @@ function setupAPIParams( config ) {
 
    if( config.defaultPlace ) { api_params += '&place_id='        + config.defaultPlace; }
 
-   // filter for annotations...
-   const lifeStage = getLifeStage(appState);
-   const evidence  = getEvidence(appState);
-
-   if( lifeStage ) {
-       // If 'null', send an empty string; otherwise, send the actual lifeStage ID
-       const valueId = lifeStage === 'null' ? '' : lifeStage;
-       api_params += '&term_id=1&term_value_id=' + valueId;
+   // filter for life stage annotation...
+   if( getLifeStage(appState) ) { 
+       if( getLifeStage(appState) === 'null' ) {
+           api_params += '&without_term_id=1';
+       } else {
+           api_params += '&term_id=1&term_value_id='  + getLifeStage(appState);
+       }
    }
 
-   if( evidence ) {
-       const valueId = evidence === 'null' ? '' : evidence;
-       api_params += '&term_id=22&term_value_id=' + valueId;
+   // filter for evidence annotation...
+   if( getEvidence(appState) ) { 
+       if( getEvidence(appState) === 'null' ) {
+           api_params += '&without_term_id=22';
+       } else {
+           api_params += '&term_id=1&term_value_id='  + getEvidence(appState);
+       }
    }
  
    if( p_without_term_id )   { api_params += '&without_term_id=' + p_without_term_id; }
