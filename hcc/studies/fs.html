@@ -343,22 +343,23 @@ function fresults( xobj, config ) {
       labels = [{innerText:'#'}];
 
       labels.push({innerText:'Photo'});
-      ///labels.push({innerText:'Name'});
 
-          let nameState = appState; 
-          nameState = setTaxonId(nameState, '');
-          nameState = setTaxonName(nameState, '');
-          nameState = setPage(nameState, '1'); 
-          let taxonUrl = './fs.html' + buildParameterList(nameState); 
+      // taxon name column...
+      let nameState = appState; 
+      nameState = setTaxonId(nameState, '');
+      nameState = setTaxonName(nameState, '');
+      nameState = setPage(nameState, '1'); 
+      let taxonUrl = './fs.html' + buildParameterList(nameState); 
 
-          // Is a valid, active taxon filter currently in the URL string? 
-          let hasTaxonFilter = window.location.search.includes('taxonid=') && 
-                              !window.location.search.includes('taxonid=&'); 
+      // Is a valid, active taxon filter currently in the URL string? 
+      let hasTaxonFilter = window.location.search.includes('taxonid=') && 
+                          !window.location.search.includes('taxonid=&'); 
 
-          let resetTaxonLink = hasTaxonFilter ? ' ' + furl(taxonUrl, iconHtml) : '';
+      let resetTaxonLink = hasTaxonFilter ? ' ' + furl(taxonUrl, iconHtml) : '';
 
-          labels.push({ innerHTML: '<span class="filterable-header">Name' + resetTaxonLink + '</span>' });
+      labels.push({ innerHTML: '<span class="filterable-header">Name' + resetTaxonLink + '</span>' });
 
+      // life stages column...
       if( p_show_ls === 'yes' ) { 
           let urlState = appState; 
           urlState = setLifeStage(urlState, ''); 
@@ -669,7 +670,22 @@ function fresults( xobj, config ) {
           labels.push({innerText:'Date'});
           labels.push({innerText:'Field Notes'});
       }
-      labels.push({innerHTML:'<div class="user"><span>Observer</span></div>'});
+
+      // Observer column...
+      let obsState = appState; 
+      obsState = setUser(obsState, '');
+      obsState = setPage(obsState, '1'); 
+      let obsUrl = './fs.html' + buildParameterList(obsState); 
+
+      // Is a valid, active observer filter currently in the URL string? 
+      let hasObsFilter = window.location.search.includes('user=') && 
+                        !window.location.search.includes('user=&'); 
+
+      let resetObsLink = hasObsFilter ? ' ' + furl(obsUrl, iconHtml) : '';
+
+      labels.push({ innerHTML: '<span class="filterable-header"><div class="user"><span>Observer</span></div>' + resetObsLink + '</span>' });
+
+     // labels.push({innerHTML:'<div class="user"><span>Observer</span></div>'});
       
       faddelems('th',hrow,labels);
 
