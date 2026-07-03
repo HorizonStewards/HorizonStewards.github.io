@@ -214,13 +214,13 @@ function buildNavDD( navbar, dd_name, links ) {
   }
 }
 
-function buildNavActivityFiltersDD( navbar, dd_name, config ) {
+function buildNavActivityFiltersDD( navbar, dd_name, config, url=null ) {
     if( config.ddFilters && config.ddFilters.length > 0 ) {
         let dd_name = config.ddFilters[0].ddName;
         let filters = [];
         let urlState = appState;
         urlState = setActivityFilter(urlState, '');
-        filters.push(faddelem('a', null, { href: './garden_activity.html' + buildParameterList(urlState), textContent: CONST_ALL }));
+        filters.push(faddelem('a', null, { href: url||'./garden_activity.html' + buildParameterList(urlState), textContent: CONST_ALL }));
         for( let i = 0; i<config.ddFilters.length; i++ ) {
              if( dd_name !== config.ddFilters[i].ddName ) {
                  buildNavDD( navbar, getActivityFilter(appState) || dd_name, filters );
