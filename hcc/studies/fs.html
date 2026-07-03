@@ -465,6 +465,8 @@ function fresults( xobj, config ) {
       }
     
       dlString += '</table></span></div>';
+      let clearState = clearForDashParams(appState);
+      clearState     = setComponent(clearState, getComponent(appState));
 
       faddelem('p', document.body, {
           innerHTML: '<div class="top-bar">' +
@@ -477,9 +479,7 @@ function fresults( xobj, config ) {
                      '<tr id="trkey"><td id="tdkey">page:</td><td id="tdright">' + fcomnum(page_curr) + ' of ' + fcomnum(page_max) + '</td></tr>' +
                    '</table>' +
                  '</div>' +
-                 let clearState = clearForDashParams(appState);
-                 clearState     = setComponent(clearState, getComponent(appState));
-                 furl('./fs.html'+buildParameterList(clearState), 'clear all filters');              
+                 furl('./fs.html'+buildParameterList(clearState), 'clear all filters') +              
                '</div>' +
                dlString + 
              '</div>'
