@@ -391,7 +391,7 @@ function fresults( xobj, config ) {
                  for( let j=0; j<rec.ofvs.length; j++ ){
                       if( field_array_copy[r] === rec.ofvs[j].field_id.toString() ){
                           let box_row   = box_array.find( boxRow => boxRow.field_id === rec.ofvs[j].field_id.toString() );
-                          box_row.field_name = truncate(rec.ofvs[j].name.toString(), 25);
+                          box_row.field_name = rec.ofvs[j].name.toString();
                       }
                  }
               }
@@ -418,11 +418,11 @@ function fresults( xobj, config ) {
            if( box_array[e].field_name !== '' ){
             
                dlString += ('<tr id="trkey"><td id="tdkey">' + furl(root_obs_fields+box_array[e].field_id,box_array[e].field_id) + '</td>');
-               dlString += ('<td id="tdkey">' + box_array[e].field_name.toLowerCase() + '</td></tr>');
+               dlString += ('<td id="tdkey">' + truncate(box_array[e].field_name.toLowerCase(), 25) + '</td></tr>');
                if( config.merge !== 'yes' ){
                    console.log('box ' + box_array[e].field_name);
                    console.log('fn    ' + getFieldName(appState));
-                   if( box_array[e].field_name === ( truncate(getFieldName(appState), 25) ) ) {
+                   if( box_array[e].field_name === getFieldName(appState) ) {
                        let urlState = appState;
                        urlState = setPage(urlState, '1');
                        urlState = setPlantName(urlState, '');
@@ -437,9 +437,9 @@ function fresults( xobj, config ) {
 
                        let resetLink = hasFilter ? ' ' + furl(resetUrl, iconHtml) : '';
 
-                       labels.push({ innerHTML: '<span class="filterable-header">'+ box_array[e].field_name + resetLink + '</span>' });
+                       labels.push({ innerHTML: '<span class="filterable-header">'+ truncate(box_array[e].field_name,25) + resetLink + '</span>' });
                    } else {
-                       labels.push({innerText:box_array[e].field_name});
+                       labels.push({innerText:truncate(box_array[e].field_name,25)});
                    }
                } else {
                    if( firstCol === 'yes' ){
