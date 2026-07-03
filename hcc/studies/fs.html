@@ -420,7 +420,7 @@ function fresults( xobj, config ) {
                dlString += ('<tr id="trkey"><td id="tdkey">' + furl(root_obs_fields+box_array[e].field_id,box_array[e].field_id) + '</td>');
                dlString += ('<td id="tdkey">' + box_array[e].field_name.toLowerCase() + '</td></tr>');
                if( config.merge !== 'yes' ){
-                   console.log('trunc ' + truncate(box_array[e].field_name, 25));
+                   console.log('box ' + box_array[e].field_name);
                    console.log('fn    ' + getFieldName(appState));
                    if( (truncate(box_array[e].field_name, 25)) === getFieldName(appState) ) {
                        let urlState = appState;
