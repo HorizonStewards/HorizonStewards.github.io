@@ -213,6 +213,7 @@ function buildMenu2( results, config ) {
       }
 
       if( getComponent(appState) === 'plantings' || getComponent(appState) === 'visits' || config.showStudyGrid === 'yes' ) {
+          console.log('grid ');
           buildNavURL( navbar, furl('./study_grid.html'+buildParameterList(appState), 'Grid') );
       }
 
