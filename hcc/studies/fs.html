@@ -656,7 +656,7 @@ function fresults( xobj, config ) {
          let urlState = appState;
          urlState = setUser(urlState, rec.user.login);
          urlState = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
-         values.push({innerHTML:user_icon});
+         values.push({innerHTML:user_icon+furl('./field_study.html'+buildParameterList(urlState),rec.user.login)});
          //values.push({innerHTML:'<span>' + user_icon + '</span><span>' + furl('./field_study.html'+buildParameterList(urlState),rec.user.login) + '</span></div>'});
 
          tempBrow.push(values);
