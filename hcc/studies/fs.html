@@ -527,9 +527,9 @@ function fresults( xobj, config ) {
          let user_icon = rec.user.icon || '';
          
          if( user_icon === '' ){
-            user_icon += '<div class="user"><div class="npcicon"></div>';
+            user_icon += '<span class="user"><span class="npcicon"></span>';
          } else {
-            user_icon = '<div class="user"><img class="smallicon" src="'+user_icon+'" />';
+            user_icon = '<span class="user"><img class="smallicon" src="'+user_icon+'" />';
          }
 
          let emojiTitle = 'Merged Observation Fields:&#10;';
@@ -657,7 +657,7 @@ function fresults( xobj, config ) {
          let urlState = appState;
          urlState = setUser(urlState, rec.user.login);
          urlState = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
-         values.push({innerHTML:user_icon+furl('./field_study.html'+buildParameterList(urlState),rec.user.login)});
+         values.push({innerHTML:user_icon+furl('./field_study.html'+buildParameterList(urlState),rec.user.login)+'</span>'});
          //values.push({innerHTML:'<span>' + user_icon + '</span><span>' + furl('./field_study.html'+buildParameterList(urlState),rec.user.login) + '</span></div>'});
 
          tempBrow.push(values);
