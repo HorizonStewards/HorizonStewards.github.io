@@ -1,6 +1,6 @@
-<!DOCTYPE html>     
-<html lang="en">         
-   
+<!DOCTYPE html>                    
+<html lang="en">              
+      
 <head> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
 <meta name="viewport" content="width=device-width, minimum-scale=1.0" />
@@ -12,10 +12,8 @@
 <link rel="manifest"                         href="../core/assets/plant_club.webmanifest" />
 <link rel="stylesheet" type="text/css"       href="../core/css/core.css" />
 <meta name="apple-mobile-web-app-title" content="Field Study" />
-<script type="text/javascript" src='../core/js/global_const.js'> </script>
-<script type="text/javascript" src='../core/js/common_func.js'> </script>
+<script type="text/javascript" src='../core/js/common_functions.js'> </script>
 <script type="text/javascript" src='../core/js/store.js'> </script>
-<script type="text/javascript" src='../core/js/roots.js'> </script>
 <title>Field Study</title>
 </head>
 
@@ -23,7 +21,8 @@
 /* for the column header un-filter */
 .filterable-header a,
 .filterable-header a:active {
-    color: var(--color-text-link); 
+    color: cornflowerblue;
+    /*color: var(--color-text-link); */
     background: transparent;
     background-color: transparent;
     text-decoration: none;
@@ -35,7 +34,8 @@
 
 /* 2. Hover State: Turn off background blocks and amplify the blue color vibrancy */
 .filterable-header a:hover {
-    color: var(--color-text-link); 
+    color: cornflowerblue;
+    /*color: var(--color-text-link); */
     background: transparent;
     background-color: transparent;
     text-decoration: none;
@@ -49,6 +49,30 @@
 .clear-btn { 
     /* Ensures the custom bold text shadow uses the exact blue dictated by the link above */
     text-shadow: 0 0 0.5px currentColor; 
+}
+
+.clear-all-filters a:active {
+    color: royalblue;
+    /*color: var(--color-text-link); */
+    background: transparent;
+    background-color: transparent;
+    text-decoration: none;
+    
+    /* Adds a subtle opacity so it blends nicely in the header, matching your old look */
+    opacity: 0.7;
+    transition: opacity 0.2s ease, filter 0.2s ease;
+}
+
+.clear-all-filters a:hover {
+    color: cornflowerblue;
+    /*color: var(--color-text-link); */
+    background: transparent;
+    background-color: transparent;
+    text-decoration: none;
+    
+    /* Brings icon to full opacity and injects a 40% vibrancy boost to make the blue pop */
+    opacity: 1;
+    filter: brightness(1.4); 
 }
  
   /* 1. THE GUTTER FRAME */
@@ -172,111 +196,38 @@ function replaceDoubleQuotes(str) {
   return str.replace(/"/g, '%22');
 }
 
-function buildMenu( results, config ) {
-      let menu_string = '';
-      let links = '';
-      let taxon_param = '';
+function furl2(url,txt=url) { return '<a href="'+url+'">'+txt+'</a>'; };
+
+function buildMenu2( results, config ) {
+      // Create the main navbar container
+      let navbar = document.createElement('div');
+      navbar.className = 'navbar v2-menu';
+
+      let baseUrl = window.location.origin + window.location.pathname;
+   
       let menu_name = config.getSubIconNameByTaxonId(config, getMenuId(appState)) || CONST_SHOW;
 
-      menu_string = '<div class="navbar">';
-
-      if( config.places && config.places.length > 0 ) {
-          let urlState = appState;
-          urlState     = setPlaceMenuId(urlState, '');
-          urlState     = setPlaceMenuName(urlState, ''); 
-          urlState     = setTaxonId(urlState, '');
-          urlState     = setFieldValue(urlState, '');
-          urlState     = setFieldName(urlState, '');
-          urlState     = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
-          links       += furl('./field_study.html'+buildParameterList(urlState),capitalizeWords(CONST_ALL));
-          for( let i=0; i<config.places.length; i++ ) {
-               urlState = setPlaceMenuId( urlState, config.places[i].placeId );
-               urlState = setPlaceMenuName( urlState, config.places[i].placeName );
-               links += furl('./field_study.html'+buildParameterList(urlState),config.places[i].placeName);
-          }
+      if( config.subIcons && config.subIcons.length > 0 ) {
+          appState = setTaxonDD(appState, '');
+          buildNavDDFilteredShow( navbar, menu_name, results, config, baseUrl );
       }
 
-      if( links ) { menu_string += buildDD((getPlaceMenuName(appState)||CONST_PLACE), links); }
-      links = '';
-
-      if( config.taxa && config.taxa.length > 0 ) {
-          let urlState = appState;
-          urlState     = setTaxonId(urlState, '');   
-          urlState     = setFieldValue(urlState, '');
-          urlState     = setPlantName(urlState, '');
-          urlState     = setTaxonName(urlState, '');
-          urlState     = setMenuId(urlState, '');
-          urlState     = setMenuName(urlState, '');
-          urlState     = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
-          urlState     = setUser(urlState, '');
-          links       += furl('./field_study.html'+buildParameterList(urlState),'<span style="padding-right:20px;">'+CONST_PLUS_UTF8+'</span>'+CONST_ALL);
-          urlState     = setUser(urlState, getUser(appState));
-          for( let i=0; i<config.taxa.length; i++ ) {
-               urlState = setMenuId(   urlState, config.taxa[i].taxonId );
-               urlState = setMenuName( urlState, config.taxa[i].taxonName );
-               links += furl('./field_study.html'+buildParameterList(urlState),'<span style="padding-right:20px;">'+config.taxa[i].icon+'</span>'+config.taxa[i].taxonName);
-          }
-      }
-
-      let taxon_name = capitalizeWords(getMenuName(appState) || CONST_SHOW);  
-      if( links ) { menu_string += buildDD( taxon_name, links); }
-
-      links = '';
-
-      let activityDDName = '';
       if( config.ddFilters && config.ddFilters.length > 0 ) {
-          let dd_name  = config.ddFilters[0].ddName;
-          let all_icon = config.ddFilters[0].icon ? ('<span style="padding-right:20px;">'+CONST_PLUS_UTF8+'</span>') : '';
-          let urlState = appState;
-          //urlState     = setFieldValue(urlState, '');
-          //urlState     = setFieldName(urlState, '');
-          urlState     = setActivityFilter(urlState, '');
-          urlState     = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
-          links       += furl('./field_study.html'+buildParameterList(urlState),all_icon+CONST_ALL);
-          for( let i=0; i<config.ddFilters.length; i++ ) {
-               if( dd_name !== config.ddFilters[i].ddName.toString() ) {
-                   activityDDName = capitalizeWords(getActivityFilter(appState) || dd_name);  
-                   menu_string += buildDD( activityDDName, links);
-                   links = '';
-                   links       += furl('./field_study.html'+buildParameterList(urlState),all_icon+CONST_ALL);
-                   dd_name = config.ddFilters[i].ddName;
-               }
-               urlState = setActivityFilter(   urlState, config.ddFilters[i].ddLabel );
-               let icon = config.ddFilters[i].icon ? ('<span style="padding-right:20px;">'+config.ddFilters[i].icon+'</span>') : '';
-               links += furl('./field_study.html'+buildParameterList(urlState),'<span style="padding-right:20px;">'+icon+config.ddFilters[i].ddLabel);
-          }
-          activityDDName = capitalizeWords(getActivityFilter(appState) || dd_name);  
-      }
-      if( links ) { menu_string += buildDD( activityDDName, links); }
-
-      if( getComponent(appState) === 'plantings' ) {
-          let studyTitle = getStudyTitle(appState);
-          let urlState  = clearForDashParams(appState);
-          urlState = setStudyTitle( urlState, studyTitle );
-          urlState = setComponent( urlState, 'plantings' );
-          menu_string += buildMenuURL( furl('./field_study.html'+buildParameterList(urlState), 'Reset' ) );
-      }
- 
-      if( getComponent(appState) === COMPONENT_VISITS ) {
-          let studyTitle = getStudyTitle(appState);
-          let urlState  = clearForDashParams(appState);
-          urlState = setStudyTitle( urlState, studyTitle );
-          urlState = setComponent( urlState, COMPONENT_VISITS );
-          menu_string += buildMenuURL( furl('./field_study.html'+buildParameterList(urlState), 'Reset' ) );
+          buildNavActivityFiltersDD( navbar, 'Filters', config, baseUrl, appState );
       }
 
       if( getComponent(appState) === 'plantings' || getComponent(appState) === 'visits' || config.showStudyGrid === 'yes' ) {
-          menu_string += buildMenuURL( furl('./study_grid.html'+buildParameterList(appState), 'Grid' ) );
+          buildNavLink( navbar, './study_grid.html', appState, 'Grid' );
       }
 
       if( p_hide_dash === 'no' ) {
-          //let urlState  = clearForDashParams(appState);
-          menu_string += buildHome(furl('../admin/dashboard.html?params='+getParams(appState),CONST_LEAF_UTF8)); //+buildParameterList(urlState),CONST_LEAF_UTF8));
+          let homeState = clearForDashParams(appState);
+          let homeUrl = '../admin/dashboard.html';
+          buildNavHome( navbar, homeUrl, homeState );
       }
- 
-      menu_string += '</div>';
 
-      faddelem('p',document.body,{innerHTML:(menu_string)});  
+      // Append the DOM nodes to the body
+      faddelem('p', document.body).appendChild(navbar);
 }
 
 function isMultipleOfFour(num) {
@@ -307,7 +258,7 @@ function fresults( xobj, config ) {
       let page_prev = ((page_curr>1)?page_curr-1:null);
       let page_next = ((page_curr<page_max)?page_curr+1:null);
 
-      buildMenu(results, config);
+      buildMenu2(results, config);
 
       let labels = [];
       let mismatch = '';
@@ -334,7 +285,7 @@ function fresults( xobj, config ) {
       let hasTaxonFilter = window.location.search.includes('taxonid=') && 
                           !window.location.search.includes('taxonid=&'); 
 
-      let resetTaxonLink = hasTaxonFilter ? ' ' + furl(taxonUrl, iconHtml) : '';
+      let resetTaxonLink = hasTaxonFilter ? ' ' + furl2(taxonUrl, iconHtml) : '';
 
       labels.push({ innerHTML: '<span class="filterable-header">Name' + resetTaxonLink + '</span>' });
 
@@ -349,7 +300,7 @@ function fresults( xobj, config ) {
           let hasFilter = window.location.search.includes('lifestage=') && 
                          !window.location.search.includes('lifestage=&'); 
 
-          let resetLink = hasFilter ? ' ' + furl(resetUrl, iconHtml) : '';
+          let resetLink = hasFilter ? ' ' + furl2(resetUrl, iconHtml) : '';
 
           labels.push({ innerHTML: '<span class="filterable-header">Life Stage' + resetLink + '</span>' });
       }
@@ -393,9 +344,9 @@ function fresults( xobj, config ) {
            } 
        
            labelCount++;
-           if( box_array[e].field_name !== '' ){
+           if( box_array[e].field_name !== '' ) {
             
-               dlString += ('<tr id="trkey"><td id="tdkey">' + furl(root_obs_fields+box_array[e].field_id,box_array[e].field_id) + '</td>');
+               dlString += ('<tr id="trkey"><td id="tdkey">' + furl2(root_obs_fields+box_array[e].field_id,box_array[e].field_id) + '</td>');
                dlString += ('<td id="tdkey">' + truncate(box_array[e].field_name.toLowerCase(), 25) + '</td></tr>');
                if( config.merge !== 'yes' ){
                    if( box_array[e].field_name === getFieldName(appState) ) {
@@ -411,7 +362,7 @@ function fresults( xobj, config ) {
                        let hasFilter = window.location.search.includes('fieldvalue=') && 
                                       !window.location.search.includes('fieldvalue=&'); 
 
-                       let resetLink = hasFilter ? ' ' + furl(resetUrl, iconHtml) : '';
+                       let resetLink = hasFilter ? ' ' + furl2(resetUrl, iconHtml) : '';
 
                        labels.push({ innerHTML: '<span class="filterable-header">'+ truncate(box_array[e].field_name,25) + resetLink + '</span>' });
                    } else {
@@ -423,26 +374,56 @@ function fresults( xobj, config ) {
                        labels.push({innerText:'Merged Fields (see above)'});
                    } 
                }
-           } 
-      }
-
-      for( let e=0; e<box_array.length; e++ ){
-           if( box_array[e].field_name === '' ){
-               dlString += ('<tr id="trkey"><td id="tdkey">' + furl(root_obs_fields+box_array[e].field_id,box_array[e].field_id) + '</td>');
+           } else {
+               // not found on this page of data.  these can't be all moved to the end of the list because
+               // we need to match them in order with the column headers for the clear filters.
+               dlString += ('<tr id="trkey"><td id="tdkey">' + furl2(root_obs_fields+box_array[e].field_id,box_array[e].field_id) + '</td>');
                dlString += ('<td id="tdkey">missing from this page</td></tr>');
                if( config.merge !== 'yes' ) {
                    labels.push({innerText:''});
                }
            }
       }
+
+      /*for( let e=0; e<box_array.length; e++ ){
+           if( box_array[e].field_name === '' ){
+               dlString += ('<tr id="trkey"><td id="tdkey">' + furl2(root_obs_fields+box_array[e].field_id,box_array[e].field_id) + '</td>');
+               dlString += ('<td id="tdkey">missing from this page</td></tr>');
+               if( config.merge !== 'yes' ) {
+                   labels.push({innerText:''});
+               }
+           }
+      }*/
     
       dlString += '</table></span></div>';
+      let clearState = clearForDashParams(appState);
+      clearState     = setComponent(clearState, getComponent(appState));    // component required when clearing state on a reset.
+      clearState     = setStudyTitle(clearState, getStudyTitle(appState));  // study title required when clearing state on a reset.
 
-      faddelem('p',document.body,{innerHTML:'<div class="top-bar"><div id="stats"><table id="tablekey">' +
+      faddelem('p', document.body, {
+          innerHTML: '<div class="top-bar">' +
+               /* Parent flex container to align items side-by-side */
+               '<div class="stats-wrapper" style="display: inline-flex; align-items: flex-end; gap: 12px;">' +
+                 '<div id="stats">' +
+                   '<table id="tablekey">' +
+                     '<tr id="trkey"><td id="tdkey">total:</td><td id="tdright">' + fcomnum(total_results) + '</td></tr>' +
+                     '<tr id="trkey"><td id="tdkey">per page:</td><td id="tdright">' + fcomnum(per_page) + '</td></tr>' +
+                     '<tr id="trkey"><td id="tdkey">page:</td><td id="tdright">' + fcomnum(page_curr) + ' of ' + fcomnum(page_max) + '</td></tr>' +
+                   '</table>' +
+                 '</div>' +
+                 '<span class="clear-all-filters">' + 
+                    '<span style="white-space: nowrap; margin-bottom: 2px;">' + furl2('./field_study.html'+buildParameterList(clearState), 'clear all filters') + '</span>' + 
+                 '</span>' +              
+               '</div>' +
+               dlString + 
+             '</div>'
+      });
+/*faddelem('p',document.body,{innerHTML:'<div class="top-bar"><div id="stats"><table id="tablekey">' +
                                             '<tr id="trkey"><td id="tdkey">total:</td><td id="tdright">'     + fcomnum(total_results) + '</td></tr>' + 
                                             '<tr id="trkey"><td id="tdkey">per page:</td><td id="tdright">'  + fcomnum(per_page)      + '</td></tr>' + 
                                             '<tr id="trkey"><td id="tdkey">page:</td><td id="tdright">'      + fcomnum(page_curr) + ' of ' + fcomnum(page_max) + '</td></tr></table></div>' + 
-                                            dlString + '</div>'});
+                                            dlString + '</div>'});*/
+      
       //faddelem('p',document.body,{innerHTML:dlString+'</div>'});
 
       // hide the mismatch warning... only display it if there is a mismatch in the table.
@@ -483,7 +464,7 @@ function fresults( xobj, config ) {
              urlState = setTaxonId(urlState, tax_id);
              urlState = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
              urlState = setTaxonName(urlState, pref_tax_name||tax_name);
-             taxon = furl('./field_study.html'+buildParameterList(urlState),'<span style=\"font-size:larger\">'+pref_tax_name.toLowerCase()+'</span><span style=\"font-style:italic\"><br>('+tax_name+')</span>');         
+             taxon = furl2('./field_study.html'+buildParameterList(urlState),'<span style=\"font-size:larger\">'+pref_tax_name.toLowerCase()+'</span><span style=\"font-style:italic\"><br>('+tax_name+')</span>');         
          }
        
          values = [{innerText:i+1}];
@@ -513,11 +494,11 @@ function fresults( xobj, config ) {
                  urlState = setPage(urlState, '1'); // set the page to 1 anytime they choose to filter. 
         
                  urlState = setLifeStage(urlState, valueId || 'null');     
-                 values.push({ innerHTML: furl('./field_study.html' + buildParameterList(urlState), stage || '[none]') }); 
+                 values.push({ innerHTML: furl2('./field_study.html' + buildParameterList(urlState), stage || '[none]') }); 
              } 
          } 
 
-         values.push({ innerHTML: furl(root_observations + rec.id, '<img class="mini_photo2" src="' + ((rec.photos && rec.photos.length > 0) ? rec.photos[0].url : '') + '" />') });
+         values.push({ innerHTML: furl2(root_observations + rec.id, '<img class="mini_photo2" src="' + ((rec.photos && rec.photos.length > 0) ? rec.photos[0].url : '') + '" />') });
        
          let user_icon = rec.user.icon || '';
          
@@ -593,14 +574,14 @@ function fresults( xobj, config ) {
                                   field1 = '<span style="font-size:larger">'+cname.toLowerCase()+'</span><span style="font-style:italic"><br>('+name+')</span>';
                               }
                               if( rec.ofvs[j].field_id.toString() === '17383' ) {  // wild ancestral colony 
-                                  values.push({innerHTML:furl(root_observations+field1, field1)});
+                                  values.push({innerHTML:furl2(root_observations+field1, field1)});
                               } else {
                                   let urlState = appState;
                                   urlState = setPage(urlState, '1');
                                   urlState = setPlantName(urlState, cname||name);
                                   urlState = setFieldName(urlState, rec.ofvs[j].name);
                                   urlState = setFieldValue(urlState, replaceDoubleQuotes(rec.ofvs[j].value.toString()));
-                                  values.push({innerHTML:furl('./field_study.html'+buildParameterList(urlState), field1)});
+                                  values.push({innerHTML:furl2('./field_study.html'+buildParameterList(urlState), field1)});
                               }
                           } else {
                               values.push({innerText:''});
@@ -640,7 +621,7 @@ function fresults( xobj, config ) {
              let urlState = appState;
              urlState = setObsDate(urlState, rec.observed_on_details?.date ?? null);
              urlState = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
-             values.push({innerHTML: furl('./field_study.html'+buildParameterList(urlState),rec.observed_on_details?.date ?? null) });
+             values.push({innerHTML: furl2('./field_study.html'+buildParameterList(urlState),rec.observed_on_details?.date ?? null) });
              values.push({innerHTML: '<div style="max-width: 300px; max-height: 45px; overflow-y: auto; padding: 6px; scrollbar-width: thin; white-space: normal; ' + 
                                            'background-color: var(--color-alt); ' + 
                                            'color: var(--color-text); ' + 
@@ -653,7 +634,7 @@ function fresults( xobj, config ) {
          urlState = setUser(urlState, rec.user.login);
          urlState = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
 
-         values.push({innerHTML:'<span class="user">'+user_icon+furl('./field_study.html'+buildParameterList(urlState),rec.user.login)+'</span>'});
+         values.push({innerHTML:'<span class="user">'+user_icon+furl2('./field_study.html'+buildParameterList(urlState),rec.user.login)+'</span>'});
          
          tempBrow.push(values);
       };
@@ -678,7 +659,7 @@ function fresults( xobj, config ) {
       let hasObsFilter = window.location.search.includes('user=') && 
                         !window.location.search.includes('user=&'); 
 
-      let resetObsLink = hasObsFilter ? ' ' + furl(obsUrl, iconHtml) : '';
+      let resetObsLink = hasObsFilter ? ' ' + furl2(obsUrl, iconHtml) : '';
 
       labels.push({ innerHTML: '<span class="filterable-header"><span class="user_head">Observer' + resetObsLink + '</span></span>' });
 
