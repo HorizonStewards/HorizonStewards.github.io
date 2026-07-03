@@ -207,7 +207,7 @@ function buildMenu2( results, config ) {
    
       let menu_name = config.getSubIconNameByTaxonId(config, getMenuId(appState)) || CONST_SHOW;
 
-      if( config.taxa && config.taxa.length > 0 ) {
+      if( config.subIcons && config.subIcons.length > 0 ) {
           appState = setTaxonDD(appState, '');
           buildNavDDFilteredShow( navbar, menu_name, results, config, baseUrl );
       }
