@@ -228,7 +228,7 @@ function buildNavActivityFiltersDD( navbar, dd_name, config, url=null ) {
              }
              let urlState = appState;
              urlState     = setActivityFilter(urlState, config.ddFilters[i].ddLabel);
-             let filter  = faddelem('a', null, { href: './garden_activity.html' + buildParameterList(urlState), textContent: config.ddFilters[i].ddLabel });
+             let filter  = faddelem('a', null, { href: url||'./garden_activity.html' + buildParameterList(urlState), textContent: config.ddFilters[i].ddLabel });
              filters.push(filter);
         }
         buildNavDD( navbar, getActivityFilter(appState) || dd_name, filters );
