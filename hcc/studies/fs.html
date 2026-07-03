@@ -303,7 +303,6 @@ function fresults( xobj, config ) {
 
           // Is a valid, active lifestage filter currently in the URL string? 
           let hasFilter = window.location.search.includes('lifestage=') && 
-                         !window.location.search.includes('lifestage=null') && 
                          !window.location.search.includes('lifestage=&'); 
 
           let resetLink = hasFilter ? ' ' + furl(resetUrl, '✕') : ''; 
