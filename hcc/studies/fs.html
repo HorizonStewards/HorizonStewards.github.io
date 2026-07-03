@@ -153,6 +153,17 @@
     min-height: 40px;
     overflow: hidden;
   }
+  
+.mini_photo2 {
+    /* If you haven't already, ensure the image stays inline */
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Target the cell containing the photo to prevent text drops */
+td:has(.mini_photo2) {
+    white-space: nowrap;
+}
 
   /* Original Helpers */
   #h2 { font-weight:bold; font-size:20px; }
