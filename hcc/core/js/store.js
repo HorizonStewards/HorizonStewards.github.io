@@ -114,7 +114,7 @@ function createNewStateInstance(initialValues = {}) {
     [ATTRIBUTE_FIELDNAME]: '',
     [ATTRIBUTE_FIELDVALUE]: '',
     [ATTRIBUTE_LIFESTAGE]: '',
-    [ATTRIBUTE_EVIDENCE]; '',
+    [ATTRIBUTE_EVIDENCE]: '',
     [ATTRIBUTE_Q]: '',
     [ATTRIBUTE_RANK]: '',
     [ATTRIBUTE_PAGE]:      '',
