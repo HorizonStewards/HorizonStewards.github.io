@@ -196,7 +196,7 @@ function replaceDoubleQuotes(str) {
   return str.replace(/"/g, '%22');
 }
 
-function furl(url,txt=url) { return '<a href="'+url+'">'+txt+'</a>'; };
+function furl2(url,txt=url) { return '<a href="'+url+'">'+txt+'</a>'; };
 
 function buildMenu2( results, config ) {
       // Create the main navbar container
@@ -389,7 +389,7 @@ function fresults( xobj, config ) {
       let hasTaxonFilter = window.location.search.includes('taxonid=') && 
                           !window.location.search.includes('taxonid=&'); 
 
-      let resetTaxonLink = hasTaxonFilter ? ' ' + furl(taxonUrl, iconHtml) : '';
+      let resetTaxonLink = hasTaxonFilter ? ' ' + furl2(taxonUrl, iconHtml) : '';
 
       labels.push({ innerHTML: '<span class="filterable-header">Name' + resetTaxonLink + '</span>' });
 
@@ -404,7 +404,7 @@ function fresults( xobj, config ) {
           let hasFilter = window.location.search.includes('lifestage=') && 
                          !window.location.search.includes('lifestage=&'); 
 
-          let resetLink = hasFilter ? ' ' + furl(resetUrl, iconHtml) : '';
+          let resetLink = hasFilter ? ' ' + furl2(resetUrl, iconHtml) : '';
 
           labels.push({ innerHTML: '<span class="filterable-header">Life Stage' + resetLink + '</span>' });
       }
@@ -450,7 +450,7 @@ function fresults( xobj, config ) {
            labelCount++;
            if( box_array[e].field_name !== '' ){
             
-               dlString += ('<tr id="trkey"><td id="tdkey">' + furl(root_obs_fields+box_array[e].field_id,box_array[e].field_id) + '</td>');
+               dlString += ('<tr id="trkey"><td id="tdkey">' + furl2(root_obs_fields+box_array[e].field_id,box_array[e].field_id) + '</td>');
                dlString += ('<td id="tdkey">' + truncate(box_array[e].field_name.toLowerCase(), 25) + '</td></tr>');
                if( config.merge !== 'yes' ){
                    if( box_array[e].field_name === getFieldName(appState) ) {
@@ -466,7 +466,7 @@ function fresults( xobj, config ) {
                        let hasFilter = window.location.search.includes('fieldvalue=') && 
                                       !window.location.search.includes('fieldvalue=&'); 
 
-                       let resetLink = hasFilter ? ' ' + furl(resetUrl, iconHtml) : '';
+                       let resetLink = hasFilter ? ' ' + furl2(resetUrl, iconHtml) : '';
 
                        labels.push({ innerHTML: '<span class="filterable-header">'+ truncate(box_array[e].field_name,25) + resetLink + '</span>' });
                    } else {
@@ -483,7 +483,7 @@ function fresults( xobj, config ) {
 
       for( let e=0; e<box_array.length; e++ ){
            if( box_array[e].field_name === '' ){
-               dlString += ('<tr id="trkey"><td id="tdkey">' + furl(root_obs_fields+box_array[e].field_id,box_array[e].field_id) + '</td>');
+               dlString += ('<tr id="trkey"><td id="tdkey">' + furl2(root_obs_fields+box_array[e].field_id,box_array[e].field_id) + '</td>');
                dlString += ('<td id="tdkey">missing from this page</td></tr>');
                if( config.merge !== 'yes' ) {
                    labels.push({innerText:''});
@@ -508,7 +508,7 @@ function fresults( xobj, config ) {
                    '</table>' +
                  '</div>' +
                  '<span class="clear-all-filters">' + 
-                    '<span style="white-space: nowrap; margin-bottom: 2px;">' + furl('./fs.html'+buildParameterList(clearState), 'clear all filters') + '</span>' + 
+                    '<span style="white-space: nowrap; margin-bottom: 2px;">' + furl2('./fs.html'+buildParameterList(clearState), 'clear all filters') + '</span>' + 
                  '</span>' +              
                '</div>' +
                dlString + 
@@ -560,7 +560,7 @@ function fresults( xobj, config ) {
              urlState = setTaxonId(urlState, tax_id);
              urlState = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
              urlState = setTaxonName(urlState, pref_tax_name||tax_name);
-             taxon = furl('./fs.html'+buildParameterList(urlState),'<span style=\"font-size:larger\">'+pref_tax_name.toLowerCase()+'</span><span style=\"font-style:italic\"><br>('+tax_name+')</span>');         
+             taxon = furl2('./fs.html'+buildParameterList(urlState),'<span style=\"font-size:larger\">'+pref_tax_name.toLowerCase()+'</span><span style=\"font-style:italic\"><br>('+tax_name+')</span>');         
          }
        
          values = [{innerText:i+1}];
@@ -590,11 +590,11 @@ function fresults( xobj, config ) {
                  urlState = setPage(urlState, '1'); // set the page to 1 anytime they choose to filter. 
         
                  urlState = setLifeStage(urlState, valueId || 'null');     
-                 values.push({ innerHTML: furl('./fs.html' + buildParameterList(urlState), stage || '[none]') }); 
+                 values.push({ innerHTML: furl2('./fs.html' + buildParameterList(urlState), stage || '[none]') }); 
              } 
          } 
 
-         values.push({ innerHTML: furl(root_observations + rec.id, '<img class="mini_photo2" src="' + ((rec.photos && rec.photos.length > 0) ? rec.photos[0].url : '') + '" />') });
+         values.push({ innerHTML: furl2(root_observations + rec.id, '<img class="mini_photo2" src="' + ((rec.photos && rec.photos.length > 0) ? rec.photos[0].url : '') + '" />') });
        
          let user_icon = rec.user.icon || '';
          
@@ -670,14 +670,14 @@ function fresults( xobj, config ) {
                                   field1 = '<span style="font-size:larger">'+cname.toLowerCase()+'</span><span style="font-style:italic"><br>('+name+')</span>';
                               }
                               if( rec.ofvs[j].field_id.toString() === '17383' ) {  // wild ancestral colony 
-                                  values.push({innerHTML:furl(root_observations+field1, field1)});
+                                  values.push({innerHTML:furl2(root_observations+field1, field1)});
                               } else {
                                   let urlState = appState;
                                   urlState = setPage(urlState, '1');
                                   urlState = setPlantName(urlState, cname||name);
                                   urlState = setFieldName(urlState, rec.ofvs[j].name);
                                   urlState = setFieldValue(urlState, replaceDoubleQuotes(rec.ofvs[j].value.toString()));
-                                  values.push({innerHTML:furl('./fs.html'+buildParameterList(urlState), field1)});
+                                  values.push({innerHTML:furl2('./fs.html'+buildParameterList(urlState), field1)});
                               }
                           } else {
                               values.push({innerText:''});
@@ -717,7 +717,7 @@ function fresults( xobj, config ) {
              let urlState = appState;
              urlState = setObsDate(urlState, rec.observed_on_details?.date ?? null);
              urlState = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
-             values.push({innerHTML: furl('./fs.html'+buildParameterList(urlState),rec.observed_on_details?.date ?? null) });
+             values.push({innerHTML: furl2('./fs.html'+buildParameterList(urlState),rec.observed_on_details?.date ?? null) });
              values.push({innerHTML: '<div style="max-width: 300px; max-height: 45px; overflow-y: auto; padding: 6px; scrollbar-width: thin; white-space: normal; ' + 
                                            'background-color: var(--color-alt); ' + 
                                            'color: var(--color-text); ' + 
@@ -730,7 +730,7 @@ function fresults( xobj, config ) {
          urlState = setUser(urlState, rec.user.login);
          urlState = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
 
-         values.push({innerHTML:'<span class="user">'+user_icon+furl('./fs.html'+buildParameterList(urlState),rec.user.login)+'</span>'});
+         values.push({innerHTML:'<span class="user">'+user_icon+furl2('./fs.html'+buildParameterList(urlState),rec.user.login)+'</span>'});
          
          tempBrow.push(values);
       };
@@ -755,7 +755,7 @@ function fresults( xobj, config ) {
       let hasObsFilter = window.location.search.includes('user=') && 
                         !window.location.search.includes('user=&'); 
 
-      let resetObsLink = hasObsFilter ? ' ' + furl(obsUrl, iconHtml) : '';
+      let resetObsLink = hasObsFilter ? ' ' + furl2(obsUrl, iconHtml) : '';
 
       labels.push({ innerHTML: '<span class="filterable-header"><span class="user_head">Observer' + resetObsLink + '</span></span>' });
 
