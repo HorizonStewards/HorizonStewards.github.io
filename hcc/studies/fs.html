@@ -21,15 +21,20 @@
 
 <style>
 /* for the column header un-filter */
-.clear-btn { 
-    /*color: var(--color-text-invert) !important;  */
-    text-decoration: none !important;  
-    /*opacity: 0.7; 
-    transition: opacity 0.2s ease; /* Smooth fade when hovering */
-} 
+/* Target the anchor link created by furl that contains your span */
+th a {
+    text-decoration: none !important;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
 
-.clear-btn:hover { 
-    opacity: 1; 
+th a:hover {
+    opacity: 1 !important;
+}
+
+/* Keep this just to ensure the icon inherits the inverted white text color */
+.clear-btn { 
+    color: var(--color-text-invert) !important; 
 }
  
   /* 1. THE GUTTER FRAME */
