@@ -176,9 +176,9 @@ function buildMenu2( results, config ) {
       // Create the main navbar container
       let navbar = document.createElement('div');
       navbar.className = 'navbar v2-menu';
+
+      let baseUrl = window.location.origin + window.location.pathname;
    
-      let links = '';
-      let taxon_param = '';
       let menu_name = config.getSubIconNameByTaxonId(config, getMenuId(appState)) || CONST_SHOW;
 
       if( config.taxa && config.taxa.length > 0 ) {
