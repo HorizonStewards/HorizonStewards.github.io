@@ -153,16 +153,17 @@
     min-height: 40px;
     overflow: hidden;
   }
+
+td:has(.mini_photo2) {
+    display: inline-flex;
+    align-items: center; /* Perfectly centers the text vertically next to your image */
+    gap: 8px;            /* Adds a clean, explicit pixel gap between image and text */
+}
   
 .mini_photo2 {
     /* If you haven't already, ensure the image stays inline */
     display: inline-block;
     vertical-align: middle;
-}
-
-/* Target the cell containing the photo to prevent text drops */
-td:has(.mini_photo2) {
-    white-space: nowrap;
 }
 
   /* Original Helpers */
