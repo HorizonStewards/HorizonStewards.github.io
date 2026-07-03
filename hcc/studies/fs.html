@@ -158,6 +158,7 @@
   #h2 { font-weight:bold; font-size:20px; }
   p { width:100%; }
   .npcicon { width:34px; height:34px; border: 1px solid cornflowerblue; padding: 5px; border-radius: 50px; }
+  .user_head { align-items: center; justify-content: center; }
   .user { display: flex; flex-direction: column; align-items: center; justify-content: center; }
 </style>
 <body>
@@ -683,7 +684,7 @@ function fresults( xobj, config ) {
 
       let resetObsLink = hasObsFilter ? ' ' + furl(obsUrl, iconHtml) : '';
 
-      labels.push({ innerHTML: '<span class="filterable-header"><span class="user">Observer' + resetObsLink + '</span></span>' });
+      labels.push({ innerHTML: '<span class="filterable-header"><span class="user_head">Observer' + resetObsLink + '</span></span>' });
 
      // labels.push({innerHTML:'<div class="user"><span>Observer</span></div>'});
       
