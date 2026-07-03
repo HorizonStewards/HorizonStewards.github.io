@@ -414,31 +414,34 @@ function fresults( xobj, config ) {
          values.push({innerHTML:tax_photo});
          values.push({innerHTML:taxon});
 
-         if( p_show_ls === 'yes' ) {
-             let stage   = ''; // Default placeholder if missing or empty
-             let valueId = '';
-             if( rec.annotations && rec.annotations.length > 0 ) {
-                 for( let i = 0; i < rec.annotations.length; i++ ) {
-                      if( rec.annotations[i].controlled_attribute_id?.toString() === '1' ) {
-                          valueId = rec.annotations[i].controlled_value_id?.toString();
-                          // look up the life stage in the life stages map...
-                          stage = LIFE_STAGE_MAP[valueId] || 'unknown';
+         if( p_show_ls === 'yes' ) { 
+             let stage = ''; // Default placeholder if missing or empty 
+             let valueId = ''; 
+    
+             if( rec.annotations && rec.annotations.length > 0 ) { 
+                 for( let i = 0; i < rec.annotations.length; i++ ) { 
+                      if( rec.annotations[i].controlled_attribute_id?.toString() === '1' ) { 
+                          valueId = rec.annotations[i].controlled_value_id?.toString() || ''; 
+                          // look up the life stage in the life stages map... 
+                          stage = LIFE_STAGE_MAP[valueId] || 'unknown'; 
                           break; 
-                      }
-                 }
-             }
-             if( stage === 'unknown' ) {
-                 values.push({ innerText:stage }); 
-             } else {
-                 let urlState = appState;
-                 urlState   = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
-                 urlState   = setLifeStage(urlState, valueId);
-                 values.push({ innerHTML:furl('./fs.html'+buildParameterList(urlState), stage||'[none]') }); 
-             }
-         }
-       
-         values.push({innerHTML:furl(root_observations+rec.id,'<img class="mini_photo2" src="'+((rec.photos&&rec.photos.length>0)?rec.photos[0].url:'')+'" />')});
+                      } 
+                 }  
+             } 
+    
+             if( stage === 'unknown' ) { 
+                 values.push({ innerHTML: stage }); 
+             } else { 
+                 let urlState = appState; 
+                 urlState = setPage(urlState, '1'); // set the page to 1 anytime they choose to filter. 
+        
+                 urlState = setLifeStage(urlState, valueId || 'null');     
+                 values.push({ innerHTML: furl('./fs.html' + buildParameterList(urlState), stage || '<em>none</em>') }); 
+             } 
+         } 
 
+         values.push({ innerHTML: furl(root_observations + rec.id, '<img class="mini_photo2" src="' + ((rec.photos && rec.photos.length > 0) ? rec.photos[0].url : '') + '" />') });
+       
          let user_icon = rec.user.icon || '';
          
          if( user_icon === '' ){
