@@ -172,7 +172,49 @@ function replaceDoubleQuotes(str) {
   return str.replace(/"/g, '%22');
 }
 
-function buildMenu( results, config ) {
+function buildMenu2( results, config ) {
+      let menu_string = '';
+      let links = '';
+      let taxon_param = '';
+      let menu_name = config.getSubIconNameByTaxonId(config, getMenuId(appState)) || CONST_SHOW;
+
+      menu_string = '<div class="navbar">';
+
+      if( config.taxa && config.taxa.length > 0 ) {
+          buildNavDDFilteredShow( navbar, menu_name, results, config, baseUrl );
+
+/*        let urlState = appState;
+          urlState     = setTaxonId(urlState, '');   
+          urlState     = setFieldValue(urlState, '');
+          urlState     = setPlantName(urlState, '');
+          urlState     = setTaxonName(urlState, '');
+          urlState     = setMenuId(urlState, '');
+          urlState     = setMenuName(urlState, '');
+          urlState     = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
+          urlState     = setUser(urlState, '');
+          links       += furl('./fs.html'+buildParameterList(urlState),'<span style="padding-right:20px;">'+CONST_PLUS_UTF8+'</span>'+CONST_ALL);
+          urlState     = setUser(urlState, getUser(appState));
+          for( let i=0; i<config.taxa.length; i++ ) {
+               urlState = setMenuId(   urlState, config.taxa[i].taxonId );
+               urlState = setMenuName( urlState, config.taxa[i].taxonName );
+               links += furl('./fs.html'+buildParameterList(urlState),'<span style="padding-right:20px;">'+config.taxa[i].icon+'</span>'+config.taxa[i].taxonName);
+          }*/
+      }
+
+      if( getComponent(appState) === 'plantings' || getComponent(appState) === 'visits' || config.showStudyGrid === 'yes' ) {
+          menu_string += buildMenuURL( furl('./study_grid.html'+buildParameterList(appState), 'Grid' ) );
+      }
+
+      if( p_hide_dash === 'no' ) {
+          let homeUrl = '../admin/dashboard.html?params='+getParams(appState);
+          buildNavHome( navbar, homeUrl, homeState );
+      }
+
+      // Append the DOM nodes to the body
+      faddelem('p', document.body).appendChild(navbar);
+}
+
+/*function buildMenu( results, config ) {
       let menu_string = '';
       let links = '';
       let taxon_param = '';
@@ -200,9 +242,7 @@ function buildMenu( results, config ) {
       links = '';
 
       if( config.taxa && config.taxa.length > 0 ) {
-          buildNavDDFilteredShow( navbar, menu_name, results, config, baseUrl );
-
-/*        let urlState = appState;
+          let urlState = appState;
           urlState     = setTaxonId(urlState, '');   
           urlState     = setFieldValue(urlState, '');
           urlState     = setPlantName(urlState, '');
@@ -217,7 +257,7 @@ function buildMenu( results, config ) {
                urlState = setMenuId(   urlState, config.taxa[i].taxonId );
                urlState = setMenuName( urlState, config.taxa[i].taxonName );
                links += furl('./fs.html'+buildParameterList(urlState),'<span style="padding-right:20px;">'+config.taxa[i].icon+'</span>'+config.taxa[i].taxonName);
-          }*/
+          }
       }
 
       let taxon_name = capitalizeWords(getMenuName(appState) || CONST_SHOW);  
@@ -279,7 +319,7 @@ function buildMenu( results, config ) {
       menu_string += '</div>';
 
       faddelem('p',document.body,{innerHTML:(menu_string)});  
-}
+}*/
 
 function isMultipleOfFour(num) {
   return num % 4 === 0;
