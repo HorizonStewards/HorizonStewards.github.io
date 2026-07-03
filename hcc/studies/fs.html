@@ -212,6 +212,10 @@ function buildMenu2( results, config ) {
           buildNavDDFilteredShow( navbar, menu_name, results, config, baseUrl );
       }
 
+      if( config.ddFilters && config.ddFilters.length > 0 ) {
+          buildNavActivityFiltersDD( navbar, 'Filters', config );
+      }
+
       if( getComponent(appState) === 'plantings' || getComponent(appState) === 'visits' || config.showStudyGrid === 'yes' ) {
           console.log('grid ');
           buildNavLink( navbar, './study_grid.html', appState, 'Grid' );
