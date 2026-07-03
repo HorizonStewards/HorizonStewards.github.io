@@ -50,7 +50,7 @@ function buildMenu( results, config ) {
     // only show the additional filters if they haven't made a seleciton from the taxa menu.
     // otherwise there's too much risk of queries with no results.
     if( !getMenuId(appState) ) {
-        buildNavActivityFiltersDD( navbar, 'Filters', config );
+        buildNavActivityFiltersDD( navbar, 'Filters', config, baseUrl, appState );
     }
 
     // Build the Home Link
