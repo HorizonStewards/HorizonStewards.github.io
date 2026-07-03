@@ -157,16 +157,9 @@
   /* Original Helpers */
   #h2 { font-weight:bold; font-size:20px; }
   p { width:100%; }
-   /*.smallicon { height:24px; width:24px; border-radius:50%; top:10px; left:20px;}*/
   .npcicon { width:18px; height:18px; border: 1px solid cornflowerblue; padding: 5px; border-radius: 50px; }
   .user_head { align-items: center; justify-content: center; }
-  /*.user { align-items: center; justify-content: center; }*/
-.user {
-    display: inline-flex;  /* Forces the icon and text link to lock side-by-side */
-    align-items: center;   /* Perfectly lines up the icon and text through the middle vertical axis */
-    white-space: nowrap;   /* Tells the browser it is physically forbidden from splitting into a new line */
-}
-  /*.user { display: flex; flex-direction: column; align-items: center; justify-content: center; }*/
+  .user { display: inline-flex; align-items: center; white-space: nowrap; gap: 8px; margin-left: 4px; }
 </style>
 <body>
 <script>
