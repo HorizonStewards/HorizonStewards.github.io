@@ -182,24 +182,8 @@ function buildMenu2( results, config ) {
       let menu_name = config.getSubIconNameByTaxonId(config, getMenuId(appState)) || CONST_SHOW;
 
       if( config.taxa && config.taxa.length > 0 ) {
+          appState = setTaxonDD(appState, '');
           buildNavDDFilteredShow( navbar, menu_name, results, config, baseUrl );
-
-/*        let urlState = appState;
-          urlState     = setTaxonId(urlState, '');   
-          urlState     = setFieldValue(urlState, '');
-          urlState     = setPlantName(urlState, '');
-          urlState     = setTaxonName(urlState, '');
-          urlState     = setMenuId(urlState, '');
-          urlState     = setMenuName(urlState, '');
-          urlState     = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
-          urlState     = setUser(urlState, '');
-          links       += furl('./fs.html'+buildParameterList(urlState),'<span style="padding-right:20px;">'+CONST_PLUS_UTF8+'</span>'+CONST_ALL);
-          urlState     = setUser(urlState, getUser(appState));
-          for( let i=0; i<config.taxa.length; i++ ) {
-               urlState = setMenuId(   urlState, config.taxa[i].taxonId );
-               urlState = setMenuName( urlState, config.taxa[i].taxonName );
-               links += furl('./fs.html'+buildParameterList(urlState),'<span style="padding-right:20px;">'+config.taxa[i].icon+'</span>'+config.taxa[i].taxonName);
-          }*/
       }
 
       if( getComponent(appState) === 'plantings' || getComponent(appState) === 'visits' || config.showStudyGrid === 'yes' ) {
