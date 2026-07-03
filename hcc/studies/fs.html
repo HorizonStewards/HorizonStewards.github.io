@@ -188,11 +188,11 @@ function buildMenu( results, config ) {
           urlState     = setFieldValue(urlState, '');
           urlState     = setFieldName(urlState, '');
           urlState     = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
-          links       += furl('./field_study.html'+buildParameterList(urlState),capitalizeWords(CONST_ALL));
+          links       += furl('./fs.html'+buildParameterList(urlState),capitalizeWords(CONST_ALL));
           for( let i=0; i<config.places.length; i++ ) {
                urlState = setPlaceMenuId( urlState, config.places[i].placeId );
                urlState = setPlaceMenuName( urlState, config.places[i].placeName );
-               links += furl('./field_study.html'+buildParameterList(urlState),config.places[i].placeName);
+               links += furl('./fs.html'+buildParameterList(urlState),config.places[i].placeName);
           }
       }
 
@@ -200,7 +200,9 @@ function buildMenu( results, config ) {
       links = '';
 
       if( config.taxa && config.taxa.length > 0 ) {
-          let urlState = appState;
+          buildNavDDFilteredShow( navbar, menu_name, results, config, baseUrl );
+
+/*        let urlState = appState;
           urlState     = setTaxonId(urlState, '');   
           urlState     = setFieldValue(urlState, '');
           urlState     = setPlantName(urlState, '');
@@ -209,13 +211,13 @@ function buildMenu( results, config ) {
           urlState     = setMenuName(urlState, '');
           urlState     = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
           urlState     = setUser(urlState, '');
-          links       += furl('./field_study.html'+buildParameterList(urlState),'<span style="padding-right:20px;">'+CONST_PLUS_UTF8+'</span>'+CONST_ALL);
+          links       += furl('./fs.html'+buildParameterList(urlState),'<span style="padding-right:20px;">'+CONST_PLUS_UTF8+'</span>'+CONST_ALL);
           urlState     = setUser(urlState, getUser(appState));
           for( let i=0; i<config.taxa.length; i++ ) {
                urlState = setMenuId(   urlState, config.taxa[i].taxonId );
                urlState = setMenuName( urlState, config.taxa[i].taxonName );
-               links += furl('./field_study.html'+buildParameterList(urlState),'<span style="padding-right:20px;">'+config.taxa[i].icon+'</span>'+config.taxa[i].taxonName);
-          }
+               links += furl('./fs.html'+buildParameterList(urlState),'<span style="padding-right:20px;">'+config.taxa[i].icon+'</span>'+config.taxa[i].taxonName);
+          }*/
       }
 
       let taxon_name = capitalizeWords(getMenuName(appState) || CONST_SHOW);  
@@ -232,18 +234,18 @@ function buildMenu( results, config ) {
           //urlState     = setFieldName(urlState, '');
           urlState     = setActivityFilter(urlState, '');
           urlState     = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
-          links       += furl('./field_study.html'+buildParameterList(urlState),all_icon+CONST_ALL);
+          links       += furl('./fs.html'+buildParameterList(urlState),all_icon+CONST_ALL);
           for( let i=0; i<config.ddFilters.length; i++ ) {
                if( dd_name !== config.ddFilters[i].ddName.toString() ) {
                    activityDDName = capitalizeWords(getActivityFilter(appState) || dd_name);  
                    menu_string += buildDD( activityDDName, links);
                    links = '';
-                   links       += furl('./field_study.html'+buildParameterList(urlState),all_icon+CONST_ALL);
+                   links       += furl('./fs.html'+buildParameterList(urlState),all_icon+CONST_ALL);
                    dd_name = config.ddFilters[i].ddName;
                }
                urlState = setActivityFilter(   urlState, config.ddFilters[i].ddLabel );
                let icon = config.ddFilters[i].icon ? ('<span style="padding-right:20px;">'+config.ddFilters[i].icon+'</span>') : '';
-               links += furl('./field_study.html'+buildParameterList(urlState),'<span style="padding-right:20px;">'+icon+config.ddFilters[i].ddLabel);
+               links += furl('./fs.html'+buildParameterList(urlState),'<span style="padding-right:20px;">'+icon+config.ddFilters[i].ddLabel);
           }
           activityDDName = capitalizeWords(getActivityFilter(appState) || dd_name);  
       }
@@ -254,7 +256,7 @@ function buildMenu( results, config ) {
           let urlState  = clearForDashParams(appState);
           urlState = setStudyTitle( urlState, studyTitle );
           urlState = setComponent( urlState, 'plantings' );
-          menu_string += buildMenuURL( furl('./field_study.html'+buildParameterList(urlState), 'Reset' ) );
+          menu_string += buildMenuURL( furl('./fs.html'+buildParameterList(urlState), 'Reset' ) );
       }
  
       if( getComponent(appState) === COMPONENT_VISITS ) {
@@ -262,7 +264,7 @@ function buildMenu( results, config ) {
           let urlState  = clearForDashParams(appState);
           urlState = setStudyTitle( urlState, studyTitle );
           urlState = setComponent( urlState, COMPONENT_VISITS );
-          menu_string += buildMenuURL( furl('./field_study.html'+buildParameterList(urlState), 'Reset' ) );
+          menu_string += buildMenuURL( furl('./fs.html'+buildParameterList(urlState), 'Reset' ) );
       }
 
       if( getComponent(appState) === 'plantings' || getComponent(appState) === 'visits' || config.showStudyGrid === 'yes' ) {
@@ -483,7 +485,7 @@ function fresults( xobj, config ) {
              urlState = setTaxonId(urlState, tax_id);
              urlState = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
              urlState = setTaxonName(urlState, pref_tax_name||tax_name);
-             taxon = furl('./field_study.html'+buildParameterList(urlState),'<span style=\"font-size:larger\">'+pref_tax_name.toLowerCase()+'</span><span style=\"font-style:italic\"><br>('+tax_name+')</span>');         
+             taxon = furl('./fs.html'+buildParameterList(urlState),'<span style=\"font-size:larger\">'+pref_tax_name.toLowerCase()+'</span><span style=\"font-style:italic\"><br>('+tax_name+')</span>');         
          }
        
          values = [{innerText:i+1}];
@@ -600,7 +602,7 @@ function fresults( xobj, config ) {
                                   urlState = setPlantName(urlState, cname||name);
                                   urlState = setFieldName(urlState, rec.ofvs[j].name);
                                   urlState = setFieldValue(urlState, replaceDoubleQuotes(rec.ofvs[j].value.toString()));
-                                  values.push({innerHTML:furl('./field_study.html'+buildParameterList(urlState), field1)});
+                                  values.push({innerHTML:furl('./fs.html'+buildParameterList(urlState), field1)});
                               }
                           } else {
                               values.push({innerText:''});
@@ -640,7 +642,7 @@ function fresults( xobj, config ) {
              let urlState = appState;
              urlState = setObsDate(urlState, rec.observed_on_details?.date ?? null);
              urlState = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
-             values.push({innerHTML: furl('./field_study.html'+buildParameterList(urlState),rec.observed_on_details?.date ?? null) });
+             values.push({innerHTML: furl('./fs.html'+buildParameterList(urlState),rec.observed_on_details?.date ?? null) });
              values.push({innerHTML: '<div style="max-width: 300px; max-height: 45px; overflow-y: auto; padding: 6px; scrollbar-width: thin; white-space: normal; ' + 
                                            'background-color: var(--color-alt); ' + 
                                            'color: var(--color-text); ' + 
@@ -653,7 +655,7 @@ function fresults( xobj, config ) {
          urlState = setUser(urlState, rec.user.login);
          urlState = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
 
-         values.push({innerHTML:'<span class="user">'+user_icon+furl('./field_study.html'+buildParameterList(urlState),rec.user.login)+'</span>'});
+         values.push({innerHTML:'<span class="user">'+user_icon+furl('./fs.html'+buildParameterList(urlState),rec.user.login)+'</span>'});
          
          tempBrow.push(values);
       };
