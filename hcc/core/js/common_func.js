@@ -1,5 +1,5 @@
 const CONST_SPECIES      = 'species:';
-const CONST_OBSERVATIONS = 'observations:';
+const CONST_OBSERVATIONS = 'observations:';  
 const CONST_OF           = ' of ';
 
 const LIFE_STAGE_MAP = {
