@@ -663,10 +663,20 @@ function setupAPIParams( config ) {
    if( config.defaultPlace ) { api_params += '&place_id='        + config.defaultPlace; }
 
    // filter for annotations...
-   if( getLifeStage(appState) ) { api_params += '&term_id=1&term_value_id='  + getLifeStage(appState) }
-   if( getEvidence(appState) )  { api_params += '&term_id=22&term_value_id=' + getEvidence(appState) }
+   const lifeStage = getLifeStage(appState);
+   const evidence  = getEvidence(appState);
 
-   // hidden parameters available directly from the url rather than the config file or state.
+   if( lifeStage ) {
+       // If 'null', send an empty string; otherwise, send the actual lifeStage ID
+       const valueId = lifeStage === 'null' ? '' : lifeStage;
+       api_params += '&term_id=1&term_value_id=' + valueId;
+   }
+
+   if( evidence ) {
+       const valueId = evidence === 'null' ? '' : evidence;
+       api_params += '&term_id=22&term_value_id=' + valueId;
+   }
+ 
    if( p_without_term_id )   { api_params += '&without_term_id=' + p_without_term_id; }
    if( p_not_user_id )       { api_params += '&not_user_id='     + p_not_user_id; }
 
