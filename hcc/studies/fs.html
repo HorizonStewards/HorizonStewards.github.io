@@ -466,11 +466,29 @@ function fresults( xobj, config ) {
     
       dlString += '</table></span></div>';
 
-      faddelem('p',document.body,{innerHTML:'<div class="top-bar"><div id="stats"><table id="tablekey">' +
+      faddelem('p', document.body, {
+          innerHTML: '<div class="top-bar">' +
+               /* Parent flex container to align items side-by-side */
+               '<div class="stats-wrapper" style="display: inline-flex; align-items: flex-end; gap: 12px;">' +
+                 '<div id="stats">' +
+                   '<table id="tablekey">' +
+                     '<tr id="trkey"><td id="tdkey">total:</td><td id="tdright">' + fcomnum(total_results) + '</td></tr>' +
+                     '<tr id="trkey"><td id="tdkey">per page:</td><td id="tdright">' + fcomnum(per_page) + '</td></tr>' +
+                     '<tr id="trkey"><td id="tdkey">page:</td><td id="tdright">' + fcomnum(page_curr) + ' of ' + fcomnum(page_max) + '</td></tr>' +
+                   '</table>' +
+                 '</div>' +
+                 /* Link sits completely outside #stats, locked to the lower right */
+                 '<a href="#" id="clear-filters-lnk" style="font-size: 0.85em; text-decoration: underline; cursor: pointer; white-space: nowrap; margin-bottom: 2px;">clear all filters</a>' +
+               '</div>' +
+               dlString + 
+             '</div>'
+      });
+/*faddelem('p',document.body,{innerHTML:'<div class="top-bar"><div id="stats"><table id="tablekey">' +
                                             '<tr id="trkey"><td id="tdkey">total:</td><td id="tdright">'     + fcomnum(total_results) + '</td></tr>' + 
                                             '<tr id="trkey"><td id="tdkey">per page:</td><td id="tdright">'  + fcomnum(per_page)      + '</td></tr>' + 
                                             '<tr id="trkey"><td id="tdkey">page:</td><td id="tdright">'      + fcomnum(page_curr) + ' of ' + fcomnum(page_max) + '</td></tr></table></div>' + 
-                                            dlString + '</div>reset'});
+                                            dlString + '</div>'});*/
+      
       //faddelem('p',document.body,{innerHTML:dlString+'</div>'});
 
       // hide the mismatch warning... only display it if there is a mismatch in the table.
