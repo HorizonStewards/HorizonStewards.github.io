@@ -479,7 +479,9 @@ function fresults( xobj, config ) {
                      '<tr id="trkey"><td id="tdkey">page:</td><td id="tdright">' + fcomnum(page_curr) + ' of ' + fcomnum(page_max) + '</td></tr>' +
                    '</table>' +
                  '</div>' +
-                 furl('./fs.html'+buildParameterList(clearState), 'clear all filters') +              
+                 '<span class="filterable-header">' + 
+                    '<span style="white-space: nowrap; margin-bottom: 2px;">' + furl('./fs.html'+buildParameterList(clearState), 'clear all filters') + </span> + 
+                 '</span> +              
                '</div>' +
                dlString + 
              '</div>'
