@@ -163,6 +163,101 @@ function removeItemFromCommaDelimitedList(listString, itemToRemove) {
   return updatedListString;
 }
 
+function buildNavDDFilteredShow( navbar, dd_name, results, config, baseUrl ) {
+
+    // Get the raw string from the URL
+    let raw_taxon_str = getTaxonDD(appState) || ""; 
+    
+    // CLEANER: Split by comma and keep ONLY items that are in your config.json
+    // This deletes anything injected into the dd url param by the user.
+    let sub_taxon_arr = raw_taxon_str.split(',').filter(id => {
+        return config.subIcons.some(iconObj => iconObj.taxonId.toString() === id.trim());
+    });
+
+    // Force the appState to only have the clean IDs
+    appState = setTaxonDD(appState, sub_taxon_arr.join(','));
+ 
+    sub_taxon_arr = getTaxonDD(appState) || [];
+ 
+    if( getTaxonDD(appState) ) {
+        sub_taxon_arr = getTaxonDD(appState);
+    } else {
+        if( config.subIcons ) {
+            for( let i=0; i<results.length; i++) {
+                 if( !sub_taxon_arr.includes(results[i].taxon.id.toString()) ) {
+                     for( let j=0; j<config.subIcons.length; j++ ) {
+                          for( let k=0; k<results[i].taxon.ancestor_ids.length; k++ ) {
+                               if( results[i].taxon.ancestor_ids[k].toString() === config.subIcons[j].taxonId.toString() ){
+                                   if( !sub_taxon_arr.includes( config.subIcons[j].taxonId ) ) {
+                                       sub_taxon_arr.push( config.subIcons[j].taxonId );
+                                   }
+                               }
+                           }
+                      }
+                 }
+             }
+             // add the comma delimited list of taxons to the url params
+             // so the full list can still be shown during filtration.
+             appState = setTaxonDD(appState, sub_taxon_arr.join());
+        }
+    } 
+
+    buildNavDDShow( navbar, dd_name, results, config, baseUrl, sub_taxon_arr );
+}
+
+function buildNavDDShow( navbar, dd_name, results, config, baseUrl, sub_taxon_arr ) {
+
+    // Build the Show Dropdown
+    if( config.subIcons ) {
+        let urlState = appState;
+        urlState = setMenuId(urlState, '');
+        urlState = setMenuName(urlState, '');
+        urlState = setActivityFilter(urlState, '');  // only show the other filters drop-down if they haven't chosen from menu
+        urlState = setPage(urlState, '1');
+
+        // Create the Dropdown container
+        let dropdown = faddelem('div', navbar, { className: 'dropdown' });
+       
+        // Dropdown Button
+        faddelem('button', dropdown, { 
+            className: 'dropbtn', 
+            textContent: capitalizeWords(dd_name) 
+        });
+
+        // Dropdown Content (the links)
+        let ddContent = faddelem('div', dropdown, { className: 'dropdown-content' }); 
+
+        // ALL Link
+        let allUrl = baseUrl + buildParameterList(urlState);
+        let allLink = faddelem('a', ddContent, { href: allUrl });
+        // Icon for ALL
+        faddelem('span', allLink, { innerHTML: CONST_PLUS_UTF8 });
+        // Text for ALL 
+        faddelem('span', allLink, { textContent: CONST_ALL }); 
+
+        // Taxon Links Loop
+        for( let j = 0; j < config.subIcons.length; j++ ) {
+             // there will be no sub_taxon_arr if we aren't filtering
+             // if sub_taxon_arr is null build the show link since we aren't filtering
+             // if we ARE filtering, make sure the filtered array includes the taxonId from the config
+             if( !sub_taxon_arr || sub_taxon_arr.includes(config.subIcons[j].taxonId) ) {
+                 urlState = setMenuId(urlState, config.subIcons[j].taxonId);
+                 let iconUrl = baseUrl + buildParameterList(urlState);
+                 
+                 let tLink = faddelem('a', ddContent, { href: iconUrl });
+
+                 // Taxon Icon if present
+                 if( config.subIcons[j].icon ) {
+                     faddelem('span', tLink, { innerHTML: config.subIcons[j].icon });
+                 }
+             
+                 // Taxon Name 
+                 faddelem('span', tLink, { textContent: config.subIcons[j].name });
+             }
+        }
+    }
+}
+
 function buildHeader(entity, total, per_page, page_curr, page_max, title_1, title_2, title_3) {
     const container = document.createElement('div');
     container.className = 'rl-box-bar';
