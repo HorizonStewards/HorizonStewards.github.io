@@ -336,13 +336,28 @@ function fresults( xobj, config ) {
       let flower = '';
       let dlString = '<div id="divhead"><span id="topright">';
       let labelCount = 0;
+      let iconHtml = '<span class="clear-btn" style="font-size:18px; padding-left:6px; display:inline-block; vertical-align:middle; line-height:1;">ⓧ</span>';
 
       let merged = 'observation field';
     
       labels = [{innerText:'#'}];
 
       labels.push({innerText:'Photo'});
-      labels.push({innerText:'Name'});
+      ///labels.push({innerText:'Name'});
+
+          let nameState = appState; 
+          nameState = setTaxonId(nameState, '');
+          nameState = setTaxonName(nameState, '');
+          nameState = setPage(nameState, '1'); 
+          let taxonUrl = './fs.html' + buildParameterList(nameState); 
+
+          // Is a valid, active taxon filter currently in the URL string? 
+          let hasTaxonFilter = window.location.search.includes('taxonid=') && 
+                              !window.location.search.includes('taxonid=&'); 
+
+          let resetTaxonLink = hasTaxonFilter ? ' ' + furl(taxonUrl, iconHtml) : '';
+
+          labels.push({ innerHTML: '<span class="filterable-header">Name' + resetTaxonLink + '</span>' });
 
       if( p_show_ls === 'yes' ) { 
           let urlState = appState; 
@@ -353,8 +368,6 @@ function fresults( xobj, config ) {
           // Is a valid, active lifestage filter currently in the URL string? 
           let hasFilter = window.location.search.includes('lifestage=') && 
                          !window.location.search.includes('lifestage=&'); 
-
-          let iconHtml = '<span class="clear-btn" style="font-size:18px; padding-left:6px; display:inline-block; vertical-align:middle; line-height:1;">ⓧ</span>';
 
           let resetLink = hasFilter ? ' ' + furl(resetUrl, iconHtml) : '';
 
