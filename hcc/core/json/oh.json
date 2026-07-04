@@ -41,12 +41,11 @@
         "field_name": "plant that the organism was found on",
         "show_study_grid": "yes",
         "map_type": "ls",
-        "default_taxon_id": "47119,47157,47201,47822,47208,11989,71349,5562"
+        "default_taxon_id": "47157,47201,47822,47208,11989,71349,5562"
     }
   ],
   "default_sub_icons": 
   [
-              { "nm": "Arachnida",       "taxon_id": "47119",     "icon": "&#128375;" }, 
               { "nm": "Lepidoptera",     "taxon_id": "47157",     "icon": "&#129419;" }, 
               { "nm": "Hymenoptera",     "taxon_id": "47201",     "icon": "&#128028;" }, 
               { "nm": "Diptera",         "taxon_id": "47822",     "icon": "&#129712;" }, 
