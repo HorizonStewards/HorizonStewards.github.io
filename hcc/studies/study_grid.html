@@ -1,6 +1,6 @@
 <!DOCTYPE html>     
-<html lang="en">  
-   
+<html lang="en">     
+     
 <head>
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
@@ -22,7 +22,7 @@
 
 <body>
 <script type="text/javascript"   src='../core/js/common_functions.js'> </script>
-<script type="text/javascript"   src='../core/js/store.js'> </script>
+<script type="text/javascript"   src='../core/js/study_store.js'> </script>
 <script>
 //get parameters from the url
 let winurlstr         = window.location.href;
@@ -51,44 +51,7 @@ function escapeHtmlUrl(urlString) {
     return urlString.replace(/&/g, '&amp;');
 }
 
-function buildMenu(config) {
-
-   let links = '';
-   let menu_string = '';
-   let menu_params = '';
-
-   let id = getMenuId(appState);
-
-   if( id ) { menu_params += '&taxon_id=' + id + '&menu_id=' + id; }
-
-   // if a filter has been chosen, get the filter api params
-   if( getActivityFilter(appState) ) {
-       menu_params += getFilterAPIParams(config);
-   }
-
-   menu_string = '<div class="navbar">';
-
-   if( config.mapType !== 'hide' ) {
-       let api_params = new URL('./hcc/admin/map.html', window.location.origin);
-
-       setupMapAPIParams(config, api_params);
-
-       // Escape the raw ampersands before passing it to furl or buildMenuURL
-       let urlString = api_params.toString() + '&params=' + getParams(appState);
-       let safeHtmlUrl = escapeHtmlUrl(urlString);
-
-       menu_string += buildMenuURL(furl(safeHtmlUrl, "Collection Area Map"));      
-   }
-   //menu_string += buildMenuURL( furl('../admin/layered_map.html'+buildParameterList(appState)+'&project_id='+config.insectProject,"Map") );
-
-   let urlState = setTaxonId(appState, '');
-   menu_string += buildHome( furl('./field_study.html'+buildParameterList(urlState),CONST_LEAF_UTF8) );
-   menu_string += '</div>';
-   
-   return menu_string;
-}
-
-function buildMenu2( config ) {
+function buildMenu( config ) {
 
   // Create the main navbar container
   let navbar = document.createElement('div');    
@@ -108,25 +71,21 @@ function buildMenu2( config ) {
 
            buildNavDD( navbar, 'Maps', links );
        } else {   
-           let url = '../admin/map.html' + setupAPIParams(config) + getMapZoom(config);
+           let url = '../admin/map.html' + setupMapAPIParams(config) + getMapZoom(config);
            buildNavURL( navbar, url, CONST_MAP );
        }
    }
 
   // Build the Home Link
   let homeUrl = './field_study.html';
-  buildNavHome( navbar, homeUrl, appState );
+  buildNavHome( navbar, homeUrl, appState, config );
   
   faddelem('p', document.body).appendChild(navbar);
 }
 
 function buildPage(data, config) {  
 
-   //if( getComponent(appState) === 'plantings' || getComponent(appState) === 'visits' ) {
-       //faddelem('p',document.body,{innerHTML:buildMenu(config)}); 
-   //} else {
-       buildMenu2(config); 
-  // }
+   buildMenu(config); 
    
    // append the params needed by the grid to build the url for outlinks to iNat.
    let inat_url = setupAPIParams(config);
@@ -134,72 +93,8 @@ function buildPage(data, config) {
    buildGrid(data, inat_url);    
 };
 
-function setupMapAPIParams( config, api_params ) {
+function setupCommonAPIParams( config, api_params ) {
     
-    api_params.searchParams.append('project_id', config.project);
-    api_params.searchParams.append('not_in_project', '157918');
-
-    if( getObsDate(appState)    ) { api_params.searchParams.append('on', getObsDate(appState)); } 
-
-    if( getUser(appState) ) {
-        api_params.searchParams.append('user_id', getUser(appState));
-    } else if( config.userId ) { 
-        api_params.searchParams.append('user_id', config.userId);
-    }
-
-    if( getPlaceMenuId(appState) ) { api_params.searchParams.append('place_id', getPlaceMenuId(appState)); }
-
-    // if a taxon_id was chosen from a row in the table, use that taxon_id.  if not, 
-    // use the menu_id if one was passed in.
-    if( getTaxonId(appState) ) {
-        api_params.searchParams.append('taxon_id', getTaxonId(appState));
-    } else if( getMenuId(appState) ) { 
-        api_params.searchParams.append('taxon_id', getMenuId(appState));
-    } else {
-        if( config.defaultTaxonId ) {
-            api_params.searchParams.append('taxon_id', config.defaultTaxonId);
-        }
-    }
-
-    /*if( getActivityFilter(appState) ) {
-        api_params.searchParams.append('field:plant+interaction', getActivityFilter(appState));
-    } */
-
-    if (config.obsAPIParams) {
-        const extraParams = new URLSearchParams(config.obsAPIParams);
-        extraParams.forEach((value, key) => {
-            api_params.searchParams.append(key, value);
-        });
-    }
-
-    if( getMapZoom(config) ) { 
-        const extraParams = new URLSearchParams(getMapZoom(config));
-        extraParams.forEach((value, key) => {
-            api_params.searchParams.append(key, value);
-        });
-    }
-   
-    if( getPage(appState) ) { api_params.searchParams.set('page', getPage(appState)); }
-    if( getPage(appState) ) { api_params.searchParams.set('per_page', CONST_OBSERVATIONS_PER_PAGE); }
-
-    return api_params;
-}
-
-function setupAPIParams( config ) {
-    
-    let api_params = '';
-
-    api_params += '?project_id='+config.project;
-
-    // url params will include field name when they filter based on a 
-    // obs field value by clicking it in the table.
-    if( getFieldName(appState) )  { 
-        api_params += '&field:' + getFieldName(appState); 
-    } else if( config.fieldName ) { 
-        api_params += '&field:'    + config.fieldName;  
-    }
- 
-    if( getFieldValue(appState) ) { api_params += '='          + getFieldValue(appState); }
     if( getObsDate(appState)    ) { api_params += '&on='       + getObsDate(appState); } 
 
     if( getUser(appState) ) {
@@ -223,17 +118,93 @@ function setupAPIParams( config ) {
         }
     }
 
+    // filter for life stage annotation...
+    if( getLifeStage(appState) ) { 
+        if( getLifeStage(appState) === 'null' ) {
+            api_params += '&without_term_id=1';
+        } else {
+            api_params += '&term_id=1&term_value_id='  + getLifeStage(appState);
+        }
+    }
+
     // if a filter has been chosen, get the filter api params
     if( getActivityFilter(appState) ) {
         api_params += getFilterAPIParams(config);
     }
-    /*if( getActivityFilter(appState) ) {
-        api_params += '&field:plant+interaction='+getActivityFilter(appState);
-    } */
 
     if( config.obsAPIParams ) { api_params += config.obsAPIParams; }
     api_params += getPageParam(appState, '&page=');
     api_params += '&per_page='+CONST_OBSERVATIONS_PER_PAGE;
+
+    return api_params;
+}
+
+function setupMapAPIParams( config ) {
+
+    let api_params = '';
+    
+    api_params += '?project_id='+config.project;
+    
+    // --- Consolidated iNat Multi-Field API Builder ---
+    const initialParams = new URLSearchParams(window.location.search);
+    const initialNames = initialParams.getAll('fieldname');
+    const initialValues = initialParams.getAll('fieldvalue');
+
+    const lowerCaseNames = initialNames.map(name => name.toLowerCase());
+
+    // if the config field name isn't already in the initial names array, add it in from the config.
+    if( config.fieldName && !lowerCaseNames.includes(config.fieldName.toLowerCase()) ) {
+        api_params += '&field:' + config.fieldName;
+        if( config.fieldValue ) {
+            api_params += '=' + encodeURIComponent(config.fieldValue);
+        }
+    }
+     console.log('api_params ' + api_params);
+
+    // Sequential Loop: Process whatever filters are explicitly remaining in the URL bar
+    initialNames.forEach((name, index) => {
+      const value = initialValues[index];
+      if( name && value ) {
+          api_params += '&field:' + name + '=' + encodeURIComponent(value);
+      }
+    });
+     console.log('api_params ' + api_params);
+     
+    api_params = setupCommonAPIParams( config, api_params );
+
+    return api_params;
+}
+
+function setupAPIParams( config ) {
+    
+    let api_params = '';
+
+    api_params += '?project_id='+config.project;
+
+    // --- Consolidated iNat Multi-Field API Builder ---
+    const initialParams = new URLSearchParams(window.location.search);
+    const initialNames = initialParams.getAll('fieldname');
+    const initialValues = initialParams.getAll('fieldvalue');
+
+    const lowerCaseNames = initialNames.map(name => name.toLowerCase());
+
+    // Core Rule: If the URL has no active filters (First Entrance), use your config defaults
+    if( config.fieldName && !lowerCaseNames.includes(config.fieldName.toLowerCase() ) ) {
+        api_params += '&field:' + config.fieldName;
+        if( config.fieldValue ) {
+            api_params += '=' + encodeURIComponent(config.fieldValue);
+        }
+    }
+
+    // Sequential Loop: Process whatever filters are explicitly remaining in the URL bar
+    initialNames.forEach((name, index) => {
+      const value = initialValues[index];
+      if( name && value ) {
+          api_params += '&field:' + name + '=' + encodeURIComponent(value);
+      }
+    });
+
+    api_params = setupCommonAPIParams( config, api_params );
 
     return api_params;
 }
