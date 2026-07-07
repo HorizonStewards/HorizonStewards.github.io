@@ -1,0 +1,15 @@
+{  
+  "map_center": "&centerlat=40.169690348&centerlng=-82.66825084999999",   
+  "default_map_zoom": "3",
+  "map_extent": "nelat:42.644838066,nelng:-79.353970824,swlat:37.866464067,swlng:-86.052995039", 
+  "configurations":     
+  [
+    {
+        "component": "studies",               "project": "29497",       
+        "study_title": "MG Bee",              "study_desc": "Morning Glory Turret Bee found visiting a flower.  \nUses the \"interaction->visited flower of\" observation field.",         
+        "obs_fields": "3126,4935,1711,7807,498,7623,6586",
+        "show_study_grid": "yes",             "obs_api_params": "&ofv_datatype=taxon",
+        "default_taxon_id": "486833"
+    }
+  ]
+}
