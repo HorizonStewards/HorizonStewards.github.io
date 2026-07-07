@@ -15,6 +15,6 @@
   "default_sub_icons": 
   [
               { "nm": "Melitoma taurea",         "taxon_id": "486833",     "icon": "&#128029;" }, 
-              { "nm": "Xenoglossa ipomoeae",     "taxon_id": "1594031",    "icon": "&#128038;" }
+              { "nm": "Xenoglossa ipomoeae",     "taxon_id": "1594031",    "icon": "&#128029;" }
   ]
 }
