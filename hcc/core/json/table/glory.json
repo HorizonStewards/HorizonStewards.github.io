@@ -9,7 +9,12 @@
         "study_title": "MG Bee",              "study_desc": "Morning Glory Turret Bee found visiting a flower.  \nUses the \"interaction->visited flower of\" observation field.",         
         "obs_fields": "3126,4935,1711,7807,498,7623,6586",
         "show_study_grid": "yes",             "obs_api_params": "&ofv_datatype=taxon",
-        "default_taxon_id": "486833"
+        "default_taxon_id": "486833,1594031"
     }
+  ],
+  "default_sub_icons": 
+  [
+              { "nm": "Melitoma taurea",         "taxon_id": "486833",     "icon": "&#128029;" }, 
+              { "nm": "Xenoglossa ipomoeae",     "taxon_id": "1594031",    "icon": "&#128038;" }
   ]
 }
