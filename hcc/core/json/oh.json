@@ -1,5 +1,4 @@
 { 
-  "plant_ids": "312177221,312177697,312176624,312175157,312179019,312178340,376236524",
   "map_center": "&centerlat=40.169690348&centerlng=-82.66825084999999",   
   "default_map_zoom": "7",
   "map_extent": "nelat:42.644838066,nelng:-79.353970824,swlat:37.866464067,swlng:-86.052995039", 
@@ -9,29 +8,25 @@
         "component": "observers",                "title": "Sample Multiple Obs Fields",
         "study_title": "observers 3126",       "study_desc": "interaction->visited flower of",
         "project": "22501",                   "insect_project": "22501",
-        "field_id": "3126",                   "field_name": "interaction->visited flower of",
-        "default_taxon_id": "47157,47201,47822,47208,11989,71349,5562"
+        "field_id": "3126",                   "field_name": "interaction->visited flower of"
     },
     { 
         "component": "observers",                "title": "Sample Multiple Obs Fields",
         "study_title": "observers 498",        "study_desc": "nectar plant",
         "project": "22501",                   "insect_project": "22501",
-        "field_id": "498",                    "field_name": "nectar plant",
-        "default_taxon_id": "47157,47201,47822,47208,11989,71349,5562"
+        "field_id": "498",                    "field_name": "nectar plant"
     },
     { 
         "component": "observers",                "title": "Sample Multiple Obs Fields",
         "study_title": "observers 4935",       "study_desc": "nectar / pollen delivering plant",
         "project": "22501",                   "insect_project": "22501",
-        "field_id": "4935",                   "field_name": "nectar / pollen delivering plant",
-        "default_taxon_id": "47157,47201,47822,47208,11989,71349,5562"
+        "field_id": "4935",                   "field_name": "nectar / pollen delivering plant"
     },
     { 
         "component": "observers",                "title": "Sample Multiple Obs Fields",
         "study_title": "observers 7623",      "study_desc": "plant that the organism was found on",
         "project": "22501",                   "insect_project": "22501",
         "field_id": "7623",                   "field_name": "plant that the organism was found on",
-        "default_taxon_id": "47157,47201,47822,47208,11989,71349,5562",
         "map_type": "ls"
     },
     {
@@ -40,18 +35,22 @@
         "field_id": "7623",                   "obs_fields": "7623",
         "field_name": "plant that the organism was found on",
         "show_study_grid": "yes",
-        "map_type": "ls",
-        "default_taxon_id": "47157,47201,47822,47208,11989,71349,5562"
+        "map_type": "ls"
     }
   ],
   "default_sub_icons": 
   [
-              { "nm": "Lepidoptera",     "taxon_id": "47157",     "icon": "&#129419;" }, 
-              { "nm": "Hymenoptera",     "taxon_id": "47201",     "icon": "&#128028;" }, 
-              { "nm": "Diptera",         "taxon_id": "47822",     "icon": "&#129712;" }, 
-              { "nm": "Coleoptera",      "taxon_id": "47208",     "icon": "&#129714;" }, 
-              { "nm": "Icteridae",       "taxon_id": "11989",     "icon": "&#128038;" }, 
-              { "nm": "Parulidae",       "taxon_id": "71349",     "icon": "&#128038;" }, 
-              { "nm": "Trochilidae",     "taxon_id": "5562",      "icon": "&#128038;" }
-  ]
-}
+              {
+                "nm": "amphibians",  "taxon_id": "20978", "icon": "&#128056;" }, {
+                "nm": "beetles",     "taxon_id": "47208", "icon": "&#129714;" }, {
+                "nm": "bees",        "taxon_id": "47222", "icon": "&#128029;" }, {
+                "nm": "birds",       "taxon_id": "3",     "icon": "&#128038;" }, {
+                "nm": "butterflies", "taxon_id": "47157", "icon": "&#129419;" }, {
+                "nm": "insects",     "taxon_id": "47158", "icon": "&#129439;" }, {
+                "nm": "mammals",     "taxon_id": "40151", "icon": "&#128059;" }, {
+                "nm": "mushrooms",   "taxon_id": "47170", "icon": "&#127812;" }, {
+                "nm": "reptiles",    "taxon_id": "26036", "icon": "&#128013;" }, {
+                "nm": "spiders",     "taxon_id": "47118", "icon": "&#128375;" }, {
+                "nm": "snails",      "taxon_id": "47115", "icon": "&#128012;" 
+              }
+  ]}
