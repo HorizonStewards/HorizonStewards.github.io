@@ -6,13 +6,13 @@
   "configurations":     
   [
     { 
-        "component": "plants",                "title": "Asteroid Owl",
+        "component": "plants",                "title": "Asteroid App",
         "project": "29497",                   "insect_project": "22501", 
         "field_id": "3126",                   "field_name": "interaction->visited flower of",
         "user_id": "asteroidowl,stockslager"           
     },
     { 
-        "component": "observers",             "title": "Horizon Community Church",     
+        "component": "observers",                
         "project": "29497",                   "insect_project": "22501", 
         "field_id": "7623",                   "field_name": "interaction->visited flower of",
         "map_type": "ls",                     "user_id": "asteroidowl,stockslager"
