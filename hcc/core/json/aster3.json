@@ -1,0 +1,35 @@
+{  
+  "plant_ids": "378569849",
+  "map_center": "&centerlat=39.323079038&centerlng=-84.312762816",   
+  "map_extent": "nelat:39.42814962656805,nelng:-84.158419792,swlat:39.174620053,swlng:-84.45136881621875", 
+  "default_map_zoom": "9",
+  "configurations":     
+  [
+    { 
+        "component": "plants",                "title": "Asteroid Owl",
+        "project": "29497",                   "insect_project": "22501", 
+        "field_id": "3126",                   "field_name": "interaction->visited flower of",
+        "user_id": "asteroidowl,stockslager"           
+    },
+    { 
+        "component": "observers",             "title": "Horizon Community Church",     
+        "project": "29497",                   "insect_project": "22501", 
+        "field_id": "7623",                   "field_name": "interaction->visited flower of",
+        "map_type": "ls"
+    }
+  ],
+  "default_sub_icons": 
+  [
+              { "nm": "insects",     "taxon_id": "47158", "icon": "&#129439;" }, 
+              { "nm": "birds",       "taxon_id": "3",     "icon": "&#128038;" }, 
+              { "nm": "amphibians",  "taxon_id": "20978", "icon": "&#128056;" }, 
+              { "nm": "reptiles",    "taxon_id": "26036", "icon": "&#128013;" }, 
+              { "nm": "spiders",     "taxon_id": "47118", "icon": "&#128375;" }, 
+              { "nm": "mammals",     "taxon_id": "40151", "icon": "&#128059;" }, 
+              { "nm": "snails",      "taxon_id": "47115", "icon": "&#128012;" }, 
+              { "nm": "mushrooms",   "taxon_id": "47170", "icon": "&#127812;" }, 
+              { "nm": "butterflies", "taxon_id": "47157", "icon": "&#129419;" }, 
+              { "nm": "beetles",     "taxon_id": "47208", "icon": "&#129714;" },
+              { "nm": "bees",        "taxon_id": "47222", "icon": "&#128029;" }
+  ]
+}
