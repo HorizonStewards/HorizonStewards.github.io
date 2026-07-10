@@ -9,7 +9,7 @@
         "component": "plants",                "title": "Asteroid Owl",
         "project": "29497",                   "insect_project": "22501", 
         "field_id": "3126",                   "field_name": "interaction->visited flower of",
-        "user_id": "asteroidowl",             "plant_list_user_id": "asteroidowl"
+        "user_id": "asteroidowl"           
     }
   ],
   "default_sub_icons": 
