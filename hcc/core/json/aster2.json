@@ -1,7 +1,7 @@
 {  
   "plant_ids": "378569849",
-  "map_center": "&centerlat=39.09319066347188&centerlng=-84.34097658959033",   
-  "map_extent": "nelat:39.09319066347188,nelng:-84.34097658959033,swlat:39.092311432,swlng:-84.34214215755725", 
+  "map_center": "&centerlat=39.323079038&centerlng=-84.312762816",   
+  "map_extent": "nelat:39.42814962656805,nelng:-84.158419792,swlat:39.174620053,swlng:-84.45136881621875", 
   "default_map_zoom": "17",
   "configurations":     
   [
