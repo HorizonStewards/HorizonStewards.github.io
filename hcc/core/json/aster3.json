@@ -15,7 +15,7 @@
         "component": "observers",             "title": "Horizon Community Church",     
         "project": "29497",                   "insect_project": "22501", 
         "field_id": "7623",                   "field_name": "interaction->visited flower of",
-        "map_type": "ls"
+        "map_type": "ls",                     "user_id": "asteroidowl,stockslager"
     }
   ],
   "default_sub_icons": 
