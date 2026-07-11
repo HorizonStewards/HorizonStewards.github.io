@@ -5,14 +5,14 @@
   [
     {
         "component": "studies",               "project": "157918",       
-        "study_title": "Plant Id",            "study_desc": "Level one curation at Horizon includes identification of plant via \n 7623  - plant that the organism was found on \n 21998 - location on plant \n 21273 - plant interaction",         
+        "study_title": "Plant Id",            "study_desc": "Level one curation at Horizon includes identification of plant via \n\n 7623  - plant that the organism was found on \n 21998 - location on plant \n 21273 - plant interaction",         
         "field_id": "7623",                   "obs_fields": "7623,21998,21273",
         "identify_enabled": "yes",            "show_grid": "yes",
         "field_name": "plant that the organism was found on"
     },
     {
         "component": "studies",                   "project": "157918",       
-        "study_title": "Pollation and Nectaring", "study_desc": "Level two curation at Horizon includes displays any organism found on a flower and allows further curation wrt pollination and nectaring via \n 9603  - proboscis inserted \n 11472 - body combing pollen",         
+        "study_title": "Pollation and Nectaring", "study_desc": "Level two curation at Horizon includes displays any organism found on a flower and allows further curation wrt pollination and nectaring via \n\n 9603  - proboscis inserted \n 11472 - body combing pollen",         
         "field_id": "21273",                      "obs_fields": "7623,21998,21273",
         "identify_enabled": "yes",                "show_grid": "yes",
         "field_name": "location on plant",        "field_value": "flower"
