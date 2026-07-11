@@ -262,42 +262,12 @@ function buildPage( configManager ) {
                let desc = config.studyDesc;
                let brow = faddelem('tr', studies_tbody);
 
-               let td1 = faddelem('td', brow);
+               let td1 = faddelem('td', brow, { style: 'vertical-align: top;' });
                faddelem('a', td1, { href: url, innerHTML: icon }); 
-               let td2 = faddelem('td', brow);
+               let td2 = faddelem('td', brow, { style: 'vertical-align: top;' });
                faddelem('a', td2, { href: url, textContent: name });
                faddelem('td', brow, { textContent: desc, style: 'white-space: pre-line;' });
            }
-       
-           /*if( config.component === COMPONENT_VISITS ) {
-               if( headers === 'no' ) {
-                   headers = 'yes';
-                   studies_table = faddelem('table',document.body,{id:'main'});                    
-                   studies_thead = faddelem('thead',studies_table);
-                   studies_hrow  = faddelem('tr',studies_thead);
-      
-                   faddelems('th',studies_hrow,studies_labels);
-                   studies_tbody = faddelem('tbody',studies_table);
-               }
-
-               let urlState = appState;
-               urlState = setComponent( urlState, config.component );
-               urlState = setStudyTitle(urlState, config.studyTitle);
-               let plant_params = buildParameterList(urlState);
-
-               let url  = '../studies/field_study.html' + buildParameterList(urlState);
-               let icon = config.utf8 || CONST_STUDIES_UTF8;
-               let name = config.studyTitle;
-               let desc = config.studyDesc;
-               let brow = faddelem('tr', studies_tbody);
-
-               let td1 = faddelem('td', brow);
-               faddelem('a', td1, { href: url, innerHTML: icon }); 
-               let td2 = faddelem('td', brow);
-               faddelem('a', td2, { href: url, textContent: name, style: 'white-space: nowrap;' });  
-               faddelem('td', brow, { textContent: desc });
-           }*/
-      
       }
 
       faddelem('p', document.body,{innerHTML:'</div>'});
