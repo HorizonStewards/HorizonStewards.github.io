@@ -706,6 +706,10 @@ function fresults( xobj, config ) {
                       } 
                   } 
              } // End of r loop
+         } else {
+             for( let r = 0; r < box_array.length; r++ ) { 
+                  values.push({ innerText: '' }); 
+             }
          }
         
          if( config.merge === 'yes' ){
