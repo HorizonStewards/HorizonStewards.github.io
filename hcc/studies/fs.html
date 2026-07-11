@@ -225,7 +225,6 @@ function buildMenu2( results, config ) {
       }
 
       if( identify_params ) {
-          console.log('easdfasfsadfasdf');
           let urlState = Object.assign({}, appState);
           buildNavLink( navbar, 'https://www.inaturalist.org/observations/identify', identify_params, 'Identify' );
       }
@@ -884,11 +883,9 @@ function setupAPIParams( config ) {
    // set the params for the identify link to the exact filtration parameters
    // to be used in the api transaction that will populate the table with whatever 
    // filtrations were selected.
-   console.log('identify enabled? ' + config.identifyEnabled);
-   if( config.idenitfyEnabled === 'yes' ) {
-       console.log('found it!!!!!!!!!!!!!');
+   if( config.identifyEnabled === 'yes' ) {
        identify_params = api_params;
-   }
+   } 
           
    api_params += getPageParam(appState, '&page=');
    api_params += '&per_page='+CONST_OBSERVATIONS_PER_PAGE;
