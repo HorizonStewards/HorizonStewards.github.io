@@ -884,6 +884,7 @@ function setupAPIParams( config ) {
    // set the params for the identify link to the exact filtration parameters
    // to be used in the api transaction that will populate the table with whatever 
    // filtrations were selected.
+   console.log('identify enabled? ' + config.identifyEnabled);
    if( config.idenitfyEnabled === 'yes' ) {
        console.log('found it!!!!!!!!!!!!!');
        identify_params = api_params;
