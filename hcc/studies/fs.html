@@ -225,8 +225,8 @@ function buildMenu2( results, config ) {
       }
 
       if( identify_params ) {
-          let urlState = Object.assign({}, appState);
-          buildNavLink( navbar, 'https://www.inaturalist.org/observations/identify', identify_params, 'Identify' );
+          let url = 'https://www.inaturalist.org/observations/identify' + identify_params;
+          buildNavURL( navbar, url, 'Identify' );
       }
 
       if( p_hide_dash === 'no' ) {
