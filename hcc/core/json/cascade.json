@@ -5,7 +5,7 @@
   [
     {
         "component": "studies",               "project": "157918",       "utf8": "&#127807;",  "title": "Cascading Curation",
-        "study_title": "Level 1",             "study_desc": "Level one curation at Horizon includes identification of the plant by an observer in the field using \n\n 7623  - plant that the organism was found on \n\nA curator will then use this table to fill in\n\n 21998 - location on plant (leaf, flower, stem, etc.) \n 21273 - plant interaction (nectaring / pollinating, feeding, etc.)",         
+        "study_title": "Level 1",             "study_desc": "Level one curation at Horizon includes identification of the plant by an observer in the field using \n\n 7623  - plant that the organism was found on \n\nA curator will then use this table to fill additional information about which part of the plant was visited (flower, leaf, stem, etc.) and the plant interaction (nectaring / pollinating, feeding, etc.)\n\n 21998 - location on plant (leaf, flower, stem, etc.) \n 21273 - plant interaction (nectaring / pollinating, feeding, etc.)",         
         "field_id": "7623",                   "obs_fields": "7623,21998,21273",
         "identify_enabled": "yes",            "show_study_grid": "yes",
         "field_name": "plant that the organism was found on"
