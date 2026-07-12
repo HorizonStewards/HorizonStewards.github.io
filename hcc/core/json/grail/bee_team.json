@@ -8,8 +8,7 @@
         "study_title": "Bee Team",            "study_desc": "Final consolidated results ~ 07-11-2026",         
         "field_id": "7623",                   "obs_fields": "7623,21998,21273",
         "identify_enabled": "yes",            "show_study_grid": "yes",
-        "field_name": "plant that the organism was found on",
-        "obs_api_params": "&d1=20260711"
+        "field_name": "plant that the organism was found on"
     }
   ],
   "default_sub_icons": 
