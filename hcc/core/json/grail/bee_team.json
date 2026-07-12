@@ -12,10 +12,10 @@
     },
     { 
         "component": "observers",             "title": "Bee Team",    
-        "study_title": "Bee Team",            "study_desc": "Observations counts for each team participant.",         
+        "study_title": "Bee Team",            "study_desc": "Observation counts for each team participant.",         
         "project": "279547",                  "insect_project": "279547", 
         "field_id": "7623",                   "field_name": "plant that the organism was found on"
-    },
+    }
   ],
   "default_sub_icons": 
   [
