@@ -4,7 +4,7 @@
   "configurations":     
   [
     {
-        "component": "studies",               "project": "279547",       "utf8": "&#128029;",
+        "component": "plants",                "project": "279547",       "utf8": "&#128029;",
         "study_title": "Bee Team",            "study_desc": "Final consolidated results ~ 07-11-2026",         
         "field_id": "7623",                   "obs_fields": "7623,21998,21273",
         "identify_enabled": "yes",            "show_study_grid": "yes",
