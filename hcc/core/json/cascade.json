@@ -4,15 +4,15 @@
   "configurations":     
   [
     {
-        "component": "studies",               "project": "157918",       "utf8": "&#127807;",
-        "study_title": "Plant Id",            "study_desc": "Level one curation at Horizon includes identification of plant via \n\n 7623  - plant that the organism was found on \n 21998 - location on plant \n 21273 - plant interaction",         
+        "component": "studies",               "project": "157918",       "utf8": "&#127807;",  "title": "Cascading Curation",
+        "study_title": "Level 1",             "study_desc": "Level one curation at Horizon includes identification of the plant by an observer in the field using \n\n 7623  - plant that the organism was found on \n\nA curator will then use this table to fill in\n 21998 - location on plant (leaf, flower, stem, etc.) \n 21273 - plant interaction (nectaring / pollinating, feeding, etc.)",         
         "field_id": "7623",                   "obs_fields": "7623,21998,21273",
         "identify_enabled": "yes",            "show_study_grid": "yes",
         "field_name": "plant that the organism was found on"
     },
     {
         "component": "studies",                   "project": "157918",       "utf8": "&#x1FAB2;",
-        "study_title": "Pollination and Nectaring", "study_desc": "Level two curation at Horizon includes displays any organism found on a flower and allows further curation wrt pollination and nectaring via \n\n 9603  - proboscis inserted \n 11472 - body combing pollen",         
+        "study_title": "Level 2",                 "study_desc": "Level two curation at Horizon displays any organism curated as having been found on a flower during level one.  This table allows further curation of these observations for pollination and nectaring via \n\n 9603  - proboscis inserted (does the photo show the proboscis being inserted?) \n 11472 - body combing pollen (does the photo show body combing pollen attached?)",         
         "field_id": "21273",                      "obs_fields": "7623,21998,21273",
         "identify_enabled": "yes",                "show_study_grid": "yes",
         "field_name": "location on plant",        "field_value": "flower"
