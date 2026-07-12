@@ -5,14 +5,14 @@
   "configurations":     
   [
     {
-        "component": "plants",                "project": "279547",     "title": "Bee Team",     
+        "component": "plants",                "project": "279547",         
         "insect_project": "279547",           "utf8": "&#128029;",
         "study_title": "Interactions",        "study_desc": "Flora / Fauna Interactions. Requires \"plant that the organism was found on\" observation feild.",         
         "field_id": "7623",                   
         "field_name": "plant that the organism was found on"
     },
     { 
-        "component": "observers",             
+        "component": "observers",             "title": "Bee Team",  
         "study_title": "Bee Team",            "study_desc": "Observation counts for each team participant.",         
         "project": "279547",                  "insect_project": "279547", 
         "field_id": "7623",                   "field_name": "plant that the organism was found on"
