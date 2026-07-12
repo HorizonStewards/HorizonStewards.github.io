@@ -13,7 +13,7 @@
     {
         "component": "studies",                   "project": "157918",       "utf8": "&#x1FAB2;",
         "study_title": "Level 2",                 "study_desc": "Level two curation at Horizon displays any organism curated as having been found on a flower during level one.  This table allows further curation of the pollination and nectaring observations from Level one.  At this level, a curator will look for a clear image of a proboscis being used by a nectarer or body combing pollen on a pollinator.\n\n 9603  - proboscis inserted\n 11472 - body combing pollen",         
-        "field_id": "21273",                      "obs_fields": "7623,21998,21273",
+        "field_id": "21273",                      "obs_fields": "7623,21998,9603,11472",
         "identify_enabled": "yes",                "show_study_grid": "yes",
         "field_name": "location on plant",        "field_value": "flower"
     }
