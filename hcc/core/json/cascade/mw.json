@@ -16,7 +16,7 @@
         "identify_enabled": "yes",            "show_study_grid": "yes",
         "field_name": "name of associated plant",
         "user_id": "m_whitson",               "obs_api_params": "&d1=2026&ofv_datatype=taxon&term_id=1&term_value_id=6"
-    },
+    }
   ],
   "default_sub_icons": 
   [
