@@ -4,7 +4,7 @@
   [
     {
         "component": "studies",               "project": "22498",       "utf8": "&#127807;",  "title": "m_whitson self curation",
-        "study_title": "Level 1",             "study_desc": "Level one curation for m_w involves consolidated of granular several granular observation fields under one broad observation field.\n\nBroad Observation Field:\n7807 - name of associated plant\n\nGranular Observation Fields:\n\n4935 - nectar / pollen delivering plant\n254 - host plant\n6586 - host plant id\n498 - nectar plant",         
+        "study_title": "Level 1",             "study_desc": "Level one curation for m_w involves consolidated of granular several granular observation fields under one broad observation field.\n\nBroad Observation Field:\n7807 - name of associated plant\n\nGranular Observation Fields:\n4935 - nectar / pollen delivering plant\n254 - host plant\n6586 - host plant id\n498 - nectar plant",         
         "field_id": "7623",                   "obs_fields": "7807,4935,254,6586,498",
         "identify_enabled": "yes",            "show_study_grid": "yes",
         "user_id": "m_whitson",               "obs_api_params": "&d1=2026&ofv_datatype=taxon"
