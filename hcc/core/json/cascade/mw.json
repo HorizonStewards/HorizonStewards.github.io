@@ -8,7 +8,15 @@
         "field_id": "7623",                   "obs_fields": "7807,4935,254,6586,498",
         "identify_enabled": "yes",            "show_study_grid": "yes",
         "user_id": "m_whitson",               "obs_api_params": "&d1=2026&ofv_datatype=taxon"
-    }
+    },
+    {
+        "component": "studies",               "project": "22498",       "utf8": "&#127807;",  "title": "m_whitson self curation",
+        "study_title": "Level 1",             "study_desc": "Level two curation for m_w populates the caterpillar contruct and construct type for larva observations of butterflies.  We already know that \"name of associated plant\" has been populated for any wildlife visiting a plant during level 1.\n\nBroad Observation Field:\n7807 - name of associated plant\n\nGranular Observation Fields:\n15119 - caterpillar construct?\n15120 - caterpillar construct type",         
+        "field_id": "7623",                   "obs_fields": "7807,15119,15120",
+        "identify_enabled": "yes",            "show_study_grid": "yes",
+        "field_name": "name of associated plant",
+        "user_id": "m_whitson",               "obs_api_params": "&d1=2026&ofv_datatype=taxon&term_id=1&term_value_id=6"
+    },
   ],
   "default_sub_icons": 
   [
