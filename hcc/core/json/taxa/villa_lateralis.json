@@ -4,25 +4,25 @@
     {
         "component": "studies",                  "title": "United States",      "utf8": "&#10133;",
         "merge": "yes",                          "obs_api_params": "&ofv_datatype=taxon",
-        "study_title": "Merged Fields",          "study_desc": "Villa lateralis found on plants using several observation fields merged together", 
+        "study_title": "Merged Fields",          "study_desc": "Villa lateralis \n\nFound on plants using several observation fields merged together", 
         "project": "29497",                     "obs_fields": "13,14487,4833,3126,7807,7623,254,2365,12550,3126,1711,18155,14922,498,47,10524,6586,12110,499,115,4935,5432,1685",
         "default_taxon_id": "133761"
     },
     {
         "component": "studies",                  "title": "Just Midwest",      "utf8": "&#10133;",
-        "merge": "yes",                          "obs_api_params": "&ofv_datatype=taxon",
-        "study_title": "Merged Fields",          "study_desc": "Villa lateralis found on plants using several observation fields merged together", 
+        "merge": "yes",                          
+        "study_title": "Merged Fields",          "study_desc": "Villa lateralis \n\nFound in the midwest \nOn plants using several observation fields merged together", 
         "project": "29497",                     "obs_fields": "13,14487,4833,3126,7807,7623,254,2365,12550,3126,1711,18155,14922,498,47,10524,6586,12110,499,115,4935,5432,1685",
         "default_taxon_id": "133761",
-        "obs_api_params": "&nelat=49.384472&nelng=-80.518705&swlat=35.9956849&swlng=-104.0578791"
+        "obs_api_params": "&ofv_datatype=taxon&nelat=49.384472&nelng=-80.518705&swlat=35.9956849&swlng=-104.0578791"
     },
     {
         "component": "studies",                  "title": "Just Midwest in June and July",      "utf8": "&#10133;",
-        "merge": "yes",                          "obs_api_params": "&ofv_datatype=taxon",
-        "study_title": "Merged Fields",          "study_desc": "Villa lateralis found on plants using several observation fields merged together", 
+        "merge": "yes",                         
+        "study_title": "Merged Fields",          "study_desc": "Villa lateralis \n\nFound in the midwest \nIn June or July \nOn plants using several observation fields merged together", 
         "project": "29497",                     "obs_fields": "13,14487,4833,3126,7807,7623,254,2365,12550,3126,1711,18155,14922,498,47,10524,6586,12110,499,115,4935,5432,1685",
         "default_taxon_id": "133761",
-        "obs_api_params": "&month=6,7&nelat=49.384472&nelng=-80.518705&swlat=35.9956849&swlng=-104.0578791"
+        "obs_api_params": "&ofv_datatype=taxon&month=6,7&nelat=49.384472&nelng=-80.518705&swlat=35.9956849&swlng=-104.0578791"
     }
   ]
 }
