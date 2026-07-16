@@ -5,7 +5,8 @@
         "component": "studies",                  "title": "Villa lateralis",      "utf8": "&#10133;",
         "merge": "yes",                          "obs_api_params": "&ofv_datatype=taxon",
         "study_title": "Merged Fields",          "study_desc": "Villa lateralis found on plants using several observation fields merged together", 
-        "project": "29497",                     "obs_fields": "3126,7807,7623,254,2365,12550,3126,1711,18155,14922,498,47,10524,6586,12110,499,115,4935,5432"
+        "project": "29497",                     "obs_fields": "3126,7807,7623,254,2365,12550,3126,1711,18155,14922,498,47,10524,6586,12110,499,115,4935,5432",
+        "default_taxon_id": "133761"
     }
   ]
 }
