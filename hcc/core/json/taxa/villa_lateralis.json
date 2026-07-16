@@ -2,7 +2,7 @@
   "configurations":     
   [  
     {
-        "component": "studies",                  "title": "United States",      "&#128029;",
+        "component": "studies",                  "title": "United States",      "utf8": "&#128029;",
         "merge": "yes",                          "obs_api_params": "&ofv_datatype=taxon",
         "study_title": "Merged Fields",          "study_desc": "Villa lateralis \n\nFound on plants using several observation fields merged together", 
         "project": "29497",                     "obs_fields": "13,14487,4833,3126,7807,7623,254,2365,12550,3126,1711,18155,14922,498,47,10524,6586,12110,499,115,4935,5432,1685",
