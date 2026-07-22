@@ -10,7 +10,7 @@
         "study_title": "On Flower",           "study_desc": "Selected fauna found visiting a flower.  \nUses the \"interaction->visited flower of\" observation field.",         
         "field_id": "3126",                   "obs_fields": "3126",
         "field_name": "interaction->visited flower of",
-        "show_study_grid": "yes",             
+        "show_study_grid": "yes",             "identify_enabled": "yes",
         "map_type": "ls",
         "default_taxon_id": "47157,47201,47822,47208,11989,71349,5562",
         "taxa":
