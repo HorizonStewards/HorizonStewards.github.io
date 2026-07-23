@@ -4,49 +4,49 @@
   "configurations":     
   [
     {
-        "component": "studies",               "project": "157918",       
+        "component": "studies",               "project": "157918",     "utf8": "&#129714;",
         "study_title": "7623",                "study_desc": "Plant that the organism was found on",         
         "field_id": "7623",                   "obs_fields": "7623",
         "show_study_grid": "yes",
         "field_name": "plant that the organism was found on"
     },
     {
-        "component": "studies",               "project": "157918",       
+        "component": "studies",               "project": "157918",      "utf8": "&#127803;",
         "study_title": "3126",                "study_desc": "interaction-> visited flower of",         
         "field_id": "3126",                   "obs_fields": "3126,7623",
         "identify_enabled": "yes",            "show_study_grid": "yes",
         "field_name": "interaction->visited flower of"
     },
     {
-        "component": "studies",               "project": "157918",       
+        "component": "studies",               "project": "157918",       "utf8": "&#129419;",
         "study_title": "4935",                "study_desc": "nectar / pollen delivering plant",         
         "field_id": "4935",                   "obs_fields": "4935,7623",
         "identify_enabled": "yes",            "show_study_grid": "yes",
         "field_name": "nectar / pollen delivering plant"
     },
     {
-        "component": "studies",               "project": "157918",       
+        "component": "studies",               "project": "157918",       "utf8": "&#129714;",
         "study_title": "7807",                "study_desc": "name of associated plant",         
         "field_id": "7807",                   "obs_fields": "7807,7623",
         "identify_enabled": "yes",            "show_study_grid": "yes",
         "field_name": "name of associated plant"
     },
     {
-        "component": "studies",               "project": "157918",       
+        "component": "studies",               "project": "157918",       "utf8": "&#129419;",
         "study_title": "498",                 "study_desc": "nectar plant",         
         "field_id": "498",                    "obs_fields": "498,7623",
         "identify_enabled": "yes",            "show_study_grid": "yes",
         "field_name": "nectar plant"
     },
         {
-        "component": "studies",               "project": "157918",       
+        "component": "studies",               "project": "157918",         "utf8": "&#129714;",
         "study_title": "16809",               "study_desc": "plant the organism was found on:",         
         "field_id": "16809",                  "obs_fields": "16809,7623",
         "identify_enabled": "yes",            "show_study_grid": "yes",
         "field_name": "plant the organism was found on:"
     },
     {
-        "component": "studies",               "project": "157918",       
+        "component": "studies",               "project": "157918",       "utf8": "&#128027;",
         "study_title": "6586",                "study_desc": "host plant id",         
         "field_id": "6586",                   "obs_fields": "6586,7623",
         "identify_enabled": "yes",            "show_study_grid": "yes",
