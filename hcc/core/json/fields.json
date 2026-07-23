@@ -5,7 +5,7 @@
   [
     {
         "component": "studies",               "project": "157918",     "utf8": "&#129714;",
-        "study_title": "7623",                "study_desc": "Plant that the organism was found on",         
+        "study_title": "7623",                "study_desc": "plant that the organism was found on",         
         "field_id": "7623",                   "obs_fields": "7623",
         "show_study_grid": "yes",
         "field_name": "plant that the organism was found on"
