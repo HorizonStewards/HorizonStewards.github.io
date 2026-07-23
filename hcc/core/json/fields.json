@@ -1,0 +1,70 @@
+{  
+  "plant_field": "garden list",         "plant_field_value": "yes",  
+  "default_map_zoom": "17",
+  "configurations":     
+  [
+    {
+        "component": "studies",               "project": "157918",       
+        "study_title": "7623",                "study_desc": "Plant that the organism was found on",         
+        "field_id": "7623",                   "obs_fields": "7623",
+        "show_study_grid": "yes"
+        "field_name": "plant that the organism was found on"
+    },
+    {
+        "component": "studies",               "project": "157918",       
+        "study_title": "3126",                "study_desc": "interaction-> visited flower of",         
+        "field_id": "3126",                   "obs_fields": "3126,7623",
+        "identify_enabled": "yes",            "show_study_grid": "yes",
+        "field_name": "interaction->visited flower of"
+    },
+    {
+        "component": "studies",               "project": "157918",       
+        "study_title": "Matrix",              "study_desc": "nectar / pollen delivering plant",         
+        "field_id": "4935",                   "obs_fields": "4935,7623",
+        "identify_enabled": "yes",            "show_study_grid": "yes",
+        "field_name": "nectar / pollen delivering plant"
+    },
+    {
+        "component": "studies",               "project": "157918",       
+        "study_title": "7807",                "study_desc": "name of associated plant",         
+        "field_id": "7807",                   "obs_fields": "7807,7623",
+        "identify_enabled": "yes",            "show_study_grid": "yes",
+        "field_name": "name of associated plant"
+    },
+    {
+        "component": "studies",               "project": "157918",       
+        "study_title": "498",                 "study_desc": "nectar plant",         
+        "field_id": "498",                    "obs_fields": "498",
+        "identify_enabled": "yes",            "show_study_grid": "yes",
+        "field_name": "nectar plant"
+    },
+        {
+        "component": "studies",               "project": "157918",       
+        "study_title": "16809",               "study_desc": "plant the organism was found on:",         
+        "field_id": "16809",                  "obs_fields": "16809",
+        "identify_enabled": "yes",            "show_study_grid": "yes",
+        "field_name": "plant the organism was found on:"
+    },
+    {
+        "component": "studies",               "project": "157918",       
+        "study_title": "6586",                "study_desc": "host plant id",         
+        "field_id": "6586",                   "obs_fields": "6586",
+        "identify_enabled": "yes",            "show_study_grid": "yes",
+        "field_name": "host plant id"
+    }
+  ],
+  "default_sub_icons": 
+  [
+                { "nm": "amphibians",  "taxon_id": "20978", "icon": "&#128056;" },
+                { "nm": "beetles",     "taxon_id": "47208", "icon": "&#129714;" }, 
+                { "nm": "bees",        "taxon_id": "47222", "icon": "&#128029;" }, 
+                { "nm": "birds",       "taxon_id": "3",     "icon": "&#128038;" }, 
+                { "nm": "butterflies", "taxon_id": "47157", "icon": "&#129419;" }, 
+                { "nm": "insects",     "taxon_id": "47158", "icon": "&#129439;" }, 
+                { "nm": "mammals",     "taxon_id": "40151", "icon": "&#128059;" }, 
+                { "nm": "mushrooms",   "taxon_id": "47170", "icon": "&#127812;" }, 
+                { "nm": "reptiles",    "taxon_id": "26036", "icon": "&#128013;" }, 
+                { "nm": "spiders",     "taxon_id": "47118", "icon": "&#128375;" }, 
+                { "nm": "snails",      "taxon_id": "47115", "icon": "&#128012;" }
+  ]
+}
