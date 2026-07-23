@@ -19,7 +19,7 @@
     },
     {
         "component": "studies",               "project": "157918",       
-        "study_title": "Matrix",              "study_desc": "nectar / pollen delivering plant",         
+        "study_title": "4935",                "study_desc": "nectar / pollen delivering plant",         
         "field_id": "4935",                   "obs_fields": "4935,7623",
         "identify_enabled": "yes",            "show_study_grid": "yes",
         "field_name": "nectar / pollen delivering plant"
