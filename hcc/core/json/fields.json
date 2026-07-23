@@ -34,21 +34,21 @@
     {
         "component": "studies",               "project": "157918",       
         "study_title": "498",                 "study_desc": "nectar plant",         
-        "field_id": "498",                    "obs_fields": "498",
+        "field_id": "498",                    "obs_fields": "498,7623",
         "identify_enabled": "yes",            "show_study_grid": "yes",
         "field_name": "nectar plant"
     },
         {
         "component": "studies",               "project": "157918",       
         "study_title": "16809",               "study_desc": "plant the organism was found on:",         
-        "field_id": "16809",                  "obs_fields": "16809",
+        "field_id": "16809",                  "obs_fields": "16809,7623",
         "identify_enabled": "yes",            "show_study_grid": "yes",
         "field_name": "plant the organism was found on:"
     },
     {
         "component": "studies",               "project": "157918",       
         "study_title": "6586",                "study_desc": "host plant id",         
-        "field_id": "6586",                   "obs_fields": "6586",
+        "field_id": "6586",                   "obs_fields": "6586,7623",
         "identify_enabled": "yes",            "show_study_grid": "yes",
         "field_name": "host plant id"
     }
