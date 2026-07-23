@@ -7,7 +7,7 @@
         "component": "studies",               "project": "157918",       
         "study_title": "7623",                "study_desc": "Plant that the organism was found on",         
         "field_id": "7623",                   "obs_fields": "7623",
-        "show_study_grid": "yes"
+        "show_study_grid": "yes",
         "field_name": "plant that the organism was found on"
     },
     {
