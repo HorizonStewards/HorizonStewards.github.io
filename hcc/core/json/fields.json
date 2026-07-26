@@ -36,7 +36,7 @@
         "study_title": "498",                 "study_desc": "nectar plant",         
         "field_id": "498",                    "obs_fields": "498,7623",
         "identify_enabled": "yes",            "show_study_grid": "yes",
-        "field_name": "nectar plant"
+        "field_name": "nectar plant",         "identify_enabled": "yes"
     },
         {
         "component": "studies",               "project": "157918",         "utf8": "&#129714;",
@@ -50,7 +50,7 @@
         "study_title": "6586",                "study_desc": "host plant id",         
         "field_id": "6586",                   "obs_fields": "6586,7623",
         "identify_enabled": "yes",            "show_study_grid": "yes",
-        "field_name": "host plant id"
+        "field_name": "host plant id",        "identify_enabled": "yes"
     }
   ],
   "default_sub_icons": 
