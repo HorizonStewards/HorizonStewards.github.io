@@ -6,7 +6,7 @@
         "component": "studies",               "project": "254947",     "utf8": "&#129714;",
         "study_title": "sohud",               "study_desc": "flora / fauna interactions tracked by ~ plant that the organism was found on",         
         "field_id": "7623",                   "obs_fields": "7623",
-        "show_study_grid": "yes",
+        "show_study_grid": "yes",             "map_type": "hide",
         "field_name": "plant that the organism was found on"
     }
   ],
