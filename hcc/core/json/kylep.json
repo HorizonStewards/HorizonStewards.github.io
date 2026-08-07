@@ -17,7 +17,7 @@
   [
               { "nm": "andrenidae",              "taxon_id": "57668",     "icon": "&#128029;"  }, 
               { "nm": "apidae",                  "taxon_id": "47221",     "icon": "&#128029;"  }, 
-              { "nm": "&nbsp;&nbsp;&nbsp;bombus",               "taxon_id": "52775",     "icon": "&#128029;"  }, 
+              { "nm": "* bombus",                "taxon_id": "52775",     "icon": "&#128029;"  }, 
               { "nm": "colletidae",              "taxon_id": "127740",    "icon": "&#128029;"  },
               { "nm": "halictidae",              "taxon_id": "49707",     "icon": "&#128029;"  }, 
               { "nm": "megachilidae",            "taxon_id": "52777",     "icon": "&#128029;"  },
