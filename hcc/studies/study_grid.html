@@ -127,6 +127,15 @@ function setupCommonAPIParams( config, api_params ) {
         }
     }
 
+    // filter for sex annotation...
+    if( getSex(appState) ) {
+        if( getSex(appState) === 'null' ) {
+            api_params += '&without_term_id=9';
+        } else {
+            api_params += '&term_id=9&term_value_id=' + getSex(appState);
+        }
+    }
+
     // if a filter has been chosen, get the filter api params
     if( getActivityFilter(appState) ) {
         api_params += getFilterAPIParams(config);
