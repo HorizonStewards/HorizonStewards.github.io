@@ -361,7 +361,7 @@ function fresults( xobj, config ) {
       nameState = setTaxonId(nameState, '');
       nameState = setTaxonName(nameState, '');
       nameState = setPage(nameState, '1'); 
-      let taxonUrl = './field_study.html' + buildParameterList(nameState); 
+      let taxonUrl = './fs.html' + buildParameterList(nameState); 
 
       // Is a valid, active taxon filter currently in the URL string? 
       let hasTaxonFilter = window.location.search.includes('taxonid=') && 
@@ -376,7 +376,7 @@ function fresults( xobj, config ) {
           let urlState = appState; 
           urlState = setLifeStage(urlState, ''); 
           urlState = setPage(urlState, '1'); 
-          let resetUrl = './field_study.html' + buildParameterList(urlState); 
+          let resetUrl = './fs.html' + buildParameterList(urlState); 
 
           // Is a valid, active lifestage filter currently in the URL string? 
           let hasFilter = window.location.search.includes('lifestage=') && 
@@ -392,7 +392,7 @@ function fresults( xobj, config ) {
           let urlState = appState; 
           urlState = setSex(urlState, '');  
           urlState = setPage(urlState, '1'); 
-          let resetUrl = './field_study.html' + buildParameterList(urlState); 
+          let resetUrl = './fs.html' + buildParameterList(urlState); 
 
           // Is a valid, active lifestage filter currently in the URL string? 
           let hasFilter = window.location.search.includes('sex=') && 
@@ -494,7 +494,7 @@ function fresults( xobj, config ) {
                            newParams.delete('plantname'); 
                        }
         
-                       const resetUrl = './field_study.html?' + newParams.toString(); 
+                       const resetUrl = './fs.html?' + newParams.toString(); 
                        const resetLink = ' ' + furl2(resetUrl, iconHtml); 
         
                        labels.push({ innerHTML: '<span class="filterable-header">' + truncate(box_array[e].field_name, 25) + resetLink + '</span>' }); 
@@ -530,7 +530,7 @@ function fresults( xobj, config ) {
                    '</table>' +
                  '</div>' +
                  '<span class="clear-all-filters">' + 
-                    '<span style="white-space: nowrap; margin-bottom: 2px;">' + furl2('./field_study.html'+buildParameterList(clearState), 'clear all filters') + '</span>' + 
+                    '<span style="white-space: nowrap; margin-bottom: 2px;">' + furl2('./fs.html'+buildParameterList(clearState), 'clear all filters') + '</span>' + 
                  '</span>' +              
                '</div>' +
                dlString + 
@@ -575,7 +575,7 @@ function fresults( xobj, config ) {
              urlState = setTaxonId(urlState, tax_id);
              urlState = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
              urlState = setTaxonName(urlState, pref_tax_name||tax_name);
-             taxon = furl2('./field_study.html'+buildParameterList(urlState),'<span style=\"font-size:larger\">'+pref_tax_name.toLowerCase()+'</span><span style=\"font-style:italic\"><br>('+tax_name+')</span>');         
+             taxon = furl2('./fs.html'+buildParameterList(urlState),'<span style=\"font-size:larger\">'+pref_tax_name.toLowerCase()+'</span><span style=\"font-style:italic\"><br>('+tax_name+')</span>');         
          }
        
          values = [{innerText:i+1}];
@@ -605,7 +605,7 @@ function fresults( xobj, config ) {
                  urlState = setPage(urlState, '1'); // set the page to 1 anytime they choose to filter. 
         
                  urlState = setLifeStage(urlState, valueId || 'null');     
-                 values.push({ innerHTML: furl2('./field_study.html' + buildParameterList(urlState), stage || '[none]') }); 
+                 values.push({ innerHTML: furl2('./fs.html' + buildParameterList(urlState), stage || '[none]') }); 
              } 
          } 
 
@@ -631,7 +631,7 @@ function fresults( xobj, config ) {
                  urlState = setPage(urlState, '1'); // set the page to 1 anytime they choose to filter. 
         
                  urlState = setSex(urlState, valueId || 'null');     
-                 values.push({ innerHTML: furl2('./field_study.html' + buildParameterList(urlState), sx || '[none]') }); 
+                 values.push({ innerHTML: furl2('./fs.html' + buildParameterList(urlState), sx || '[none]') }); 
              } 
          } 
 
@@ -747,7 +747,7 @@ function fresults( xobj, config ) {
                                    } 
       
                                    // 2. Safely restore furl2 now that parameter pollution is fully resolved
-                                   let url = furl2('./field_study.html?' + finalParams.toString(), field1); 
+                                   let url = furl2('./fs.html?' + finalParams.toString(), field1); 
       
                                    if( isPrimaryField && config.fieldOutlink ) { 
                                        let outlink = furl2( config.fieldOutlink + ofvValue.toString(), '<span style="font-size: 1.3rem; padding-right: 10px; display: inline-block; vertical-align: middle; margin-bottom: -0.3rem;">🛈</span>' ); 
@@ -799,7 +799,7 @@ function fresults( xobj, config ) {
              let urlState = appState;
              urlState = setObsDate(urlState, rec.observed_on_details?.date ?? null);
              urlState = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
-             values.push({innerHTML: furl2('./field_study.html'+buildParameterList(urlState),rec.observed_on_details?.date ?? null) });
+             values.push({innerHTML: furl2('./fs.html'+buildParameterList(urlState),rec.observed_on_details?.date ?? null) });
              values.push({innerHTML: '<div style="max-width: 300px; max-height: 45px; overflow-y: auto; padding: 6px; scrollbar-width: thin; white-space: normal; ' + 
                                            'background-color: var(--color-alt); ' + 
                                            'color: var(--color-text); ' + 
@@ -812,7 +812,7 @@ function fresults( xobj, config ) {
          urlState = setUser(urlState, rec.user.login);
          urlState = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
 
-         values.push({innerHTML:'<span class="user">'+user_icon+furl2('./field_study.html'+buildParameterList(urlState),rec.user.login)+'</span>'});
+         values.push({innerHTML:'<span class="user">'+user_icon+furl2('./fs.html'+buildParameterList(urlState),rec.user.login)+'</span>'});
          
          tempBrow.push(values);
       };
@@ -831,7 +831,7 @@ function fresults( xobj, config ) {
       let obsState = appState; 
       obsState = setUser(obsState, '');
       obsState = setPage(obsState, '1'); 
-      let obsUrl = './field_study.html' + buildParameterList(obsState); 
+      let obsUrl = './fs.html' + buildParameterList(obsState); 
 
       // Is a valid, active observer filter currently in the URL string? 
       let hasObsFilter = window.location.search.includes('user=') && 
