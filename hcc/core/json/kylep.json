@@ -10,7 +10,7 @@
         "field_id": "7623",                   "obs_fields": "7623",
         "field_name": "plant that the organism was found on",
         "show_study_grid": "yes",             "default_taxon_id": "630955",  
-        "map_type": "ls"            
+        "map_type": "ls",                     "identify_enabled": "yes" 
     }
   ],
   "default_sub_icons": 
