@@ -15,10 +15,12 @@
   ],
   "default_sub_icons": 
   [
-              { "nm": "all bees",                "taxon_id": "630955",    "icon": "&#128029;"  },
               { "nm": "andrenidae",              "taxon_id": "57668",     "icon": "&#128029;"  }, 
               { "nm": "apidae",                  "taxon_id": "47221",     "icon": "&#128029;"  }, 
+              { "nm": "colletidae",              "taxon_id": "127740",    "icon": "&#128029;"  },
               { "nm": "halictidae",              "taxon_id": "49707",     "icon": "&#128029;"  }, 
-              { "nm": "megachilidae",            "taxon_id": "52777",     "icon": "&#128029;"  }
+              { "nm": "megachilidae",            "taxon_id": "52777",     "icon": "&#128029;"  },
+              { "nm": "melittidae",              "taxon_id": "154651",    "icon": "&#128029;"  },
+              { "nm": "stenotritidae",           "taxon_id": "524742",    "icon": "&#128029;"  }
   ]
 }
