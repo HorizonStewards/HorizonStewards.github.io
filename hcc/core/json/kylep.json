@@ -1,5 +1,5 @@
 {  
-  "map_center": "&centerlat=39.125077250000004&centerlng=-84.504565365",   
+  "map_center": "&centerlat=39.125077250000004&centerlng=-84.504565365",    
   "default_map_zoom": "9",
   "map_extent": "nelat:39.83771963394732,nelng:-83.5848303616875,swlat:38.43482963053007,swlng:-85.55011843512501", 
   "configurations":     
