@@ -3,7 +3,7 @@
   "default_map_zoom": "9",
   "map_extent": "nelat:39.83771963394732,nelng:-83.5848303616875,swlat:38.43482963053007,swlng:-85.55011843512501", 
   "configurations":     
-  [
+  [ 
     {
         "component": "studies",               "project": "255754",       "utf8": "&#128029;",
         "study_title": "On Plant",            "study_desc": "Wildlife found visiting a plant.  \n\nFields Used:\n7623 ~ Plant that the organism was found on",         
