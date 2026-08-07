@@ -175,6 +175,7 @@ let p_hide_dash = winurlparams.get('hide_dash') || 'no';
 let p_without_term_id = winurlparams.get('without_term_id'); 
 let p_not_user_id = winurlparams.get('without_user_id'); 
 let p_show_ls = winurlparams.get('show_ls') || 'no'; 
+let p_show_sex = winurlparams.get('show_sex') || 'no';
 let p_field = ''; 
 let p_field_value = ''; 
 let field_array = []; 
@@ -385,6 +386,22 @@ function fresults( xobj, config ) {
 
           labels.push({ innerHTML: '<span class="filterable-header">Life Stage' + resetLink + '</span>' });
       }
+
+      // sex column...
+      if( p_show_sex === 'yes' ) { 
+          let urlState = appState; 
+          urlState = setSex(urlState, '');  
+          urlState = setPage(urlState, '1'); 
+          let resetUrl = './field_study.html' + buildParameterList(urlState); 
+
+          // Is a valid, active sx filter currently in the URL string? 
+          let hasFilter = window.location.search.includes('sx=') && 
+                         !window.location.search.includes('sx=&'); 
+
+          let resetLink = hasFilter ? ' ' + furl2(resetUrl, iconHtml) : '';
+
+          labels.push({ innerHTML: '<span class="filterable-header">Sex' + resetLink + '</span>' });
+      }
     
       labels.push({innerText:'Obs Photo'});
 
@@ -589,6 +606,32 @@ function fresults( xobj, config ) {
         
                  urlState = setLifeStage(urlState, valueId || 'null');     
                  values.push({ innerHTML: furl2('./field_study.html' + buildParameterList(urlState), stage || '[none]') }); 
+             } 
+         } 
+
+         if( p_show_sex === 'yes' ) { 
+             let sx = ''; // Default placeholder if missing or empty 
+             let valueId = ''; 
+    
+             if( rec.annotations && rec.annotations.length > 0 ) { 
+                 for( let i = 0; i < rec.annotations.length; i++ ) { 
+                      if( rec.annotations[i].controlled_attribute_id?.toString() === '9' ) { 
+                          valueId = rec.annotations[i].controlled_value_id?.toString() || ''; 
+                          // look up the sex in the life stages map... 
+                          sx = SEX_MAP[valueId] || 'unknown'; 
+                          break; 
+                      } 
+                 }  
+             } 
+    
+             if( sx === 'unknown' ) { 
+                 values.push({ innerHTML: sx }); 
+             } else { 
+                 let urlState = appState; 
+                 urlState = setPage(urlState, '1'); // set the page to 1 anytime they choose to filter. 
+        
+                 urlState = setSex(urlState, valueId || 'null');     
+                 values.push({ innerHTML: furl2('./field_study.html' + buildParameterList(urlState), sx || '[none]') }); 
              } 
          } 
 
@@ -888,6 +931,15 @@ function setupAPIParams( config ) {
            api_params += '&without_term_id=1';
        } else {
            api_params += '&term_id=1&term_value_id='  + getLifeStage(appState);
+       }
+   }
+
+   // filter for sex annotation...
+   if( getSex(appState) ) {
+       if( getSex(appState) === 'null' ) {
+           api_params += '&without_term_id=9';
+       } else {
+           api_params += '&term_id=9&term_value_id=' + getSex(appState);
        }
    }
 
