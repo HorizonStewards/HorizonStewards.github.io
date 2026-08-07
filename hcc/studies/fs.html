@@ -395,8 +395,8 @@ function fresults( xobj, config ) {
           let resetUrl = './fs.html' + buildParameterList(urlState); 
 
           // Is a valid, active lifestage filter currently in the URL string? 
-          let hasFilter = window.location.search.includes('sex=') && 
-                         !window.location.search.includes('sex=&'); 
+          let hasFilter = window.location.search.includes('sx=') && 
+                         !window.location.search.includes('sx=&'); 
 
           let resetLink = hasFilter ? ' ' + furl2(resetUrl, iconHtml) : '';
 
