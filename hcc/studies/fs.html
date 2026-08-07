@@ -934,6 +934,15 @@ function setupAPIParams( config ) {
        }
    }
 
+   // filter for sex annotation...
+   if( getSex(appState) ) {
+       if( getSex(appState) === 'null' ) {
+           api_params += '&without_term_id=9';
+       } else {
+           api_params += '&term_id=9&term_value_id=' + getSex(appState);
+       }
+   }
+
    // filter for evidence annotation...
    if( getEvidence(appState) ) { 
        if( getEvidence(appState) === 'null' ) {
