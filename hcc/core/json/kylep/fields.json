@@ -1,0 +1,92 @@
+{   
+  "default_map_zoom": "17",
+  "configurations":     
+  [
+    {
+        "component": "studies",               "project": "29497",       "utf8": "&#127807;",  "title": "Normalize Observation Fields",
+        "study_title": "3126",                "study_desc": "Level one curation ~ 3126 to 7807.",         
+        "field_id": "3126",                   "obs_fields": "7807,3126",
+        "identify_enabled": "yes",            "show_study_grid": "yes",
+        "field_name": "interaction->visited flower of",
+        "user_id": "kyleprice1"
+    },
+    {
+        "component": "studies",               "project": "29497",       "utf8": "&#127807;",  "title": "Normalize Observation Fields",
+        "study_title": "4935",                "study_desc": "Level one curation ~ 4935 to 7807.",         
+        "field_id": "4935",                   "obs_fields": "7807,4935",
+        "identify_enabled": "yes",            "show_study_grid": "yes",
+        "field_name": "nectar / pollen delivering plant",
+        "user_id": "kyleprice1"
+    },
+    {
+        "component": "studies",               "project": "29497",       "utf8": "&#127807;",  "title": "Normalize Observation Fields",
+        "study_title": "1711",                "study_desc": "Level one curation ~ 1711 to 7807.",         
+        "field_id": "1711",                   "obs_fields": "7807,1711",
+        "identify_enabled": "yes",            "show_study_grid": "yes",
+        "field_name": "associated species with names lookup",
+        "user_id": "kyleprice1"
+    },
+    {
+        "component": "studies",               "project": "29497",       "utf8": "&#127807;",  "title": "Normalize Observation Fields",
+        "study_title": "6586",                "study_desc": "Level one curation ~ 6586 to 7807.",         
+        "field_id": "6586",                   "obs_fields": "7807,6586",
+        "identify_enabled": "yes",            "show_study_grid": "yes",
+        "field_name": "host plant id",
+        "user_id": "kyleprice1"
+    },
+    {
+        "component": "studies",               "project": "29497",       "utf8": "&#127807;",  "title": "Normalize Observation Fields",
+        "study_title": "1685",                "study_desc": "Level one curation ~ 1685 to 7807.",         
+        "field_id": "1685",                   "obs_fields": "7807,1685",
+        "identify_enabled": "yes",            "show_study_grid": "yes",
+        "field_name": "feeding on",
+        "user_id": "kyleprice1"
+    },
+    {
+        "component": "studies",               "project": "29497",       "utf8": "&#127807;",  "title": "Normalize Observation Fields",
+        "study_title": "10524",                "study_desc": "Level one curation ~ 10524 to 7807.",         
+        "field_id": "10524",                   "obs_fields": "7807,10524",
+        "identify_enabled": "yes",            "show_study_grid": "yes",
+        "field_name": "plant association",
+        "user_id": "kyleprice1"
+    },
+    {
+        "component": "studies",               "project": "29497",       "utf8": "&#127807;",  "title": "Normalize Observation Fields",
+        "study_title": "7623",                "study_desc": "Level one curation ~ 7623 to 7807.",         
+        "field_id": "7623",                   "obs_fields": "7807,7623",
+        "identify_enabled": "yes",            "show_study_grid": "yes",
+        "field_name": "plant that the organism was found on",
+        "user_id": "kyleprice1"
+    },
+    {
+        "component": "studies",               "project": "29497",       "utf8": "&#127807;",  "title": "Normalize Observation Fields",
+        "study_title": "2365",                "study_desc": "Level one curation ~ 2365 to 7807.",         
+        "field_id": "2365",                   "obs_fields": "7807,2365",
+        "identify_enabled": "yes",            "show_study_grid": "yes",
+        "field_name": "milkweed species",
+        "user_id": "kyleprice1"
+    },
+    {
+        "component": "studies",               "project": "29497",       "utf8": "&#127807;",  "title": "Normalize Observation Fields",
+        "study_title": "498",                 "study_desc": "Level one curation ~ 498 to 7807.",         
+        "field_id": "498",                    "obs_fields": "7807,498",
+        "identify_enabled": "yes",            "show_study_grid": "yes",
+        "field_name": "nectar plant",
+        "user_id": "kyleprice1"
+    }
+  ],
+  "default_sub_icons": 
+  [
+              { "nm": "insects",     "taxon_id": "47158", "icon": "&#129439;" }, 
+              { "nm": "birds",       "taxon_id": "3",     "icon": "&#128038;" }, 
+              { "nm": "amphibians",  "taxon_id": "20978", "icon": "&#128056;" }, 
+              { "nm": "reptiles",    "taxon_id": "26036", "icon": "&#128013;" }, 
+              { "nm": "spiders",     "taxon_id": "47118", "icon": "&#128375;" }, 
+              { "nm": "mammals",     "taxon_id": "40151", "icon": "&#128059;" }, 
+              { "nm": "snails",      "taxon_id": "47115", "icon": "&#128012;" }, 
+              { "nm": "mushrooms",   "taxon_id": "47170", "icon": "&#127812;" }, 
+              { "nm": "butterflies", "taxon_id": "47157", "icon": "&#129419;" }, 
+              { "nm": "beetles",     "taxon_id": "47208", "icon": "&#129714;" },
+              { "nm": "bees",        "taxon_id": "47222", "icon": "&#128029;" }
+  ]
+}
