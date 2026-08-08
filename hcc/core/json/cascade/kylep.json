@@ -11,8 +11,8 @@
     },
     {
         "component": "studies",               "project": "29497",       "utf8": "&#128027;",  "title": "kyleprice1 self curation",
-        "study_title": "Level 2",             "study_desc": "Level two curation populates the caterpillar contruct and construct type for larva observations of butterflies.  We already know that \"name of associated plant\" has been populated for any wildlife visiting a plant during level 1.\n\nBroad Observation Field:\n7807 - name of associated plant\n\nGranular Observation Fields:\n15119 - caterpillar construct?\n15120 - caterpillar construct type",         
-        "field_id": "7807",                   "obs_fields": "7807,15119,15120",
+        "study_title": "Level 2",             "study_desc": "Level two curation populates the pollen present in corbicula or scopa.  We already know that \"name of associated plant\" has been populated for any wildlife visiting a plant during level 1.\n\nBroad Observation Field:\n7807 - name of associated plant\n\nGranular Observation Fields:\n13989 - pollen present in corbicula or scopa",         
+        "field_id": "7807",                   "obs_fields": "7807,13989",
         "identify_enabled": "yes",            "show_study_grid": "yes",
         "field_name": "name of associated plant",
         "user_id": "kyleprice1",               "obs_api_params": "&ofv_datatype=taxon&term_id=1&term_value_id=6"
