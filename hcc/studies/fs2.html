@@ -241,8 +241,8 @@ function replaceDoubleQuotes(str) {
   return str.replace(/"/g, '%22');
 }
 
-//function furl2(url,txt=url) { return '<a href="'+url+'">'+txt+'</a>'; };
-function furl2(url, txt = url) {
+function furl2(url,txt=url) { return '<a href="'+url+'">'+txt+'</a>'; };
+/*function furl2(url, txt = url) {
     // 1. Block malicious javascript: protocols
     const safeUrl = url.trim().toLowerCase().startsWith('javascript:') ? '#' : url;
     
@@ -252,7 +252,7 @@ function furl2(url, txt = url) {
     
     // 3. Return the raw HTML string
     return '<a href="' + escapedUrl + '">' + escapedTxt + '</a>';
-}
+}*/
 
 function buildMenu2( results, config ) {
       // Create the main navbar container
