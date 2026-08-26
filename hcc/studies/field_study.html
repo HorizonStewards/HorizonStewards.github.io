@@ -796,7 +796,7 @@ function fresults( xobj, config ) {
               values.push({innerHTML:displayName});
          }          
 
-         if( getComponent(appState) === COMPONENT_VISITS ) {
+         if( getComponent(appState) === COMPONENT_VISITS || p_show_notes === 'yes' ) {
              let urlState = appState;
              urlState = setObsDate(urlState, rec.observed_on_details?.date ?? null);
              urlState = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
