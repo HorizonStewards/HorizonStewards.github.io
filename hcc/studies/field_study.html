@@ -176,6 +176,7 @@ let p_without_term_id = winurlparams.get('without_term_id');
 let p_not_user_id = winurlparams.get('without_user_id'); 
 let p_show_ls = winurlparams.get('show_ls') || 'no'; 
 let p_show_sex = winurlparams.get('show_sex') || 'no';
+let p_show_notes = winurlparams.get('show_notes') || 'no';
 let p_field = ''; 
 let p_field_value = ''; 
 let field_array = []; 
@@ -822,7 +823,7 @@ function fresults( xobj, config ) {
       let hrow = faddelem('tr',thead);
 
       //labels.push({innerText:'User Photo'});
-      if( getComponent(appState) === COMPONENT_VISITS ) {
+      if( getComponent(appState) === COMPONENT_VISITS || p_show_notes === 'yes' ) {
           labels.push({innerText:'Date'});
           labels.push({innerText:'Field Notes'});
       }
