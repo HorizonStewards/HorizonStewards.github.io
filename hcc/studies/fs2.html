@@ -207,14 +207,14 @@ let url = window.location.origin + window.location.pathname;
 //let apiurl = apibase+((winurlparams!='')?('?'+winurlparams):'');
 //let apirefurl = 'https://api.inaturalist.org/v1/docs/#!/Observations/get_observations';
 
-function escapeHtml(str) {
-    if (!str) return '';
-    return str
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;');
+function escapeHtml(str) { 
+    if (!str) return ''; 
+    return str 
+        .replace(/&/g, '&amp;') 
+        .replace(/</g, '&lt;') 
+        .replace(/>/g, '&gt;') 
+        .replace(/"/g, '&quot;') 
+        .replace(/'/g, '&#39;'); 
 }
            
 // Opens the modal and injects the text
@@ -241,7 +241,18 @@ function replaceDoubleQuotes(str) {
   return str.replace(/"/g, '%22');
 }
 
-function furl2(url,txt=url) { return '<a href="'+url+'">'+txt+'</a>'; };
+//function furl2(url,txt=url) { return '<a href="'+url+'">'+txt+'</a>'; };
+function furl2(url, txt = url) {
+    // 1. Block malicious javascript: protocols
+    const safeUrl = url.trim().toLowerCase().startsWith('javascript:') ? '#' : url;
+    
+    // 2. Escape both variables so they can safely sit inside an HTML string
+    const escapedUrl = escapeHtml(safeUrl);
+    const escapedTxt = escapeHtml(txt);
+    
+    // 3. Return the raw HTML string
+    return '<a href="' + escapedUrl + '">' + escapedTxt + '</a>';
+}
 
 function buildMenu2( results, config ) {
       // Create the main navbar container
