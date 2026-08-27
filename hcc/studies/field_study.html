@@ -347,7 +347,7 @@ const getUrlWithoutFilter = (queryString, targetFieldId) => {
   params.set('page', '1');
   return params.toString();
 };
-    
+
 function fresults( xobj, config ) { 
    let results = xobj.results; 
    let box_array = []; 
@@ -908,12 +908,18 @@ function fresults( xobj, config ) {
                  values.push({innerHTML: furl2('./field_study.html'+buildParameterList(urlState),rec.observed_on_details?.date ?? null) });
              }
 
+             const relatedObs = rec.ofvs.find(item => item.field_id === '948')?.value;
+
+             let relatedObsUrl = relatedObs 
+                    ? 'Related Observation: ' + furl2(root_observations + relatedObs, relatedObs) 
+                    : '';
+                    
              // Completely escape the full text for the data attribute safely
              const rawDescription = rec.description || 'No description';
              const fullText = escapeHtml(rawDescription);
 
              // Escape the preview text, or fallback to safe, hardcoded placeholder HTML
-             const displayHtml = rec.description ? escapeHtml(rec.description) : '<i style="opacity: 0.6;">No description</i>';
+             const displayHtml = rec.description ? escapeHtml(rec.description) + relatedObsUrl : '<i style="opacity: 0.6;">No description</i>';
 
              values.push({
                 innerHTML: '<div class="clickable-note-cell" ' +
