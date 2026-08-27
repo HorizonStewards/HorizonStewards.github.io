@@ -774,7 +774,7 @@ function fresults( xobj, config ) {
                                                          '<br><span style="font-style:italic">(' + escapedTaxName + ')</span>';
 
                                    // Pass a modified, unescaped version of furl2 that ONLY escapes the URL
-                                   displayName = '<a href="' + escapeHtml('./fs2.html' + buildParameterList(urlState)) + '">' + formattedText + '</a>';
+                                   displayName = '<a href="' + escapeHtml('./fs2.html' + buildParameterList(appState)) + '">' + formattedText + '</a>';
                                    emojiTitle += `${ofv.field_id} ${taxonName}\n`; 
                                } else { 
                                    emojiTitle += `${ofv.field_id} ${taxonName.toLowerCase()}\n`; 
