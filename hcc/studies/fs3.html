@@ -207,9 +207,6 @@ for (const [key, value] of winurlparams.entries()) {
 }   
  
 let url = window.location.origin + window.location.pathname;   
-//let apibase = 'https://api.inaturalist.org/v1/observations';
-//let apiurl = apibase+((winurlparams!='')?('?'+winurlparams):'');
-//let apirefurl = 'https://api.inaturalist.org/v1/docs/#!/Observations/get_observations';
 
 function escapeHtml(str) { 
     if (!str) return ''; 
@@ -245,7 +242,6 @@ function replaceDoubleQuotes(str) {
   return str.replace(/"/g, '%22');
 }
 
-//function furl2(url,txt=url) { return '<a href="'+url+'">'+txt+'</a>'; };
 function furl2(url, txt = url) {
     // 1. Block malicious javascript: protocols
     const safeUrl = url.trim().toLowerCase().startsWith('javascript:') ? '#' : url;
