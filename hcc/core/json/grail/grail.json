@@ -8,7 +8,7 @@
         "study_title": "Bee Safari",          "study_desc": "Final consolidated results ~ 07-11-2026",         
         "obs_fields": "7623,21998,21273",
         "identify_enabled": "yes",            "show_study_grid": "yes",
-        "obs_api_params": "&d1=20260711"
+        "obs_api_params": "&d1=20260711&d2=20260712"
     }
   ],
   "default_sub_icons": 
