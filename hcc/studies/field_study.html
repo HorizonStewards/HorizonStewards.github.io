@@ -908,7 +908,7 @@ function fresults( xobj, config ) {
                  values.push({innerHTML: furl2('./field_study.html'+buildParameterList(urlState),rec.observed_on_details?.date ?? null) });
              }
 
-             const relatedObs = rec.ofvs.find(item => item.field_id === '948')?.value;
+             const relatedObs = rec.ofvs.find(item => item.field_id === 948)?.value;
 
              let relatedObsUrl = relatedObs 
                     ? 'Related Observation: ' + furl2(root_observations + relatedObs, relatedObs) 
