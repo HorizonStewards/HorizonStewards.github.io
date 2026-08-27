@@ -46,11 +46,6 @@
 }
 
 /* 3. Icon Thickness Management */
-.clear-btn { 
-    /* Ensures the custom bold text shadow uses the exact blue dictated by the link above */
-    text-shadow: 0 0 0.5px currentColor; 
-}
-
 .clear-all-filters a:active {
     color: royalblue;
     /*color: var(--color-text-link); */
@@ -156,6 +151,15 @@
     overflow: hidden;
   }
 
+.filterable-header a {
+    font-size: 18px;
+    padding-left: 6px;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+    text-decoration: none; /* Optional: keeps the icon from looking like a blue underline link */
+}
+           
   /* Original Helpers */
   #h2 { font-weight:bold; font-size:20px; }
   p { width:100%; }
@@ -400,26 +404,21 @@ function fresults( xobj, config ) {
       let flower = '';
       let dlString = '<div id="divhead"><span id="topright">';
       let labelCount = 0;
-      let iconHtml = '<span class="clear-btn" style="font-size:18px; padding-left:6px; display:inline-block; vertical-align:middle; line-height:1;">ⓧ</span>';
+      let iconHtml = 'ⓧ'; 
 
       let merged = 'observation field';
-    
       labels = [{innerText:'#'}];
-
       labels.push({innerText:'Photo'});
 
       // taxon name column...
-      let nameState = appState; 
+      let nameState = appState;
       nameState = setTaxonId(nameState, '');
       nameState = setTaxonName(nameState, '');
-      nameState = setPage(nameState, '1'); 
-      let taxonUrl = './fs3.html' + buildParameterList(nameState); 
+      nameState = setPage(nameState, '1');
+      let taxonUrl = './fs3.html' + buildParameterList(nameState);
 
-      // Is a valid, active taxon filter currently in the URL string? 
-      let hasTaxonFilter = window.location.search.includes('taxonid=') && 
-                          !window.location.search.includes('taxonid=&'); 
-
-      let resetTaxonLink = hasTaxonFilter ? ' <a href="' + escapeHtml(taxonUrl) + '">' + iconHtml + '</a>' : '';      
+      let hasTaxonFilter = window.location.search.includes('taxonid=') && !window.location.search.includes('taxonid=&');
+      let resetTaxonLink = hasTaxonFilter ? ' ' + furl2(taxonUrl, iconHtml) : '';
 
       labels.push({ innerHTML: '<span class="filterable-header">Name' + resetTaxonLink + '</span>' });
 
