@@ -419,7 +419,7 @@ function fresults( xobj, config ) {
       let hasTaxonFilter = window.location.search.includes('taxonid=') && 
                           !window.location.search.includes('taxonid=&'); 
 
-      let resetTaxonLink = hasTaxonFilter ? ' ' + furl2(taxonUrl, iconHtml) : '';
+      let resetTaxonLink = hasTaxonFilter ? ' <a href="' + escapeHtml(taxonUrl) + '">' + iconHtml + '</a>' : '';      
 
       labels.push({ innerHTML: '<span class="filterable-header">Name' + resetTaxonLink + '</span>' });
 
