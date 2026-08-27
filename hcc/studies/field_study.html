@@ -46,11 +46,6 @@
 }
 
 /* 3. Icon Thickness Management */
-.clear-btn { 
-    /* Ensures the custom bold text shadow uses the exact blue dictated by the link above */
-    text-shadow: 0 0 0.5px currentColor; 
-}
-
 .clear-all-filters a:active {
     color: royalblue;
     /*color: var(--color-text-link); */
@@ -156,6 +151,15 @@
     overflow: hidden;
   }
 
+.filterable-header a {
+    font-size: 18px;
+    padding-left: 6px;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+    text-decoration: none; /* Optional: keeps the icon from looking like a blue underline link */
+}
+           
   /* Original Helpers */
   #h2 { font-weight:bold; font-size:20px; }
   p { width:100%; }
@@ -164,6 +168,16 @@
   .user { display: inline-flex; align-items: center; white-space: nowrap; gap: 8px; margin-left: 2px; } 
 </style>
 <body>
+  
+<!-- The Modal Overlay and Content Box -->
+<div id="globalNoteModal" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); align-items: center; justify-content: center;">
+  <div style="background-color: var(--color-alt, #fff); color: var(--color-text, #000); margin: 10% auto; padding: 20px; border: 1px solid var(--color-border); border-radius: 8px; width: 80%; max-width: 550px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); position: relative;">
+    <span onclick="closeNoteModal()" style="position: absolute; right: 15px; top: 10px; font-size: 24px; cursor: pointer; opacity: 0.7;">&times;</span>
+    <h3 style="margin-top: 0; border-bottom: 1px solid var(--color-border); padding-bottom: 8px;">Full Notes</h3>
+    <p id="globalNoteModalText" style="white-space: pre-wrap; max-height: 60vh; overflow-y: auto; line-height: 1.5; margin-bottom: 0; font-size: 0.95em;"></p>
+  </div>
+</div>
+  
 <script>
 let winurlstr = window.location.href; 
 let winurlsearchstr = window.location.search; 
@@ -193,15 +207,52 @@ for (const [key, value] of winurlparams.entries()) {
 }   
  
 let url = window.location.origin + window.location.pathname;   
-//let apibase = 'https://api.inaturalist.org/v1/observations';
-//let apiurl = apibase+((winurlparams!='')?('?'+winurlparams):'');
-//let apirefurl = 'https://api.inaturalist.org/v1/docs/#!/Observations/get_observations';
+
+function escapeHtml(str) { 
+    if (!str) return ''; 
+    return str 
+        .replace(/&/g, '&amp;') 
+        .replace(/</g, '&lt;') 
+        .replace(/>/g, '&gt;') 
+        .replace(/"/g, '&quot;') 
+        .replace(/'/g, '&#39;'); 
+}
+           
+// Opens the modal and injects the text
+function openNoteModal(element) {
+  const fullNote = element.getAttribute('data-full-note');
+  document.getElementById('globalNoteModalText').innerText = fullNote;
+  document.getElementById('globalNoteModal').style.display = 'flex';
+}
+
+// Closes the modal
+function closeNoteModal() {
+  document.getElementById('globalNoteModal').style.display = 'none';
+}
+
+// Close the modal when clicking outside the content area
+window.addEventListener('click', function(event) {
+  const modal = document.getElementById('globalNoteModal');
+  if (event.target === modal) {
+    closeNoteModal();
+  }
+});
 
 function replaceDoubleQuotes(str) {
   return str.replace(/"/g, '%22');
 }
 
-function furl2(url,txt=url) { return '<a href="'+url+'">'+txt+'</a>'; };
+function furl2(url, txt = url) {
+    // 1. Block malicious javascript: protocols
+    const safeUrl = url.trim().toLowerCase().startsWith('javascript:') ? '#' : url;
+    
+    // 2. Escape both variables so they can safely sit inside an HTML string
+    const escapedUrl = escapeHtml(safeUrl);
+    const escapedTxt = escapeHtml(txt);
+    
+    // 3. Return the raw HTML string
+    return '<a href="' + escapedUrl + '">' + escapedTxt + '</a>';
+}
 
 function buildMenu2( results, config ) {
       // Create the main navbar container
@@ -349,25 +400,20 @@ function fresults( xobj, config ) {
       let flower = '';
       let dlString = '<div id="divhead"><span id="topright">';
       let labelCount = 0;
-      let iconHtml = '<span class="clear-btn" style="font-size:18px; padding-left:6px; display:inline-block; vertical-align:middle; line-height:1;">ⓧ</span>';
+      let iconHtml = 'ⓧ'; 
 
       let merged = 'observation field';
-    
       labels = [{innerText:'#'}];
-
       labels.push({innerText:'Photo'});
 
       // taxon name column...
-      let nameState = appState; 
+      let nameState = appState;
       nameState = setTaxonId(nameState, '');
       nameState = setTaxonName(nameState, '');
-      nameState = setPage(nameState, '1'); 
-      let taxonUrl = './field_study.html' + buildParameterList(nameState); 
+      nameState = setPage(nameState, '1');
+      let taxonUrl = './fs2.html' + buildParameterList(nameState);
 
-      // Is a valid, active taxon filter currently in the URL string? 
-      let hasTaxonFilter = window.location.search.includes('taxonid=') && 
-                          !window.location.search.includes('taxonid=&'); 
-
+      let hasTaxonFilter = window.location.search.includes('taxonid=') && !window.location.search.includes('taxonid=&');
       let resetTaxonLink = hasTaxonFilter ? ' ' + furl2(taxonUrl, iconHtml) : '';
 
       labels.push({ innerHTML: '<span class="filterable-header">Name' + resetTaxonLink + '</span>' });
@@ -377,7 +423,7 @@ function fresults( xobj, config ) {
           let urlState = appState; 
           urlState = setLifeStage(urlState, ''); 
           urlState = setPage(urlState, '1'); 
-          let resetUrl = './field_study.html' + buildParameterList(urlState); 
+          let resetUrl = './fs2.html' + buildParameterList(urlState); 
 
           // Is a valid, active lifestage filter currently in the URL string? 
           let hasFilter = window.location.search.includes('lifestage=') && 
@@ -393,7 +439,7 @@ function fresults( xobj, config ) {
           let urlState = appState; 
           urlState = setSex(urlState, '');  
           urlState = setPage(urlState, '1'); 
-          let resetUrl = './field_study.html' + buildParameterList(urlState); 
+          let resetUrl = './fs2.html' + buildParameterList(urlState); 
 
           // Is a valid, active sx filter currently in the URL string? 
           let hasFilter = window.location.search.includes('sx=') && 
@@ -495,7 +541,7 @@ function fresults( xobj, config ) {
                            newParams.delete('plantname'); 
                        }
         
-                       const resetUrl = './field_study.html?' + newParams.toString(); 
+                       const resetUrl = './fs2.html?' + newParams.toString(); 
                        const resetLink = ' ' + furl2(resetUrl, iconHtml); 
         
                        labels.push({ innerHTML: '<span class="filterable-header">' + truncate(box_array[e].field_name, 25) + resetLink + '</span>' }); 
@@ -531,7 +577,7 @@ function fresults( xobj, config ) {
                    '</table>' +
                  '</div>' +
                  '<span class="clear-all-filters">' + 
-                    '<span style="white-space: nowrap; margin-bottom: 2px;">' + furl2('./field_study.html'+buildParameterList(clearState), 'clear all filters') + '</span>' + 
+                    '<span style="white-space: nowrap; margin-bottom: 2px;">' + furl2('./fs2.html'+buildParameterList(clearState), 'clear all filters') + '</span>' + 
                  '</span>' +              
                '</div>' +
                dlString + 
@@ -576,7 +622,16 @@ function fresults( xobj, config ) {
              urlState = setTaxonId(urlState, tax_id);
              urlState = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
              urlState = setTaxonName(urlState, pref_tax_name||tax_name);
-             taxon = furl2('./field_study.html'+buildParameterList(urlState),'<span style=\"font-size:larger\">'+pref_tax_name.toLowerCase()+'</span><span style=\"font-style:italic\"><br>('+tax_name+')</span>');         
+             // Manually escape only the unsafe variables from the API
+             const escapedPrefName = escapeHtml(pref_tax_name.toLowerCase());
+             const escapedTaxName = escapeHtml(tax_name);
+
+             // Assemble the structured HTML content safely
+             const formattedText = '<span style="font-size:larger">' + escapedPrefName + '</span>' +
+                                   '<br><span style="font-style:italic">(' + escapedTaxName + ')</span>';
+
+             // Pass a modified, unescaped version of furl2 that ONLY escapes the URL
+             taxon = '<a href="' + escapeHtml('./fs2.html' + buildParameterList(urlState)) + '">' + formattedText + '</a>';
          }
        
          values = [{innerText:i+1}];
@@ -606,7 +661,7 @@ function fresults( xobj, config ) {
                  urlState = setPage(urlState, '1'); // set the page to 1 anytime they choose to filter. 
         
                  urlState = setLifeStage(urlState, valueId || 'null');     
-                 values.push({ innerHTML: furl2('./field_study.html' + buildParameterList(urlState), stage || '[none]') }); 
+                 values.push({ innerHTML: furl2('./fs2.html' + buildParameterList(urlState), stage || '[none]') }); 
              } 
          } 
 
@@ -632,13 +687,18 @@ function fresults( xobj, config ) {
                  urlState = setPage(urlState, '1'); // set the page to 1 anytime they choose to filter. 
         
                  urlState = setSex(urlState, valueId || 'null');     
-                 values.push({ innerHTML: furl2('./field_study.html' + buildParameterList(urlState), sx || '[none]') }); 
+                 values.push({ innerHTML: furl2('./fs2.html' + buildParameterList(urlState), sx || '[none]') }); 
              } 
          } 
 
          // use a clickable scrollable div containing field notes in place of image when there is no image.
          if( rec.photos && rec.photos.length > 0 ) {
-             values.push({ innerHTML: furl2(root_observations + rec.id, '<img class="mini_photo2" src="' + rec.photos[0].url + '" />') });
+             // Grab the image URL safely, or fall back to an empty string if no photo exists
+             const imgUrl = (rec.photos && rec.photos.length > 0) ? rec.photos[0].url : '';
+             const imgHtml = '<img class="mini_photo2" src="' + escapeHtml(imgUrl) + '" />';
+
+             // Assemble the final safe link string 
+             values.push({ innerHTML: '<a href="' + escapeHtml(root_observations + rec.id) + '">' + imgHtml + '</a>' });
          } else {
              let desc = rec.description || '<i style="opacity: 0.6;">No notes</i>';
              values.push({ innerHTML: furl2(root_observations + rec.id, '<div style="max-width: 150px; max-height: 45px; overflow-y: auto; padding: 6px; scrollbar-width: thin; white-space: normal; ' + 
@@ -706,7 +766,15 @@ function fresults( xobj, config ) {
                                    field1 = taxonName; 
                                    displayCommonName = commonName.toLowerCase(); 
                                    displayTaxonName = taxonName; 
-                                   displayName = `<span style="font-size:larger">${commonName.toLowerCase()}</span><span style="font-style:italic"><br>(${taxonName})</span>`; 
+                                   // Manually escape only the unsafe variables from the API
+                                   const escapedPrefName = escapeHtml(displayCommonName);
+                                   const escapedTaxName = escapeHtml(displayTaxonName);
+
+                                   const formattedText = '<span style="font-size:larger">' + escapedPrefName + '</span>' +
+                                                         '<br><span style="font-style:italic">(' + escapedTaxName + ')</span>';
+
+                                   // Pass a modified, unescaped version of furl2 that ONLY escapes the URL
+                                   displayName = '<a href="' + escapeHtml('./fs2.html' + buildParameterList(appState)) + '">' + formattedText + '</a>';
                                    emojiTitle += `${ofv.field_id} ${taxonName}\n`; 
                                } else { 
                                    emojiTitle += `${ofv.field_id} ${taxonName.toLowerCase()}\n`; 
@@ -719,48 +787,70 @@ function fresults( xobj, config ) {
                                emojiTitle += `${ofv.field_id} ${ofvValueLower}\n`; 
                            }  
                        } 
-    
-                       // --- SECTION C: No-Merge Mode --- 
+
                        if( config.merge !== 'yes' && ofvFieldIdStr === targetBoxFieldIdStr ) { 
                            matchedCopy = 'yes'; 
                            if( ofv.value ) { 
-                               field1 = ofvValueLower; 
+                               // Start by escaping the raw text value from the API
+                               field1 = escapeHtml(ofvValueLower); 
                                displayName = ofvValueLower; 
+
+                               let hasHtmlLayout = false;
+
                                if( ofv.taxon ) { 
-                                   field1 = `<span style="font-size:larger">${commonName.toLowerCase()}</span><span style="font-style:italic"><br>(${taxonName})</span>`; 
+                                   // Escape both API text strings safely
+                                   const escapedCommon = escapeHtml(commonName.toLowerCase());
+                                   const escapedTaxon = escapeHtml(taxonName);
+            
+                                   //  Wrap them in hardcoded HTML formatting
+                                   field1 = `<span style="font-size:larger">${escapedCommon}</span><span style="font-style:italic"><br>(${escapedTaxon})</span>`; 
+                                   hasHtmlLayout = true;
                                } 
-    
+
                                // Wild ancestral colony 
                                if( ofvFieldIdStr === '17383' ) { 
-                                   values.push({ innerHTML: furl2(root_observations + field1, field1) }); 
+                                   // Create a clean link using the ID or raw value, NOT the HTML spans.
+                                   // Since field1 contains HTML spans, we bypass furl2 so the browser renders the styling.
+                                   const targetUrl = root_observations + encodeURIComponent(ofvValue.toString());
+                                   values.push({ innerHTML: '<a href="' + escapeHtml(targetUrl) + '">' + field1 + '</a>' }); 
                                } else { 
                                    const cleanValue = replaceDoubleQuotes(ofvValue.toString()); 
-      
-                                   // 1. Let the store utility generate your clean lowercase array parameter string safely
+            
+                                   // Let the store utility generate your clean lowercase array parameter string safely 
                                    let updatedParamsStr = updateUrlParamsByFieldId(window.location.search, ofvFieldIdStr, ofv.name, cleanValue, config); 
-      
                                    const isPrimaryField = config.fieldName && (ofv.name?.toLowerCase() === config.fieldName.toLowerCase()); 
-                                   const finalParams = new URLSearchParams(updatedParamsStr);
-      
+                                   const finalParams = new URLSearchParams(updatedParamsStr); 
                                    finalParams.set('page', '1'); 
+            
                                    if( isPrimaryField ) { 
                                        finalParams.set('plantname', commonName || taxonName); 
                                    } 
-      
-                                   // 2. Safely restore furl2 now that parameter pollution is fully resolved
-                                   let url = furl2('./field_study.html?' + finalParams.toString(), field1); 
-      
+
+                                   // If field1 contains rich HTML layouts, don't pass it to furl2. Assemble it directly.
+                                   const destinationUrl = './fs2.html?' + finalParams.toString();
+                                   let url;
+                                   if( hasHtmlLayout ) {
+                                       url = '<a href="' + escapeHtml(destinationUrl) + '">' + field1 + '</a>';
+                                   } else {
+                                       url = furl2(destinationUrl, field1);
+                                   }
+
                                    if( isPrimaryField && config.fieldOutlink ) { 
-                                       let outlink = furl2( config.fieldOutlink + ofvValue.toString(), '<span style="font-size: 1.3rem; padding-right: 10px; display: inline-block; vertical-align: middle; margin-bottom: -0.3rem;">🛈</span>' ); 
+                                       // This hardcoded icon string is safe to pass with your 'true' flag if you updated furl2,
+                                       // or just concatenate it manually here.
+                                       let outlink = '<a href="' + escapeHtml(config.fieldOutlink + ofvValue.toString()) + '">' +
+                                                     '<span style="font-size: 1.3rem; padding-right: 10px; display: inline-block; vertical-align: middle; margin-bottom: -0.3rem;">🛈</span>' +
+                                                      '</a>';
+                
                                        values.push({ innerHTML: '<span class="filterable-header">' + outlink + '</span>' + url }); 
                                    } else { 
                                        values.push({ innerHTML: url }); 
                                    } 
-                               }  
+                               } 
                            } else { 
-                               values.push({ innerText: '' }); 
+                             values.push({ innerText: '' }); 
                            } 
-                      } // end c
+                       } // end c
                   } // End of j loop 
   
                   if( config.merge !== 'yes' ) { 
@@ -777,45 +867,70 @@ function fresults( xobj, config ) {
              }
          }
         
-         if( config.merge === 'yes' ){
-              if( displayTaxonName !== '' ){
-                  if( mismatch === 'yes' ){
-                      document.getElementById("mismatch").style.display = "inline"; 
-                      displayName = '<span style="font-size:larger">'+displayCommonName.toLowerCase()+'</span><span style="font-style:italic"><br>('+displayTaxonName+') <span class="flowericon" title="'+emojiTitle+'">&#x1F338;</span></span>';
-                  } else {
-                      displayName = '<span style="font-size:larger">'+displayCommonName.toLowerCase()+'</span><span style="font-style:italic"><br>('+displayTaxonName+')</span>';
-                  }
-              } else {
-                  if( mismatch === 'yes' ){
-                      document.getElementById("mismatch").style.display = "inline"; 
-                      displayName += ' ';
-                      displayName += '<span class="flowericon" title="'+emojiTitle+'">&#x1F338;</span></span>';    
-                  } 
-              }
-          
-              values.push({innerHTML:displayName});
-         }          
+         if( config.merge === 'yes' ){ 
+             if( displayTaxonName !== '' ){ 
+                 // Escape the API text strings immediately
+                 const escapedCommon = escapeHtml(displayCommonName.toLowerCase());
+                 const escapedTaxon = escapeHtml(displayTaxonName);
+                 const escapedEmojiTitle = escapeHtml(emojiTitle);
+
+                 if( mismatch === 'yes' ){ 
+                     document.getElementById("mismatch").style.display = "inline"; 
+            
+                     // Assemble using the clean, escaped variables
+                     displayName = '<span style="font-size:larger">'+escapedCommon+'</span>' +
+                                   '<span style="font-style:italic"><br>('+escapedTaxon+') ' +
+                                   '<span class="flowericon" title="' + escapedEmojiTitle + '">&#x1F338;</span></span>'; 
+                 } else { 
+                     displayName = '<span style="font-size:larger">'+escapedCommon+'</span>' +
+                                   '<span style="font-style:italic"><br>('+escapedTaxon+')</span>'; 
+                 } 
+             } else { 
+                 if( mismatch === 'yes' ){ 
+                     document.getElementById("mismatch").style.display = "inline"; 
+            
+                     // Escape the emoji title text variable here too
+                     const escapedEmojiTitle = escapeHtml(emojiTitle);
+            
+                     displayName += ' '; 
+                     displayName += '<span class="flowericon" title="' + escapedEmojiTitle + '">&#x1F338;</span></span>'; 
+                 } 
+             } 
+             values.push({innerHTML:displayName}); 
+         }
 
          if( getComponent(appState) === COMPONENT_VISITS || p_show_notes === 'yes' ) {
              let urlState = appState;
              urlState = setObsDate(urlState, rec.observed_on_details?.date ?? null);
-             urlState = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
+             urlState = setPage(urlState, '1'); // set the page to 1 anytime they choose to filter.
+
              if( getComponent(appState) === COMPONENT_VISITS ) {
-                 values.push({innerHTML: furl2('./field_study.html'+buildParameterList(urlState),rec.observed_on_details?.date ?? null) });
+                 values.push({innerHTML: furl2('./fs2.html'+buildParameterList(urlState),rec.observed_on_details?.date ?? null) });
              }
-             values.push({innerHTML: '<div style="max-width: 300px; max-height: 45px; overflow-y: auto; padding: 6px; scrollbar-width: thin; white-space: normal; ' + 
-                                           'background-color: var(--color-alt); ' + 
-                                           'color: var(--color-text); ' + 
-                                           'border: 1px solid var(--color-border); ' + 
-                                           'border-radius: 4px; font-size: 0.9em; line-height: 1.4;">' + 
-                                           (rec.description || '<i style="opacity: 0.6;">No description</i>') + 
-                                     '</div>'});
+
+             // Completely escape the full text for the data attribute safely
+             const rawDescription = rec.description || 'No description';
+             const fullText = escapeHtml(rawDescription);
+
+             // Escape the preview text, or fallback to safe, hardcoded placeholder HTML
+             const displayHtml = rec.description ? escapeHtml(rec.description) : '<i style="opacity: 0.6;">No description</i>';
+
+             values.push({
+                innerHTML: '<div class="clickable-note-cell" ' +
+                   'style="max-width: 300px; max-height: 45px; overflow-y: auto; padding: 6px; scrollbar-width: thin; white-space: normal; ' +
+                   'background-color: var(--color-alt); color: var(--color-text); border: 1px solid var(--color-border); ' +
+                   'border-radius: 4px; font-size: 0.9em; line-height: 1.4; cursor: pointer;" ' +
+                   'onclick="openNoteModal(this)" ' +
+                   'data-full-note="' + fullText + '">' + 
+                   displayHtml + 
+                   '</div>'
+             });
          }
          let urlState = appState;
          urlState = setUser(urlState, rec.user.login);
          urlState = setPage(urlState, '1');     // set the page to 1 anytime they choose to filter.
 
-         values.push({innerHTML:'<span class="user">'+user_icon+furl2('./field_study.html'+buildParameterList(urlState),rec.user.login)+'</span>'});
+         values.push({innerHTML:'<span class="user">'+user_icon+furl2('./fs2.html'+buildParameterList(urlState),rec.user.login)+'</span>'});
          
          tempBrow.push(values);
       };
@@ -834,7 +949,7 @@ function fresults( xobj, config ) {
       let obsState = appState; 
       obsState = setUser(obsState, '');
       obsState = setPage(obsState, '1'); 
-      let obsUrl = './field_study.html' + buildParameterList(obsState); 
+      let obsUrl = './fs2.html' + buildParameterList(obsState); 
 
       // Is a valid, active observer filter currently in the URL string? 
       let hasObsFilter = window.location.search.includes('user=') && 
