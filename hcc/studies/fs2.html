@@ -632,7 +632,6 @@ function fresults( xobj, config ) {
 
              // Pass a modified, unescaped version of furl2 that ONLY escapes the URL
              taxon = '<a href="' + escapeHtml('./fs2.html' + buildParameterList(urlState)) + '">' + formattedText + '</a>';
-             //taxon = furl2('./fs2.html'+buildParameterList(urlState),'<span style=\"font-size:larger\">'+pref_tax_name.toLowerCase()+'</span><span style=\"font-style:italic\"><br>('+tax_name+')</span>');         
          }
        
          values = [{innerText:i+1}];
@@ -767,7 +766,15 @@ function fresults( xobj, config ) {
                                    field1 = taxonName; 
                                    displayCommonName = commonName.toLowerCase(); 
                                    displayTaxonName = taxonName; 
-                                   displayName = `<span style="font-size:larger">${commonName.toLowerCase()}</span><span style="font-style:italic"><br>(${taxonName})</span>`; 
+                                   // Manually escape only the unsafe variables from the API
+                                   const escapedPrefName = escapeHtml(displayCommonName);
+                                   const escapedTaxName = escapeHtml(displayTaxonName);
+
+                                   const formattedText = '<span style="font-size:larger">' + escapedPrefName + '</span>' +
+                                                         '<br><span style="font-style:italic">(' + escapedTaxName + ')</span>';
+
+                                   // Pass a modified, unescaped version of furl2 that ONLY escapes the URL
+                                   displayName = '<a href="' + escapeHtml('./fs2.html' + buildParameterList(urlState)) + '">' + formattedText + '</a>';
                                    emojiTitle += `${ofv.field_id} ${taxonName}\n`; 
                                } else { 
                                    emojiTitle += `${ofv.field_id} ${taxonName.toLowerCase()}\n`; 
@@ -780,8 +787,76 @@ function fresults( xobj, config ) {
                                emojiTitle += `${ofv.field_id} ${ofvValueLower}\n`; 
                            }  
                        } 
-    
+
+if( config.merge !== 'yes' && ofvFieldIdStr === targetBoxFieldIdStr ) { 
+    matchedCopy = 'yes'; 
+    if( ofv.value ) { 
+        // Start by escaping the raw text value from the API
+        field1 = escapeHtml(ofvValueLower); 
+        displayName = ofvValueLower; 
+
+        let hasHtmlLayout = false;
+
+        if( ofv.taxon ) { 
+            // 1. Escape both API text strings safely
+            const escapedCommon = escapeHtml(commonName.toLowerCase());
+            const escapedTaxon = escapeHtml(taxonName);
+            
+            // 2. Wrap them in your hardcoded HTML formatting
+            field1 = `<span style="font-size:larger">${escapedCommon}</span><span style="font-style:italic"><br>(${escapedTaxon})</span>`; 
+            hasHtmlLayout = true;
+        } 
+
+        // Wild ancestral colony 
+        if( ofvFieldIdStr === '17383' ) { 
+            // 3. FIX: Create a clean link using the ID or raw value, NOT the HTML spans.
+            // Since field1 contains HTML spans, we bypass furl2 so the browser renders the styling.
+            const targetUrl = root_observations + encodeURIComponent(ofvValue.toString());
+            values.push({ 
+                innerHTML: '<a href="' + escapeHtml(targetUrl) + '">' + field1 + '</a>' 
+            }); 
+        } else { 
+            const cleanValue = replaceDoubleQuotes(ofvValue.toString()); 
+            
+            // 1. Let the store utility generate your clean lowercase array parameter string safely 
+            let updatedParamsStr = updateUrlParamsByFieldId(window.location.search, ofvFieldIdStr, ofv.name, cleanValue, config); 
+            const isPrimaryField = config.fieldName && (ofv.name?.toLowerCase() === config.fieldName.toLowerCase()); 
+            const finalParams = new URLSearchParams(updatedParamsStr); 
+            finalParams.set('page', '1'); 
+            
+            if( isPrimaryField ) { 
+                finalParams.set('plantname', commonName || taxonName); 
+            } 
+
+            // 2. FIX: If field1 contains rich HTML layouts, don't pass it to furl2. Assemble it directly.
+            const destinationUrl = './fs2.html?' + finalParams.toString();
+            let url;
+            if (hasHtmlLayout) {
+                url = '<a href="' + escapeHtml(destinationUrl) + '">' + field1 + '</a>';
+            } else {
+                url = furl2(destinationUrl, field1);
+            }
+
+            if( isPrimaryField && config.fieldOutlink ) { 
+                // This hardcoded icon string is safe to pass with your 'true' flag if you updated furl2,
+                // or just concatenate it manually here.
+                let outlink = '<a href="' + escapeHtml(config.fieldOutlink + ofvValue.toString()) + '">' +
+                              '<span style="font-size: 1.3rem; padding-right: 10px; display: inline-block; vertical-align: middle; margin-bottom: -0.3rem;">🛈</span>' +
+                              '</a>';
+                
+                values.push({ innerHTML: '<span class="filterable-header">' + outlink + '</span>' + url }); 
+            } else { 
+                values.push({ innerHTML: url }); 
+            } 
+        } 
+    } else { 
+        values.push({ innerText: '' }); 
+    } 
+} // end c
+
+                                  
                        // --- SECTION C: No-Merge Mode --- 
+                             /*
                        if( config.merge !== 'yes' && ofvFieldIdStr === targetBoxFieldIdStr ) { 
                            matchedCopy = 'yes'; 
                            if( ofv.value ) { 
@@ -821,7 +896,8 @@ function fresults( xobj, config ) {
                            } else { 
                                values.push({ innerText: '' }); 
                            } 
-                      } // end c
+                      }  
+                      */
                   } // End of j loop 
   
                   if( config.merge !== 'yes' ) { 
