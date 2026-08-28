@@ -205,6 +205,29 @@ class ConfigManager {
     }
 }
 
+/**
+ * Checks the archive directory if the primary request returns a 404.
+ * @param {string} params - The incoming path string (e.g., "../core/json/some_params")
+ * @returns {Promise<void>} Throws a specific error based on archive existence.
+ */
+async function fetchArchivedConfig(params) {
+  const lastSlashIndex = params.lastIndexOf('/');
+  const basePath = params.substring(0, lastSlashIndex);
+  const fileName = params.substring(lastSlashIndex + 1);
+
+  const archiveUrl = `${basePath}/archive/${fileName}.json`;
+  const archiveResponse = await fetch(archiveUrl);
+
+  if (archiveResponse.ok) {
+    console.error('Resource has been archived:', archiveUrl);
+    throw new Error('Resource has been archived');
+  }
+
+  const primaryUrl = params + '.json';
+  console.error('Resource not found (404):', primaryUrl);
+  throw new Error(`Resource not found (404): ${primaryUrl}`);
+}
+
 // Function handles caching of the RAW data string for consistency
 async function asyncGetConfiguration( params, component, studyTitle=null ) {
 
@@ -294,8 +317,7 @@ async function asyncGetConfiguration( params, component, studyTitle=null ) {
         // ... error handling for response (e.g. 500 Internal Server Error)...
         if( !response.ok ) {
             if( response.status === 404 ) {
-                console.error('Resource not found (404):', params + '.json');
-                throw new Error('Resource not found (404): ' + params + '.json');
+                await fetchArchivedConfig(params);
             }
             console.error(`HTTP error! Status: ${response.status}`);
             throw new Error(`HTTP error! Status: ${response.status}`);
