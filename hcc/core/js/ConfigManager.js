@@ -220,7 +220,12 @@ async function fetchArchivedConfig(params) {
 
   if (archiveResponse.ok) {
     console.error('Resource has been archived:', archiveUrl);
-    throw new Error('Resource has been archived');
+    throw new Error('this configuration has been archived.  i\'d be very excited to hear someone is using it ' +
+                    'and if i knew it was being used i wouldn\'t have archived it.  i\'ve allowed many people to ' +
+                    'use this functionality but maintaining configurations that are no longer being used can be ' +
+                    'a challenge, especially as i continue to perfect the interface.  if you\'d like to have this ' + 
+                    'configuration un-archived, please reach out.  i\'d be excited to know you found the functionality ' + 
+                    'useful and would be happy to reestablish it.  @stockslager ~ https://www.inaturalist.org/people/2719557');
   }
 
   const primaryUrl = params + '.json';
