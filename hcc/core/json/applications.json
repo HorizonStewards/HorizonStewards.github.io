@@ -5,7 +5,7 @@
     {
         "component": "studies",                       "project": "157918",    "utf8": "&#128203;",    "home_utf8": "&#128203;",  
         "study_title": "Pesticide Use",               "study_desc": "Detailed pesticide applications including date/time, target plant, chemical used, etc.",
-        "obs_fields": "157,7207,138,15712,17657",     "field_id": "157",
+        "obs_fields": "157,5453,1187,15712,17657",     "field_id": "157",
         "field_name": "location"
     }
   ],
