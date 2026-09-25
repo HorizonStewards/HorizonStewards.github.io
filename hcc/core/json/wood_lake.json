@@ -1,15 +1,10 @@
 { 
   "configurations":   
   [
-    { 
-        "component": "hiker", 
-                     "project": "289197",  
-                     "utf8": "&#127793;",
-                     "study_title": "Parent Colonies",       
-                     "study_desc": "Shows the geographic range that each plant species were collected from. ",
-                     "title": "Ancestry", 
-                     "default_map_zoom": "6",
-                     "field_id": "17383", "field_name": "wild ancestral colony"
+    {
+        "component": "colonies",              "title": "Wood Lake ",
+        "project": "289197",                  "insect_project": "289197",
+        "field_id": "7623",                   "field_name": "plant that the organism was found on"
     },
     {
         "component": "studies",               "project": "289197",       "utf8": "&#127793;",
