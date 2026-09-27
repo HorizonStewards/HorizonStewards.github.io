@@ -62,17 +62,17 @@
             }
             
             // Generate Map Overlay Layers 
-            const blackLocustLayer = L.tileLayer(getInatTileUrl(56066, 'red'), { opacity: 0.85 }).addTo(map);
-            const hackberryLayer   = L.tileLayer(getInatTileUrl(54857, 'green'), { opacity: 0.85 });
-            const boxElderLayer    = L.tileLayer(getInatTileUrl(47726, 'blue'), { opacity: 0.85 });
+            const boxElderLayer    = L.tileLayer(getInatTileUrl(47726, 'blue'), { opacity: 0.85 }).addTo(map);
             const blackCherryLayer = L.tileLayer(getInatTileUrl(54834, 'purple'), { opacity: 0.85 });
+            const hackberryLayer   = L.tileLayer(getInatTileUrl(54857, 'green'), { opacity: 0.85 });
+            const blackLocustLayer = L.tileLayer(getInatTileUrl(56066, 'red'), { opacity: 0.85 })            
 
             // UI Control Menu mapping
             const speciesBaseLayers = {
-                "<span style='color: red; font-weight: bold;'>Black Locust</span>": blackLocustLayer,
-                "<span style='color: green; font-weight: bold;'>Common Hackberry</span>": hackberryLayer,
                 "<span style='color: blue; font-weight: bold;'>Box Elder</span>": boxElderLayer,
-                "<span style='color: purple; font-weight: bold;'>Black Cherry</span>": blackCherryLayer
+                "<span style='color: purple; font-weight: bold;'>Black Cherry</span>": blackCherryLayer,
+                "<span style='color: green; font-weight: bold;'>Common Hackberry</span>": hackberryLayer,
+                "<span style='color: red; font-weight: bold;'>Black Locust</span>": blackLocustLayer
             };
             
             // Passing speciesBaseLayers as the FIRST argument turns them into radio buttons.
