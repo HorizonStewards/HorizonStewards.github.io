@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invasive NA Species in Europe</title>
+    <!-- Include Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com" />
+    <style>
+        html, body, #map {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="map"></div>
+
+    <!-- Include Leaflet JavaScript -->
+    <script src="https://unpkg.com"></script>
+    <script>
+        // 1. Initialize the map centered on Europe
+        const map = L.map('map').setView([50.0, 15.0], 4);
+
+        // 2. Add a dark base map so the observation colors pop beautifully
+        const baseMap = L.tileLayer('https://{s}://{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors &copy; <a href="https://carto.com">CARTO</a>'
+        }).addTo(map);
+
+        // 3. Define iNaturalist baseline parameters
+        // Europe Place ID = 97391
+        const europePlaceId = 97391; 
+        
+        // Function to quickly generate iNaturalist tile URLs with custom colors
+        function getInatTileUrl(taxonId, colorHex) {
+            // URL format targets grid/heatmap points constrained by taxon and geographic location
+            return `https://inaturalist.org{z}/{x}/{y}.png?taxon_id=${taxonId}&place_id=${europePlaceId}&color=${encodeURIComponent(colorHex)}`;
+        }
+
+        // 4. Create the iNaturalist Observation Layers
+        const blackLocustLayer = L.tileLayer(getInatTileUrl(56066, '#ff3333'), { // Vibrant Red
+            attribution: '<a href="https://www.inaturalist.org">iNaturalist</a>',
+            opacity: 0.85
+        }).addTo(map); // Defaulting this layer to ON
+
+        const hackberryLayer = L.tileLayer(getInatTileUrl(54857, '#33ff33'), { // Vibrant Green
+            attribution: '<a href="https://www.inaturalist.org">iNaturalist</a>',
+            opacity: 0.85
+        }).addTo(map); // Defaulting this layer to ON
+
+        const boxElderLayer = L.tileLayer(getInatTileUrl(47726, '#3399ff'), { // Vibrant Blue
+            attribution: '<a href="https://www.inaturalist.org">iNaturalist</a>',
+            opacity: 0.85
+        }).addTo(map); // Defaulting this layer to ON
+
+        // 5. Structure the Layer Overlay control panel (The Selector UI)
+        const overlayMaps = {
+            "<span style='color: #ff3333; font-weight: bold;'>Black Locust</span> (Robinia pseudoacacia)": blackLocustLayer,
+            "<span style='color: #33ff33; font-weight: bold;'>Common Hackberry</span> (Celtis occidentalis)": hackberryLayer,
+            "<span style='color: #3399ff; font-weight: bold;'>Box Elder</span> (Acer negundo)": boxElderLayer
+        };
+
+        // 6. Add the interactive menu overlay control to the top right of the map
+        L.control.layers(null, overlayMaps, { collapsed: false }).addTo(map);
+    </script>
+</body>
+</html>
