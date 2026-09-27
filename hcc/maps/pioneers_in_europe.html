@@ -57,25 +57,24 @@
                     protocol, iNatDomain, "/v1/points/{z}/{x}/{y}.png",
                     "?taxon_id=", taxonId,
                     "&place_id=", europeId,
-                    "&verifiable=any",
                     "&color=", encodeURIComponent(colorHex)
                 ]);
             }
 
-            // Generate Map Overlay Layers (All 4 now work perfectly)
-            const blackLocustLayer = L.tileLayer(getInatTileUrl(56066, '#ff3333'), { opacity: 0.85 }).addTo(map);
-            const hackberryLayer   = L.tileLayer(getInatTileUrl(54857, '#00aa00'), { opacity: 0.85 }).addTo(map);
-            const boxElderLayer    = L.tileLayer(getInatTileUrl(47726, '#3333ff'), { opacity: 0.85 }).addTo(map);
-            const blackCherryLayer = L.tileLayer(getInatTileUrl(50212, '#cc00cc'), { opacity: 0.85 }).addTo(map);
+            // Generate Map Overlay Layers 
+            const blackLocustLayer = L.tileLayer(getInatTileUrl(56066, 'red'), { opacity: 0.85 }).addTo(map);
+            const hackberryLayer   = L.tileLayer(getInatTileUrl(54857, 'green'), { opacity: 0.85 }).addTo(map);
+            const boxElderLayer    = L.tileLayer(getInatTileUrl(47726, 'blue'), { opacity: 0.85 }).addTo(map);
+            const blackCherryLayer = L.tileLayer(getInatTileUrl(50212, 'purple'), { opacity: 0.85 }).addTo(map);
 
-            // Structure Controller Menu Object with distinct colors
+            // UI Control Menu mapping
             const overlayMaps = {
-                "<span style='color: #ff3333; font-weight: bold;'>Black Locust</span>": blackLocustLayer,
-                "<span style='color: #00aa00; font-weight: bold;'>Common Hackberry</span>": hackberryLayer,
-                "<span style='color: #3333ff; font-weight: bold;'>Box Elder</span>": boxElderLayer,
-                "<span style='color: #cc00cc; font-weight: bold;'>Black Cherry</span>": blackCherryLayer
+                "<span style='color: red; font-weight: bold;'>Black Locust</span>": blackLocustLayer,
+                "<span style='color: green; font-weight: bold;'>Common Hackberry</span>": hackberryLayer,
+                "<span style='color: blue; font-weight: bold;'>Box Elder</span>": boxElderLayer,
+                "<span style='color: purple; font-weight: bold;'>Black Cherry</span>": blackCherryLayer
             };
-
+            
             // Spawn menu control panel card inside UI frame
             L.control.layers(null, overlayMaps, { collapsed: false }).addTo(map);
         };
