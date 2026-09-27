@@ -60,23 +60,24 @@
                     "&color=", encodeURIComponent(colorHex)
                 ]);
             }
-
+            
             // Generate Map Overlay Layers 
             const blackLocustLayer = L.tileLayer(getInatTileUrl(56066, 'red'), { opacity: 0.85 }).addTo(map);
-            const hackberryLayer   = L.tileLayer(getInatTileUrl(54857, 'green'), { opacity: 0.85 }).addTo(map);
-            const boxElderLayer    = L.tileLayer(getInatTileUrl(47726, 'blue'), { opacity: 0.85 }).addTo(map);
-            const blackCherryLayer = L.tileLayer(getInatTileUrl(54834, 'purple'), { opacity: 0.85 }).addTo(map);
+            const hackberryLayer   = L.tileLayer(getInatTileUrl(54857, 'green'), { opacity: 0.85 });
+            const boxElderLayer    = L.tileLayer(getInatTileUrl(47726, 'blue'), { opacity: 0.85 });
+            const blackCherryLayer = L.tileLayer(getInatTileUrl(54834, 'purple'), { opacity: 0.85 });
 
             // UI Control Menu mapping
-            const overlayMaps = {
+            const speciesBaseLayers = {
                 "<span style='color: red; font-weight: bold;'>Black Locust</span>": blackLocustLayer,
                 "<span style='color: green; font-weight: bold;'>Common Hackberry</span>": hackberryLayer,
                 "<span style='color: blue; font-weight: bold;'>Box Elder</span>": boxElderLayer,
                 "<span style='color: purple; font-weight: bold;'>Black Cherry</span>": blackCherryLayer
             };
             
-            // Spawn menu control panel card inside UI frame
-            L.control.layers(null, overlayMaps, { collapsed: false }).addTo(map);
+            // Passing speciesBaseLayers as the FIRST argument turns them into radio buttons.
+            L.control.layers(speciesBaseLayers, null, { collapsed: false }).addTo(map);
+            
         };
     </script>
 </body>
