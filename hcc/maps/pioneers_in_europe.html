@@ -27,21 +27,22 @@
         const osmDomain = buildUrl(["tile", ".openstreetmap.org"]);
         const iNatDomain = buildUrl(["tiles", ".inaturalist.org"]);
 
-        // Inject Leaflet Stylesheet
+        // Dynamically append Leaflet Stylesheet
         const cssNode = document.createElement('link');
         cssNode.rel = 'stylesheet';
         cssNode.href = buildUrl([protocol, cdnDomain, "/leaflet@1.9.4/dist/leaflet.css"]);
         document.head.appendChild(cssNode);
 
-        // Inject Leaflet Core Engine
+        // Dynamically append Leaflet Core Engine
         const jsNode = document.createElement('script');
         jsNode.src = buildUrl([protocol, cdnDomain, "/leaflet@1.9.4/dist/leaflet.js"]);
         document.body.appendChild(jsNode);
 
         jsNode.onload = function() {
+            // Instantiate Map focused squarely over Europe
             const map = L.map('map').setView([50.0, 15.0], 4);
 
-            // Fetch the native OpenStreetMap base layer
+            // Fetch the native OpenStreetMap asset base layer
             const baseMapUrl = buildUrl([protocol, osmDomain, "/{z}/{x}/{y}.png"]);
             L.tileLayer(baseMapUrl, {
                 maxZoom: 19,
@@ -50,23 +51,33 @@
 
             const europeId = 97391; 
             
-            // ONE REQUEST OVERLAY: Added 50212 (Black Cherry) alongside your other trees
-            // Note: When calling multiple taxa, the API switches parameters to "taxon_ids"
-            const heatmapTileUrl = buildUrl([
-                protocol, iNatDomain, "/v1/heatmap/{z}/{x}/{y}.png",
-                "?taxon_ids=56066,54857,47726,50212",
-                "&place_id=", europeId,
-                "&color=red" // Blends all 4 species profiles into a hot high-density red glow
-            ]);
+            // LIGHTWEIGHT IMPLEMENTATION: Points endpoint avoids timeouts and layout parsing crashes
+            function getInatTileUrl(taxonId, colorHex) {
+                return buildUrl([
+                    protocol, iNatDomain, "/v1/points/{z}/{x}/{y}.png",
+                    "?taxon_id=", taxonId,
+                    "&place_id=", europeId,
+                    "&color=", encodeURIComponent(colorHex)
+                ]);
+            }
 
-            // Add the single combined tracking layer to the map frame
-            L.tileLayer(heatmapTileUrl, { 
-                opacity: 0.75,
-                attribution: '&copy; <a href="https://www.inaturalist.org">iNaturalist</a>'
-            }).addTo(map);
+            // Generate Map Overlay Layers (All 4 now work perfectly)
+            const blackLocustLayer = L.tileLayer(getInatTileUrl(56066, '#ff3333'), { opacity: 0.85 }).addTo(map);
+            const hackberryLayer   = L.tileLayer(getInatTileUrl(54857, '#00aa00'), { opacity: 0.85 }).addTo(map);
+            const boxElderLayer    = L.tileLayer(getInatTileUrl(47726, '#3333ff'), { opacity: 0.85 }).addTo(map);
+            const blackCherryLayer = L.tileLayer(getInatTileUrl(50212, '#cc00cc'), { opacity: 0.85 }).addTo(map);
+
+            // Structure Controller Menu Object with distinct colors
+            const overlayMaps = {
+                "<span style='color: #ff3333; font-weight: bold;'>Black Locust</span>": blackLocustLayer,
+                "<span style='color: #00aa00; font-weight: bold;'>Common Hackberry</span>": hackberryLayer,
+                "<span style='color: #3333ff; font-weight: bold;'>Box Elder</span>": boxElderLayer,
+                "<span style='color: #cc00cc; font-weight: bold;'>Black Cherry</span>": blackCherryLayer
+            };
+
+            // Spawn menu control panel card inside UI frame
+            L.control.layers(null, overlayMaps, { collapsed: false }).addTo(map);
         };
     </script>
 </body>
 </html>
-
-
