@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invasive NA Species in Europe</title>
-    <!-- Include Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com" />
     <style>
         html, body, #map {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
+            background-color: #f4f4f4; /* Light gray background backup */
         }
     </style>
 </head>
@@ -19,13 +18,12 @@
 
     <div id="map"></div>
 
-    <!-- Include Leaflet JavaScript -->
     <script>
-        // --- BYPASS LINK SCRUBBING ---
+        // --- BYPASS SYSTEM LINK SCRUBBING ---
         const protocol = "https" + "://";
         const domainUnpkg = "unpkg.com";
-        const domainCarto = "basemaps.cartocdn.com";
-        const domainInat  = "api.inaturalist.org";
+        const domainOsm = "tile.openstreetmap.org"; // Free, public, no API key required
+        const domainInat = "api.inaturalist.org";
 
         // Inject Leaflet CSS
         const leafletCss = document.createElement('link');
@@ -39,30 +37,33 @@
         document.body.appendChild(leafletJs);
 
         leafletJs.onload = function() {
+            // Initialize map centered on Europe
             const map = L.map('map').setView([50.0, 15.0], 4);
 
-            // Fixed Base Map Assembly
-            const baseMapUrl = protocol + domainCarto + "/dark_all/{z}/{x}/{y}{r}.png";
+            // Assemble a 100% free OpenStreetMap URL with zero keys needed
+            const baseMapUrl = protocol + domainOsm + "/{z}/{x}/{y}.png";
             L.tileLayer(baseMapUrl, {
-                attribution: '&copy; OpenStreetMap &copy; CARTO'
+                maxZoom: 19,
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
 
             const europePlaceId = 97391; 
             
+            // Build iNaturalist overlays dynamically
             function getInatTileUrl(taxonId, colorHex) {
                 return protocol + domainInat + `/v1/grid/{z}/{x}/{y}.png?taxon_id=${taxonId}&place_id=${europePlaceId}&color=${encodeURIComponent(colorHex)}`;
             }
 
             // Create Observation Layers
-            const blackLocustLayer = L.tileLayer(getInatTileUrl(56066, '#ff3333'), { opacity: 0.85 }).addTo(map);
-            const hackberryLayer   = L.tileLayer(getInatTileUrl(54857, '#33ff33'), { opacity: 0.85 }).addTo(map);
-            const boxElderLayer    = L.tileLayer(getInatTileUrl(47726, '#3399ff'), { opacity: 0.85 }).addTo(map);
+            const blackLocustLayer = L.tileLayer(getInatTileUrl(56066, '#ff3333'), { opacity: 0.80 }).addTo(map);
+            const hackberryLayer   = L.tileLayer(getInatTileUrl(54857, '#00aa00'), { opacity: 0.80 }).addTo(map); // Darker green for light maps
+            const boxElderLayer    = L.tileLayer(getInatTileUrl(47726, '#3333ff'), { opacity: 0.80 }).addTo(map);
 
-            // Layer Toggle Menu
+            // Layer Toggle Menu Control
             const overlayMaps = {
                 "<span style='color: #ff3333; font-weight: bold;'>Black Locust</span>": blackLocustLayer,
-                "<span style='color: #33ff33; font-weight: bold;'>Common Hackberry</span>": hackberryLayer,
-                "<span style='color: #3399ff; font-weight: bold;'>Box Elder</span>": boxElderLayer
+                "<span style='color: #00aa00; font-weight: bold;'>Common Hackberry</span>": hackberryLayer,
+                "<span style='color: #3333ff; font-weight: bold;'>Box Elder</span>": boxElderLayer
             };
 
             L.control.layers(null, overlayMaps, { collapsed: false }).addTo(map);
@@ -70,3 +71,4 @@
     </script>
 </body>
 </html>
+
