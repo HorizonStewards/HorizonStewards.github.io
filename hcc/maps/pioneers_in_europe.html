@@ -58,12 +58,14 @@
             const blackLocustLayer = L.tileLayer(getInatTileUrl(56066, '#ff3333'), { opacity: 0.80 }).addTo(map);
             const hackberryLayer   = L.tileLayer(getInatTileUrl(54857, '#00aa00'), { opacity: 0.80 }).addTo(map); // Darker green for light maps
             const boxElderLayer    = L.tileLayer(getInatTileUrl(47726, '#3333ff'), { opacity: 0.80 }).addTo(map);
-
+            const blackCherryLayer = L.tileLayer(getInatTileUrl(50212, '#cc00cc'), { opacity: 0.80 }).addTo(map);
+            
             // Layer Toggle Menu Control
             const overlayMaps = {
                 "<span style='color: #ff3333; font-weight: bold;'>Black Locust</span>": blackLocustLayer,
                 "<span style='color: #00aa00; font-weight: bold;'>Common Hackberry</span>": hackberryLayer,
-                "<span style='color: #3333ff; font-weight: bold;'>Box Elder</span>": boxElderLayer
+                "<span style='color: #3333ff; font-weight: bold;'>Box Elder</span>": boxElderLayer,
+                "<span style='color: #cc00cc; font-weight: bold;'>Black Cherry</span>": blackCherryLayer
             };
 
             L.control.layers(null, overlayMaps, { collapsed: false }).addTo(map);
